@@ -13,8 +13,15 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-
+    
+                                                                         <!-- This is the list page that appears when the app is loaded -->
     <StackLayout>
+                                              <!-- a calendar should go here instead, but since there is no xaml calendar, i put a date picker :) -->
+        <DatePicker x:Name="CalPicker"
+                    Margin="0, 25, 0, 10">
+        </DatePicker>
+
+
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
