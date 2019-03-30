@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +12,10 @@ namespace KMSCalendar.MobileAppService
 {
     public class Startup
     {
+        //* Public Properties
+        public IConfigurationRoot Configuration { get; }
+
+        //* Constructors
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -24,21 +27,12 @@ namespace KMSCalendar.MobileAppService
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+        //* Public Methods
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-            services.AddSingleton<IItemRepository, ItemRepository>();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-            });
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        ///  <summary>
+        /// This method gets called by the runtime. Use this method to configure
+        /// the HTTP request pipeline.
+        /// </summary>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -47,12 +41,29 @@ namespace KMSCalendar.MobileAppService
             app.UseMvc();
 
             app.UseSwagger();
-            app.UseSwaggerUI(c =>
+            app.UseSwaggerUI(uiOptions =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                uiOptions.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.Run(async (context) => await Task.Run(() => context.Response.Redirect("/swagger")));
+            app.Run(async (context) => await Task.Run(() =>
+                context.Response.Redirect("/swagger")));
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc();
+            services.AddSingleton<IItemRepository, ItemRepository>();
+
+            services.AddSwaggerGen(genOptions =>
+            {
+                genOptions.SwaggerDoc("v1", new Info
+                {
+                    Title = "My API",
+                    Version = "v1"
+                });
+            });
         }
     }
 }
