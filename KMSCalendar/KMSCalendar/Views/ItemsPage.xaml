@@ -23,7 +23,7 @@
         </DatePicker>
 
 
-        <!--Todo: put frame around and do rounded top!-->
+        <!--Todo: put a grid around list so that it looks better-->
         <Frame x:Name="BottomArea" BackgroundColor="White" CornerRadius="15">
                 <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
