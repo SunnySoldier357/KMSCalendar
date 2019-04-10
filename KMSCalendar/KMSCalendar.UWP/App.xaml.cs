@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -53,6 +54,9 @@ namespace KMSCalendar.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e);
+
+                ApplicationView.PreferredLaunchViewSize = new Size(1334, 750);  //THIS is supposed to set the uwp size to iphone 8 resolultion. it is not working on my laptop :(
+                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

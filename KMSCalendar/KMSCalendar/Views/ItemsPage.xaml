@@ -15,14 +15,17 @@
     </ContentPage.ToolbarItems>
     
                                                                          <!-- This is the list page that appears when the app is loaded -->
-    <StackLayout>
+    <StackLayout BackgroundColor=" #154360">
                                               <!-- a calendar should go here instead, but since there is no xaml calendar, i put a date picker :) -->
         <DatePicker x:Name="CalPicker"
-                    Margin="0, 25, 0, 10">
+                    Margin="0, 25, 0, 10"
+                    HeightRequest="150">
         </DatePicker>
 
 
-        <ListView x:Name="ItemsListView"
+        <!--Todo: put frame around and do rounded top!-->
+        <Frame x:Name="BottomArea" BackgroundColor="White" CornerRadius="15">
+                <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
@@ -31,22 +34,25 @@
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
                 ItemSelected="OnItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Text}" 
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding Text}" 
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
-                            <Label Text="{Binding Description}" 
+                                    <Label Text="{Binding Description}" 
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+        </Frame>
+        
+        
     </StackLayout>
 </ContentPage>
