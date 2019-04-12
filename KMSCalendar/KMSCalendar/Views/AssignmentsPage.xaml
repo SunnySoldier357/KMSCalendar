@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
+             x:Class="KMSCalendar.Views.AssignmentsPage"
+             x:Name="BrowseAssignmentsPage"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" 
+                     Clicked="AddAssignment_Clicked">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="UWP" 
+                        Value="add.png" />
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <!-- This is the list page that appears when the app is loaded -->
+    <StackLayout BackgroundColor="#154360">
+        <control:WeekControl HorizontalOptions="CenterAndExpand"
+                             Margin="5,10,5,15" />
+
+        <!-- TODO: Put a Grid around ListView so that it looks better -->
+        <Frame x:Name="BottomAreaFrame" 
+               BackgroundColor="White" 
+               CornerRadius="15">
+            <StackLayout>
+
+                <!-- You might want to make this a content view for abstraction! -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Thursday, 4, April"
+                           TextColor="Gray"
+                           HorizontalOptions="Center" />
+
+                    <!--   TODO: Replace this with an image   -->
+                    <Label Grid.Column="1"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Text="______" 
+                           TextColor="Gray" />
+
+                    <Label Grid.Column="2" 
+                           HorizontalOptions="Center"
+                           Text="TODAY"  
+                           TextColor="Gray" />
+
+                </Grid>
+
+                <ListView x:Name="AssignmentsListView"
+                          VerticalOptions="FillAndExpand"
+                          HasUnevenRows="true"
+                          ItemsSource="{Binding Items}"
+                          IsPullToRefreshEnabled="true"
+                          RefreshCommand="{Binding LoadItemsCommand}"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          CachingStrategy="RecycleElement"
+                          ItemSelected="OnItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Column="1"
+                                           Style="{DynamicResource ListItemTextStyle}" 
+                                           Text="{Binding Name}"
+                                           FontSize="16" 
+                                           LineBreakMode="NoWrap" />
+
+                                    <Label Grid.Row="1" 
+                                           Grid.Column="1"
+                                           Style="{DynamicResource ListItemDetailTextStyle}"
+                                           Text="{Binding Description}" 
+                                           FontSize="13"
+                                           LineBreakMode="NoWrap" />
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

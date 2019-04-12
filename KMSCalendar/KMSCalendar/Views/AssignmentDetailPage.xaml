@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KMSCalendar.Views.AssignmentDetailPage"
+             Title="{Binding Title}">
+
+    <StackLayout Spacing="20"
+                 Padding="15">
+        <Label Text="Name:" 
+               FontSize="Medium" />
+        <Label Text="{Binding Assignment.Name}" 
+               FontSize="Small"/>
+        <Label Text="Description:" 
+               FontSize="Medium" />
+        <Label Text="{Binding Assignment.Description}" 
+               FontSize="Small"/>
+        <Label Text="Due Date:" 
+               FontSize="Medium" />
+        <Label Text="{Binding Assignment.Date}" 
+               FontSize="Small"/>
+    </StackLayout>
+</ContentPage>

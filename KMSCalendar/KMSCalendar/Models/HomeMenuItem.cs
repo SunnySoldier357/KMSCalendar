@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace KMSCalendar.Models
+﻿namespace KMSCalendar.Models
 {
     public enum MenuItemType
     {

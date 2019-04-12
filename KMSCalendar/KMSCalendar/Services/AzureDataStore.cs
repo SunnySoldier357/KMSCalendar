@@ -8,63 +8,71 @@ using KMSCalendar.Models;
 
 namespace KMSCalendar.Services
 {
-    public class AzureDataStore : IDataStore<Item>
+    public class AzureDataStore : IDataStore<Assignment>
     {
-        HttpClient client;
-        IEnumerable<Item> items;
+        //* Private Properties/
+        private HttpClient client;
 
+        private IEnumerable<Assignment> assignments;
+
+        //* Constructors
         public AzureDataStore()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
 
-            items = new List<Item>();
+            assignments = new List<Assignment>();
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        //* Interface Implementations
+        public async Task<IEnumerable<Assignment>> GetItemsAsync(bool forceRefresh = false)
         {
             if (forceRefresh)
             {
-                var json = await client.GetStringAsync($"api/item");
-                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
+                string json = await client.GetStringAsync($"api/item");
+                assignments = await Task.Run(() =>
+                    JsonConvert.DeserializeObject<IEnumerable<Assignment>>(json));
             }
 
-            return items;
+            return assignments;
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Assignment> GetItemAsync(string id)
         {
             if (id != null)
             {
-                var json = await client.GetStringAsync($"api/item/{id}");
-                return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
+                string json = await client.GetStringAsync($"api/item/{id}");
+                return await Task.Run(() =>
+                    JsonConvert.DeserializeObject<Assignment>(json));
             }
 
             return null;
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(Assignment assignment)
         {
-            if (item == null)
+            if (assignment == null)
                 return false;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
+            string serializedItem = JsonConvert.SerializeObject(assignment);
 
-            var response = await client.PostAsync($"api/item", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync($"api/item",
+                new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(Assignment assignment)
         {
-            if (item == null || item.Id == null)
+            if (assignment == null || assignment.Id == null)
                 return false;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
-            var buffer = Encoding.UTF8.GetBytes(serializedItem);
+            string serializedItem = JsonConvert.SerializeObject(assignment);
+            byte[] buffer = Encoding.UTF8.GetBytes(serializedItem);
             var byteContent = new ByteArrayContent(buffer);
 
-            var response = await client.PutAsync(new Uri($"api/item/{item.Id}"), byteContent);
+            var response = await client.PutAsync(new Uri($"api/item/{assignment.Id}"),
+                byteContent);
 
             return response.IsSuccessStatusCode;
         }

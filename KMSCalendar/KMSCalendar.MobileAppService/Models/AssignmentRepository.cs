@@ -16,23 +16,23 @@ namespace KMSCalendar.MobileAppService.Models
             Add(new Assignment
             {
                 Id = Guid.NewGuid().ToString(),
-                DueDate = DateTime.Today,
                 Name = "Item 1",
-                Description = "This is an item description."
+                Description = "This is an item description.",
+                DueDate = DateTime.Today
             });
             Add(new Assignment
             {
                 Id = Guid.NewGuid().ToString(),
-                DueDate = DateTime.Today,
                 Name = "Item 2",
-                Description = "This is an item description."
+                Description = "This is an item description.",
+                DueDate = DateTime.Today
             });
             Add(new Assignment
             {
                 Id = Guid.NewGuid().ToString(),
-                DueDate = DateTime.Today,
                 Name = "Item 3",
-                Description = "This is an item description."
+                Description = "This is an item description.",
+                DueDate = DateTime.Today
             });
         }
 

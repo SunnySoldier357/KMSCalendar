@@ -12,24 +12,30 @@ namespace KMSCalendar.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
-
-        bool isBusy = false;
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
-        }
+        //* Private Properties
+        private bool isBusy = false;
 
         string title = string.Empty;
-        public string Title
+
+        //* Public Properties
+        public bool IsBusy
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            get => isBusy;
+            set => setProperty(ref isBusy, value);
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
+        public IDataStore<Assignment> DataStore =>
+            DependencyService.Get<IDataStore<Assignment>>() ?? new MockDataStore();
+        
+        public string Title
+        {
+            get => title;
+            set => setProperty(ref title, value);
+        }
+
+        //* Protected Methods
+        protected bool setProperty<T>(ref T backingStore, T value,
+            [CallerMemberName] string propertyName = "",
             Action onChanged = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
@@ -38,11 +44,13 @@ namespace KMSCalendar.ViewModels
             backingStore = value;
             onChanged?.Invoke();
             OnPropertyChanged(propertyName);
+
             return true;
         }
 
-        #region INotifyPropertyChanged
+        //* Event & Event Handlers
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -51,6 +59,5 @@ namespace KMSCalendar.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
     }
 }

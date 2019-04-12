@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -10,21 +10,25 @@ using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class AssignmentViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        //* Public Properties
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public ObservableCollection<Assignment> Assignments { get; set; }
+        
+        //* Constructors */
+        public AssignmentViewModel()
         {
-            Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Title = "Assignments Calendar";
+            Assignments = new ObservableCollection<Assignment>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
+                "AddAssignment", async (page, a) =>
             {
-                var newItem = item as Item;
-                Items.Add(newItem);
+                Assignment newItem = a as Assignment;
+                Assignments.Add(newItem);
                 await DataStore.AddItemAsync(newItem);
             });
         }
@@ -38,12 +42,10 @@ namespace KMSCalendar.ViewModels
 
             try
             {
-                Items.Clear();
+                Assignments.Clear();
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
-                {
-                    Items.Add(item);
-                }
+                    Assignments.Add(item);
             }
             catch (Exception ex)
             {

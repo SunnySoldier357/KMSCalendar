@@ -1,35 +1,41 @@
-﻿using KMSCalendar.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+using KMSCalendar.Models;
 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : MasterDetailPage
     {
-        Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+        //* Public Properties
+        public Dictionary<int, NavigationPage> MenuPages = 
+            new Dictionary<int, NavigationPage>();
+
+        //* Constructor
         public MainPage()
         {
             InitializeComponent();
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            MenuPages.Add((int) MenuItemType.Browse, (NavigationPage) Detail);
         }
 
+        // Public Methods
         public async Task NavigateFromMenu(int id)
         {
             if (!MenuPages.ContainsKey(id))
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.Browse:
-                        MenuPages.Add(id, new NavigationPage(new ItemsPage()));
+                    case (int) MenuItemType.Browse:
+                        MenuPages.Add(id, new NavigationPage(new AssignmentsPage()));
                         break;
-                    case (int)MenuItemType.About:
+                    case (int) MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
                 }
