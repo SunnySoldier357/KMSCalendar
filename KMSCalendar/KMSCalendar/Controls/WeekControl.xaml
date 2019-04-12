@@ -7,57 +7,73 @@
         <!-- This grid defines the layout of evreything within the calendar -->
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <!-- Year and Month Labels -->
             <Label x:Name="YearLabel"
-                   Grid.ColumnSpan="3"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
                    Text="{Binding Date.Year}"
-                   TextColor="White" />
+                   TextColor="White" 
+                   Margin="15, 0, 0, 0"
+                   FontSize="20"/>
             <Label x:Name="MonthLabel"
                    Grid.Row="1"
-                   Grid.ColumnSpan="4"
+                   Grid.ColumnSpan="3"
                    Text="{Binding Month}"
-                   TextColor="White" />
+                   TextColor="White" 
+                   Margin="15, -7, 0, 0"
+                   FontSize="25"
+                   />
 
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
             <Button x:Name="LeftArrowButton"
-                    Grid.Column="3"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="7"
                     Text="&lt;"
                     TextColor="{Binding ColorTheme}"
                     FontSize="9"
                     BackgroundColor="Transparent"
                     BorderColor="Transparent"
                     BorderWidth="0"
-                    Clicked="LeftArrowButton_Clicked" />
+                    Clicked="LeftArrowButton_Clicked" 
+                    Margin="0, 0, 30, 0"
+                    HorizontalOptions="Center"/>
             <Button x:Name="RightArrowButton"
-                    Grid.Column="4"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="7"
                     Text="&gt;"
                     TextColor="{Binding ColorTheme}"
                     FontSize="9"
                     BackgroundColor="Transparent"
                     BorderColor="Transparent"
                     BorderWidth="0"
-                    Clicked="RightArrowButton_Clicked" />
+                    Clicked="RightArrowButton_Clicked" 
+                    Margin="30, 0, 0, 0"
+                    HorizontalOptions="Center"/>
 
             <!-- Plus Button, in the future this will add a new HW event -->
             <Button x:Name="PlusButton"
+                    Grid.Row="0"
                     Grid.RowSpan="2"
                     Grid.Column="5"
                     Grid.ColumnSpan="2"

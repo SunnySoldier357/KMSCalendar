@@ -18,7 +18,7 @@
                                                                          <!-- This is the list page that appears when the app is loaded -->
     <StackLayout BackgroundColor=" #154360">
 
-        <control:WeekControl HorizontalOptions="CenterAndExpand"/>
+        <control:WeekControl HorizontalOptions="CenterAndExpand" Margin="5, 10, 5, 15"/>
 
         <!--Todo: put a grid around list so that it looks better-->
         <Frame x:Name="BottomArea" BackgroundColor="White" CornerRadius="15">
