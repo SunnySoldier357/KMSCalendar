@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 
-using KMSCalendar.Models;
+using KMSCalendar.MobileAppService.Models;
 
 namespace KMSCalendar.MobileAppService
 {
@@ -54,7 +54,7 @@ namespace KMSCalendar.MobileAppService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<IItemRepository, ItemRepository>();
+            services.AddSingleton<IAssignmentRepository, AssignmentRepository>();
 
             services.AddSwaggerGen(genOptions =>
             {
