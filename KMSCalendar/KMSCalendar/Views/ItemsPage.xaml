@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KMSCalendar.Views.ItemsPage"
-              Title="{Binding Title}"
+             Title="{Binding Title}"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
              x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked">
@@ -16,12 +17,8 @@
     
                                                                          <!-- This is the list page that appears when the app is loaded -->
     <StackLayout BackgroundColor=" #154360">
-                                              <!-- a calendar should go here instead, but since there is no xaml calendar, i put a date picker :) -->
-        <DatePicker x:Name="CalPicker"
-                    Margin="0, 25, 0, 10"
-                    HeightRequest="150">
-        </DatePicker>
 
+        <control:WeekControl HorizontalOptions="CenterAndExpand"/>
 
         <!--Todo: put a grid around list so that it looks better-->
         <Frame x:Name="BottomArea" BackgroundColor="White" CornerRadius="15">
