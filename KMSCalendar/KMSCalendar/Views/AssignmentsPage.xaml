@@ -72,26 +72,27 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Grid Padding="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="20" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
 
-                                    <Label Grid.Column="1"
-                                           Style="{DynamicResource ListItemTextStyle}" 
+                                    <Label Style="{DynamicResource ListItemTextStyle}" 
                                            Text="{Binding Name}"
                                            FontSize="16" 
                                            LineBreakMode="NoWrap" />
 
                                     <Label Grid.Row="1" 
-                                           Grid.Column="1"
                                            Style="{DynamicResource ListItemDetailTextStyle}"
                                            Text="{Binding Description}" 
+                                           FontSize="13"
+                                           LineBreakMode="NoWrap" />
+
+                                    <Label Grid.RowSpan="2"
+                                           HorizontalOptions="End" 
+                                           VerticalOptions="Center"
+                                           Style="{DynamicResource ListItemDetailTextStyle}"
+                                           Text="{Binding ShortDate}"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />
 
