@@ -30,7 +30,7 @@ namespace KMSCalendar.Services
         {
             if (forceRefresh)
             {
-                string json = await client.GetStringAsync($"api/assignment");
+                string json = await client.GetStringAsync($"api/{nameof(Assignment)}");
                 assignments = await Task.Run(() =>
                     JsonConvert.DeserializeObject<IEnumerable<Assignment>>(json));
             }
@@ -42,7 +42,7 @@ namespace KMSCalendar.Services
         {
             if (id != null)
             {
-                string json = await client.GetStringAsync($"api/assignment/{id}");
+                string json = await client.GetStringAsync($"api/{nameof(Assignment)}/{id}");
                 return await Task.Run(() =>
                     JsonConvert.DeserializeObject<Assignment>(json));
             }
@@ -57,7 +57,7 @@ namespace KMSCalendar.Services
 
             string serializedItem = JsonConvert.SerializeObject(assignment);
 
-            var response = await client.PostAsync($"api/assignment",
+            var response = await client.PostAsync($"api/{nameof(Assignment)}",
                 new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
             return response.IsSuccessStatusCode;
@@ -72,7 +72,7 @@ namespace KMSCalendar.Services
             byte[] buffer = Encoding.UTF8.GetBytes(serializedItem);
             var byteContent = new ByteArrayContent(buffer);
 
-            var response = await client.PutAsync(new Uri($"api/assignment/{assignment.Id}"),
+            var response = await client.PutAsync(new Uri($"api/{nameof(Assignment)}/{assignment.Id}"),
                 byteContent);
 
             return response.IsSuccessStatusCode;
@@ -83,7 +83,7 @@ namespace KMSCalendar.Services
             if (string.IsNullOrEmpty(id))
                 return false;
 
-            var response = await client.DeleteAsync($"api/assignment/{id}");
+            var response = await client.DeleteAsync($"api/{nameof(Assignment)}/{id}");
 
             return response.IsSuccessStatusCode;
         }

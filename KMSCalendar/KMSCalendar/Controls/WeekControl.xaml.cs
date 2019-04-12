@@ -137,9 +137,13 @@ namespace KMSCalendar.Controls
                     tempLabel.HorizontalOptions = LayoutOptions.Center;
 
                     tempLabel.BindingContext = dataList[i * 7 + j];
-                    tempLabel.SetBinding(Label.TextProperty, new Binding("Date.Day"));
-                    tempLabel.SetBinding(Label.TextColorProperty, new Binding("ColorTheme"));
-                    tempLabel.SetBinding(OpacityProperty, new Binding("NumOpacity"));
+                    tempLabel.SetBinding(Label.TextProperty, new Binding(
+                        string.Format("{0}.{1}", nameof(DayViewModel.Date), 
+                            nameof(DayViewModel.Date.Day))));
+                    tempLabel.SetBinding(Label.TextColorProperty, new Binding(
+                        nameof(DayViewModel.ColorTheme)));
+                    tempLabel.SetBinding(OpacityProperty, new Binding(
+                        nameof(DayViewModel.NumOpacity)));
 
                     MainGrid.Children.Add(tempLabel);
 
@@ -153,8 +157,10 @@ namespace KMSCalendar.Controls
                     tempButton.Clicked += DateButton_Clicked;
 
                     tempButton.BindingContext = dataList[i * 7 + j];
-                    tempButton.SetBinding(Button.BorderColorProperty, new Binding("ColorTheme"));
-                    tempButton.SetBinding(OpacityProperty, new Binding("CircleOpacity"));
+                    tempButton.SetBinding(Button.BorderColorProperty, new Binding(
+                        nameof(DayViewModel.ColorTheme)));
+                    tempButton.SetBinding(OpacityProperty, new Binding(
+                        nameof(DayViewModel.CircleOpacity)));
 
                     MainGrid.Children.Add(tempButton);
                 }
