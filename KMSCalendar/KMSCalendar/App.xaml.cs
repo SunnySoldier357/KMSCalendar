@@ -12,7 +12,7 @@ namespace KMSCalendar
         //* Static Properties
         public static string AzureBackendUrl = "https://kmscalendar.azurewebsites.net/";
 
-        public static bool UseMockDataStore = true;
+        public static bool UseMockDataStore = false;
 
         //* Constructors
         public App()
