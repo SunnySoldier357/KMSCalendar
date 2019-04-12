@@ -13,7 +13,7 @@ namespace KMSCalendar.ViewModels
     public class AssignmentViewModel : BaseViewModel
     {
         //* Public Properties
-        public Command LoadItemsCommand { get; set; }
+        public Command LoadAssignmentsCommand { get; set; }
 
         public ObservableCollection<Assignment> Assignments { get; set; }
         
@@ -22,7 +22,8 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Assignments Calendar";
             Assignments = new ObservableCollection<Assignment>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadAssignmentsCommand = new Command(async () => 
+                await ExecuteLoadAssignmentsCommand());
 
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
                 "AddAssignment", async (page, a) =>
@@ -33,7 +34,7 @@ namespace KMSCalendar.ViewModels
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        async Task ExecuteLoadAssignmentsCommand()
         {
             if (IsBusy)
                 return;

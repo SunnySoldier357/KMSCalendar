@@ -62,9 +62,9 @@
                 <ListView x:Name="AssignmentsListView"
                           VerticalOptions="FillAndExpand"
                           HasUnevenRows="true"
-                          ItemsSource="{Binding Items}"
+                          ItemsSource="{Binding Assignments}"
                           IsPullToRefreshEnabled="true"
-                          RefreshCommand="{Binding LoadItemsCommand}"
+                          RefreshCommand="{Binding LoadAssignmentsCommand}"
                           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                           CachingStrategy="RecycleElement"
                           ItemSelected="OnItemSelected">

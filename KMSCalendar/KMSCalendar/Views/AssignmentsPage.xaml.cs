@@ -28,7 +28,7 @@ namespace KMSCalendar.Views
             base.OnAppearing();
 
             if (viewModel.Assignments.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+                viewModel.LoadAssignmentsCommand.Execute(null);
         }
 
         //* Event Handlers
