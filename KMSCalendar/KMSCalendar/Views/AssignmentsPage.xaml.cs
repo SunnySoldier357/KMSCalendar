@@ -32,7 +32,7 @@ namespace KMSCalendar.Views
         }
 
         //* Event Handlers
-        public async void AddAssignment_Clicked(object sender, EventArgs e) => 
+        public async void AddAssignment_Clicked(object sender, EventArgs e) =>
             await Navigation.PushModalAsync(new NavigationPage(new NewAssignmentPage()));
 
         public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)

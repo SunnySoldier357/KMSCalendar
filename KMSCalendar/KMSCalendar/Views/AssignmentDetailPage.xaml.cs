@@ -33,8 +33,7 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            this.viewModel = viewModel;
-            BindingContext = this.viewModel;
+            BindingContext = this.viewModel = viewModel;
         }
     }
 }

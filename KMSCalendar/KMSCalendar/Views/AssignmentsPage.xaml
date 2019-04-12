@@ -7,11 +7,11 @@
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" 
+        <ToolbarItem Text="Add"
                      Clicked="AddAssignment_Clicked">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="UWP" 
+                    <On Platform="UWP"
                         Value="add.png" />
                 </OnPlatform>
             </ToolbarItem.Icon>
@@ -24,8 +24,8 @@
                              Margin="5,10,5,15" />
 
         <!-- TODO: Put a Grid around ListView so that it looks better -->
-        <Frame x:Name="BottomAreaFrame" 
-               BackgroundColor="White" 
+        <Frame x:Name="BottomAreaFrame"
+               BackgroundColor="White"
                CornerRadius="15">
             <StackLayout>
 
@@ -49,12 +49,12 @@
                     <Label Grid.Column="1"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
-                           Text="______" 
+                           Text="______"
                            TextColor="Gray" />
 
-                    <Label Grid.Column="2" 
+                    <Label Grid.Column="2"
                            HorizontalOptions="Center"
-                           Text="TODAY"  
+                           Text="TODAY"
                            TextColor="Gray" />
 
                 </Grid>
@@ -77,19 +77,19 @@
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
 
-                                    <Label Style="{DynamicResource ListItemTextStyle}" 
+                                    <Label Style="{DynamicResource ListItemTextStyle}"
                                            Text="{Binding Name}"
-                                           FontSize="16" 
+                                           FontSize="16"
                                            LineBreakMode="NoWrap" />
 
-                                    <Label Grid.Row="1" 
+                                    <Label Grid.Row="1"
                                            Style="{DynamicResource ListItemDetailTextStyle}"
-                                           Text="{Binding Description}" 
+                                           Text="{Binding Description}"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />
 
                                     <Label Grid.RowSpan="2"
-                                           HorizontalOptions="End" 
+                                           HorizontalOptions="End"
                                            VerticalOptions="Center"
                                            Style="{DynamicResource ListItemDetailTextStyle}"
                                            Text="{Binding ShortDate}"

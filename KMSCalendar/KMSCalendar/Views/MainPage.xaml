@@ -12,7 +12,7 @@
         <NavigationPage>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" 
+                    <On Platform="iOS"
                         Value="tab_feed.png"/>
                 </OnPlatform>
             </NavigationPage.Icon>

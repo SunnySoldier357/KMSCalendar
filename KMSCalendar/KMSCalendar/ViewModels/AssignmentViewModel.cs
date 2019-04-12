@@ -22,7 +22,7 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Assignments Calendar";
             Assignments = new ObservableCollection<Assignment>();
-            LoadAssignmentsCommand = new Command(async () => 
+            LoadAssignmentsCommand = new Command(async () =>
                 await ExecuteLoadAssignmentsCommand());
 
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,

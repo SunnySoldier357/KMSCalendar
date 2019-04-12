@@ -12,7 +12,7 @@ namespace KMSCalendar.Views
     public partial class MainPage : MasterDetailPage
     {
         //* Public Properties
-        public Dictionary<int, NavigationPage> MenuPages = 
+        public Dictionary<int, NavigationPage> MenuPages =
             new Dictionary<int, NavigationPage>();
 
         //* Constructor
@@ -41,7 +41,7 @@ namespace KMSCalendar.Views
                 }
             }
 
-            var newPage = MenuPages[id];
+            NavigationPage newPage = MenuPages[id];
 
             if (newPage != null && Detail != newPage)
             {

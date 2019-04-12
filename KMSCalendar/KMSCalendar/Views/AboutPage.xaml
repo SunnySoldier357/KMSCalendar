@@ -24,34 +24,34 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackLayout HorizontalOptions="Fill" 
-                     VerticalOptions="FillAndExpand" 
+        <StackLayout HorizontalOptions="Fill"
+                     VerticalOptions="FillAndExpand"
                      BackgroundColor="{StaticResource Accent}">
-            <StackLayout Orientation="Horizontal" 
-                         HorizontalOptions="Center" 
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
                          VerticalOptions="Center">
-                <ContentView VerticalOptions="FillAndExpand" 
+                <ContentView VerticalOptions="FillAndExpand"
                              Padding="0,40,0,40" >
-                    <Image Source="xamarin_logo.png" 
-                           VerticalOptions="Center" 
+                    <Image Source="xamarin_logo.png"
+                           VerticalOptions="Center"
                            HeightRequest="64" />
                 </ContentView>
             </StackLayout>
         </StackLayout>
         
         <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" 
-                         Padding="16,40,16,40" 
+            <StackLayout Orientation="Vertical"
+                         Padding="16,40,16,40"
                          Spacing="10">
                 <Label FontSize="22">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="KMS Calendar" 
-                                      FontAttributes="Bold" 
+                                <Span Text="KMS Calendar"
+                                      FontAttributes="Bold"
                                       FontSize="22" />
                                 <Span Text=" " />
-                                <Span Text="1.0" 
+                                <Span Text="1.0"
                                       ForegroundColor="{StaticResource LightTextColor}" />
                             </FormattedString.Spans>
                         </FormattedString>

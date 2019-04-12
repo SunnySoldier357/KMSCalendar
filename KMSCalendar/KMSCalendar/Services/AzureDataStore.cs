@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+
 using KMSCalendar.Models;
 
 namespace KMSCalendar.Services
 {
     public class AzureDataStore : IDataStore<Assignment>
     {
-        //* Private Properties/
+        //* Private Properties
         private HttpClient client;
 
         private IEnumerable<Assignment> assignments;

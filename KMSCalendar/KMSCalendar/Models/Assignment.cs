@@ -7,7 +7,7 @@ namespace KMSCalendar.Models
         //* Public Properties
         public DateTime DueDate { get; set; }
 
-        public string Date => DueDate.ToString("MMMM dd, yyyy");
+        public string Date => DueDate.ToLongDateString();
         public string Description { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }

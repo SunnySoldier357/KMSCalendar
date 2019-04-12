@@ -6,17 +6,17 @@
 
     <StackLayout Spacing="20"
                  Padding="15">
-        <Label Text="Name:" 
+        <Label Text="Name:"
                FontSize="Medium" />
-        <Label Text="{Binding Assignment.Name}" 
+        <Label Text="{Binding Assignment.Name}"
                FontSize="Small"/>
-        <Label Text="Description:" 
+        <Label Text="Description:"
                FontSize="Medium" />
-        <Label Text="{Binding Assignment.Description}" 
+        <Label Text="{Binding Assignment.Description}"
                FontSize="Small"/>
-        <Label Text="Due Date:" 
+        <Label Text="Due Date:"
                FontSize="Medium" />
-        <Label Text="{Binding Assignment.Date}" 
+        <Label Text="{Binding Assignment.Date}"
                FontSize="Small"/>
     </StackLayout>
 </ContentPage>
