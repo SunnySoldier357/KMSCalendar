@@ -25,6 +25,45 @@
 
         <!--Todo: put a grid around list so that it looks better-->
         <Frame x:Name="BottomArea" BackgroundColor="White" CornerRadius="15">
+            <StackLayout>
+
+                <!-- You might want to make this a content view for abstraction! -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Thursday, 4, April" Grid.Column="0" Grid.Row="0"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                    
+                        <!--   Todo: Replace this with an image   -->
+                    <Label Text="______" Grid.Column="1" Grid.Row="0"
+                           TextColor="Gray" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    
+                    <!--<Frame BackgroundColor="LightGray"
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Start"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           WidthRequest="10"
+                           HeightRequest="1">
+                    </Frame>-->
+
+                    <Label Text="TODAY"  Grid.Column="2" Grid.Row="0"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+
+                </Grid>
+
+
                 <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
@@ -37,6 +76,38 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
+
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Text="{Binding Period}}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+                                       VerticalOptions="Center"/>
+
+                                    <Label Text="{Binding Text}" 
+                                       LineBreakMode="NoWrap" 
+                                       Style="{DynamicResource ListItemTextStyle}" 
+                                       FontSize="16" 
+                                       Grid.Column="1"
+                                       Grid.Row="0"/>
+                                    <Label Text="{Binding Description}" 
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="13"
+                                       Grid.Column="1"
+                                       Grid.Row="1"/>
+
+                                </Grid>
+
+
+
+                                <!--   Old Layout:
                                 <StackLayout Padding="10">
                                     <Label Text="{Binding Text}" 
                                 LineBreakMode="NoWrap" 
@@ -46,11 +117,18 @@
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
-                                </StackLayout>
+                                </StackLayout>-->
+
+
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </StackLayout>
+
+
+
+
         </Frame>
         
         
