@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -131,7 +128,6 @@ namespace KMSCalendar.Controls
                         MonthLabel.BindingContext = dataList[0];
                         LeftArrowButton.BindingContext = dataList[0];
                         RightArrowButton.BindingContext = dataList[0];
-                        PlusButton.BindingContext = dataList[0];
                     }
 
                     // Label for the date number
@@ -219,16 +215,9 @@ namespace KMSCalendar.Controls
             ShiftDatesBackward();
         }
 
-        private void PlusButton_Clicked(object sender, EventArgs e)
-        {
-            // TODO: Link this with the Controller class 
-        }
-
         private void RightArrowButton_Clicked(object sender, EventArgs e)
         {
             ShiftDatesForward();
         }
-
-
     }
 }

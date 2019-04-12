@@ -25,64 +25,46 @@
 
             <!-- Year and Month Labels -->
             <Label x:Name="YearLabel"
-                   Grid.Row="0"
                    Grid.ColumnSpan="2"
+                   Margin="15,0,0,0"
                    Text="{Binding Date.Year}"
                    TextColor="White" 
-                   Margin="15, 0, 0, 0"
-                   FontSize="20"/>
+                   FontSize="20" />
             <Label x:Name="MonthLabel"
                    Grid.Row="1"
                    Grid.ColumnSpan="3"
+                   Margin="15,-7,0,0"
                    Text="{Binding Month}"
                    TextColor="White" 
-                   Margin="15, -7, 0, 0"
-                   FontSize="25"
-                   />
+                   FontSize="25" />
 
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
             <Button x:Name="LeftArrowButton"
-                    Grid.Row="0"
                     Grid.RowSpan="2"
-                    Grid.Column="0"
                     Grid.ColumnSpan="7"
+                    HorizontalOptions="Center"
+                    Margin="0,0,30,0"
                     Text="&lt;"
                     TextColor="{Binding ColorTheme}"
                     FontSize="9"
                     BackgroundColor="Transparent"
                     BorderColor="Transparent"
                     BorderWidth="0"
-                    Clicked="LeftArrowButton_Clicked" 
-                    Margin="0, 0, 30, 0"
-                    HorizontalOptions="Center"/>
+                    Clicked="LeftArrowButton_Clicked" />
+            
             <Button x:Name="RightArrowButton"
-                    Grid.Row="0"
                     Grid.RowSpan="2"
-                    Grid.Column="0"
                     Grid.ColumnSpan="7"
+                    HorizontalOptions="Center"
+                    Margin="30,0,0,0"
                     Text="&gt;"
                     TextColor="{Binding ColorTheme}"
                     FontSize="9"
                     BackgroundColor="Transparent"
                     BorderColor="Transparent"
                     BorderWidth="0"
-                    Clicked="RightArrowButton_Clicked" 
-                    Margin="30, 0, 0, 0"
-                    HorizontalOptions="Center"/>
-
-            <!-- Plus Button, in the future this will add a new HW event -->
-            <Button x:Name="PlusButton"
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="5"
-                    Grid.ColumnSpan="2"
-                    Text="+"
-                    TextColor="{Binding ColorTheme}"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    BorderColor="Transparent"
-                    Clicked="PlusButton_Clicked" />
+                    Clicked="RightArrowButton_Clicked" />
 
             <!-- If you want to have day of the week labels -->
             <!-- <Label Text="SUN" FontSize="8" Grid.Row="2" /> -->
