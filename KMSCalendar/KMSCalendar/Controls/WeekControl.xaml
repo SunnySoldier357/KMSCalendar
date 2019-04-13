@@ -7,8 +7,8 @@
         <!-- This grid defines the layout of evreything within the calendar -->
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
@@ -29,22 +29,22 @@
                    Margin="15,0,0,0"
                    Text="{Binding Date.Year}"
                    TextColor="White" 
-                   FontSize="20" />
+                   FontSize="Small" />
             <Label x:Name="MonthLabel"
                    Grid.Row="1"
                    Grid.ColumnSpan="3"
                    Margin="15,-7,0,0"
                    Text="{Binding Month}"
                    TextColor="White" 
-                   FontSize="25" />
+                   FontSize="Medium" />
 
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
             <Button x:Name="LeftArrowButton"
-                    Grid.RowSpan="2"
-                    Grid.ColumnSpan="7"
                     HorizontalOptions="Center"
-                    Margin="0,0,30,0"
+                    Grid.Column="5"
+                    Grid.Row="0"
+                    Margin="0,0,0,0"
                     Text="&lt;"
                     TextColor="{Binding ColorTheme}"
                     FontSize="9"
@@ -54,10 +54,10 @@
                     Clicked="LeftArrowButton_Clicked" />
             
             <Button x:Name="RightArrowButton"
-                    Grid.RowSpan="2"
-                    Grid.ColumnSpan="7"
                     HorizontalOptions="Center"
-                    Margin="30,0,0,0"
+                    Grid.Column="6"
+                    Grid.Row="0"
+                    Margin="0,0,0,0"
                     Text="&gt;"
                     TextColor="{Binding ColorTheme}"
                     FontSize="9"

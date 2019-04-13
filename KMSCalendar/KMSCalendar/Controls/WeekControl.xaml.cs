@@ -124,6 +124,7 @@ namespace KMSCalendar.Controls
                     tempLabel.SetValue(Grid.RowProperty, i + 2);
                     tempLabel.SetValue(Grid.ColumnProperty, j);
                     tempLabel.HorizontalOptions = LayoutOptions.Center;
+                    tempLabel.VerticalOptions = LayoutOptions.Center;
 
                     tempLabel.BindingContext = dataList[i * 7 + j];
                     tempLabel.SetBinding(Label.TextProperty, new Binding(
@@ -141,8 +142,9 @@ namespace KMSCalendar.Controls
                     tempButton.SetValue(Grid.RowProperty, i + 2);
                     tempButton.SetValue(Grid.ColumnProperty, j);
                     tempButton.BackgroundColor = Color.Transparent;
-                    tempButton.CornerRadius = 10;
+                    tempButton.CornerRadius = 30;
                     tempButton.BorderWidth = 1;
+                    tempButton.VerticalOptions = LayoutOptions.Center;
                     tempButton.Clicked += DateButton_Clicked;
 
                     tempButton.BindingContext = dataList[i * 7 + j];
