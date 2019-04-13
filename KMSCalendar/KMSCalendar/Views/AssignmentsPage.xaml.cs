@@ -13,13 +13,16 @@ namespace KMSCalendar.Views
     {
         //* Private Properties
         private AssignmentViewModel viewModel;
-
+        
         //* Constructors
         public AssignmentsPage()
         {
             InitializeComponent();
 
             BindingContext = viewModel = new AssignmentViewModel();
+
+            CalendarDisplay.SetPage(this);
+            CalendarDisplay.ReportDateChanged();
         }
 
         //* Overridden Methods
@@ -47,5 +50,13 @@ namespace KMSCalendar.Views
             // Manually deselect item.
             AssignmentsListView.SelectedItem = null;
         }
+
+        //* Public Methods
+        public void NewDateSelected(DateTime newDate)
+        {
+            //TODO: Fetch data depending on hw items that are due soon.
+        }
+
+
     }
 }
