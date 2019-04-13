@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 
 using Xamarin.Forms;
@@ -200,10 +201,14 @@ namespace KMSCalendar.Controls
                     tempButton.SetValue(Grid.RowProperty, i + 2);
                     tempButton.SetValue(Grid.ColumnProperty, j);
                     tempButton.VerticalOptions = LayoutOptions.Center;
+                    tempButton.HorizontalOptions = LayoutOptions.Center;
                     tempButton.BackgroundColor = Color.Transparent;
-                    tempButton.CornerRadius = 30;
                     tempButton.BorderWidth = 1;
                     tempButton.Clicked += DateButton_Clicked;
+                    //tempButton.Margin = new Thickness(10, 0, 10, 0);
+                    tempButton.HeightRequest = 30;
+                    tempButton.WidthRequest = 30;
+                    tempButton.CornerRadius = 15;
 
                     tempButton.BindingContext = dataList[i * 7 + j];
                     tempButton.SetBinding(Button.BorderColorProperty, new Binding(
