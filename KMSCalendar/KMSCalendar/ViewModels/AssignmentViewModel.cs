@@ -30,8 +30,6 @@ namespace KMSCalendar.ViewModels
             LoadAssignmentsCommand = new Command(async () =>
                 await ExecuteLoadAssignmentsCommand());
 
-            FilterAssignments(DateTime.Today);
-
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
                 "AddAssignment", async (page, a) =>
             {
@@ -64,6 +62,8 @@ namespace KMSCalendar.ViewModels
             {
                 IsBusy = false;
             }
+
+            FilterAssignments(DateTime.Today);
         }
 
         public void FilterAssignments(DateTime date)
@@ -71,7 +71,7 @@ namespace KMSCalendar.ViewModels
             FilteredAssignments.Clear();
 
             var result = 
-                from a in Assignments
+                from a in Assignments.AsParallel()
                 where a.DueDate.Day == date.Day &&
                     a.DueDate.Month == date.Month &&
                     a.DueDate.Year == date.Year
