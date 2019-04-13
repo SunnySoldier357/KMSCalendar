@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 using KMSCalendar.Models;
 using KMSCalendar.Views;
+using System.Linq;
 
 namespace KMSCalendar.ViewModels
 {
@@ -16,14 +17,20 @@ namespace KMSCalendar.ViewModels
         public Command LoadAssignmentsCommand { get; set; }
 
         public ObservableCollection<Assignment> Assignments { get; set; }
-        
-        //* Constructors */
+        public ObservableCollection<Assignment> FilteredAssignments { get; set; }
+
+        //* Constructors
         public AssignmentViewModel()
         {
             Title = "Assignments Calendar";
+
             Assignments = new ObservableCollection<Assignment>();
+            FilteredAssignments = new ObservableCollection<Assignment>();
+
             LoadAssignmentsCommand = new Command(async () =>
                 await ExecuteLoadAssignmentsCommand());
+
+            FilterAssignments(DateTime.Today);
 
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
                 "AddAssignment", async (page, a) =>
@@ -34,7 +41,8 @@ namespace KMSCalendar.ViewModels
             });
         }
 
-        async Task ExecuteLoadAssignmentsCommand()
+        //* Public Methods
+        public async Task ExecuteLoadAssignmentsCommand()
         {
             if (IsBusy)
                 return;
@@ -44,9 +52,9 @@ namespace KMSCalendar.ViewModels
             try
             {
                 Assignments.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
-                    Assignments.Add(item);
+                var assignments = await DataStore.GetItemsAsync(true);
+                foreach (Assignment assignment in assignments)
+                    Assignments.Add(assignment);
             }
             catch (Exception ex)
             {
@@ -56,6 +64,21 @@ namespace KMSCalendar.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public void FilterAssignments(DateTime date)
+        {
+            FilteredAssignments.Clear();
+
+            var result = 
+                from a in Assignments
+                where a.DueDate.Day == date.Day &&
+                    a.DueDate.Month == date.Month &&
+                    a.DueDate.Year == date.Year
+                select a;
+
+            foreach (Assignment assignment in result)
+                FilteredAssignments.Add(assignment);
         }
     }
 }

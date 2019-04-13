@@ -3,6 +3,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using KMSCalendar.Controls;
 using KMSCalendar.Models;
 using KMSCalendar.ViewModels;
 
@@ -21,8 +22,8 @@ namespace KMSCalendar.Views
 
             BindingContext = viewModel = new AssignmentViewModel();
 
-            CalendarDisplay.SetPage(this);
-            CalendarDisplay.ReportDateChanged();
+            // Subscrible to the event
+            CalendarDisplay.DataSelectedChanged += DateSelectedChanged;
         }
 
         //* Overridden Methods
@@ -37,6 +38,12 @@ namespace KMSCalendar.Views
         //* Event Handlers
         public async void AddAssignment_Clicked(object sender, EventArgs e) =>
             await Navigation.PushModalAsync(new NavigationPage(new NewAssignmentPage()));
+        
+        public void DateSelectedChanged(object sender, EventArgs e)
+        {
+            WeekControl control = sender as WeekControl;
+            viewModel.FilterAssignments(control.DateSelected);
+        }
 
         public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -50,13 +57,5 @@ namespace KMSCalendar.Views
             // Manually deselect item.
             AssignmentsListView.SelectedItem = null;
         }
-
-        //* Public Methods
-        public void NewDateSelected(DateTime newDate)
-        {
-            //TODO: Fetch data depending on hw items that are due soon.
-        }
-
-
     }
 }

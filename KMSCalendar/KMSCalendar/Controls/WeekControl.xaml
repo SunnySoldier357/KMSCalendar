@@ -41,10 +41,9 @@
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
             <Button x:Name="LeftArrowButton"
-                    HorizontalOptions="Center"
                     Grid.Column="5"
-                    Grid.Row="0"
-                    Margin="0,0,0,0"
+                    HorizontalOptions="Center"
+                    Margin="0"
                     Text="&lt;"
                     TextColor="{Binding ColorTheme}"
                     FontSize="9"
@@ -54,10 +53,9 @@
                     Clicked="LeftArrowButton_Clicked" />
             
             <Button x:Name="RightArrowButton"
-                    HorizontalOptions="Center"
                     Grid.Column="6"
-                    Grid.Row="0"
-                    Margin="0,0,0,0"
+                    HorizontalOptions="Center"
+                    Margin="0"
                     Text="&gt;"
                     TextColor="{Binding ColorTheme}"
                     FontSize="9"

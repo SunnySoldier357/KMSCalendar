@@ -63,7 +63,7 @@
                 <ListView x:Name="AssignmentsListView"
                           VerticalOptions="FillAndExpand"
                           HasUnevenRows="true"
-                          ItemsSource="{Binding Assignments}"
+                          ItemsSource="{Binding FilteredAssignments}"
                           IsPullToRefreshEnabled="true"
                           RefreshCommand="{Binding LoadAssignmentsCommand}"
                           IsRefreshing="{Binding IsBusy, Mode=OneWay}"

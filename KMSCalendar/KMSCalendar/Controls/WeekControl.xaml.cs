@@ -12,7 +12,9 @@ namespace KMSCalendar.Controls
 	{
         //* Public Properties
         public DateTime DateSelected;
-        public Views.AssignmentsPage ParentPage;  //todo: rename this to parent
+
+        //* Public Events
+        public event EventHandler DataSelectedChanged;
 
         //* Private Properties
         private List<DayViewModel> dataList = new List<DayViewModel>();
@@ -22,15 +24,47 @@ namespace KMSCalendar.Controls
         {
             InitializeComponent();
 
-            //controller = new WeekController();
-
             setUpDateElements();
             fillDatesWithToday();
         }
 
-        public void SetPage(Views.AssignmentsPage ap)
+        //* Public Methods
+        public void ShiftDatesBackward()
         {
-            ParentPage = ap;
+            DateTime firstDate = DateTime.Today;
+
+            int year = dataList[0].Date.Year;
+            string month = dataList[0].Month;
+            int day = dataList[0].Date.Day;
+
+            string concat = string.Format("{0}-{1}-{2}", year, month, day);
+
+            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out firstDate);
+
+            for (int i = dataList.Count - 1; i >= 0; i--)
+            {
+                firstDate = firstDate.AddDays(-1);
+                changeBindingDate(i, firstDate);
+            }
+        }
+
+        public void ShiftDatesForward()
+        {
+            DateTime lastDate = DateTime.Today;
+
+            int year = dataList[dataList.Count - 1].Date.Year;
+            string month = dataList[dataList.Count - 1].Month;
+            int day = dataList[dataList.Count - 1].Date.Day;
+
+            string concat = string.Format("{0}-{1}-{2}", year, month, day);
+
+            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out lastDate);
+
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                lastDate = lastDate.AddDays(1);
+                changeBindingDate(i, lastDate);
+            }
         }
 
         // TODO: Put a little marker on today.
@@ -100,6 +134,30 @@ namespace KMSCalendar.Controls
             selectDay(todayOfWeek);
         }
 
+        /// <summary>
+        /// Updates the ViewModel bindings with new data.
+        /// </summary>
+        /// <param name="n">
+        /// The index of the date on the calendar (0 is the first date, 13 is the last date)
+        /// </param>
+        private void selectDay(int n)
+        {
+            changeMonthYearBinding(n);
+            circleDate(n);
+            setDateSelected(n);
+        }
+
+        private void setDateSelected(int n)
+        {
+            int year = dataList[n].Date.Year;
+            string month = dataList[n].Month;
+            int day = dataList[n].Date.Day;
+
+            string concat = string.Format("{0}-{1}-{2}", year, month, day);
+
+            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out DateSelected);
+        }
+
         private void setUpDateElements()
         {
             DateTime date = new DateTime(2019, 4, 28);
@@ -141,10 +199,10 @@ namespace KMSCalendar.Controls
                     Button tempButton = new Button();
                     tempButton.SetValue(Grid.RowProperty, i + 2);
                     tempButton.SetValue(Grid.ColumnProperty, j);
+                    tempButton.VerticalOptions = LayoutOptions.Center;
                     tempButton.BackgroundColor = Color.Transparent;
                     tempButton.CornerRadius = 30;
                     tempButton.BorderWidth = 1;
-                    tempButton.VerticalOptions = LayoutOptions.Center;
                     tempButton.Clicked += DateButton_Clicked;
 
                     tempButton.BindingContext = dataList[i * 7 + j];
@@ -158,87 +216,10 @@ namespace KMSCalendar.Controls
             }
         }
 
-        /// <summary>
-        ///     Updates the ViewModel bindings with new data.
-        /// </summary>
-        /// <param name="n">
-        ///     The index of the date on the calendar (0 is the first date, 13 is the last date)
-        /// </param>
-        private void selectDay(int n)
-        {
-            changeMonthYearBinding(n);
-            circleDate(n);
-            setDateSelected(n);
-        }
-
-        private void setDateSelected(int n)
-        {
-            int year = dataList[n].Date.Year;
-            string month = dataList[n].Month;
-            int day = dataList[n].Date.Day;
-
-            string concat = string.Format("{0}-{1}-{2}", year, month, day);
-
-            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out DateSelected);
-        }
-
-
-
-
-        //* Public Methods
-        public void ShiftDatesBackward()
-        {
-            DateTime firstDate = DateTime.Today;
-
-            int year = dataList[0].Date.Year;
-            string month = dataList[0].Month;
-            int day = dataList[0].Date.Day;
-
-            string concat = string.Format("{0}-{1}-{2}", year, month, day);
-
-            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out firstDate);
-
-            for (int i = dataList.Count - 1; i >= 0; i--)
-            {
-                firstDate = firstDate.AddDays(-1);
-                changeBindingDate(i, firstDate);
-            }
-        }
-
-        public void ShiftDatesForward()
-        {
-            DateTime lastDate = DateTime.Today;
-
-            int year = dataList[dataList.Count - 1].Date.Year;
-            string month = dataList[dataList.Count - 1].Month;
-            int day = dataList[dataList.Count - 1].Date.Day;
-
-            string concat = string.Format("{0}-{1}-{2}", year, month, day);
-
-            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out lastDate);
-
-            for (int i = 0; i < dataList.Count; i++)
-            {
-                lastDate = lastDate.AddDays(1);
-                changeBindingDate(i, lastDate);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ReportDateChanged()
-        {
-            ParentPage.NewDateSelected(DateSelected);
-        }
-
-
-
-
         //* Event Handlers
 
         /// <summary>
-        ///     Handles the event when any of the numbered dates is pressed.
+        /// Handles the event when any of the numbered dates is pressed.
         /// </summary>
         private void DateButton_Clicked(object sender, EventArgs e)
         {
@@ -248,7 +229,8 @@ namespace KMSCalendar.Controls
 
             selectDay((row - 2) * 7 + column);
 
-            ReportDateChanged();
+            // Raise the event
+            DataSelectedChanged?.Invoke(this, e);
         }
 
         private void LeftArrowButton_Clicked(object sender, EventArgs e)
