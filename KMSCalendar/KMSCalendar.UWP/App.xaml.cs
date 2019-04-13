@@ -44,9 +44,8 @@ namespace KMSCalendar.UWP
 
                 Xamarin.Forms.Forms.Init(e);
 
-                // This is supposed to set the UWP size to iPhone 8 resolultion. It is not
-                // working on my laptop :(
-                ApplicationView.PreferredLaunchViewSize = new Size(1334, 750);
+                // This sets the UWP size to Google Pixel resolultion (1080 x 1920)
+                ApplicationView.PreferredLaunchViewSize = new Size(1080, 1920);
                 ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
