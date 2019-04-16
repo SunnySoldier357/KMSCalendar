@@ -6,8 +6,6 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Threading.Tasks;
 
-using KMSCalendar.MobileAppService.Models;
-
 namespace KMSCalendar.MobileAppService
 {
     public class Startup
@@ -54,7 +52,6 @@ namespace KMSCalendar.MobileAppService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<IAssignmentRepository, AssignmentRepository>();
 
             services.AddSwaggerGen(genOptions =>
             {
