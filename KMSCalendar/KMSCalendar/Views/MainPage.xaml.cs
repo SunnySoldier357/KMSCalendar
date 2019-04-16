@@ -22,7 +22,8 @@ namespace KMSCalendar.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int) MenuItemType.Browse, (NavigationPage) Detail);
+            // The default page to load
+            MenuPages.Add((int) MenuItemType.Calendar, (NavigationPage) Detail);
         }
 
         // Public Methods
@@ -32,11 +33,14 @@ namespace KMSCalendar.Views
             {
                 switch (id)
                 {
-                    case (int) MenuItemType.Browse:
-                        MenuPages.Add(id, new NavigationPage(new AssignmentsPage()));
-                        break;
                     case (int) MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
+                        break;
+                    case (int) MenuItemType.Calendar:
+                        MenuPages.Add(id, new NavigationPage(new AssignmentsPage()));
+                        break;
+                    case (int) MenuItemType.Settings:
+                        MenuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;
                 }
             }

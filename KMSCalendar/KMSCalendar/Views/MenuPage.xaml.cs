@@ -25,14 +25,20 @@ namespace KMSCalendar.Views
             {
                 new HomeMenuItem
                 {
-                    Id = MenuItemType.Browse,
-                    Title ="Browse"
+                    Id = MenuItemType.Calendar,
+                    Title ="Calendar"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.About,
                     Title ="About"
+                },
+                new HomeMenuItem
+                {
+                    Id = MenuItemType.Settings,
+                    Title = "Settings"
                 }
+
             };
 
             ListViewMenu.ItemsSource = menuItems;
@@ -44,7 +50,7 @@ namespace KMSCalendar.Views
                 if (e.SelectedItem == null)
                     return;
 
-                var id = (int)((HomeMenuItem) e.SelectedItem).Id;
+                int id = (int)((HomeMenuItem) e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
         }

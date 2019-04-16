@@ -10,7 +10,8 @@
 
     public enum MenuItemType
     {
-        Browse,
-        About
+        About,
+        Calendar,
+        Settings
     }
 }
