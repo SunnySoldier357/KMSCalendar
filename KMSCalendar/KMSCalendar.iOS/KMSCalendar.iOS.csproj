@@ -143,4 +143,10 @@
       <Name>KMSCalendar</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\arrow-pointing-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\arrow-pointing-right.png" />
+  </ItemGroup>
 </Project>
