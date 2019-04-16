@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 
 using Xamarin.Forms;
@@ -8,24 +9,42 @@ using Xamarin.Forms.Xaml;
 namespace KMSCalendar.Controls
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class WeekControl : ContentView
+	public partial class WeekControl : ContentView, INotifyPropertyChanged
 	{
+        //* Private Properties
+        private DateTime dateSelected;
+
+        private List<DayViewModel> dataList = new List<DayViewModel>();
+
         //* Public Properties
-        public DateTime DateSelected;
-        public DateStringViewModel DateProp;
+        public DateTime DateSelected
+        {
+            get => dateSelected;
+            private set
+            {
+                if (value != dateSelected)
+                {
+                    dateSelected = value;
+                    OnNotifyPropertyChanged(nameof(DateSelected));
+                    OnNotifyPropertyChanged(nameof(DateFormatted));
+                }
+            }
+        }
+
+        /// <summary>
+        /// This sets the Title to the ListView with the DateSelected
+        /// </summary>
+        public string DateFormatted => DateSelected.ToString("dddd, MMMM dd");
 
         //* Public Events
         public event EventHandler DataSelectedChanged;
-
-        //* Private Properties
-        private List<DayViewModel> dataList = new List<DayViewModel>();
+        public event PropertyChangedEventHandler PropertyChanged;
 
         //* Constructors
         public WeekControl()
         {
             InitializeComponent();
 
-            DateProp = new DateStringViewModel();
             setUpDateElements();
             fillDatesWithToday();
         }
@@ -147,8 +166,6 @@ namespace KMSCalendar.Controls
             changeMonthYearBinding(n);
             circleDate(n);
             setDateSelected(n);
-
-            DateProp.DateString = DateSelected.ToString("dddd, MMMM dd");  //this sets the title to the list view with the dateSelected
         }
 
         private void setDateSelected(int n)
@@ -159,7 +176,9 @@ namespace KMSCalendar.Controls
 
             string concat = string.Format("{0}-{1}-{2}", year, month, day);
 
-            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out DateSelected);
+            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out dateSelected);
+            OnNotifyPropertyChanged(nameof(DateSelected));
+            OnNotifyPropertyChanged(nameof(DateFormatted));
         }
 
         private void setUpDateElements()
@@ -244,6 +263,9 @@ namespace KMSCalendar.Controls
         {
             ShiftDatesBackward();
         }
+
+        public void OnNotifyPropertyChanged(string property) => 
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 
         private void RightArrowButton_Clicked(object sender, EventArgs e)
         {

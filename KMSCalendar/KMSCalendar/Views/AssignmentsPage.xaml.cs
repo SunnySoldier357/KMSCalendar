@@ -26,7 +26,7 @@ namespace KMSCalendar.Views
             // Subscrible to the event
             CalendarDisplay.DataSelectedChanged += DateSelectedChanged;
 
-            ListTitleDate.BindingContext = CalendarDisplay.DateProp;
+            ListTitleDate.BindingContext = CalendarDisplay;
         }
 
         //* Overridden Methods
