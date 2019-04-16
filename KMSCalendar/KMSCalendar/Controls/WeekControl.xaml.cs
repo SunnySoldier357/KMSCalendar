@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -52,15 +51,7 @@ namespace KMSCalendar.Controls
         //* Public Methods
         public void ShiftDatesBackward()
         {
-            DateTime firstDate = DateTime.Today;
-
-            int year = dataList[0].Date.Year;
-            string month = dataList[0].Month;
-            int day = dataList[0].Date.Day;
-
-            string concat = string.Format("{0}-{1}-{2}", year, month, day);
-
-            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out firstDate);
+            DateTime firstDate = dataList[0].Date;
 
             for (int i = dataList.Count - 1; i >= 0; i--)
             {
@@ -71,15 +62,7 @@ namespace KMSCalendar.Controls
 
         public void ShiftDatesForward()
         {
-            DateTime lastDate = DateTime.Today;
-
-            int year = dataList[dataList.Count - 1].Date.Year;
-            string month = dataList[dataList.Count - 1].Month;
-            int day = dataList[dataList.Count - 1].Date.Day;
-
-            string concat = string.Format("{0}-{1}-{2}", year, month, day);
-
-            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out lastDate);
+            DateTime lastDate = dataList[dataList.Count - 1].Date;
 
             for (int i = 0; i < dataList.Count; i++)
             {
@@ -130,7 +113,7 @@ namespace KMSCalendar.Controls
             DateTime today = DateTime.Now;
 
             // 0 is Sunday ... 6 is Saturday
-            int todayOfWeek = (int)today.DayOfWeek;
+            int todayOfWeek = (int) today.DayOfWeek;
 
             changeBindingDate(todayOfWeek, today);
 
@@ -165,20 +148,8 @@ namespace KMSCalendar.Controls
         {
             changeMonthYearBinding(n);
             circleDate(n);
-            setDateSelected(n);
-        }
 
-        private void setDateSelected(int n)
-        {
-            int year = dataList[n].Date.Year;
-            string month = dataList[n].Month;
-            int day = dataList[n].Date.Day;
-
-            string concat = string.Format("{0}-{1}-{2}", year, month, day);
-
-            DateTime.TryParseExact(concat, "yyyy-MMMM-d", null, DateTimeStyles.None, out dateSelected);
-            OnNotifyPropertyChanged(nameof(DateSelected));
-            OnNotifyPropertyChanged(nameof(DateFormatted));
+            DateSelected = dataList[n].Date;
         }
 
         private void setUpDateElements()
@@ -209,7 +180,7 @@ namespace KMSCalendar.Controls
 
                     tempLabel.BindingContext = dataList[i * 7 + j];
                     tempLabel.SetBinding(Label.TextProperty, new Binding(
-                        string.Format("{0}.{1}", nameof(DayViewModel.Date), 
+                        string.Format("{0}.{1}", nameof(DayViewModel.Date),
                             nameof(DayViewModel.Date.Day))));
                     tempLabel.SetBinding(Label.TextColorProperty, new Binding(
                         nameof(DayViewModel.ColorTheme)));
@@ -259,17 +230,13 @@ namespace KMSCalendar.Controls
             DataSelectedChanged?.Invoke(this, e);
         }
 
-        private void LeftArrowButton_Clicked(object sender, EventArgs e)
-        {
+        private void LeftArrowButton_Clicked(object sender, EventArgs e) => 
             ShiftDatesBackward();
-        }
 
-        public void OnNotifyPropertyChanged(string property) => 
+        public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 
-        private void RightArrowButton_Clicked(object sender, EventArgs e)
-        {
+        private void RightArrowButton_Clicked(object sender, EventArgs e) => 
             ShiftDatesForward();
-        }
     }
 }
