@@ -144,9 +144,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\arrow-pointing-left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\arrow-pointing-right.png" />
+    <Content Include="Resources\arrow-pointing-left.png" />
+    <Content Include="Resources\arrow-pointing-right.png" />
+    <BundleResource Include="Resources\rightArrow.png" />
+    <BundleResource Include="Resources\leftArrow.png" />
   </ItemGroup>
 </Project>

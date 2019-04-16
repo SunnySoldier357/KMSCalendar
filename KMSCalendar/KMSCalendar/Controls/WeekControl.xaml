@@ -40,30 +40,20 @@
 
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
-            <Button x:Name="LeftArrowButton"
-                    Grid.Column="5"
-                    HorizontalOptions="Center"
-                    Margin="0"
-                    Text="&lt;"
-                    TextColor="{Binding ColorTheme}"
-                    FontSize="9"
-                    BackgroundColor="Transparent"
-                    BorderColor="Transparent"
-                    BorderWidth="0"
-                    Clicked="LeftArrowButton_Clicked" />
-            
-            <Button x:Name="RightArrowButton"
-                    Grid.Column="6"
-                    HorizontalOptions="Center"
-                    Margin="0"
-                    Text="&gt;"
-                    TextColor="{Binding ColorTheme}"
-                    FontSize="9"
-                    BackgroundColor="Transparent"
-                    BorderColor="Transparent"
-                    BorderWidth="0"
-                    Clicked="RightArrowButton_Clicked" />
+            <ImageButton x:Name="LeftArrowButton"
+                         Source="leftArrow.png"
+                         Grid.Column="5"
+                         HorizontalOptions="Center"
+                         BackgroundColor="Transparent"
+                         Clicked="LeftArrowButton_Clicked" />
 
+            <ImageButton x:Name="RightArrowButton"
+                         Source="rightArrow.png"
+                         BackgroundColor="Transparent"
+                         Grid.Column="6"
+                         HorizontalOptions="Center"
+                         Clicked="RightArrowButton_Clicked" />
+            
             <!-- If you want to have day of the week labels -->
             <!-- <Label Text="SUN" FontSize="8" Grid.Row="2" /> -->
             <!-- <Label Text="MON" FontSize="8" Grid.Row="2" Grid.Column="1"/> -->
