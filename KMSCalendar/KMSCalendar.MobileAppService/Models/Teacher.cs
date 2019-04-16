@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace KMSCalendar.MobileAppService.Models
 {
-    public class Teacher
+    public class Teacher : TableData
     {
         //* Public Properties
         public List<Class> Classes { get; set; }
