@@ -12,6 +12,7 @@ namespace KMSCalendar.Controls
 	{
         //* Public Properties
         public DateTime DateSelected;
+        public DateStringViewModel DateProp;
 
         //* Public Events
         public event EventHandler DataSelectedChanged;
@@ -24,6 +25,7 @@ namespace KMSCalendar.Controls
         {
             InitializeComponent();
 
+            DateProp = new DateStringViewModel();
             setUpDateElements();
             fillDatesWithToday();
         }
@@ -145,6 +147,8 @@ namespace KMSCalendar.Controls
             changeMonthYearBinding(n);
             circleDate(n);
             setDateSelected(n);
+
+            DateProp.DateString = DateSelected.ToString("dddd, MMMM dd");  //this sets the title to the list view with the dateSelected
         }
 
         private void setDateSelected(int n)

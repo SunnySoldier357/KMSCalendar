@@ -31,34 +31,13 @@
             <StackLayout>
 
                 <!-- You might want to make this a content view for abstraction! -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                    </Grid.RowDefinitions>
-
-                    <Label Text="Thursday, 4, April"
+                <Label     x:Name="ListTitleDate"
+                           Text="{Binding DateString}"
                            TextColor="Gray"
-                           HorizontalOptions="Center" />
-
-                    <!--   TODO: Replace this with an image   -->
-                    <Label Grid.Column="1"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           Text="______"
-                           TextColor="Gray" />
-
-                    <Label Grid.Column="2"
-                           HorizontalOptions="Center"
-                           Text="TODAY"
-                           TextColor="Gray" />
-
-                </Grid>
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="Micro"
+                           Margin="0, -10, 0, 0"/>
 
                 <ListView x:Name="AssignmentsListView"
                           VerticalOptions="FillAndExpand"
