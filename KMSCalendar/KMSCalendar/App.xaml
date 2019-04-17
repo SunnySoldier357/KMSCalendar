@@ -5,7 +5,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Global Styles -->
+            <!--https://stackoverflow.com/questions/18200902/changing-the-styles-at-runtime-in-wpf-->
+            <Color x:Key="NavigationBackground">#FFF</Color>
             <Color x:Key="NavigationPrimary">#154360</Color>
+            <Color x:Key="NavigationSecondary">#603215</Color>
+            <Color x:Key="NavigationTertiary">#C9682C</Color>
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor"
                         Value="{StaticResource NavigationPrimary}" />
