@@ -13,7 +13,7 @@ namespace KMSCalendar.Views
     public partial class SettingsPage : ContentPage
     {
         //* Private Properties
-        public Settings settings = DependencyService.Get<Settings>();
+        public Settings settings = Settings.DefaultInstance;
 
         public SettingsPage()
         {

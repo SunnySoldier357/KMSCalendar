@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace KMSCalendar.Models
@@ -8,6 +9,9 @@ namespace KMSCalendar.Models
     {
         //* Constants
         private const string DIC_KEY = "Settings";
+
+        //* Static Properties
+        public static Settings DefaultInstance = initAsync().Result;
 
         //* Private Properties
         private Theme theme;
@@ -31,18 +35,23 @@ namespace KMSCalendar.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         //* Constructor
-        public Settings()
+        private Settings()
         {
             // Default Values
             theme = Theme.Light;
         }
 
-        public Settings(Settings settings) => 
-            Theme = settings.Theme;
-
-        //* Static Methods
-        public static async Task InitAsync(Settings settings)
+        private Settings(Settings settings)
         {
+            if (settings != null)
+                Theme = settings.Theme;
+        }
+            
+        //* Static Methods
+        private static async Task<Settings> initAsync()
+        {
+            Settings settings = null;
+
             string settingsJson = null;
 
             if (App.Current.Properties.ContainsKey(DIC_KEY))
@@ -60,6 +69,8 @@ namespace KMSCalendar.Models
 
                 await settings.UpdateDictionaryAsync();
             }
+
+            return settings;
         }
 
         //* Public Methods
@@ -67,8 +78,14 @@ namespace KMSCalendar.Models
         {
             string settingsJson = JsonConvert.SerializeObject(this);
             App.Current.Properties[DIC_KEY] = settingsJson;
+            var temp = App.Current.Properties;
 
             await App.Current.SavePropertiesAsync();
+
+            foreach (var item in App.Current.Properties.Values)
+            {
+                Debug.WriteLine(item.ToString());
+            }
         }
 
         //* Event Handlers
