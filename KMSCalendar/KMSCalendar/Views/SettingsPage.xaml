@@ -1,12 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:KMSCalendar.Views"
              x:Class="KMSCalendar.Views.SettingsPage">
+
+    <ContentPage.Resources>
+        <local:ThemeToColorConverter x:Key="ThemeToColorConverter" />
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="This is the settings page."
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="StartAndExpand">
+                <Label Text="Theme:"
+                       FontSize="Medium" />
+                <Picker x:Name="ThemePicker" 
+                        HorizontalOptions="End"
+                        SelectedIndexChanged="ThemePicker_SelectedIndexChanged">
+                </Picker>
+            </StackLayout>
+
+            <Label x:Name="ThemeTestLabel" 
+                   HeightRequest="100"
+                   WidthRequest="100"
+                   Text="THEME TEST"
+                   TextColor="Orange"
+                   BackgroundColor="{Binding settings.Theme, Converter={StaticResource ThemeToColorConverter}}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

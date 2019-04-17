@@ -59,6 +59,9 @@ namespace KMSCalendar.Controls
         /// <summary>The month of the selected day.</summary>
         public string Month => Date.ToString("MMMM");
 
+        //* Events
+        public event PropertyChangedEventHandler PropertyChanged;
+
         //* Constructors
         public DayViewModel() : this(new DateTime(2019, 5, 1), 0, 1, Color.Black) { }
 
@@ -81,9 +84,7 @@ namespace KMSCalendar.Controls
             ColorTheme = colorTheme;
         }
 
-        //* Events and Event Handlers
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        //* Event Handlers
         public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 

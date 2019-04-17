@@ -3,6 +3,7 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Services;
 using KMSCalendar.Views;
+using KMSCalendar.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KMSCalendar
@@ -23,6 +24,10 @@ namespace KMSCalendar
                 DependencyService.Register<MockDataStore>();
             else
                 DependencyService.Register<AzureDataStore>();
+
+            // Initialise Settings
+            DependencyService.Register<Settings>();
+            Settings.InitAsync(DependencyService.Get<Settings>());
 
             MainPage = new MainPage();
         }
