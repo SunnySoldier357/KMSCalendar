@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KMSCalendar.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <Label Text="This is the login page."
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Entry x:Name="UsernameEntry"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Start"
+                   Placeholder="Username"/>
+
+            <Entry x:Name="PasswordEntry"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Start"
+                   Placeholder="Password"/>
+
+            <Button x:Name="AuthenticateLoginButton"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Start"
+                    Text="LOGIN"/>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
