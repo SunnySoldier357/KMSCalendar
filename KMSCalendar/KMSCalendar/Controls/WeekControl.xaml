@@ -7,8 +7,8 @@
         <!-- This grid defines the layout of evreything within the calendar -->
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="24" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
@@ -41,19 +41,34 @@
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
             <ImageButton x:Name="LeftArrowButton"
-                         Source="leftArrow.png"
                          Grid.Column="5"
+                         WidthRequest="24"
                          HorizontalOptions="Center"
                          BackgroundColor="Transparent"
-                         Clicked="LeftArrowButton_Clicked" />
+                         Clicked="LeftArrowButton_Clicked">
+                <ImageButton.Source>
+                    <OnPlatform x:TypeArguments="FileImageSource">
+                        <On Platform="Android" Value="leftArrow.png"/>
+                        <On Platform="UWP, iOS" Value="arrow-pointing-left.png"/>
+                    </OnPlatform>
+                </ImageButton.Source>
+            </ImageButton>
 
             <ImageButton x:Name="RightArrowButton"
-                         Source="rightArrow.png"
+                         WidthRequest="24"
                          BackgroundColor="Transparent"
                          Grid.Column="6"
                          HorizontalOptions="Center"
-                         Clicked="RightArrowButton_Clicked" />
-            
+                         Clicked="RightArrowButton_Clicked">
+                <ImageButton.Source>
+                    <OnPlatform x:TypeArguments="FileImageSource">
+                        <On Platform="Android" Value="rightArrow.png"/>
+                        <On Platform="UWP, iOS" Value="arrow-pointing-right.png"/>
+                    </OnPlatform>
+                </ImageButton.Source>
+            </ImageButton>
+
+
             <!-- If you want to have day of the week labels -->
             <!-- <Label Text="SUN" FontSize="8" Grid.Row="2" /> -->
             <!-- <Label Text="MON" FontSize="8" Grid.Row="2" Grid.Column="1"/> -->
