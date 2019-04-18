@@ -44,28 +44,46 @@
                          Grid.Column="5"
                          HorizontalOptions="Center"
                          WidthRequest="24"
+                         Source="leftArrow.png"
                          BackgroundColor="Transparent"
-                         Clicked="LeftArrowButton_Clicked"
-                         Source="leftArrow.png">
-            </ImageButton>
+                         Clicked="LeftArrowButton_Clicked" />
 
             <ImageButton x:Name="RightArrowButton"
                          Grid.Column="6"
                          HorizontalOptions="Center"
                          WidthRequest="24"
+                         Source="rightArrow.png"
                          BackgroundColor="Transparent"
-                         Clicked="RightArrowButton_Clicked"
-                         Source="rightArrow.png">
-            </ImageButton>
+                         Clicked="RightArrowButton_Clicked" />
 
-            <!-- If you want to have day of the week labels -->
-            <!-- <Label Text="SUN" FontSize="8" Grid.Row="2" /> -->
-            <!-- <Label Text="MON" FontSize="8" Grid.Row="2" Grid.Column="1"/> -->
-            <!-- <Label Text="TUE" FontSize="8" Grid.Row="2" Grid.Column="2"/> -->
-            <!-- <Label Text="WED" FontSize="8" Grid.Row="2" Grid.Column="3"/> -->
-            <!-- <Label Text="THS" FontSize="8" Grid.Row="2" Grid.Column="4"/> -->
-            <!-- <Label Text="FRI" FontSize="8" Grid.Row="2" Grid.Column="5"/> -->
-            <!-- <Label Text="SAT" FontSize="8" Grid.Row="2" Grid.Column="6"/> -->
+            <!-- If you want to have day of the week labels
+            <Label Grid.Row="2"
+                   Text="SUN"
+                   FontSize="8" />
+            <Label Grid.Row="2"
+                   Grid.Column="1"
+                   Text="MON"
+                   FontSize="8" />
+            <Label Grid.Row="2"
+                   Grid.Column="2"
+                   Text="TUE"
+                   FontSize="8" />
+            <Label Grid.Row="2"
+                   Grid.Column="3"
+                   Text="WED"
+                   FontSize="8" />
+            <Label Grid.Row="2"
+                   Grid.Column="4"
+                   Text="THS"
+                   FontSize="8" />
+            <Label Grid.Row="2"
+                   Grid.Column="5"
+                   Text="FRI"
+                   FontSize="8" />
+            <Label Grid.Row="2"
+                   Grid.Column="6"
+                   Text="SAT"
+                   FontSize="8" /> -->
         </Grid>
 
     </ContentView.Content>
