@@ -45,13 +45,8 @@
                          HorizontalOptions="Center"
                          WidthRequest="24"
                          BackgroundColor="Transparent"
-                         Clicked="LeftArrowButton_Clicked">
-                <ImageButton.Source>
-                    <OnPlatform x:TypeArguments="FileImageSource">
-                        <On Platform="Android" Value="leftArrow.png"/>
-                        <On Platform="UWP, iOS" Value="arrow-pointing-left.png"/>
-                    </OnPlatform>
-                </ImageButton.Source>
+                         Clicked="LeftArrowButton_Clicked"
+                         Source="leftArrow.png">
             </ImageButton>
 
             <ImageButton x:Name="RightArrowButton"
@@ -59,13 +54,8 @@
                          HorizontalOptions="Center"
                          WidthRequest="24"
                          BackgroundColor="Transparent"
-                         Clicked="RightArrowButton_Clicked">
-                <ImageButton.Source>
-                    <OnPlatform x:TypeArguments="FileImageSource">
-                        <On Platform="Android" Value="rightArrow.png"/>
-                        <On Platform="UWP, iOS" Value="arrow-pointing-right.png"/>
-                    </OnPlatform>
-                </ImageButton.Source>
+                         Clicked="RightArrowButton_Clicked"
+                         Source="rightArrow.png">
             </ImageButton>
 
             <!-- If you want to have day of the week labels -->

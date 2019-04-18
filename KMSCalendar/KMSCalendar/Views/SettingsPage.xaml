@@ -7,7 +7,8 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource NavigationBackground}">
             <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="StartAndExpand">
+                         HorizontalOptions="CenterAndExpand"
+                         Margin="0, 20, 0, 0">
                 <Label Text="Theme:"
                        FontSize="Medium" />
                 <Picker x:Name="ThemePicker"
