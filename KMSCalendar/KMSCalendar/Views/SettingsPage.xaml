@@ -4,10 +4,6 @@
              xmlns:local="clr-namespace:KMSCalendar.Views"
              x:Class="KMSCalendar.Views.SettingsPage">
 
-    <ContentPage.Resources>
-        <local:ThemeToColorConverter x:Key="ThemeToColorConverter" />
-    </ContentPage.Resources>
-
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal"
@@ -25,7 +21,7 @@
                    WidthRequest="100"
                    Text="THEME TEST"
                    TextColor="Orange"
-                   BackgroundColor="{Binding settings.Theme, Converter={StaticResource ThemeToColorConverter}}"/>
+                   BackgroundColor="{DynamicResource NavigationBackground}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 
 using Xamarin.Forms;
@@ -67,32 +66,5 @@ namespace KMSCalendar.Views
         public string Name;
 
         public override string ToString() => Name;
-    }
-
-    // Converts from Theme to Color
-    public class ThemeToColorConverter : IValueConverter
-    {
-        //* Interface Implementations
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            switch (value as Theme?)
-            {
-                case Theme.Dark:
-                    return Color.Black;
-                case Theme.Light:
-                default:
-                    return Color.White;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            Color? valueColor = value as Color?;
-
-            if (valueColor == Color.Black)
-                return Theme.Dark;
-            
-            return Theme.Light;
-        }
     }
 }
