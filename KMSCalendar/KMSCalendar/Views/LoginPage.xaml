@@ -7,27 +7,38 @@
 
         <StackLayout VerticalOptions="Fill">
             <Grid>
-
                 <Grid.RowDefinitions>
+                    
+                    <!-- Spacing -->
                     <RowDefinition Height="90"/>
+                    
                     <!-- Title -->
                     <RowDefinition Height="60"/>
+
+                    <!-- Spacing -->
                     <RowDefinition Height="100"/>
-                    <!-- Spacing -->
-                    <RowDefinition Height="40"/>
+                    
                     <!-- Email -->
-                    <RowDefinition Height="20"/>
-                    <!-- Spacing -->
                     <RowDefinition Height="40"/>
+                    
+                    <!-- Spacing -->
+                    <RowDefinition Height="20"/>
+                    
                     <!-- Password -->
+                    <RowDefinition Height="40"/>
+                    
+                    <!-- Spacing -->
                     <RowDefinition Height="20"/>
-                    <!-- Spacing -->
-                    <RowDefinition Height="40"/>
+                    
                     <!-- Button -->
-                    <RowDefinition Height="14"/>
-                    <!-- Spacing -->
                     <RowDefinition Height="40"/>
+                    
+                    <!-- Spacing -->
+                    <RowDefinition Height="14"/>
+
                     <!-- Forgot Password Button -->
+                    <RowDefinition Height="40"/>
+                    
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="1"
@@ -61,8 +72,8 @@
 
                 <Button x:Name="AuthenticateLoginButton"
                         Grid.Row="7"
+                        HorizontalOptions="Center"
                         WidthRequest="100"
-                        Margin="100,0,100,0"
                         Padding="5"
                         BackgroundColor="{StaticResource NavigationTertiary}"
                         Text="LOG IN"
