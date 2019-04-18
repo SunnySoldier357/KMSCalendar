@@ -33,7 +33,10 @@ namespace KMSCalendar.Views
             {
                 switch (id)
                 {
-                    case (int) MenuItemType.About:
+                    case (int)MenuItemType.Login:
+                        MenuPages.Add(id, new NavigationPage(new LoginPage()));
+                        break;
+                    case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
                     case (int) MenuItemType.Calendar:

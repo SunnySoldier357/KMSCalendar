@@ -19,14 +19,14 @@
     </ContentPage.ToolbarItems>
 
     <!-- This is the list page that appears when the app is loaded -->
-    <StackLayout BackgroundColor="#154360">
+    <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
         <control:WeekControl x:Name="CalendarDisplay"
                              HorizontalOptions="CenterAndExpand"
                              Margin="5,10,5,15" />
 
         <!-- TODO: Put a Grid around ListView so that it looks better -->
         <Frame x:Name="BottomAreaFrame"
-               BackgroundColor="White"
+               BackgroundColor="{DynamicResource NavigationBackground}"
                CornerRadius="15">
             <StackLayout>
 
@@ -37,7 +37,7 @@
                        Margin="0,-10,0,0"
                        Text="{Binding DateFormatted}"
                        TextColor="Gray"
-                       FontSize="Micro" />
+                       FontSize="Small" />
 
                 <ListView x:Name="AssignmentsListView"
                           VerticalOptions="FillAndExpand"

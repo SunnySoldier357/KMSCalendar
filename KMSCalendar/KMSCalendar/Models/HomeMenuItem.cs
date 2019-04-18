@@ -10,6 +10,7 @@
 
     public enum MenuItemType
     {
+        Login,
         About,
         Calendar,
         Settings

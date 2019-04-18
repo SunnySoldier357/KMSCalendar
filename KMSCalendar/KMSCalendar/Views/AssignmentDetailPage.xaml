@@ -5,18 +5,19 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20"
-                 Padding="15">
+                 Padding="15"
+                 BackgroundColor="{DynamicResource NavigationBackground}">
         <Label Text="Name:"
                FontSize="Medium" />
         <Label Text="{Binding Assignment.Name}"
-               FontSize="Small"/>
+               FontSize="Small" />
         <Label Text="Description:"
                FontSize="Medium" />
         <Label Text="{Binding Assignment.Description}"
-               FontSize="Small"/>
+               FontSize="Small" />
         <Label Text="Due Date:"
                FontSize="Medium" />
         <Label Text="{Binding Assignment.Date}"
-               FontSize="Small"/>
+               FontSize="Small" />
     </StackLayout>
 </ContentPage>

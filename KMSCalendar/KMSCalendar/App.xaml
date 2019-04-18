@@ -5,7 +5,28 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Global Styles -->
+            <!--https://stackoverflow.com/questions/18200902/changing-the-styles-at-runtime-in-wpf-->
+            
+            <!-- White -->
+            <Color x:Key="NavigationBackground">#FFF</Color>
+            <!-- Dark Blue -->
             <Color x:Key="NavigationPrimary">#154360</Color>
+            <!-- Brown -->
+            <Color x:Key="NavigationSecondary">#603215</Color>
+            <!-- Orange -->
+            <Color x:Key="NavigationTertiary">#C9682C</Color>
+
+            <!-- Light Gray -->
+            <Color x:Key="LightText">#999999</Color>
+            <!-- Black -->
+            <Color x:Key="Text">#000</Color>
+            
+            <!-- Implicit Styles -->
+            <Style TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="{DynamicResource Text}" />
+            </Style>
+            
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor"
                         Value="{StaticResource NavigationPrimary}" />
