@@ -1,29 +1,118 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KMSCalendar.Views.LoginPage">
+             x:Class="KMSCalendar.Views.LoginPage"
+             BackgroundImage="BackgroundForLogin.png">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center">
-            <Label Text="This is the login page."
-                VerticalOptions="Start" 
-                HorizontalOptions="CenterAndExpand" />
 
-            <Entry x:Name="UsernameEntry"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Start"
-                   Placeholder="Username"/>
+        <StackLayout VerticalOptions="Fill">
+            <Grid>
 
-            <Entry x:Name="PasswordEntry"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Start"
-                   Placeholder="Password"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <!-- Title -->
+                    <RowDefinition Height="100"/>
+                    <!-- Spacing -->
+                    <RowDefinition Height="40"/>
+                    <!-- Email -->
+                    <RowDefinition Height="20"/>
+                    <!-- Spacing -->
+                    <RowDefinition Height="40"/>
+                    <!-- Password -->
+                    <RowDefinition Height="20"/>
+                    <!-- Spacing -->
+                    <RowDefinition Height="40"/>
+                    <!-- Button -->
+                    <RowDefinition Height="14"/>
+                    <!-- Spacing -->
+                    <RowDefinition Height="40"/>
+                    <!-- Forgot Password Button -->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Button x:Name="AuthenticateLoginButton"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="Start"
-                    Text="LOGIN"/>
+                <Label Text="HW Calendar"
+                       TextColor="White"
+                       FontSize="Large"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Row="1"/>
+
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Grid.Row="3"
+                       Padding="0"
+                       Margin="60, 0, 60, 0">
+                    <Entry x:Name="UsernameEntry"
+                           Placeholder="Username"
+                           BackgroundColor="Transparent"/>
+                </Frame>
+
+
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Grid.Row="5"
+                       Padding="0"
+                       Margin="60, 0, 60, 0">
+                    <Entry x:Name="PasswordEntry"
+                           Placeholder="Password"/>
+                </Frame>
+
+                <Button x:Name="AuthenticateLoginButton"
+                        Grid.Row="7"
+                        WidthRequest="100"
+                        Margin="100, 0, 100, 0"
+                        Text="LOG IN"
+                        TextColor="White"
+                        BackgroundColor="{StaticResource NavigationTertiary}"
+                        CornerRadius="20"
+                        BorderColor="Transparent"
+                        Padding="5"/>
+
+                <Button x:Name="ForgotPasswordButton"
+                        Grid.Row="9"
+                        WidthRequest="100"
+                        Text="Forgot Password?"
+                        TextColor="White"
+                        BorderColor="Transparent"
+                        BackgroundColor="Transparent"
+                        FontSize="Small"/>
+
+
+            </Grid>
+
+            <Grid HorizontalOptions="Center" VerticalOptions="EndAndExpand" Margin="0, 0, 0, 50">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                
+
+                <Label Text="Don't have an account yet?"
+                       TextColor="White"
+                       Grid.Column="0"
+                       VerticalOptions="Center"/>
+
+                <Button x:Name="NewUserButton"
+                        Text="SignUp"
+                        TextColor="{StaticResource NavigationTertiary}"
+                        BorderColor="Transparent"
+                        BackgroundColor="Transparent"
+                        Grid.Column="1"
+                        VerticalOptions="Center"/>
+
+            </Grid>
+            
 
 
         </StackLayout>
+        
+        
     </ContentPage.Content>
 </ContentPage>

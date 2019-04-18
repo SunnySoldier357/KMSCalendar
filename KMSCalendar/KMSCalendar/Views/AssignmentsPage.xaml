@@ -26,7 +26,7 @@
 
         <!-- TODO: Put a Grid around ListView so that it looks better -->
         <Frame x:Name="BottomAreaFrame"
-               BackgroundColor="Black"
+               BackgroundColor="White"
                CornerRadius="15">
             <StackLayout>
 

@@ -148,5 +148,6 @@
     <Content Include="Resources\arrow-pointing-right.png" />
     <BundleResource Include="Resources\rightArrow.png" />
     <BundleResource Include="Resources\leftArrow.png" />
+    <BundleResource Include="Resources\BackgroundForLogin.png" />
   </ItemGroup>
 </Project>
