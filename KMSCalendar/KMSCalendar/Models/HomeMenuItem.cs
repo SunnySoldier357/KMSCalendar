@@ -4,15 +4,15 @@
     {
         //* Public Properties
         public MenuItemType Id { get; set; }
-
+ 
         public string Title { get; set; }
     }
 
     public enum MenuItemType
     {
-        Login,
         About,
         Calendar,
+        Login,
         Settings
     }
 }

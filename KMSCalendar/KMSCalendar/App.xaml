@@ -4,10 +4,7 @@
              x:Class="KMSCalendar.App">
     <Application.Resources>
         <ResourceDictionary>
-            <!-- Global Styles -->
-            <!--https://stackoverflow.com/questions/18200902/changing-the-styles-at-runtime-in-wpf-->
-            
-            <!-- Implicit Styles -->
+            <!-- Implicit Global Styles -->
             <Style TargetType="Label">
                 <Setter Property="TextColor"
                         Value="{DynamicResource Text}" />

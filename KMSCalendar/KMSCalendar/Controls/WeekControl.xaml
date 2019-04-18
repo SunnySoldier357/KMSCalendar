@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KMSCalendar.Controls.WeekControl">
   <ContentView.Content>
@@ -28,22 +28,22 @@
                    Grid.ColumnSpan="2"
                    Margin="15,0,0,0"
                    Text="{Binding Date.Year}"
-                   TextColor="White" 
+                   TextColor="White"
                    FontSize="Small" />
             <Label x:Name="MonthLabel"
                    Grid.Row="1"
                    Grid.ColumnSpan="3"
                    Margin="15,-7,0,0"
                    Text="{Binding Month}"
-                   TextColor="White" 
+                   TextColor="White"
                    FontSize="Medium" />
 
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
             <ImageButton x:Name="LeftArrowButton"
                          Grid.Column="5"
-                         WidthRequest="24"
                          HorizontalOptions="Center"
+                         WidthRequest="24"
                          BackgroundColor="Transparent"
                          Clicked="LeftArrowButton_Clicked">
                 <ImageButton.Source>
@@ -55,10 +55,10 @@
             </ImageButton>
 
             <ImageButton x:Name="RightArrowButton"
-                         WidthRequest="24"
-                         BackgroundColor="Transparent"
                          Grid.Column="6"
                          HorizontalOptions="Center"
+                         WidthRequest="24"
+                         BackgroundColor="Transparent"
                          Clicked="RightArrowButton_Clicked">
                 <ImageButton.Source>
                     <OnPlatform x:TypeArguments="FileImageSource">
@@ -67,7 +67,6 @@
                     </OnPlatform>
                 </ImageButton.Source>
             </ImageButton>
-
 
             <!-- If you want to have day of the week labels -->
             <!-- <Label Text="SUN" FontSize="8" Grid.Row="2" /> -->

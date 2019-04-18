@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
             <Label HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Start" 
+                   VerticalOptions="Start"
                    Text="This is the login page." />
 
             <Entry x:Name="UsernameEntry"
@@ -23,7 +23,7 @@
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="Start"
                     BackgroundColor="{DynamicResource NavigationTertiary}"
-                    Text="LOGIN" 
+                    Text="LOGIN"
                     TextColor="White"/>
 
         </StackLayout>

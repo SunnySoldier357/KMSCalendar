@@ -15,11 +15,11 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
 
-        <ToolbarItem Text="Save" 
+        <ToolbarItem Text="Save"
                      Clicked="Save_Clicked">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="UWP" 
+                    <On Platform="UWP"
                         Value="save.png"/>
                 </OnPlatform>
             </ToolbarItem.Icon>
@@ -30,18 +30,18 @@
         <StackLayout Spacing="20"
                      Padding="15"
                      BackgroundColor="{DynamicResource NavigationBackground}">
-            <Label Text="Name" 
+            <Label Text="Name"
                    FontSize="Medium" />
-            <Entry Text="{Binding Assignment.Name}" 
+            <Entry Text="{Binding Assignment.Name}"
                    FontSize="Small" />
-            <Label Text="Description" 
+            <Label Text="Description"
                    FontSize="Medium" />
-            <Editor Text="{Binding Assignment.Description}" 
-                    FontSize="Small" 
+            <Editor Text="{Binding Assignment.Description}"
+                    FontSize="Small"
                     Margin="0" />
-            <Label Text="Due Date" 
+            <Label Text="Due Date"
                    FontSize="Medium" />
-            <DatePicker Date="{Binding Assignment.DueDate}"  
+            <DatePicker Date="{Binding Assignment.DueDate}"
                         Margin="0" />
         </StackLayout>
     </ContentPage.Content>

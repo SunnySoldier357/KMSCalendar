@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
-
+ 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -33,15 +33,18 @@ namespace KMSCalendar.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.Login:
-                        MenuPages.Add(id, new NavigationPage(new LoginPage()));
-                        break;
-                    case (int)MenuItemType.About:
+                    case (int) MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
+
                     case (int) MenuItemType.Calendar:
                         MenuPages.Add(id, new NavigationPage(new AssignmentsPage()));
                         break;
+
+                    case (int) MenuItemType.Login:
+                        MenuPages.Add(id, new NavigationPage(new LoginPage()));
+                        break;
+
                     case (int) MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;

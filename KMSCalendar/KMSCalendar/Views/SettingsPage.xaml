@@ -10,13 +10,13 @@
                          HorizontalOptions="StartAndExpand">
                 <Label Text="Theme:"
                        FontSize="Medium" />
-                <Picker x:Name="ThemePicker" 
+                <Picker x:Name="ThemePicker"
                         HorizontalOptions="End"
                         SelectedIndexChanged="ThemePicker_SelectedIndexChanged">
                 </Picker>
             </StackLayout>
 
-            <Label x:Name="ThemeTestLabel" 
+            <Label x:Name="ThemeTestLabel"
                    HeightRequest="100"
                    WidthRequest="100"
                    Text="THEME TEST"

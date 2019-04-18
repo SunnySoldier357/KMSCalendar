@@ -230,13 +230,13 @@ namespace KMSCalendar.Controls
             DataSelectedChanged?.Invoke(this, e);
         }
 
-        private void LeftArrowButton_Clicked(object sender, EventArgs e) => 
+        private void LeftArrowButton_Clicked(object sender, EventArgs e) =>
             ShiftDatesBackward();
 
         public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 
-        private void RightArrowButton_Clicked(object sender, EventArgs e) => 
+        private void RightArrowButton_Clicked(object sender, EventArgs e) =>
             ShiftDatesForward();
     }
 }
