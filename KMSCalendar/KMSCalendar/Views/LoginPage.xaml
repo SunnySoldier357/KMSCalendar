@@ -1,35 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KMSCalendar.Views.LoginPage">
-    
+             x:Class="KMSCalendar.Views.LoginPage"
+             BackgroundImage="BackgroundForLogin.png">
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" 
-                     VerticalOptions="FillAndExpand"
-                     BackgroundColor="{DynamicResource NavigationBackground}">
-            <StackLayout VerticalOptions="CenterAndExpand">
-                <Label HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Start"
-                       Text="This is the login page." />
 
-                <Entry x:Name="UsernameEntry"
+        <StackLayout VerticalOptions="Fill">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90"/>
+                    <!-- Title -->
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="100"/>
+                    <!-- Spacing -->
+                    <RowDefinition Height="40"/>
+                    <!-- Email -->
+                    <RowDefinition Height="20"/>
+                    <!-- Spacing -->
+                    <RowDefinition Height="40"/>
+                    <!-- Password -->
+                    <RowDefinition Height="20"/>
+                    <!-- Spacing -->
+                    <RowDefinition Height="40"/>
+                    <!-- Button -->
+                    <RowDefinition Height="14"/>
+                    <!-- Spacing -->
+                    <RowDefinition Height="40"/>
+                    <!-- Forgot Password Button -->
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="1"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="Start"
-                       Placeholder="Username" />
+                       Text="HW Calendar"
+                       TextColor="White"
+                       FontSize="Large" />
 
-                <Entry x:Name="PasswordEntry"
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Start"
-                       Placeholder="Password" />
+                <Frame Grid.Row="3"
+                       Margin="60,0,60,0"
+                       Padding="0"
+                       BackgroundColor="White"
+                       CornerRadius="20">
+                    <Entry x:Name="UsernameEntry"
+                           VerticalOptions="Center"
+                           BackgroundColor="Transparent"
+                           Placeholder="Username" />
+                </Frame>
+
+                <Frame Grid.Row="5"
+                       Margin="60,0,60,0"
+                       Padding="0"
+                       BackgroundColor="White"
+                       CornerRadius="20">
+
+                    <Entry x:Name="PasswordEntry"
+                           VerticalOptions="Center"
+                           Placeholder="Password" />
+                </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="Start"
-                        BackgroundColor="{DynamicResource NavigationTertiary}"
-                        Text="LOGIN"
-                        TextColor="White" />
+                        Grid.Row="7"
+                        WidthRequest="100"
+                        Margin="100,0,100,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource NavigationTertiary}"
+                        Text="LOG IN"
+                        TextColor="White"
+                        CornerRadius="20"
+                        BorderColor="Transparent" />
 
-            </StackLayout>
+                <Button x:Name="ForgotPasswordButton"
+                        Grid.Row="9"
+                        WidthRequest="100"
+                        BackgroundColor="Transparent"
+                        Text="Forgot Password?"
+                        TextColor="White"
+                        FontSize="Small"
+                        BorderColor="Transparent" />
+
+            </Grid>
+
+            <Grid HorizontalOptions="Center" 
+                  VerticalOptions="EndAndExpand" 
+                  Margin="0,0,0,50">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+
+                <Label VerticalOptions="Center"
+                       Text="Don't have an account yet?"
+                       TextColor="White" />
+
+                <Button x:Name="NewUserButton"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        BackgroundColor="Transparent"
+                        Text="SignUp"
+                        TextColor="{StaticResource NavigationTertiary}"
+                        BorderColor="Transparent" />
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

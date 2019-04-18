@@ -105,6 +105,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\rightArrow.png" />
     <AndroidResource Include="Resources\drawable-hdpi\leftArrow.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\leftArrow.png" />
+    <AndroidResource Include="Resources\drawable\BackgroundForLogin.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
