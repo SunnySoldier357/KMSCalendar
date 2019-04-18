@@ -5,7 +5,7 @@
              x:Class="KMSCalendar.Views.SettingsPage">
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{DynamicResource NavigationBackground}">
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="StartAndExpand">
                 <Label Text="Theme:"

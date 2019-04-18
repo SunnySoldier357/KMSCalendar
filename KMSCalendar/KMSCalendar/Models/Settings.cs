@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace KMSCalendar.Models
@@ -78,14 +77,8 @@ namespace KMSCalendar.Models
         {
             string settingsJson = JsonConvert.SerializeObject(this);
             App.Current.Properties[DIC_KEY] = settingsJson;
-            var temp = App.Current.Properties;
 
             await App.Current.SavePropertiesAsync();
-
-            foreach (var item in App.Current.Properties.Values)
-            {
-                Debug.WriteLine(item.ToString());
-            }
         }
 
         //* Event Handlers
