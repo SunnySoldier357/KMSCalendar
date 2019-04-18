@@ -15,13 +15,6 @@
                         SelectedIndexChanged="ThemePicker_SelectedIndexChanged">
                 </Picker>
             </StackLayout>
-
-            <Label x:Name="ThemeTestLabel"
-                   HeightRequest="100"
-                   WidthRequest="100"
-                   Text="THEME TEST"
-                   TextColor="Orange"
-                   BackgroundColor="{DynamicResource NavigationBackground}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

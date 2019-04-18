@@ -51,14 +51,13 @@ namespace KMSCalendar.Models
         {
             Settings settings = null;
 
-            string settingsJson = null;
+            object settingsJson = null;
 
-            if (App.Current.Properties.ContainsKey(DIC_KEY))
-                settingsJson = App.Current.Properties[DIC_KEY] as string;
+            App.Current.Properties.TryGetValue(DIC_KEY, out settingsJson);
 
             if (settingsJson != null)
             {
-                Settings temp = JsonConvert.DeserializeObject<Settings>(settingsJson);
+                Settings temp = JsonConvert.DeserializeObject<Settings>(settingsJson as string);
 
                 settings = new Settings(temp);
             }

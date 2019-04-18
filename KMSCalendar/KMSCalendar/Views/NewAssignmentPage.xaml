@@ -32,17 +32,23 @@
                      BackgroundColor="{DynamicResource NavigationBackground}">
             <Label Text="Name"
                    FontSize="Medium" />
-            <Entry Text="{Binding Assignment.Name}"
+            <Entry BackgroundColor="{DynamicResource NavigationBackground}" 
+                   Text="{Binding Assignment.Name}"
+                   TextColor="{DynamicResource Text}"
                    FontSize="Small" />
             <Label Text="Description"
                    FontSize="Medium" />
-            <Editor Text="{Binding Assignment.Description}"
-                    FontSize="Small"
-                    Margin="0" />
+            <Editor Margin="0"
+                    BackgroundColor="{DynamicResource NavigationBackground}"
+                    Text="{Binding Assignment.Description}"
+                    TextColor="{DynamicResource Text}"
+                    FontSize="Small" />
             <Label Text="Due Date"
                    FontSize="Medium" />
-            <DatePicker Date="{Binding Assignment.DueDate}"
-                        Margin="0" />
+            <DatePicker Margin="0"
+                        Date="{Binding Assignment.DueDate}"
+                        TextColor="{DynamicResource Text}"
+                        BackgroundColor="{DynamicResource NavigationBackground}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

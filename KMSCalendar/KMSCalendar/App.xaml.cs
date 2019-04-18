@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Models;
 using KMSCalendar.Services;
 using KMSCalendar.Views;
+using System.Diagnostics;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KMSCalendar
@@ -26,10 +27,6 @@ namespace KMSCalendar
                 DependencyService.Register<MockDataStore>();
             else
                 DependencyService.Register<AzureDataStore>();
-
-            Settings settings = Settings.DefaultInstance;
-            UpdateColorResources(settings.Theme);
-            settings.PropertyChanged += ThemeChanged;
 
             MainPage = new MainPage();
         }
@@ -65,6 +62,14 @@ namespace KMSCalendar
 
             Resources[nameof(LightText)] = LightText;
             Resources[nameof(Text)] = Text;
+        }
+
+        //* Overridden Methods
+        protected override void OnStart()
+        {
+            Settings settings = Settings.DefaultInstance;
+            UpdateColorResources(settings.Theme);
+            settings.PropertyChanged += ThemeChanged;
         }
 
         //* Event Handlers

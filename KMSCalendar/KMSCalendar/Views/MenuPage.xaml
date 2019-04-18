@@ -5,7 +5,8 @@
              Title="Menu">
     
     <!-- This view is the hamburger menu -->
-    <StackLayout VerticalOptions="FillAndExpand">
+    <StackLayout VerticalOptions="FillAndExpand"
+                 BackgroundColor="{DynamicResource NavigationBackground}">
         <ListView x:Name="ListViewMenu"
                   HasUnevenRows="True">
             <ListView.ItemTemplate>

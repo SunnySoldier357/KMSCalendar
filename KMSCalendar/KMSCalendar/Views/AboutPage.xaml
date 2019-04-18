@@ -9,7 +9,7 @@
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
 
-    <Grid>
+    <Grid BackgroundColor="{DynamicResource NavigationBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
