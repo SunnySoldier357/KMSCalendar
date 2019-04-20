@@ -2,6 +2,7 @@
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
+using Windows.Storage;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -31,6 +32,23 @@ namespace KMSCalendar.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            var localSetting = ApplicationData.Current.LocalSettings;
+
+            double height, width;
+
+            if (localSetting.Values[nameof(height)] != null && localSetting.Values[nameof(width)] != null)
+            {
+                height = (double) localSetting.Values[nameof(height)];
+                width = (double) localSetting.Values[nameof(width)];
+
+                ApplicationView.PreferredLaunchViewSize = new Size
+                {
+                    Height = height,
+                    Width = width
+                };
+                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            }
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -43,10 +61,6 @@ namespace KMSCalendar.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e);
-
-                // This sets the UWP size to Google Pixel resolultion (1080 x 1920)
-                ApplicationView.PreferredLaunchViewSize = new Size(1080, 1920);
-                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -74,7 +88,7 @@ namespace KMSCalendar.UWP
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e) => 
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e) =>
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
 
         /// <summary>
@@ -88,7 +102,12 @@ namespace KMSCalendar.UWP
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
-            // TODO: Save application state and stop any background activity
+            double height = Window.Current.CoreWindow.Bounds.Height;
+            double width = Window.Current.CoreWindow.Bounds.Width;
+            var localSetting = ApplicationData.Current.LocalSettings;
+
+            localSetting.Values[nameof(height)] = height;
+            localSetting.Values[nameof(width)] = width;
 
             deferral.Complete();
         }
