@@ -167,8 +167,8 @@ namespace KMSCalendar.Controls
                     {
                         YearLabel.BindingContext = dataList[0];
                         MonthLabel.BindingContext = dataList[0];
-                        LeftArrowButton.BindingContext = dataList[0];
-                        RightArrowButton.BindingContext = dataList[0];
+                        LeftArrowImageButton.BindingContext = dataList[0];
+                        RightArrowImageButton.BindingContext = dataList[0];
                     }
 
                     // Label for the date number
@@ -230,13 +230,13 @@ namespace KMSCalendar.Controls
             DataSelectedChanged?.Invoke(this, e);
         }
 
-        private void LeftArrowButton_Clicked(object sender, EventArgs e) =>
+        private void LeftArrowImageButton_Clicked(object sender, EventArgs e) =>
             ShiftDatesBackward();
 
         public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 
-        private void RightArrowButton_Clicked(object sender, EventArgs e) =>
+        private void RightArrowImageButton_Clicked(object sender, EventArgs e) =>
             ShiftDatesForward();
     }
 }

@@ -40,21 +40,21 @@
 
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
-            <ImageButton x:Name="LeftArrowButton"
+            <ImageButton x:Name="LeftArrowImageButton"
                          Grid.Column="5"
                          HorizontalOptions="Center"
                          WidthRequest="24"
                          Source="leftArrow.png"
                          BackgroundColor="Transparent"
-                         Clicked="LeftArrowButton_Clicked" />
+                         Clicked="LeftArrowImageButton_Clicked" />
 
-            <ImageButton x:Name="RightArrowButton"
+            <ImageButton x:Name="RightArrowImageButton"
                          Grid.Column="6"
                          HorizontalOptions="Center"
                          WidthRequest="24"
                          Source="rightArrow.png"
                          BackgroundColor="Transparent"
-                         Clicked="RightArrowButton_Clicked" />
+                         Clicked="RightArrowImageButton_Clicked" />
 
             <!-- If you want to have day of the week labels
             <Label Grid.Row="2"
