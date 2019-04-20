@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KMSCalendar.Views.LoginPage"
+             xmlns:local="clr-namespace:KMSCalendar; assembly=KMSCalendar"
              BackgroundImage="BackgroundForLogin.png">
     <ContentPage.Content>
 
@@ -53,10 +54,10 @@
                        Padding="0"
                        BackgroundColor="White"
                        CornerRadius="20">
-                    <Entry x:Name="UsernameEntry"
-                           VerticalOptions="Center"
-                           BackgroundColor="Transparent"
-                           Placeholder="Username" />
+                    <local:MyEntry x:Name="EmailEntry"
+                                   VerticalOptions="Center"
+                                   Margin="10, 0, 0, -5"
+                                   Placeholder="Email"/>
                 </Frame>
 
                 <Frame Grid.Row="5"
@@ -64,10 +65,10 @@
                        Padding="0"
                        BackgroundColor="White"
                        CornerRadius="20">
-
-                    <Entry x:Name="PasswordEntry"
-                           VerticalOptions="Center"
-                           Placeholder="Password" />
+                    <local:MyEntry x:Name="PasswordEntry"
+                                   VerticalOptions="Center"
+                                   Margin="10, 0, 0, -5"
+                                   Placeholder="Password"/>
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"
