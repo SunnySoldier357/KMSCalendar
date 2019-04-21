@@ -38,7 +38,7 @@
                     <RowDefinition Height="14"/>
 
                     <!-- Forgot Password Button -->
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
                     
                 </Grid.RowDefinitions>
 
@@ -82,14 +82,32 @@
                         CornerRadius="20"
                         BorderColor="Transparent" />
 
-                <Button x:Name="ForgotPasswordButton"
-                        Grid.Row="9"
+
+                <StackLayout Orientation="Vertical"
+                             Grid.Row="9">
+                    <Button x:Name="ForgotPasswordButton"
                         WidthRequest="100"
                         BackgroundColor="Transparent"
                         Text="Forgot Password?"
                         TextColor="White"
                         FontSize="Small"
                         BorderColor="Transparent" />
+
+                    <Label x:Name="LoginValidationLabel"
+                           BackgroundColor="Transparent"
+                           TextColor="{StaticResource NavigationTertiary}"
+                           IsVisible="False"
+                           FontSize="Small"
+                           HorizontalOptions="Center"
+                           Margin="0, 20, 0, 0"
+                           Text="Login Invalid." />
+
+                </StackLayout>
+                
+
+                
+                
+                
 
             </Grid>
 

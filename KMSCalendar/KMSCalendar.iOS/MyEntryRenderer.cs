@@ -21,9 +21,8 @@ namespace KMSCalendar.iOS
 
             if (Control != null)
             {
-                // do whatever you want to the UITextField here!
-                Control.BackgroundColor = UIColor.FromRGB(204, 153, 255);
-                Control.BorderStyle = UITextBorderStyle.Line;
+                Control.Layer.BorderWidth = 0;
+                Control.BorderStyle = UITextBorderStyle.None;
             }
         }
     }

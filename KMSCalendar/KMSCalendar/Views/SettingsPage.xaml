@@ -16,8 +16,6 @@
                         TextColor="{DynamicResource Text}"
                         SelectedIndexChanged="ThemePicker_SelectedIndexChanged" />
 
-                <local:MyEntry Text="In Shared Code"/>
-
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
