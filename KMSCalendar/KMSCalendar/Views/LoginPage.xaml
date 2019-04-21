@@ -82,7 +82,8 @@
                     
                     <Entry x:Name="EmailEntry"
                            Style="{StaticResource LoginEntry}"
-                           Placeholder="Email" />
+                           Placeholder="Email"
+                           Text="{Binding Email}"/>
                 </Frame>
 
                 <Frame Grid.Row="5"
@@ -90,7 +91,8 @@
                     
                     <Entry x:Name="PasswordEntry"
                            Style="{StaticResource LoginEntry}"
-                           Placeholder="Password" />
+                           Placeholder="Password"
+                           Text="{Binding Password}"/>
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"
@@ -102,27 +104,28 @@
                         Text="LOG IN"
                         TextColor="White"
                         CornerRadius="20"
-                        BorderColor="Transparent" />
+                        BorderColor="Transparent"
+                        Clicked="AuthenticateLoginButton_Clicked"/>
 
                 <StackLayout Orientation="Vertical"
                              Grid.Row="9">
                     
                     <Button x:Name="ForgotPasswordButton"
-                            WidthRequest="100"
+                            HorizontalOptions="Center"
                             BackgroundColor="Transparent"
                             Text="Forgot Password?"
                             TextColor="White"
                             FontSize="Small"
-                            BorderColor="Transparent" />
+                            BorderColor="Transparent"
+                            Clicked="ForgotPasswordButton_Clicked"/>
 
                     <Label x:Name="LoginValidationLabel"
                            BackgroundColor="Transparent"
                            TextColor="{StaticResource NavigationTertiary}"
-                           IsVisible="False"
                            FontSize="Small"
                            HorizontalOptions="Center"
                            Margin="0, 20, 0, 0"
-                           Text="Login Invalid." />
+                           Text="{Binding LoginValidationMessage}" />
 
                 </StackLayout>
             </Grid>
@@ -150,7 +153,8 @@
                         BackgroundColor="Transparent"
                         Text="SignUp"
                         TextColor="{StaticResource NavigationTertiary}"
-                        BorderColor="Transparent" />
+                        BorderColor="Transparent" 
+                        Clicked="NewUserButton_Clicked"/>
 
             </Grid>
         </StackLayout>
