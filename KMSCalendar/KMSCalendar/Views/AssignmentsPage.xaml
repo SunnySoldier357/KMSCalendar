@@ -8,14 +8,8 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add"
-                     Clicked="AddAssignment_Clicked">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="UWP"
-                        Value="add.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+                     Icon="add.png"
+                     Clicked="AddAssignment_Clicked" />
     </ContentPage.ToolbarItems>
 
     <!-- This is the list page that appears when the app is loaded -->

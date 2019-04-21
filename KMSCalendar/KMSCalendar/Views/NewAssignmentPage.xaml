@@ -6,24 +6,12 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel"
-                     Clicked="Cancel_Clicked">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="UWP"
-                        Value="cancel.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+                     Icon="cancel.png"
+                     Clicked="Cancel_Clicked" />
 
         <ToolbarItem Text="Save"
-                     Clicked="Save_Clicked">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="UWP"
-                        Value="save.png"/>
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
+                     Icon="save.png"
+                     Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
