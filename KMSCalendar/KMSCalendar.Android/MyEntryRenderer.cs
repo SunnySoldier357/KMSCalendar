@@ -29,7 +29,7 @@ namespace KMSCalendar.Droid
 
             if(Control != null)
             {
-                Control.Background = null;
+                //Control.Background = null;
             }
         }
     }
