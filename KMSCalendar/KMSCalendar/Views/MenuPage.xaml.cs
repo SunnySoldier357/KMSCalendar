@@ -46,11 +46,11 @@ namespace KMSCalendar.Views
 
             };
 
-            ListViewMenu.ItemsSource = menuItems;
+            MenuListView.ItemsSource = menuItems;
 
-            ListViewMenu.SelectedItem = menuItems[0];
+            MenuListView.SelectedItem = menuItems[0];
 
-            ListViewMenu.ItemSelected += async (sender, e) =>
+            MenuListView.ItemSelected += async (sender, e) =>
             {
                 if (e.SelectedItem == null)
                     return;

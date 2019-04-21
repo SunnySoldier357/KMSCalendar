@@ -20,7 +20,7 @@
 
     <!-- This is the list page that appears when the app is loaded -->
     <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
-        <control:WeekControl x:Name="CalendarDisplay"
+        <control:WeekControl x:Name="CalendarWeekControl"
                              HorizontalOptions="CenterAndExpand"
                              Margin="5,10,5,15" />
 
@@ -31,7 +31,6 @@
             <StackLayout>
 
                 <!-- You might want to make this a content view for abstraction! -->
-
                 <Label x:Name="ListTitleDate"
                        HorizontalOptions="CenterAndExpand"
                        Margin="0,-10,0,0"
@@ -57,13 +56,11 @@
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
 
-                                    <Label Style="{DynamicResource ListItemTextStyle}"
-                                           Text="{Binding Name}"
+                                    <Label Text="{Binding Name}"
                                            FontSize="16"
                                            LineBreakMode="NoWrap" />
 
                                     <Label Grid.Row="1"
-                                           Style="{DynamicResource ListItemDetailTextStyle}"
                                            Text="{Binding Description}"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />
@@ -71,7 +68,6 @@
                                     <Label Grid.RowSpan="2"
                                            HorizontalOptions="End"
                                            VerticalOptions="Center"
-                                           Style="{DynamicResource ListItemDetailTextStyle}"
                                            Text="{Binding ShortDate}"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />

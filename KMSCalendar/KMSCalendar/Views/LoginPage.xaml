@@ -4,6 +4,35 @@
              x:Class="KMSCalendar.Views.LoginPage"
              xmlns:local="clr-namespace:KMSCalendar; assembly=KMSCalendar"
              BackgroundImage="BackgroundForLogin.png">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LoginEntry"
+                   TargetType="local:MyEntry">
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+
+                <Setter Property="Margin"
+                        Value="10,0,0,-5" />
+            </Style>
+            
+            <Style x:Key="LoginEntryFrame"
+                   TargetType="Frame">
+                <Setter Property="Margin"
+                        Value="60,0,60,0" />
+
+                <Setter Property="Padding"
+                        Value="0" />
+
+                <Setter Property="BackgroundColor"
+                        Value="White" />
+
+                <Setter Property="CornerRadius"
+                        Value="20" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
 
         <StackLayout VerticalOptions="Fill">
@@ -11,34 +40,34 @@
                 <Grid.RowDefinitions>
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="90" />
                     
                     <!-- Title -->
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60" />
 
                     <!-- Spacing -->
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100" />
                     
                     <!-- Email -->
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20" />
                     
                     <!-- Password -->
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20" />
                     
                     <!-- Button -->
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="14"/>
+                    <RowDefinition Height="14" />
 
                     <!-- Forgot Password Button -->
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60" />
                     
                 </Grid.RowDefinitions>
 
@@ -50,25 +79,19 @@
                        FontSize="Large" />
 
                 <Frame Grid.Row="3"
-                       Margin="60,0,60,0"
-                       Padding="0"
-                       BackgroundColor="White"
-                       CornerRadius="20">
+                       Style="{StaticResource LoginEntryFrame}">
+                    
                     <local:MyEntry x:Name="EmailEntry"
-                                   VerticalOptions="Center"
-                                   Margin="10, 0, 0, -5"
-                                   Placeholder="Email"/>
+                                   Style="{StaticResource LoginEntry}"
+                                   Placeholder="Email" />
                 </Frame>
 
                 <Frame Grid.Row="5"
-                       Margin="60,0,60,0"
-                       Padding="0"
-                       BackgroundColor="White"
-                       CornerRadius="20">
+                       Style="{StaticResource LoginEntryFrame}">
+                    
                     <local:MyEntry x:Name="PasswordEntry"
-                                   VerticalOptions="Center"
-                                   Margin="10, 0, 0, -5"
-                                   Placeholder="Password"/>
+                                   Style="{StaticResource LoginEntry}"
+                                   Placeholder="Password" />
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"
@@ -82,16 +105,16 @@
                         CornerRadius="20"
                         BorderColor="Transparent" />
 
-
                 <StackLayout Orientation="Vertical"
                              Grid.Row="9">
+                    
                     <Button x:Name="ForgotPasswordButton"
-                        WidthRequest="100"
-                        BackgroundColor="Transparent"
-                        Text="Forgot Password?"
-                        TextColor="White"
-                        FontSize="Small"
-                        BorderColor="Transparent" />
+                            WidthRequest="100"
+                            BackgroundColor="Transparent"
+                            Text="Forgot Password?"
+                            TextColor="White"
+                            FontSize="Small"
+                            BorderColor="Transparent" />
 
                     <Label x:Name="LoginValidationLabel"
                            BackgroundColor="Transparent"
@@ -103,16 +126,10 @@
                            Text="Login Invalid." />
 
                 </StackLayout>
-                
-
-                
-                
-                
-
             </Grid>
 
-            <Grid HorizontalOptions="Center" 
-                  VerticalOptions="EndAndExpand" 
+            <Grid HorizontalOptions="Center"
+                  VerticalOptions="EndAndExpand"
                   Margin="0,0,0,50">
 
                 <Grid.ColumnDefinitions>

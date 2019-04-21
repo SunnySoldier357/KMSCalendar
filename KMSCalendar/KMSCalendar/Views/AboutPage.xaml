@@ -55,7 +55,8 @@
                             <FormattedString.Spans>
                                 <Span Text="This app is written in C# and native APIs using the" />
                                 <Span Text=" " />
-                                <Span Text="Xamarin Platform" FontAttributes="Bold" />
+                                <Span Text="Xamarin Platform"
+                                      FontAttributes="Bold" />
                                 <Span Text="." />
                             </FormattedString.Spans>
                         </FormattedString>
@@ -68,7 +69,8 @@
                             <FormattedString.Spans>
                                 <Span Text="It shares code with its" />
                                 <Span Text=" " />
-                                <Span Text="iOS, Android, and Windows" FontAttributes="Bold" />
+                                <Span Text="iOS, Android, and Windows"
+                                      FontAttributes="Bold" />
                                 <Span Text=" " />
                                 <Span Text="versions." />
                             </FormattedString.Spans>
@@ -82,7 +84,8 @@
                             <FormattedString.Spans>
                                 <Span Text="Developed by KMS - Kenneth, Matthew, &amp; Sandeep" />
                                 <Span Text=" " />
-                                <Span Text="iOS, Android, and Windows" FontAttributes="Bold" />
+                                <Span Text="iOS, Android, and Windows"
+                                      FontAttributes="Bold" />
                                 <Span Text=" " />
                                 <Span Text="versions." />
                             </FormattedString.Spans>

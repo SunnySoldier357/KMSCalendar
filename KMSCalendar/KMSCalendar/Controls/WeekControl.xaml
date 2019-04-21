@@ -2,6 +2,38 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KMSCalendar.Controls.WeekControl">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="DateLabelStyle"
+                   TargetType="Label">
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+
+                <Setter Property="VerticalOptions"
+                        Value="EndAndExpand" />
+
+                <Setter Property="FontSize"
+                        Value="10" />
+
+                <Setter Property="TextColor"
+                        Value="White" />
+            </Style>
+            
+            <Style x:Key="NavigationImageButtonStyle"
+                   TargetType="ImageButton">
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+
+                <Setter Property="WidthRequest"
+                        Value="24" />
+
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
   <ContentView.Content>
 
         <!-- This grid defines the layout of evreything within the calendar -->
@@ -42,69 +74,44 @@
             <!-- These buttons are the left and right arrows that make the calendar go
                  forward and backward in time -->
             <ImageButton x:Name="LeftArrowImageButton"
+                         Style="{StaticResource NavigationImageButtonStyle}"
                          Grid.Column="5"
-                         HorizontalOptions="Center"
-                         WidthRequest="24"
                          Source="leftArrow.png"
-                         BackgroundColor="Transparent"
                          Clicked="LeftArrowImageButton_Clicked" />
 
             <ImageButton x:Name="RightArrowImageButton"
+                         Style="{StaticResource NavigationImageButtonStyle}"
                          Grid.Column="6"
-                         HorizontalOptions="Center"
-                         WidthRequest="24"
                          Source="rightArrow.png"
-                         BackgroundColor="Transparent"
                          Clicked="RightArrowImageButton_Clicked" />
 
             <Label Grid.Row="2"
-                   Text="SUN"
-                   FontSize="7" 
-                   TextColor="White"
-                   HorizontalOptions="Center"
-                   VerticalOptions="EndAndExpand"/>
+                   Style="{StaticResource DateLabelStyle}"
+                   Text="SUN" />
             <Label Grid.Row="2"
                    Grid.Column="1"
-                   Text="MON"
-                   FontSize="7" 
-                   TextColor="White" 
-                   HorizontalOptions="Center"
-                   VerticalOptions="EndAndExpand"/>
+                   Style="{StaticResource DateLabelStyle}"
+                   Text="MON" />
             <Label Grid.Row="2"
                    Grid.Column="2"
-                   Text="TUE"
-                   FontSize="7" 
-                   TextColor="White"
-                   HorizontalOptions="Center"
-                   VerticalOptions="EndAndExpand"/>
+                   Style="{StaticResource DateLabelStyle}"
+                   Text="TUE" />
             <Label Grid.Row="2"
                    Grid.Column="3"
-                   Text="WED"
-                   FontSize="7" 
-                   TextColor="White"
-                   HorizontalOptions="Center"
-                   VerticalOptions="EndAndExpand"/>
+                   Style="{StaticResource DateLabelStyle}"
+                   Text="WED" />
             <Label Grid.Row="2"
                    Grid.Column="4"
-                   Text="THS"
-                   FontSize="7" 
-                   TextColor="White"
-                   HorizontalOptions="Center"
-                   VerticalOptions="EndAndExpand"/>
+                   Style="{StaticResource DateLabelStyle}"
+                   Text="THS" />
             <Label Grid.Row="2"
                    Grid.Column="5"
-                   Text="FRI"
-                   FontSize="7" 
-                   TextColor="White"
-                   HorizontalOptions="Center"
-                   VerticalOptions="EndAndExpand"/>
+                   Style="{StaticResource DateLabelStyle}"
+                   Text="FRI" />
             <Label Grid.Row="2"
                    Grid.Column="6"
-                   Text="SAT"
-                   FontSize="7" 
-                   TextColor="White"
-                   HorizontalOptions="Center"
-                   VerticalOptions="EndAndExpand"/> 
+                   Style="{StaticResource DateLabelStyle}"
+                   Text="SAT" />
         </Grid>
 
     </ContentView.Content>

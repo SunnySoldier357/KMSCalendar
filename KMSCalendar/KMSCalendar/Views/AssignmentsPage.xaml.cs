@@ -15,7 +15,6 @@ namespace KMSCalendar.Views
         //* Private Properties
         private AssignmentViewModel viewModel;
         
-        
         //* Constructors
         public AssignmentsPage()
         {
@@ -24,9 +23,9 @@ namespace KMSCalendar.Views
             BindingContext = viewModel = new AssignmentViewModel();
 
             // Subscrible to the event
-            CalendarDisplay.DataSelectedChanged += DateSelectedChanged;
+            CalendarWeekControl.DataSelectedChanged += DateSelectedChanged;
 
-            ListTitleDate.BindingContext = CalendarDisplay;
+            ListTitleDate.BindingContext = CalendarWeekControl;
         }
 
         //* Overridden Methods
