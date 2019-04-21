@@ -15,6 +15,7 @@ namespace KMSCalendar.Views
         //* Private Properties
         public Settings settings = Settings.DefaultInstance;
 
+        //* Constructor
         public SettingsPage()
         {
             InitializeComponent();
@@ -35,9 +36,14 @@ namespace KMSCalendar.Views
 
             ThemePicker.ItemsSource = pickerItems;
             ThemePicker.SelectedItem = pickerItems.First(a => a.Theme == settings.Theme);
+
+            CalendarDaySwitch.IsToggled = settings.ShowCalendarDays;
         }
 
         //* Event Handlers
+        private void CalendarDaySwitch_Toggled(object sender, ToggledEventArgs e) =>
+            settings.ShowCalendarDays = CalendarDaySwitch.IsToggled;
+
         private void ThemePicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             var item = ThemePicker.SelectedItem as ThemeItem;

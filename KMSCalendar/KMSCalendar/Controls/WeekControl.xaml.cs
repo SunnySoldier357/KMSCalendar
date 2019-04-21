@@ -10,12 +10,36 @@ namespace KMSCalendar.Controls
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WeekControl : ContentView, INotifyPropertyChanged
 	{
+        //* Static Properties
+        public static readonly BindableProperty ShowDayNameProperty = BindableProperty.Create(
+            propertyName: nameof(ShowDayName),
+            returnType: typeof(bool),
+            declaringType: typeof(WeekControl),
+            defaultValue: false,
+            defaultBindingMode: BindingMode.TwoWay,
+            propertyChanged: ShowDayNameProperty_Changed);
+
         //* Private Properties
+        private bool showDayName = false;
+
         private DateTime dateSelected;
 
         private List<DayViewModel> dataList = new List<DayViewModel>();
 
         //* Public Properties
+        public bool ShowDayName
+        {
+            get => showDayName;
+            set
+            {
+                if (value != showDayName)
+                {
+                    showDayName = value;
+                    OnNotifyPropertyChanged(nameof(ShowDayName));
+                }
+            }
+        }
+
         public DateTime DateSelected
         {
             get => dateSelected;
@@ -46,6 +70,8 @@ namespace KMSCalendar.Controls
 
             setUpDateElements();
             fillDatesWithToday();
+
+            setUpDateLabels();
         }
 
         //* Public Methods
@@ -213,7 +239,32 @@ namespace KMSCalendar.Controls
             }
         }
 
+        private void setUpDateLabels()
+        {
+            // Date chosen as 1 corresponds to Sunday
+            for (DateTime d = new DateTime(2018, 7, 1); d.Day < 8; d = d.AddDays(1))
+            {
+                Label tempLabel = new Label();
+                tempLabel.SetValue(Grid.RowProperty, 2);
+                tempLabel.SetValue(Grid.ColumnProperty, d.Day - 1);
+                tempLabel.Style = Resources["DateLabelStyle"] as Style;
+                tempLabel.Text = d.ToString("ddd").ToUpper();
+
+                tempLabel.BindingContext = this;
+                tempLabel.SetBinding(IsVisibleProperty, new Binding(
+                    nameof(ShowDayName)));
+
+                MainGrid.Children.Add(tempLabel);
+            }
+        }
+
         //* Event Handlers
+        private static void ShowDayNameProperty_Changed(BindableObject bindable, object oldValue, 
+            object newValue)
+        {
+            WeekControl control = (WeekControl) bindable;
+            control.ShowDayName = (bool) newValue;
+        }
 
         /// <summary>
         /// Handles the event when any of the numbered dates is pressed.

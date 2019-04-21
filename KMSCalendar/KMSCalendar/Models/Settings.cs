@@ -13,21 +13,21 @@ namespace KMSCalendar.Models
         public static Settings DefaultInstance = initAsync().Result;
 
         //* Private Properties
+        private bool showCalendarDays;
+
         private Theme theme;
 
         //* Public Properties
+        public bool ShowCalendarDays
+        {
+            get => showCalendarDays;
+            set => modifyProperty(ref value, ref showCalendarDays, nameof(ShowCalendarDays));
+        }
+
         public Theme Theme
         {
             get => theme;
-            set
-            {
-                if (theme != value)
-                {
-                    theme = value;
-                    OnNotifyPropertyChanged(nameof(Theme));
-                    UpdateDictionaryAsync();
-                }
-            }
+            set => modifyProperty(ref value, ref theme, nameof(Theme));
         }
 
         //* Events
@@ -37,13 +37,19 @@ namespace KMSCalendar.Models
         private Settings()
         {
             // Default Values
+            showCalendarDays = false;
+
             theme = Theme.Light;
         }
 
         private Settings(Settings settings)
         {
             if (settings != null)
+            {
+                ShowCalendarDays = settings.ShowCalendarDays;
+
                 Theme = settings.Theme;
+            }  
         }
             
         //* Static Methods
@@ -83,6 +89,17 @@ namespace KMSCalendar.Models
         //* Event Handlers
         public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+
+        //* Private Methods
+        private void modifyProperty<T>(ref T value, ref T privateProperty, string nameOfProperty)
+        {
+            if (!value.Equals(privateProperty))
+            {
+                privateProperty = value;
+                OnNotifyPropertyChanged(nameOfProperty);
+                UpdateDictionaryAsync();
+            }
+        }
     }
 
     public enum Theme
