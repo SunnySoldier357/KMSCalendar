@@ -173,7 +173,7 @@ namespace KMSCalendar.Controls
 
                     // Label for the date number
                     Label tempLabel = new Label();
-                    tempLabel.SetValue(Grid.RowProperty, i + 2);
+                    tempLabel.SetValue(Grid.RowProperty, i + 3);
                     tempLabel.SetValue(Grid.ColumnProperty, j);
                     tempLabel.HorizontalOptions = LayoutOptions.Center;
                     tempLabel.VerticalOptions = LayoutOptions.Center;
@@ -191,7 +191,7 @@ namespace KMSCalendar.Controls
 
                     // Button behind the Label for the touch event when the number is clicked
                     Button tempButton = new Button();
-                    tempButton.SetValue(Grid.RowProperty, i + 2);
+                    tempButton.SetValue(Grid.RowProperty, i + 3);
                     tempButton.SetValue(Grid.ColumnProperty, j);
                     tempButton.VerticalOptions = LayoutOptions.Center;
                     tempButton.HorizontalOptions = LayoutOptions.Center;
@@ -224,7 +224,7 @@ namespace KMSCalendar.Controls
             int column = (int)button.GetValue(Grid.ColumnProperty);
             int row = (int)button.GetValue(Grid.RowProperty);
 
-            selectDay((row - 2) * 7 + column);
+            selectDay((row - 3) * 7 + column);
 
             // Raise the event
             DataSelectedChanged?.Invoke(this, e);
