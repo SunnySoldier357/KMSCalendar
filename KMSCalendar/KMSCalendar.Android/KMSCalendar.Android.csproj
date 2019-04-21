@@ -98,8 +98,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="arrow-pointing-left.png" />
-    <Content Include="arrow-pointing-right.png" />
     <AndroidResource Include="Resources\drawable\leftArrow.png" />
     <AndroidResource Include="Resources\drawable\rightArrow.png" />
     <AndroidResource Include="Resources\drawable-hdpi\rightArrow.png" />
