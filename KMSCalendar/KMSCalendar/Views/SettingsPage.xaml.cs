@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
+using System.Collections.Generic;
 
 namespace KMSCalendar.Views
 {
@@ -18,53 +19,31 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            var pickerItems = new[]
+            var pickerItems = new List<ThemeItem>
             {
-                new
+                new ThemeItem
                 {
                     Name = nameof(Theme.Light),
-                    Value = Theme.Light
+                    Theme = Theme.Light
                 },
-                new
+                new ThemeItem
                 {
                     Name = nameof(Theme.Dark),
-                    Value = Theme.Dark
+                    Theme = Theme.Dark
                 }
-            }.ToList();
+            };
 
             ThemePicker.ItemsSource = pickerItems;
-            ThemePicker.ItemDisplayBinding = new Binding("Name");
-            ThemePicker.SelectedItem = pickerItems.First(a => a.Value == settings.Theme);
+            ThemePicker.SelectedItem = pickerItems.First(a => a.Theme == settings.Theme);
         }
 
         //* Event Handlers
         private void ThemePicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var item = ThemePicker.SelectedItem;
+            var item = ThemePicker.SelectedItem as ThemeItem;
 
-            var a = new { Name = "", Value = Theme.Dark };
-
-            a = Cast(a, item);
-
-            if (a != null)
-                settings.Theme = a.Value;
+            if (item != null)
+                settings.Theme = item.Theme;
         }
-
-        private static T Cast<T>(T typeHolder, Object x)
-        {
-            // typeHolder above is just for compiler magic
-            // to infer the type to cast x to
-            return (T)x;
-        }
-    }
-
-    public class ThemeItem
-    {
-        //* Public Properties
-        public Theme Value;
-
-        public string Name;
-
-        public override string ToString() => Name;
     }
 }
