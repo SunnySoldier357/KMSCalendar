@@ -40,35 +40,38 @@
                 <Grid.RowDefinitions>
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90*" />
                     
                     <!-- Title -->
                     <RowDefinition Height="60" />
 
                     <!-- Spacing -->
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="100*" />
                     
                     <!-- Email -->
                     <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20*" />
                     
                     <!-- Password -->
                     <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20*" />
                     
                     <!-- Button -->
                     <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="14" />
+                    <RowDefinition Height="14*" />
 
                     <!-- Forgot Password Button -->
                     <RowDefinition Height="60" />
-                    
+
+                    <!-- Spacing -->
+                    <RowDefinition Height="40*" />
+
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="1"
@@ -125,7 +128,7 @@
                            TextColor="{StaticResource NavigationTertiary}"
                            FontSize="Small"
                            HorizontalOptions="Center"
-                           Margin="0, 20, 0, 0"
+                           Margin="50, 10, 50, 20"
                            Text="{Binding LoginValidationMessage}" />
 
                 </StackLayout>
