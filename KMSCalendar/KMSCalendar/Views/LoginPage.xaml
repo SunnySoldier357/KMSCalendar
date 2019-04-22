@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
              x:Class="KMSCalendar.Views.LoginPage"
              BackgroundImage="BackgroundForLogin.png">
 
@@ -80,19 +81,19 @@
                 <Frame Grid.Row="3"
                        Style="{StaticResource LoginEntryFrame}">
                     
-                    <Entry x:Name="EmailEntry"
-                           Style="{StaticResource LoginEntry}"
-                           Placeholder="Email"
-                           Text="{Binding Email}"/>
+                    <control:TransparentEntry x:Name="EmailEntry"
+                                              Style="{StaticResource LoginEntry}"
+                                              Placeholder="Email"
+                                              Text="{Binding Email}"/>
                 </Frame>
 
                 <Frame Grid.Row="5"
                        Style="{StaticResource LoginEntryFrame}">
                     
-                    <Entry x:Name="PasswordEntry"
-                           Style="{StaticResource LoginEntry}"
-                           Placeholder="Password"
-                           Text="{Binding Password}"/>
+                    <control:TransparentEntry x:Name="PasswordEntry"
+                                              Style="{StaticResource LoginEntry}"
+                                              Placeholder="Password"
+                                              Text="{Binding Password}"/>
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"

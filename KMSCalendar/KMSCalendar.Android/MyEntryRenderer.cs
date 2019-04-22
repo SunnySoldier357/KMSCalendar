@@ -3,14 +3,15 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
+using KMSCalendar.Controls;
 using KMSCalendar.Droid;
 
-[assembly: ExportRenderer(typeof(Entry), typeof(MyEntryRenderer))]
+[assembly: ExportRenderer(typeof(TransparentEntry), typeof(TransparentEntryRenderer))]
 namespace KMSCalendar.Droid
 {
-    public class MyEntryRenderer : EntryRenderer
+    public class TransparentEntryRenderer : EntryRenderer
     {
-        public MyEntryRenderer(Context context) : base(context) { }
+        public TransparentEntryRenderer(Context context) : base(context) { }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {

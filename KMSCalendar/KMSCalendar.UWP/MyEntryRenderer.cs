@@ -1,12 +1,13 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 
+using KMSCalendar.Controls;
 using KMSCalendar.UWP;
 
-[assembly: ExportRenderer(typeof(Entry), typeof(MyEntryRenderer))]
+[assembly: ExportRenderer(typeof(TransparentEntry), typeof(TransparentEntryRenderer))]
 namespace KMSCalendar.UWP
 {
-    public class MyEntryRenderer : EntryRenderer
+    public class TransparentEntryRenderer : EntryRenderer
     {
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {

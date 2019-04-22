@@ -3,12 +3,13 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
+using KMSCalendar.Controls;
 using KMSCalendar.iOS;
 
-[assembly: ExportRenderer(typeof(Entry), typeof(MyEntryRenderer))]
+[assembly: ExportRenderer(typeof(TransparentEntry), typeof(TransparentEntryRenderer))]
 namespace KMSCalendar.iOS
 {
-    class MyEntryRenderer : EntryRenderer
+    class TransparentEntryRenderer : EntryRenderer
     {
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
