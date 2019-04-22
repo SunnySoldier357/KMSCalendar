@@ -4,12 +4,21 @@ using System.Threading.Tasks;
 
 namespace KMSCalendar.Models
 {
+    /// <summary>
+    /// A class that allows app settings to be saved between sessions.
+    /// </summary>
     public class Settings : INotifyPropertyChanged
     {
         //* Constants
+
+        /// <summary>
+        /// The key for App Settings in the App's Properties Dictionary
+        /// </summary>
         private const string DIC_KEY = "Settings";
 
         //* Static Properties
+
+        /// <summary>Singleton Instance for Settings class</summary>
         public static Settings DefaultInstance = initAsync().Result;
 
         //* Private Properties
@@ -18,12 +27,20 @@ namespace KMSCalendar.Models
         private Theme theme;
 
         //* Public Properties
+
+        /// <summary>
+        /// If <see langword="true"/>, the WeekControl will display the day of the
+        /// week.
+        /// </summary>
         public bool ShowCalendarDays
         {
             get => showCalendarDays;
             set => modifyProperty(ref value, ref showCalendarDays, nameof(ShowCalendarDays));
         }
 
+        /// <summary>
+        /// The Theme (Light or Dark) that the Application should be themed in.
+        /// </summary>
         public Theme Theme
         {
             get => theme;
@@ -31,6 +48,10 @@ namespace KMSCalendar.Models
         }
 
         //* Events
+
+        /// <summary>
+        /// Event is invoked whenever a public property of Settings is changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         //* Constructor
@@ -53,6 +74,12 @@ namespace KMSCalendar.Models
         }
             
         //* Static Methods
+
+        /// <summary>
+        /// Initialises the Singleton Settings class either with values pulled out
+        /// from the App's 
+        /// </summary>
+        /// <returns></returns>
         private static async Task<Settings> initAsync()
         {
             Settings settings = null;
