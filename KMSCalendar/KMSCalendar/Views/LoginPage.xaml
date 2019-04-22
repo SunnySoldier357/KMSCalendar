@@ -40,37 +40,37 @@
                 <Grid.RowDefinitions>
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="90*" />
+                    <RowDefinition Height="80*" />
                     
                     <!-- Title -->
                     <RowDefinition Height="60" />
 
                     <!-- Spacing -->
-                    <RowDefinition Height="100*" />
+                    <RowDefinition Height="45*" />
                     
                     <!-- Email -->
                     <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="10*" />
                     
                     <!-- Password -->
                     <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="10*" />
                     
                     <!-- Button -->
                     <RowDefinition Height="40" />
                     
                     <!-- Spacing -->
-                    <RowDefinition Height="14*" />
+                    <RowDefinition Height="7*" />
 
                     <!-- Forgot Password Button -->
                     <RowDefinition Height="60" />
 
                     <!-- Spacing -->
-                    <RowDefinition Height="40*" />
+                    <RowDefinition Height="30*" />
 
                 </Grid.RowDefinitions>
 
