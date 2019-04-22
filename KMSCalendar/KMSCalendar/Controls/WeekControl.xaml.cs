@@ -221,12 +221,12 @@ namespace KMSCalendar.Controls
                     tempButton.SetValue(Grid.ColumnProperty, j);
                     tempButton.VerticalOptions = LayoutOptions.Center;
                     tempButton.HorizontalOptions = LayoutOptions.Center;
+                    tempButton.Margin = new Thickness(-1, 0, 0, 0);
                     tempButton.HeightRequest = 30;
                     tempButton.WidthRequest = 30;
                     tempButton.BackgroundColor = Color.Transparent;
                     tempButton.BorderWidth = 1;
                     tempButton.CornerRadius = 15;
-                    tempButton.Margin = new Thickness(-1, 0, 0, 0);
                     tempButton.Clicked += DateButton_Clicked;
 
                     tempButton.BindingContext = dataList[i * 7 + j];

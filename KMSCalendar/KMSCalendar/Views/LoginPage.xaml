@@ -83,8 +83,8 @@
                     
                     <control:TransparentEntry x:Name="EmailEntry"
                                               Style="{StaticResource LoginEntry}"
-                                              Placeholder="Email"
-                                              Text="{Binding Email}"/>
+                                              Text="{Binding Email}"
+                                              Placeholder="Email" />
                 </Frame>
 
                 <Frame Grid.Row="5"
@@ -92,8 +92,8 @@
                     
                     <control:TransparentEntry x:Name="PasswordEntry"
                                               Style="{StaticResource LoginEntry}"
-                                              Placeholder="Password"
-                                              Text="{Binding Password}"/>
+                                              Text="{Binding Password}"
+                                              Placeholder="Password" />
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"
@@ -106,7 +106,7 @@
                         TextColor="White"
                         CornerRadius="20"
                         BorderColor="Transparent"
-                        Clicked="AuthenticateLoginButton_Clicked"/>
+                        Clicked="AuthenticateLoginButton_Clicked" />
 
                 <StackLayout Orientation="Vertical"
                              Grid.Row="9">
@@ -118,7 +118,7 @@
                             TextColor="White"
                             FontSize="Small"
                             BorderColor="Transparent"
-                            Clicked="ForgotPasswordButton_Clicked"/>
+                            Clicked="ForgotPasswordButton_Clicked" />
 
                     <Label x:Name="LoginValidationLabel"
                            BackgroundColor="Transparent"

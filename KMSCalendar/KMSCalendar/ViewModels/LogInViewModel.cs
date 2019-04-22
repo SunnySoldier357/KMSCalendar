@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace KMSCalendar.ViewModels
 {
@@ -9,45 +6,34 @@ namespace KMSCalendar.ViewModels
     {
         //* Private Properties
         private string email;
-        private string password;
         private string loginValidationMessage;
-
-        //* Constructor
-        public LogInViewModel() => logInAttempts = 0;
+        private string password;
 
         //* Public Properties
-        public int logInAttempts;
+        public int LogInAttempts;
 
         public string Email
         {
             get => email;
-            set
-            {
-                modifyProperty(ref value, ref email, nameof(Email));
-            }
+            set => modifyProperty(ref value, ref email, nameof(Email));
         }
-
-        public string Password
-        {
-            get => password;
-            set
-            {
-                modifyProperty(ref value, ref password, nameof(Password));
-            }
-        }
-
         public string LoginValidationMessage
         {
             get => loginValidationMessage;
-            set
-            {
-                modifyProperty(ref value, ref loginValidationMessage, nameof(LoginValidationMessage));
-            }
+            set => modifyProperty(ref value, ref loginValidationMessage, 
+                nameof(LoginValidationMessage));
         }
-
+        public string Password
+        {
+            get => password;
+            set => modifyProperty(ref value, ref password, nameof(Password));
+        }
 
         //* Events
         public event PropertyChangedEventHandler PropertyChanged;
+
+        //* Constructor
+        public LogInViewModel() => LogInAttempts = 0;
 
         //* Event Handlers
         public void OnNotifyPropertyChanged(string property) =>
