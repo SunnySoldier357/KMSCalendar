@@ -25,6 +25,11 @@ namespace KMSCalendar.Views
             {
                 new HomeMenuItem
                 {
+                    Id = MenuItemType.SignUp,
+                    Title = "SignUp"
+                },
+                new HomeMenuItem
+                {
                     Id = MenuItemType.Login,
                     Title = "Login"
                 },
