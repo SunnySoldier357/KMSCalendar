@@ -8,6 +8,7 @@ namespace KMSCalendar.ViewModels
         private string email;
         private string loginValidationMessage;
         private string password;
+        private string confirmPassword;
 
         //* Public Properties
         public int LogInAttempts;
@@ -27,6 +28,11 @@ namespace KMSCalendar.ViewModels
         {
             get => password;
             set => modifyProperty(ref value, ref password, nameof(Password));
+        }
+        public string ConfirmPassword
+        {
+            get => confirmPassword;
+            set => modifyProperty(ref value, ref confirmPassword, nameof(ConfirmPassword));
         }
 
         //* Events

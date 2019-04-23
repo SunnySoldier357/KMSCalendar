@@ -144,7 +144,7 @@
                            HorizontalOptions="Center"
                            Margin="0,20,0,0"
                            BackgroundColor="Transparent"
-                           Text="{Binding SignUpValidationMessage}"
+                           Text="{Binding LoginValidationMessage}"
                            TextColor="{StaticResource NavigationTertiary}"
                            FontSize="Small" />
 
