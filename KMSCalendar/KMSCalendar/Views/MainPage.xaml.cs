@@ -48,6 +48,10 @@ namespace KMSCalendar.Views
                     case (int) MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;
+
+                    case (int) MenuItemType.SignUp:
+                        MenuPages.Add(id, new NavigationPage(new SignUpPage()));
+                        break;
                 }
             }
 

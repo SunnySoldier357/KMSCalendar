@@ -20,6 +20,7 @@
         About,
         Calendar,
         Login,
-        Settings
+        Settings,
+        SignUp,
     }
 }
