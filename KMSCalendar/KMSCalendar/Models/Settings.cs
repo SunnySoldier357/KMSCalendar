@@ -103,6 +103,10 @@ namespace KMSCalendar.Models
         }
 
         //* Public Methods
+
+        /// <summary>
+        /// Updates the App's Property Dictionary based on the current values in the instance.
+        /// </summary>
         public async Task UpdateDictionaryAsync()
         {
             string settingsJson = JsonConvert.SerializeObject(this);
