@@ -11,7 +11,7 @@ namespace KMSCalendar.Views
     public partial class MenuPage : ContentPage
     {
         //* Public Properties
-        MainPage RootPage => Application.Current.MainPage as MainPage;
+        public MainPage RootPage => Application.Current.MainPage as MainPage;
 
         //* Private Properties
         private List<HomeMenuItem> menuItems;
@@ -60,7 +60,7 @@ namespace KMSCalendar.Views
                 if (e.SelectedItem == null)
                     return;
 
-                int id = (int)((HomeMenuItem) e.SelectedItem).Id;
+                int id = (int) ((HomeMenuItem) e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
         }

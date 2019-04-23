@@ -19,7 +19,7 @@
 
                     <!-- Spacing -->
                     <RowDefinition Height="45*" />
-                    
+
                     <!-- Email -->
                     <RowDefinition Height="40" />
 
@@ -30,7 +30,7 @@
                     <RowDefinition Height="40" />
 
                     <RowDefinition Height="10*" />
-                    
+
                     <!-- Button -->
                     <RowDefinition Height="40" />
 
@@ -54,7 +54,7 @@
 
                 <Frame Grid.Row="3"
                        Style="{StaticResource LoginEntryFrame}">
-                    
+
                     <control:TransparentEntry x:Name="EmailEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Email}"
@@ -63,7 +63,7 @@
 
                 <Frame Grid.Row="5"
                        Style="{StaticResource LoginEntryFrame}">
-                    
+
                     <control:TransparentEntry x:Name="PasswordEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
@@ -84,7 +84,7 @@
 
                 <StackLayout Orientation="Vertical"
                              Grid.Row="9">
-                    
+
                     <Button x:Name="ForgotPasswordButton"
                             HorizontalOptions="Center"
                             BackgroundColor="Transparent"
@@ -129,7 +129,7 @@
                         Text="SignUp"
                         TextColor="{StaticResource NavigationTertiary}"
                         BorderColor="Transparent"
-                        Clicked="NewUserButton_Clicked"/>
+                        Clicked="NewUserButton_Clicked" />
 
             </Grid>
         </StackLayout>

@@ -22,14 +22,14 @@
                          HorizontalOptions="Center"
                          VerticalOptions="Center">
                 <ContentView VerticalOptions="FillAndExpand"
-                             Padding="0,40,0,40" >
+                             Padding="0,40,0,40">
                     <Image Source="xamarin_logo.png"
                            VerticalOptions="Center"
                            HeightRequest="64" />
                 </ContentView>
             </StackLayout>
         </StackLayout>
-        
+
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical"
                          Padding="16,40,16,40"
@@ -48,7 +48,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                
+
                 <Label>
                     <Label.FormattedText>
                         <FormattedString>
@@ -62,7 +62,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                
+
                 <Label>
                     <Label.FormattedText>
                         <FormattedString>
@@ -77,7 +77,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                
+
                 <Label Margin="0,35,0,10">
                     <Label.FormattedText>
                         <FormattedString>

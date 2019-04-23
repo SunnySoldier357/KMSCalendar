@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="Controls\TransparentEntryRenderer.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="MyEntryRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

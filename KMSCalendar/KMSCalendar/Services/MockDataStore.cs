@@ -16,7 +16,7 @@ namespace KMSCalendar.Services
         public MockDataStore()
         {
             assignments = new List<Assignment>();
-            var mockAssignments = new List<Assignment>
+            List<Assignment> mockAssignments = new List<Assignment>
             {
                 new Assignment
                 {
@@ -62,7 +62,7 @@ namespace KMSCalendar.Services
                 }
             };
 
-            foreach (var assignment in mockAssignments)
+            foreach (Assignment assignment in mockAssignments)
                 assignments.Add(assignment);
         }
 
@@ -76,7 +76,7 @@ namespace KMSCalendar.Services
 
         public async Task<bool> UpdateItemAsync(Assignment assignment)
         {
-            var oldItem = assignments
+            Assignment oldItem = assignments
                 .Where(a => a.Id == assignment.Id)
                 .FirstOrDefault();
             assignments.Remove(oldItem);
@@ -87,7 +87,7 @@ namespace KMSCalendar.Services
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var oldItem = assignments
+            Assignment oldItem = assignments
                 .Where(a => a.Id == id)
                 .FirstOrDefault();
             assignments.Remove(oldItem);

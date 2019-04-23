@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace KMSCalendar.Models
 {
@@ -70,9 +70,9 @@ namespace KMSCalendar.Models
                 ShowCalendarDays = settings.ShowCalendarDays;
 
                 Theme = settings.Theme;
-            }  
+            }
         }
-            
+
         //* Static Methods
 
         /// <summary>
@@ -84,9 +84,7 @@ namespace KMSCalendar.Models
         {
             Settings settings = null;
 
-            object settingsJson = null;
-
-            App.Current.Properties.TryGetValue(DIC_KEY, out settingsJson);
+            App.Current.Properties.TryGetValue(DIC_KEY, out object settingsJson);
 
             if (settingsJson != null)
             {

@@ -1,13 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
 using KMSCalendar.Models;
 using KMSCalendar.Views;
-using System.Linq;
 
 namespace KMSCalendar.ViewModels
 {
@@ -70,7 +70,7 @@ namespace KMSCalendar.ViewModels
         {
             FilteredAssignments.Clear();
 
-            var result = 
+            var result =
                 from a in Assignments.AsParallel()
                 where a.DueDate.Day == date.Day &&
                     a.DueDate.Month == date.Month &&

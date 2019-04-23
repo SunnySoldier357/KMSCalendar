@@ -7,9 +7,9 @@ using Xamarin.Forms.Xaml;
 
 namespace KMSCalendar.Controls
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class WeekControl : ContentView, INotifyPropertyChanged
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class WeekControl : ContentView, INotifyPropertyChanged
+    {
         //* Static Properties
         public static readonly BindableProperty ShowDayNameProperty = BindableProperty.Create(
             propertyName: nameof(ShowDayName),
@@ -260,7 +260,7 @@ namespace KMSCalendar.Controls
         }
 
         //* Event Handlers
-        private static void ShowDayNameProperty_Changed(BindableObject bindable, object oldValue, 
+        private static void ShowDayNameProperty_Changed(BindableObject bindable, object oldValue,
             object newValue)
         {
             WeekControl control = (WeekControl) bindable;
@@ -273,8 +273,8 @@ namespace KMSCalendar.Controls
         private void DateButton_Clicked(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            int column = (int)button.GetValue(Grid.ColumnProperty);
-            int row = (int)button.GetValue(Grid.RowProperty);
+            int column = (int) button.GetValue(Grid.ColumnProperty);
+            int row = (int) button.GetValue(Grid.RowProperty);
 
             selectDay((row - 3) * 7 + column);
 

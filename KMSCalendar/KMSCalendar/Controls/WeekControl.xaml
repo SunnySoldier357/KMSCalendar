@@ -22,7 +22,7 @@
                 <Setter Property="TextColor"
                         Value="White" />
             </Style>
-            
+
             <Style x:Key="NavigationImageButtonStyle"
                    TargetType="ImageButton">
                 <Setter Property="HorizontalOptions"
@@ -36,8 +36,8 @@
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-    
-  <ContentView.Content>
+
+    <ContentView.Content>
 
         <!-- This grid defines the layout of evreything within the calendar -->
         <Grid x:Name="MainGrid">

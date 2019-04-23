@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
-using System.Collections.Generic;
 
 namespace KMSCalendar.Views
 {
@@ -20,7 +20,7 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            var pickerItems = new List<ThemeItem>
+            List<ThemeItem> pickerItems = new List<ThemeItem>
             {
                 new ThemeItem
                 {
@@ -46,7 +46,7 @@ namespace KMSCalendar.Views
 
         private void ThemePicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var item = ThemePicker.SelectedItem as ThemeItem;
+            ThemeItem item = ThemePicker.SelectedItem as ThemeItem;
 
             if (item != null)
                 settings.Theme = item.Theme;

@@ -7,7 +7,7 @@
 
     <ContentPage.Content>
 
-     <!-- Layout: 
+        <!-- Layout: 
 
                 Spacing
 
@@ -87,7 +87,7 @@
                        Text="HW Calendar"
                        TextColor="White"
                        FontSize="Large" />
-                
+
                 <Label Grid.Row="2"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="Start"
@@ -171,7 +171,7 @@
                         BackgroundColor="Transparent"
                         Text="LOG IN"
                         TextColor="{StaticResource NavigationTertiary}"
-                        BorderColor="Transparent" 
+                        BorderColor="Transparent"
                         Clicked="AlreadyUserButton_Clicked" />
 
             </Grid>

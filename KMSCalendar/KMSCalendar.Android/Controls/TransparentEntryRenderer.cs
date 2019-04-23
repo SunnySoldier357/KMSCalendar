@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 using KMSCalendar.Controls;
-using KMSCalendar.Droid;
+using KMSCalendar.Droid.Controls;
 
 [assembly: ExportRenderer(typeof(TransparentEntry), typeof(TransparentEntryRenderer))]
 namespace KMSCalendar.Droid.Controls

@@ -2,7 +2,7 @@
 using Xamarin.Forms.Platform.UWP;
 
 using KMSCalendar.Controls;
-using KMSCalendar.UWP;
+using KMSCalendar.UWP.Controls;
 
 [assembly: ExportRenderer(typeof(TransparentEntry), typeof(TransparentEntryRenderer))]
 namespace KMSCalendar.UWP.Controls

@@ -9,14 +9,14 @@
                 <Setter Property="TextColor"
                         Value="{DynamicResource Text}" />
             </Style>
-            
+
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor"
                         Value="{DynamicResource NavigationPrimary}" />
                 <Setter Property="BarTextColor"
                         Value="White" />
             </Style>
-            
+
             <!-- Non-Implicit Global Styles -->
             <Style x:Key="LoginEntry"
                    TargetType="Entry">

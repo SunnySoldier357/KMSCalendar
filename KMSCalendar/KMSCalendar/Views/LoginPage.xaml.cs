@@ -5,9 +5,9 @@ using KMSCalendar.ViewModels;
 
 namespace KMSCalendar.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoginPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LoginPage : ContentPage
+    {
         //* Private Properties
         private LogInViewModel viewModel;
 

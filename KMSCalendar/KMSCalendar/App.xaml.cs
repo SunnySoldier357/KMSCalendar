@@ -6,7 +6,6 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Models;
 using KMSCalendar.Services;
 using KMSCalendar.Views;
-using System.Diagnostics;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KMSCalendar

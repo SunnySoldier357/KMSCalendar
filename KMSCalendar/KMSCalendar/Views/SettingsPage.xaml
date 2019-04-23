@@ -24,7 +24,7 @@
             <StackLayout Style="{StaticResource SettingsStackLayout}">
                 <Label Text="Theme:"
                        FontSize="Medium" />
-                
+
                 <Picker x:Name="ThemePicker"
                         HorizontalOptions="End"
                         TextColor="{DynamicResource Text}"

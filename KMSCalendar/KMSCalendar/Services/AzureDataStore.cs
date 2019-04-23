@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 using KMSCalendar.Models;
 
@@ -19,8 +19,10 @@ namespace KMSCalendar.Services
         //* Constructors
         public AzureDataStore()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+            client = new HttpClient
+            {
+                BaseAddress = new Uri($"{App.AzureBackendUrl}/")
+            };
 
             assignments = new List<Assignment>();
         }
@@ -57,7 +59,7 @@ namespace KMSCalendar.Services
 
             string serializedItem = JsonConvert.SerializeObject(assignment);
 
-            var response = await client.PostAsync($"api/{nameof(Assignment)}",
+            HttpResponseMessage response = await client.PostAsync($"api/{nameof(Assignment)}",
                 new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
             return response.IsSuccessStatusCode;
@@ -70,9 +72,9 @@ namespace KMSCalendar.Services
 
             string serializedItem = JsonConvert.SerializeObject(assignment);
             byte[] buffer = Encoding.UTF8.GetBytes(serializedItem);
-            var byteContent = new ByteArrayContent(buffer);
+            ByteArrayContent byteContent = new ByteArrayContent(buffer);
 
-            var response = await client.PutAsync(new Uri($"api/{nameof(Assignment)}/{assignment.Id}"),
+            HttpResponseMessage response = await client.PutAsync(new Uri($"api/{nameof(Assignment)}/{assignment.Id}"),
                 byteContent);
 
             return response.IsSuccessStatusCode;
@@ -83,7 +85,7 @@ namespace KMSCalendar.Services
             if (string.IsNullOrEmpty(id))
                 return false;
 
-            var response = await client.DeleteAsync($"api/{nameof(Assignment)}/{id}");
+            HttpResponseMessage response = await client.DeleteAsync($"api/{nameof(Assignment)}/{id}");
 
             return response.IsSuccessStatusCode;
         }

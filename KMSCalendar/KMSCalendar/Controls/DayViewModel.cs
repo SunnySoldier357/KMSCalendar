@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace KMSCalendar.Controls
 {
-    class DayViewModel : INotifyPropertyChanged
+    public class DayViewModel : INotifyPropertyChanged
     {
         //* Private Properties
         private Color colorTheme;

@@ -8,7 +8,7 @@
         /// The page to open when this Menu Item is clicked.
         /// </summary>
         public MenuItemType Id { get; set; }
- 
+
         /// <summary>
         /// The Title that is shown in the Hamburger Menu.
         /// </summary>

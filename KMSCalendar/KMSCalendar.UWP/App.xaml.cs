@@ -13,7 +13,7 @@ namespace KMSCalendar.UWP
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    public sealed partial class App : Application
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -32,7 +32,7 @@ namespace KMSCalendar.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var localSetting = ApplicationData.Current.LocalSettings;
+            ApplicationDataContainer localSetting = ApplicationData.Current.LocalSettings;
 
             double height, width;
 
@@ -88,7 +88,7 @@ namespace KMSCalendar.UWP
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e) =>
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e) =>
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
 
         /// <summary>
@@ -100,11 +100,11 @@ namespace KMSCalendar.UWP
         /// <param name="e">Details about the suspend request.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
+            SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
 
             double height = Window.Current.CoreWindow.Bounds.Height;
             double width = Window.Current.CoreWindow.Bounds.Width;
-            var localSetting = ApplicationData.Current.LocalSettings;
+            ApplicationDataContainer localSetting = ApplicationData.Current.LocalSettings;
 
             localSetting.Values[nameof(height)] = height;
             localSetting.Values[nameof(width)] = width;

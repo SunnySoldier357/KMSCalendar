@@ -16,8 +16,8 @@
     <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
         <control:WeekControl x:Name="CalendarWeekControl"
                              HorizontalOptions="CenterAndExpand"
-                             Margin="5,10,5,15" 
-                             ShowDayName="{Binding ShowCalendarDays}"/>
+                             Margin="5,10,5,15"
+                             ShowDayName="{Binding ShowCalendarDays}" />
 
         <!-- TODO: Put a Grid around ListView so that it looks better -->
         <Frame x:Name="BottomAreaFrame"

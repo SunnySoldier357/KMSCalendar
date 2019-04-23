@@ -15,7 +15,7 @@ namespace KMSCalendar.ViewModels
         //* Private Properties
         private bool isBusy = false;
 
-        string title = string.Empty;
+        private string title = string.Empty;
 
         //* Public Properties
         public bool IsBusy
@@ -26,7 +26,7 @@ namespace KMSCalendar.ViewModels
 
         public IDataStore<Assignment> DataStore =>
             DependencyService.Get<IDataStore<Assignment>>() ?? new MockDataStore();
-        
+
         public string Title
         {
             get => title;

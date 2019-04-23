@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 using KMSCalendar.Controls;
-using KMSCalendar.iOS;
+using KMSCalendar.iOS.Controls;
 
 [assembly: ExportRenderer(typeof(TransparentEntry), typeof(TransparentEntryRenderer))]
 namespace KMSCalendar.iOS.Controls

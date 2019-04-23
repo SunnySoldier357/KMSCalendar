@@ -20,7 +20,7 @@ namespace KMSCalendar.ViewModels
         public string LoginValidationMessage
         {
             get => loginValidationMessage;
-            set => modifyProperty(ref value, ref loginValidationMessage, 
+            set => modifyProperty(ref value, ref loginValidationMessage,
                 nameof(LoginValidationMessage));
         }
         public string Password
