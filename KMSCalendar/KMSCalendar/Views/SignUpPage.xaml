@@ -5,38 +5,7 @@
              x:Class="KMSCalendar.Views.SignUpPage"
              BackgroundImage="BackgroundForLogin.png">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="LoginEntry"
-                   TargetType="Entry">
-                <Setter Property="VerticalOptions"
-                        Value="Center" />
-
-                <Setter Property="Margin"
-                        Value="10,0,0,-5" />
-            </Style>
-
-            <Style x:Key="LoginEntryFrame"
-                   TargetType="Frame">
-                <Setter Property="Margin"
-                        Value="60,0,60,0" />
-
-                <Setter Property="Padding"
-                        Value="0" />
-
-                <Setter Property="BackgroundColor"
-                        Value="White" />
-
-                <Setter Property="CornerRadius"
-                        Value="20" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-
     <ContentPage.Content>
-
-
 
      <!-- Layout: 
 
@@ -68,49 +37,46 @@
                         Sign in - button
       -->
 
-
-
-
         <StackLayout VerticalOptions="Fill">
             <Grid>
                 <Grid.RowDefinitions>
 
-                    <!-- Spacing 0-->
+                    <!-- Spacing 0 -->
                     <RowDefinition Height="40*" />
 
-                    <!-- Title 1-->
+                    <!-- Title 1 -->
                     <RowDefinition Height="60" />
-                    <!-- SubTitle 2-->
+                    <!-- SubTitle 2 -->
                     <RowDefinition Height="40" />
 
-                    <!-- Spacing 3-->
+                    <!-- Spacing 3 -->
                     <RowDefinition Height="35*" />
 
-                    <!-- Email 4-->
+                    <!-- Email 4 -->
                     <RowDefinition Height="40" />
 
-                    <!-- Spacing 5-->
+                    <!-- Spacing 5 -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Password 6-->
+                    <!-- Password 6 -->
                     <RowDefinition Height="40" />
 
-                    <!-- Spacing 7-->
+                    <!-- Spacing 7 -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Confirm Password 8-->
+                    <!-- Confirm Password 8 -->
                     <RowDefinition Height="40" />
 
-                    <!-- Spacing 9-->
+                    <!-- Spacing 9 -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Button 10-->
+                    <!-- Button 10 -->
                     <RowDefinition Height="40" />
 
-                    <!-- Spacing 11-->
+                    <!-- Spacing 11 -->
                     <RowDefinition Height="7*" />
 
-                    <!-- Error Message 12-->
+                    <!-- Error Message 12 -->
                     <RowDefinition Height="14" />
 
                 </Grid.RowDefinitions>
@@ -134,8 +100,8 @@
 
                     <control:TransparentEntry x:Name="EmailEntry"
                                               Style="{StaticResource LoginEntry}"
-                                              Placeholder="Email"
-                                              Text="{Binding Email}"/>
+                                              Text="{Binding Email}"
+                                              Placeholder="Email" />
                 </Frame>
 
                 <Frame Grid.Row="6"
@@ -143,8 +109,8 @@
 
                     <control:TransparentEntry x:Name="PasswordEntry"
                                               Style="{StaticResource LoginEntry}"
-                                              Placeholder="Password"
-                                              Text="{Binding Password}"/>
+                                              Text="{Binding Password}"
+                                              Placeholder="Password" />
                 </Frame>
 
                 <Frame Grid.Row="8"
@@ -152,8 +118,8 @@
 
                     <control:TransparentEntry x:Name="ConfirmPasswordEntry"
                                               Style="{StaticResource LoginEntry}"
-                                              Placeholder="Confirm Password"
-                                              Text="{Binding ConfirmPassword}"/>
+                                              Text="{Binding ConfirmPassword}"
+                                              Placeholder="Confirm Password" />
                 </Frame>
 
                 <Button x:Name="AuthenticateSignUpButton"
@@ -166,18 +132,18 @@
                         TextColor="White"
                         CornerRadius="20"
                         BorderColor="Transparent"
-                        Clicked="AuthenticateSignUpButton_Clicked"/>
+                        Clicked="AuthenticateSignUpButton_Clicked" />
 
                 <StackLayout Orientation="Vertical"
                              Grid.Row="12">
 
                     <Label x:Name="SignUpValidationLabel"
-                           BackgroundColor="Transparent"
-                           TextColor="{StaticResource NavigationTertiary}"
-                           FontSize="Small"
                            HorizontalOptions="Center"
-                           Margin="0, 20, 0, 0"
-                           Text="{Binding SignUpValidationMessage}" />
+                           Margin="0,20,0,0"
+                           BackgroundColor="Transparent"
+                           Text="{Binding SignUpValidationMessage}"
+                           TextColor="{StaticResource NavigationTertiary}"
+                           FontSize="Small" />
 
                 </StackLayout>
             </Grid>
@@ -206,7 +172,7 @@
                         Text="LOG IN"
                         TextColor="{StaticResource NavigationTertiary}"
                         BorderColor="Transparent" 
-                        Clicked="AlreadyUserButton_Clicked"/>
+                        Clicked="AlreadyUserButton_Clicked" />
 
             </Grid>
         </StackLayout>

@@ -13,7 +13,7 @@
         About,
         Calendar,
         Login,
+        Settings,
         SignUp,
-        Settings
     }
 }
