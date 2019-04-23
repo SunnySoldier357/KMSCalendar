@@ -2,47 +2,82 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:KMSCalendar.Controls"
-             x:Class="KMSCalendar.Views.LoginPage"
+             x:Class="KMSCalendar.Views.SignUpPage"
              BackgroundImage="BackgroundForLogin.png">
 
     <ContentPage.Content>
 
+     <!-- Layout: 
+
+                Spacing
+
+                Title - Label
+                Subitle - Label
+
+                Spacing
+
+                Email - Entry
+
+                Spacing
+
+                Password - Entry
+
+                Spacing
+
+                Confirm Password - Entry
+
+                Spacing 
+
+                Sign Up - Button
+
+
+                New Grid at bottom of page:
+                    Two columns
+                        Already a user? label
+                        Sign in - button
+      -->
+
         <StackLayout VerticalOptions="Fill">
             <Grid>
                 <Grid.RowDefinitions>
-                    
-                    <!-- Spacing -->
-                    <RowDefinition Height="80*" />
-                    
-                    <!-- Title -->
-                    <RowDefinition Height="60" />
 
-                    <!-- Spacing -->
-                    <RowDefinition Height="45*" />
-                    
-                    <!-- Email -->
+                    <!-- Spacing 0 -->
+                    <RowDefinition Height="40*" />
+
+                    <!-- Title 1 -->
+                    <RowDefinition Height="60" />
+                    <!-- SubTitle 2 -->
                     <RowDefinition Height="40" />
-                    
-                    <!-- Spacing -->
+
+                    <!-- Spacing 3 -->
+                    <RowDefinition Height="35*" />
+
+                    <!-- Email 4 -->
+                    <RowDefinition Height="40" />
+
+                    <!-- Spacing 5 -->
                     <RowDefinition Height="10*" />
-                    
-                    <!-- Password -->
+
+                    <!-- Password 6 -->
                     <RowDefinition Height="40" />
-                    
-                    <!-- Spacing -->
+
+                    <!-- Spacing 7 -->
                     <RowDefinition Height="10*" />
-                    
-                    <!-- Button -->
+
+                    <!-- Confirm Password 8 -->
                     <RowDefinition Height="40" />
-                    
-                    <!-- Spacing -->
+
+                    <!-- Spacing 9 -->
+                    <RowDefinition Height="10*" />
+
+                    <!-- Button 10 -->
+                    <RowDefinition Height="40" />
+
+                    <!-- Spacing 11 -->
                     <RowDefinition Height="7*" />
 
-                    <!-- Forgot Password Button -->
-                    <RowDefinition Height="60" />
-
-                    <!-- Spacing -->
-                    <RowDefinition Height="30*" />
+                    <!-- Error Message 12 -->
+                    <RowDefinition Height="14" />
 
                 </Grid.RowDefinitions>
 
@@ -52,56 +87,63 @@
                        Text="HW Calendar"
                        TextColor="White"
                        FontSize="Large" />
+                
+                <Label Grid.Row="2"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Start"
+                       Text="Sign Up"
+                       TextColor="{StaticResource NavigationTertiary}"
+                       FontSize="Medium" />
 
-                <Frame Grid.Row="3"
+                <Frame Grid.Row="4"
                        Style="{StaticResource LoginEntryFrame}">
-                    
+
                     <control:TransparentEntry x:Name="EmailEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Email}"
                                               Placeholder="Email" />
                 </Frame>
 
-                <Frame Grid.Row="5"
+                <Frame Grid.Row="6"
                        Style="{StaticResource LoginEntryFrame}">
-                    
+
                     <control:TransparentEntry x:Name="PasswordEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
                                               Placeholder="Password" />
                 </Frame>
 
-                <Button x:Name="AuthenticateLoginButton"
-                        Grid.Row="7"
+                <Frame Grid.Row="8"
+                       Style="{StaticResource LoginEntryFrame}">
+
+                    <control:TransparentEntry x:Name="ConfirmPasswordEntry"
+                                              Style="{StaticResource LoginEntry}"
+                                              Text="{Binding ConfirmPassword}"
+                                              Placeholder="Confirm Password" />
+                </Frame>
+
+                <Button x:Name="AuthenticateSignUpButton"
+                        Grid.Row="10"
                         HorizontalOptions="Center"
                         WidthRequest="100"
                         Padding="5"
                         BackgroundColor="{StaticResource NavigationTertiary}"
-                        Text="LOG IN"
+                        Text="SIGN UP"
                         TextColor="White"
                         CornerRadius="20"
                         BorderColor="Transparent"
-                        Clicked="AuthenticateLoginButton_Clicked" />
+                        Clicked="AuthenticateSignUpButton_Clicked" />
 
                 <StackLayout Orientation="Vertical"
-                             Grid.Row="9">
-                    
-                    <Button x:Name="ForgotPasswordButton"
-                            HorizontalOptions="Center"
-                            BackgroundColor="Transparent"
-                            Text="Forgot Password?"
-                            TextColor="White"
-                            FontSize="Small"
-                            BorderColor="Transparent"
-                            Clicked="ForgotPasswordButton_Clicked" />
+                             Grid.Row="12">
 
-                    <Label x:Name="LoginValidationLabel"
-                           BackgroundColor="Transparent"
-                           TextColor="{StaticResource NavigationTertiary}"
-                           FontSize="Small"
+                    <Label x:Name="SignUpValidationLabel"
                            HorizontalOptions="Center"
-                           Margin="50, 10, 50, 20"
-                           Text="{Binding LoginValidationMessage}" />
+                           Margin="0,20,0,0"
+                           BackgroundColor="Transparent"
+                           Text="{Binding SignUpValidationMessage}"
+                           TextColor="{StaticResource NavigationTertiary}"
+                           FontSize="Small" />
 
                 </StackLayout>
             </Grid>
@@ -120,17 +162,17 @@
                 </Grid.RowDefinitions>
 
                 <Label VerticalOptions="Center"
-                       Text="Don't have an account yet?"
+                       Text="Already a user?"
                        TextColor="White" />
 
-                <Button x:Name="NewUserButton"
+                <Button x:Name="AlreadyUserButton"
                         Grid.Column="1"
                         VerticalOptions="Center"
                         BackgroundColor="Transparent"
-                        Text="SignUp"
+                        Text="LOG IN"
                         TextColor="{StaticResource NavigationTertiary}"
                         BorderColor="Transparent" 
-                        Clicked="NewUserButton_Clicked"/>
+                        Clicked="AlreadyUserButton_Clicked" />
 
             </Grid>
         </StackLayout>
