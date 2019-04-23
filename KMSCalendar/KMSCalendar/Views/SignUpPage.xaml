@@ -78,6 +78,9 @@
 
                     <!-- Error Message 12 -->
                     <RowDefinition Height="14" />
+                    
+                    <!-- Spacing 13 -->
+                    <RowDefinition Height="50*" />
 
                 </Grid.RowDefinitions>
 

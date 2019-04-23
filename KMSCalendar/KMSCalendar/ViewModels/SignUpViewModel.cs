@@ -11,6 +11,7 @@ namespace KMSCalendar.ViewModels
         private string email;
         private string password;
         private string confirmPassword;
+        private string signUpValidationMessage;
 
         //* Public Properties
         public string Email
@@ -27,6 +28,11 @@ namespace KMSCalendar.ViewModels
         {
             get => confirmPassword;
             set => modifyProperty(ref value, ref confirmPassword, nameof(ConfirmPassword));
+        }
+        public string SignUpValidationMessage
+        {
+            get => signUpValidationMessage;
+            set => modifyProperty(ref value, ref signUpValidationMessage, nameof(SignUpValidationMessage));
         }
 
         //* Event Handlers

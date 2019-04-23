@@ -27,6 +27,7 @@ namespace KMSCalendar.Views
             EmailEntry.BindingContext = viewModel;
             PasswordEntry.BindingContext = viewModel;
             ConfirmPasswordEntry.BindingContext = viewModel;
+            SignUpValidationLabel.BindingContext = viewModel;
         }
 
 
@@ -38,7 +39,8 @@ namespace KMSCalendar.Views
                 string userEmail = viewModel.Email;
                 string userPassword = viewModel.Password;
 
-                System.Diagnostics.Debug.WriteLine("Email: {0}, Password: {1}", userEmail, userPassword);
+                viewModel.SignUpValidationMessage = string.Format("Email: {0}, Password: {1}", userEmail, userPassword);
+                //System.Diagnostics.Debug.WriteLine(string.Format("Email: {0}, Password: {1}", userEmail, userPassword));
                 // TODO: Do something with the sign up info.
             }
 
