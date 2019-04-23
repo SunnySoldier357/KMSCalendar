@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Concurrent;
+using Microsoft.AspNetCore.Mvc;
 
 using KMSCalendar.MobileAppService.Models;
 
@@ -36,7 +36,7 @@ namespace KMSCalendar.MobileAppService.Controllers
                 if (item == null || !ModelState.IsValid)
                     return BadRequest("Invalid State");
 
-               add(item);
+                add(item);
             }
             catch (Exception)
             {
@@ -65,10 +65,6 @@ namespace KMSCalendar.MobileAppService.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(string id)
-        {
-            T item;
-            items.TryRemove(id, out item);
-        }
+        public void Delete(string id) => items.TryRemove(id, out T item);
     }
 }
