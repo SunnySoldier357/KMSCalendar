@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KMSCalendar.ViewModels;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,19 +9,46 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignUpPage : ContentPage
     {
+        //* Private Properties
+        private SignUpViewModel viewModel;
+
         //* Constructors
-        public SignUpPage() =>
+        public SignUpPage()
+        {
             InitializeComponent();
 
-        //* Event Handlers
-        private void AlreadyUserButton_Clicked(object sender, EventArgs e)
-        {
-            // TODO: Do something with the sign up info.
+            viewModel = new SignUpViewModel();
+            setBindings();
         }
 
+        //* Private Methods
+        private void setBindings()
+        {
+            EmailEntry.BindingContext = viewModel;
+            PasswordEntry.BindingContext = viewModel;
+            ConfirmPasswordEntry.BindingContext = viewModel;
+        }
+
+
+        //* Event Handlers
         private void AuthenticateSignUpButton_Clicked(object sender, EventArgs e)
+        {
+            if (viewModel.Password == viewModel.ConfirmPassword)
+            {
+                string userEmail = viewModel.Email;
+                string userPassword = viewModel.Password;
+
+                System.Diagnostics.Debug.WriteLine("Email: {0}, Password: {1}", userEmail, userPassword);
+                // TODO: Do something with the sign up info.
+            }
+
+        }
+
+        private void AlreadyUserButton_Clicked(object sender, EventArgs e)
         {
             // TODO: Redirect to log in page.
         }
+
+
     }
 }
