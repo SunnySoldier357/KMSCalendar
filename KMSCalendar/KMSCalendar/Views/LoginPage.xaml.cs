@@ -31,8 +31,15 @@ namespace KMSCalendar.Views
         //* Event Handlers
 
         /// <summary> Check if correct login and password </summary>
-        private void AuthenticateLoginButton_Clicked(object sender, System.EventArgs e) =>
+        private void AuthenticateLoginButton_Clicked(object sender, System.EventArgs e)
+        {
             viewModel.LoginValidationMessage = "Login totally invalid.";
+            string email = viewModel.Email;
+            string password = viewModel.Password;
+
+            //TODO: Authenticate with backend
+        }
+
 
         private void ForgotPasswordButton_Clicked(object sender, System.EventArgs e) =>
             viewModel.LoginValidationMessage = "You can't forget your password if you don't have an account.";
@@ -40,7 +47,7 @@ namespace KMSCalendar.Views
         /// <summary>
         /// Go to sign up page
         /// </summary>
-        private void NewUserButton_Clicked(object sender, System.EventArgs e) =>
-            viewModel.LoginValidationMessage = "Sign up page under development.";
+        private async void NewUserButton_Clicked(object sender, System.EventArgs e) =>
+            await Navigation.PushAsync(new SignUpPage(), true); //true makes it animated
     }
 }

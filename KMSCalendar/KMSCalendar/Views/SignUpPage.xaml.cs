@@ -59,12 +59,11 @@ namespace KMSCalendar.Views
                 viewModel.LoginValidationMessage = string.Format("Email: {0} Password: {1}", userEmail, userPassword);
                 // TODO: Do something with the sign up info.
             }
-
         }
 
-        private void AlreadyUserButton_Clicked(object sender, EventArgs e)
+        private async void AlreadyUserButton_Clicked(object sender, EventArgs e)
         {
-            // TODO: Redirect to log in page.
+            await Navigation.PushAsync(new LoginPage(), true); //true makes it animated
         }
 
 
