@@ -19,6 +19,34 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <!-- 
+            Page Design
+
+           Centered Title                      - label
+        
+        Centered Account Photo                 - Image 
+    
+                                               - grid 3 rows, 2 columns
+
+        Account Subtitle                       - label                                       
+    
+        Email Subtitle         Email           - label      label
+    
+        Password Subtitle      ••••••          - label      label
+
+
+        Design Subtitle                        - label                                       
+    
+        Theme Subtitle         Light / Dark              - label      picker
+    
+        Show Days of Week Subtitle     Show / Hide       - label      picker
+    
+    
+         Centered Rating Button                - buton
+    
+    -->
+
+
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource NavigationBackground}">
             <StackLayout Style="{StaticResource SettingsStackLayout}">
