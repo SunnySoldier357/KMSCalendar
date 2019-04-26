@@ -48,37 +48,119 @@ Page Design:
 
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource NavigationBackground}">
+        <ScrollView>
+            <StackLayout BackgroundColor="#F2F3F4">
 
-            <Label x:Name="Title"/>
+                <Label x:Name="Title"
+                   Text="Settings"
+                   FontSize="Medium"
+                   HorizontalOptions="Center"/>
 
-            <Frame BorderColor="AliceBlue" HeightRequest="50" WidthRequest="50" CornerRadius="25">
-                <Label x:Name="AccountPhoto"/>
-            </Frame>
+                <Frame BorderColor="{StaticResource NavigationPrimary}" 
+                   HeightRequest="50"
+                   WidthRequest="50" 
+                   CornerRadius="50"
+                   HorizontalOptions="Center">
+                    <Label x:Name="AccountPhoto" Text="photo here"/>
+                </Frame>
 
-            <Label x:Name="AccountSubtitle"/>
+                <Frame Margin="50, 10, 50, 0"
+                   BackgroundColor="White"
+                   CornerRadius="10">
+                    <!-- Account Settings -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="AccountSubtitle"
+                           Text="Account"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           TextColor="Gray"/>
+
+                        <Label x:Name="EmailDescriptor"
+                           Text="Email"
+                           Grid.Row="1"
+                           Grid.Column="0"/>
 
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
+                        <Label x:Name="EmailSetting"
+                           Text="SingIsKing@buddy.com"
+                           Grid.Row="1"
+                           Grid.Column="1"/>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />                    
-                </Grid.ColumnDefinitions>
-                
-                
-                
-                
-                
-                
-            </Grid>
+                        <Label x:Name="PasswordDescriptor"
+                           Text="Password"
+                           Grid.Row="2"
+                           Grid.Column="0"/>
 
-            <StackLayout Style="{StaticResource SettingsStackLayout}">
+                        <Label x:Name="PasswordSetting"
+                           Text=" ••••••••• "
+                           Grid.Row="2"
+                           Grid.Column="1"/>
+                    </Grid>
+                </Frame>
+
+
+                <Frame Margin="50, 10, 50, 0"
+                   BackgroundColor="White"
+                   CornerRadius="10">
+                    <!-- Design Settings -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="DesignSubtitle"
+                           Text="Design"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           TextColor="Gray"/>
+
+                        <Label x:Name="ThemeDescriptor"
+                       Text="Theme"
+                       Grid.Row="1"
+                       Grid.Column="0"/>
+
+                        <Picker x:Name="ThemePicker"
+                        TextColor="{DynamicResource Text}"
+                        SelectedIndexChanged="ThemePicker_SelectedIndexChanged" 
+                        Grid.Row="1"
+                        Grid.Column="1"/>
+
+                        <Label x:Name="ShowDaysDescriptor"
+                       Text="Password"
+                       Grid.Row="2"
+                       Grid.Column="0"/>
+
+                        <Switch x:Name="CalendarDaySwitch"
+                        Toggled="CalendarDaySwitch_Toggled" 
+                        Grid.Row="2"
+                        Grid.Column="2"/>
+                    </Grid>
+                </Frame>
+
+                <Button x:Name="RatingButton"
+                    Text="Enjoy the app? Give a rating"
+                    HorizontalOptions="Center"/>
+
+
+                <!--<StackLayout Style="{StaticResource SettingsStackLayout}">
                 <Label Text="Theme:"
                        FontSize="Medium" />
 
@@ -96,11 +178,13 @@ Page Design:
                 <Switch x:Name="CalendarDaySwitch"
                         HorizontalOptions="End"
                         Toggled="CalendarDaySwitch_Toggled" />
-                
-                
-                
-                
+            </StackLayout> -->
+
+
+
             </StackLayout>
-        </StackLayout>
+
+
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
