@@ -20,7 +20,7 @@
     </ContentPage.Resources>
 
     <!-- 
-            Page Design
+Page Design:
 
            Centered Title                      - label
         
@@ -49,6 +49,35 @@
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource NavigationBackground}">
+
+            <Label x:Name="Title"/>
+
+            <Frame BorderColor="AliceBlue" HeightRequest="50" WidthRequest="50" CornerRadius="25">
+                <Label x:Name="AccountPhoto"/>
+            </Frame>
+
+            <Label x:Name="AccountSubtitle"/>
+
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />                    
+                </Grid.ColumnDefinitions>
+                
+                
+                
+                
+                
+                
+            </Grid>
+
             <StackLayout Style="{StaticResource SettingsStackLayout}">
                 <Label Text="Theme:"
                        FontSize="Medium" />
@@ -67,6 +96,10 @@
                 <Switch x:Name="CalendarDaySwitch"
                         HorizontalOptions="End"
                         Toggled="CalendarDaySwitch_Toggled" />
+                
+                
+                
+                
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
