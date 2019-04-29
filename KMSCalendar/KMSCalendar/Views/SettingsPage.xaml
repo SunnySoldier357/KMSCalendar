@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KMSCalendar.Views.SettingsPage">
+             x:Class="KMSCalendar.Views.SettingsPage"
+             Title="Settings">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -51,29 +52,37 @@ Page Design:
         <ScrollView>
             <StackLayout BackgroundColor="#F2F3F4">
 
-                <Label x:Name="Title"
+                <!--<Label x:Name="Title"
                    Text="Settings"
                    FontSize="Medium"
-                   HorizontalOptions="Center"/>
+                   HorizontalOptions="Center"/>-->
 
-                <Frame BorderColor="{StaticResource NavigationPrimary}" 
+                <Image Source="userIcon.png" 
+                       HorizontalOptions="Center"
+                       HeightRequest="50"
+                       WidthRequest="50"
+                       Margin="20"/>
+
+                <!--<Frame BorderColor="{StaticResource NavigationPrimary}" 
                    HeightRequest="50"
                    WidthRequest="50" 
                    CornerRadius="50"
                    HorizontalOptions="Center">
-                    <Label x:Name="AccountPhoto" Text="photo here"/>
-                    <!-- https://www.flaticon.com/free-icon/user_747376 -->
-                </Frame>
+                    --><!--<Label x:Name="AccountPhoto" Text="photo here"/>-->
+                    <!-- https://www.flaticon.com/free-icon/user_747376 --><!--
+                    
+                    
+                </Frame>-->
 
-                <Frame Margin="50, 10, 50, 0"
+                <Frame Margin="50, 0, 50, 0"
                    BackgroundColor="White"
                    CornerRadius="10">
                     <!-- Account Settings -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -114,9 +123,9 @@ Page Design:
                     <!-- Design Settings -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -125,39 +134,50 @@ Page Design:
                         </Grid.ColumnDefinitions>
 
                         <Label x:Name="DesignSubtitle"
-                           Text="Design"
-                           Grid.Row="0"
-                           Grid.Column="0"
-                           TextColor="Gray"/>
+                               Text="Design"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               TextColor="Gray"/>
 
                         <Label x:Name="ThemeDescriptor"
-                       Text="Theme"
-                       Grid.Row="1"
-                       Grid.Column="0"/>
+                               Text="Theme"
+                               Grid.Row="1"
+                               Grid.Column="0"/>
 
                         <Picker x:Name="ThemePicker"
-                        TextColor="{DynamicResource Text}"
-                        SelectedIndexChanged="ThemePicker_SelectedIndexChanged" 
-                        Grid.Row="1"
-                        Grid.Column="1"/>
+                                TextColor="{DynamicResource Text}"
+                                SelectedIndexChanged="ThemePicker_SelectedIndexChanged" 
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                HorizontalOptions="End"/>
 
                         <Label x:Name="ShowDaysDescriptor"
-                       Text="Password"
-                       Grid.Row="2"
-                       Grid.Column="0"/>
+                               Text="Password"
+                               Grid.Row="2"
+                               Grid.Column="0"/>
 
                         <Switch x:Name="CalendarDaySwitch"
-                        Toggled="CalendarDaySwitch_Toggled" 
-                        Grid.Row="2"
-                        Grid.Column="2"/>
+                                Toggled="CalendarDaySwitch_Toggled" 
+                                Grid.Row="2"
+                                Grid.Column="2"/>
                     </Grid>
                 </Frame>
 
                 <Button x:Name="RatingButton"
-                    Text="Enjoy the app? Give a rating"
-                    HorizontalOptions="Center"/>
+                        Text="Enjoy the app? Give a rating"
+                        HorizontalOptions="Center"
+                        Margin="50"
+                        Padding="5"
+                        BackgroundColor="{StaticResource NavigationPrimary}"
+                        BorderWidth="0"
+                        CornerRadius="12"
+                        TextColor="White"/>
 
 
+                
+                
+                
+            <!--   Old Settings Page:          -->
                 <!--<StackLayout Style="{StaticResource SettingsStackLayout}">
                 <Label Text="Theme:"
                        FontSize="Medium" />
