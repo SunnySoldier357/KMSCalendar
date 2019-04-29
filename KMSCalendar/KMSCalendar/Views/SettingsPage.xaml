@@ -62,6 +62,7 @@ Page Design:
                    CornerRadius="50"
                    HorizontalOptions="Center">
                     <Label x:Name="AccountPhoto" Text="photo here"/>
+                    <!-- https://www.flaticon.com/free-icon/user_747376 -->
                 </Frame>
 
                 <Frame Margin="50, 10, 50, 0"
@@ -90,8 +91,6 @@ Page Design:
                            Text="Email"
                            Grid.Row="1"
                            Grid.Column="0"/>
-
-
                         <Label x:Name="EmailSetting"
                            Text="SingIsKing@buddy.com"
                            Grid.Row="1"
@@ -101,7 +100,6 @@ Page Design:
                            Text="Password"
                            Grid.Row="2"
                            Grid.Column="0"/>
-
                         <Label x:Name="PasswordSetting"
                            Text=" ••••••••• "
                            Grid.Row="2"
