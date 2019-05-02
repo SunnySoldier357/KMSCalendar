@@ -4,22 +4,6 @@
              x:Class="KMSCalendar.Views.SettingsPage"
              Title="Settings">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="SettingsStackLayout"
-                   TargetType="StackLayout">
-                <Setter Property="Orientation"
-                        Value="Horizontal" />
-
-                <Setter Property="HorizontalOptions"
-                        Value="CenterAndExpand" />
-
-                <Setter Property="Margin"
-                        Value="0,20,0,0" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <!-- 
 Page Design:
 
@@ -50,159 +34,114 @@ Page Design:
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout BackgroundColor="#F2F3F4">
+            <StackLayout BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
-                <!--<Label x:Name="Title"
-                   Text="Settings"
-                   FontSize="Medium"
-                   HorizontalOptions="Center"/>-->
-
-                <Image Source="userIcon.png" 
+                <Image Source="userIcon.png"
                        HorizontalOptions="Center"
                        HeightRequest="50"
                        WidthRequest="50"
-                       Margin="20"/>
+                       Margin="20" />
 
-                <!--<Frame BorderColor="{StaticResource NavigationPrimary}" 
-                   HeightRequest="50"
-                   WidthRequest="50" 
-                   CornerRadius="50"
-                   HorizontalOptions="Center">
-                    --><!--<Label x:Name="AccountPhoto" Text="photo here"/>-->
-                    <!-- https://www.flaticon.com/free-icon/user_747376 --><!--
-                    
-                    
-                </Frame>-->
+                <Frame Margin="50,0,50,0"
+                       BackgroundColor="{DynamicResource NavigationBackground}"
+                       CornerRadius="10">
 
-                <Frame Margin="50, 0, 50, 0"
-                   BackgroundColor="White"
-                   CornerRadius="10">
                     <!-- Account Settings -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label x:Name="AccountSubtitle"
-                           Text="Account"
-                           Grid.Row="0"
-                           Grid.Column="0"
-                           TextColor="Gray"/>
+                        <Label Margin="0,0,0,15" 
+                               Text="Account"
+                               TextColor="Gray" />
 
-                        <Label x:Name="EmailDescriptor"
-                           Text="Email"
-                           Grid.Row="1"
-                           Grid.Column="0"/>
-                        <Label x:Name="EmailSetting"
-                           Text="SingIsKing@buddy.com"
-                           Grid.Row="1"
-                           Grid.Column="1"/>
+                        <Label Grid.Row="1"
+                               Text="Email" />
 
-                        <Label x:Name="PasswordDescriptor"
-                           Text="Password"
-                           Grid.Row="2"
-                           Grid.Column="0"/>
-                        <Label x:Name="PasswordSetting"
-                           Text=" ••••••••• "
-                           Grid.Row="2"
-                           Grid.Column="1"/>
+                        <Label x:Name="EmailLabel"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               HorizontalOptions="Center"
+                               Margin="0,0,0,5"
+                               Text="SinghIsKing@buddy.com" />
+
+                        <Label Grid.Row="2"
+                               Text="Password" />
+
+                        <Label x:Name="PasswordLabel"
+                               Grid.Row="2"
+                               Grid.Column="1"
+                               HorizontalOptions="Center"
+                               Text="•••••••••" />
                     </Grid>
                 </Frame>
 
+                <Frame Margin="50,10,50,0"
+                       BackgroundColor="{DynamicResource NavigationBackground}"
+                       CornerRadius="10">
 
-                <Frame Margin="50, 10, 50, 0"
-                   BackgroundColor="White"
-                   CornerRadius="10">
                     <!-- Design Settings -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label x:Name="DesignSubtitle"
-                               Text="Design"
-                               Grid.Row="0"
-                               Grid.Column="0"
-                               TextColor="Gray"/>
+                        <Label Text="Design"
+                               TextColor="{DynamicResource LightText}" />
 
-                        <Label x:Name="ThemeDescriptor"
-                               Text="Theme"
-                               Grid.Row="1"
-                               Grid.Column="0"/>
+                        <Label Grid.Row="1"
+                               Margin="0,0,0,15"
+                               Text="Theme" />
 
+                        <!-- TODO: Ensure Picker is centered -->
                         <Picker x:Name="ThemePicker"
-                                TextColor="{DynamicResource Text}"
-                                SelectedIndexChanged="ThemePicker_SelectedIndexChanged" 
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                HorizontalOptions="End"/>
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                TextColor="{DynamicResource Text}"
+                                SelectedIndexChanged="ThemePicker_SelectedIndexChanged" />
 
-                        <Label x:Name="ShowDaysDescriptor"
-                               Text="Password"
-                               Grid.Row="2"
-                               Grid.Column="0"/>
+                        <Label Grid.Row="2"
+                               Margin="0,0,0,5"
+                               Text="Show Days of Week on Calendar" 
+                               LineBreakMode="WordWrap" />
 
+                        <!-- TODO: Ensure Switch is centered -->
                         <Switch x:Name="CalendarDaySwitch"
-                                Toggled="CalendarDaySwitch_Toggled" 
                                 Grid.Row="2"
-                                Grid.Column="2"/>
+                                Grid.Column="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Toggled="CalendarDaySwitch_Toggled" />
                     </Grid>
                 </Frame>
 
                 <Button x:Name="RatingButton"
-                        Text="Enjoy the app? Give a rating"
                         HorizontalOptions="Center"
                         Margin="50"
-                        Padding="5"
-                        BackgroundColor="{StaticResource NavigationPrimary}"
+                        Padding="10"
+                        BackgroundColor="{DynamicResource NavigationTertiary}"
                         BorderWidth="0"
                         CornerRadius="12"
-                        TextColor="White"/>
-
-
-                
-                
-                
-            <!--   Old Settings Page:          -->
-                <!--<StackLayout Style="{StaticResource SettingsStackLayout}">
-                <Label Text="Theme:"
-                       FontSize="Medium" />
-
-                <Picker x:Name="ThemePicker"
-                        HorizontalOptions="End"
-                        TextColor="{DynamicResource Text}"
-                        SelectedIndexChanged="ThemePicker_SelectedIndexChanged" />
-
+                        Text="Enjoy the app? Give a rating"
+                        TextColor="White" />
             </StackLayout>
-
-            <StackLayout Style="{StaticResource SettingsStackLayout}">
-                <Label Text="Show Day Names on Calendar:"
-                       FontSize="Medium" />
-
-                <Switch x:Name="CalendarDaySwitch"
-                        HorizontalOptions="End"
-                        Toggled="CalendarDaySwitch_Toggled" />
-            </StackLayout> -->
-
-
-
-            </StackLayout>
-
-
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
