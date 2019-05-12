@@ -113,7 +113,8 @@
                     <control:TransparentEntry x:Name="PasswordEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
-                                              Placeholder="Password" />
+                                              Placeholder="Password" 
+                                              IsPassword="True"/>
                 </Frame>
 
                 <Frame Grid.Row="8"
@@ -122,7 +123,8 @@
                     <control:TransparentEntry x:Name="ConfirmPasswordEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding ConfirmPassword}"
-                                              Placeholder="Confirm Password" />
+                                              Placeholder="Confirm Password" 
+                                              IsPassword="True"/>
                 </Frame>
 
                 <Button x:Name="AuthenticateSignUpButton"
