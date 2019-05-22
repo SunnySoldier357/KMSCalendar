@@ -20,6 +20,12 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
+            if (settings.Theme == Theme.Dark)
+                ThemeSwitch.IsToggled = true;
+
+            CalendarDaySwitch.IsToggled = settings.ShowCalendarDays;
+
+            //      Old code for the picker instead of the switch:
             //List<ThemeItem> pickerItems = new List<ThemeItem>
             //{
             //    new ThemeItem
@@ -33,27 +39,13 @@ namespace KMSCalendar.Views
             //        Theme = Theme.Dark
             //    }
             //};
-
             //ThemePicker.ItemsSource = pickerItems;
             //ThemePicker.SelectedItem = pickerItems.First(a => a.Theme == settings.Theme);
-
-            if (settings.Theme == Theme.Dark)
-                ThemeSwitch.IsToggled = true;
-
-            CalendarDaySwitch.IsToggled = settings.ShowCalendarDays;
         }
 
         //* Event Handlers
         private void CalendarDaySwitch_Toggled(object sender, ToggledEventArgs e) =>
             settings.ShowCalendarDays = CalendarDaySwitch.IsToggled;
-
-        /*private void ThemePicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ThemeItem item = ThemePicker.SelectedItem as ThemeItem;
-
-            if (item != null)
-                settings.Theme = item.Theme;
-        }*/
 
         private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e)
         {
@@ -66,5 +58,13 @@ namespace KMSCalendar.Views
                 settings.Theme = Theme.Light;
             }
         }
+
+        /*private void ThemePicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ThemeItem item = ThemePicker.SelectedItem as ThemeItem;
+
+            if (item != null)
+                settings.Theme = item.Theme;
+        }*/
     }
 }

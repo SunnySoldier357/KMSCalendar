@@ -55,7 +55,7 @@ Page Design:
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
@@ -105,10 +105,11 @@ Page Design:
                                TextColor="{DynamicResource LightText}" />
 
                         <Label Grid.Row="1"
-                               Margin="0,0,0,15"
-                               Text="Theme" />
+                               VerticalOptions="Center"
+                               Text="Dark Theme" 
+                               LineBreakMode="WordWrap" />
 
-                        <!-- TODO: Ensure Picker is centered -->
+                        <!-- This is the old picker before changed to a switch -->
                         <!--<Picker x:Name="ThemePicker"
                                 Grid.Row="1"
                                 Grid.Column="1"
@@ -120,21 +121,19 @@ Page Design:
                         <Switch x:Name="ThemeSwitch"
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="EndAndExpand"
                                 VerticalOptions="Center"
                                 Toggled="ThemeSwitch_Toggled" />
 
-
                         <Label Grid.Row="2"
-                               Margin="0,0,0,5"
+                               VerticalOptions="Center"
                                Text="Show Days of Week on Calendar" 
                                LineBreakMode="WordWrap" />
 
-                        <!-- TODO: Ensure Switch is centered -->
                         <Switch x:Name="CalendarDaySwitch"
                                 Grid.Row="2"
-                                Grid.Column="2"
-                                HorizontalOptions="Center"
+                                Grid.Column="1"
+                                HorizontalOptions="EndAndExpand"
                                 VerticalOptions="Center"
                                 Toggled="CalendarDaySwitch_Toggled" />
                     </Grid>
