@@ -109,13 +109,21 @@ Page Design:
                                Text="Theme" />
 
                         <!-- TODO: Ensure Picker is centered -->
-                        <Picker x:Name="ThemePicker"
+                        <!--<Picker x:Name="ThemePicker"
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
                                 TextColor="{DynamicResource Text}"
-                                SelectedIndexChanged="ThemePicker_SelectedIndexChanged" />
+                                SelectedIndexChanged="ThemePicker_SelectedIndexChanged" />-->
+
+                        <Switch x:Name="ThemeSwitch"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Toggled="ThemeSwitch_Toggled" />
+
 
                         <Label Grid.Row="2"
                                Margin="0,0,0,5"

@@ -20,22 +20,25 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            List<ThemeItem> pickerItems = new List<ThemeItem>
-            {
-                new ThemeItem
-                {
-                    Name = nameof(Theme.Light),
-                    Theme = Theme.Light
-                },
-                new ThemeItem
-                {
-                    Name = nameof(Theme.Dark),
-                    Theme = Theme.Dark
-                }
-            };
+            //List<ThemeItem> pickerItems = new List<ThemeItem>
+            //{
+            //    new ThemeItem
+            //    {
+            //        Name = nameof(Theme.Light),
+            //        Theme = Theme.Light
+            //    },
+            //    new ThemeItem
+            //    {
+            //        Name = nameof(Theme.Dark),
+            //        Theme = Theme.Dark
+            //    }
+            //};
 
-            ThemePicker.ItemsSource = pickerItems;
-            ThemePicker.SelectedItem = pickerItems.First(a => a.Theme == settings.Theme);
+            //ThemePicker.ItemsSource = pickerItems;
+            //ThemePicker.SelectedItem = pickerItems.First(a => a.Theme == settings.Theme);
+
+            if (settings.Theme == Theme.Dark)
+                ThemeSwitch.IsToggled = true;
 
             CalendarDaySwitch.IsToggled = settings.ShowCalendarDays;
         }
@@ -44,12 +47,24 @@ namespace KMSCalendar.Views
         private void CalendarDaySwitch_Toggled(object sender, ToggledEventArgs e) =>
             settings.ShowCalendarDays = CalendarDaySwitch.IsToggled;
 
-        private void ThemePicker_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void ThemePicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             ThemeItem item = ThemePicker.SelectedItem as ThemeItem;
 
             if (item != null)
                 settings.Theme = item.Theme;
+        }*/
+
+        private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            if(ThemeSwitch.IsToggled)
+            {
+                settings.Theme = Theme.Dark;
+            }
+            else
+            {
+                settings.Theme = Theme.Light;
+            }
         }
     }
 }
