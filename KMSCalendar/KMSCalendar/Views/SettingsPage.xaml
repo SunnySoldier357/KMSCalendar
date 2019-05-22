@@ -109,15 +109,6 @@ Page Design:
                                Text="Dark Theme" 
                                LineBreakMode="WordWrap" />
 
-                        <!-- This is the old picker before changed to a switch -->
-                        <!--<Picker x:Name="ThemePicker"
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                TextColor="{DynamicResource Text}"
-                                SelectedIndexChanged="ThemePicker_SelectedIndexChanged" />-->
-
                         <Switch x:Name="ThemeSwitch"
                                 Grid.Row="1"
                                 Grid.Column="1"
