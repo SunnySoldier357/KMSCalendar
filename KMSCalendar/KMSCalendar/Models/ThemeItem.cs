@@ -5,19 +5,21 @@
     /// </summary>
     public class ThemeItem
     {
-        //* Public Properties
+        //This class is useless if the switch is used instead of the picker for DarkTheme.
 
-        /// <summary>
-        /// The Name of the current Theme option to be shown.
-        /// </summary>
-        public string Name;
+    //    //* Public Properties
 
-        /// <summary>
-        /// The Theme associated with the current option.
-        /// </summary>
-        public Theme Theme;
+    //    /// <summary>
+    //    /// The Name of the current Theme option to be shown.
+    //    /// </summary>
+    //    public string Name;
 
-        //* Overridden Methods
-        public override string ToString() => Name;
+    //    /// <summary>
+    //    /// The Theme associated with the current option.
+    //    /// </summary>
+    //    public Theme Theme;
+
+    //    //* Overridden Methods
+    //    public override string ToString() => Name;
     }
 }
