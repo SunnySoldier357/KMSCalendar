@@ -79,12 +79,16 @@
             <ImageButton x:Name="LeftArrowImageButton"
                          Style="{StaticResource NavigationImageButtonStyle}"
                          Grid.Column="5"
+                         Grid.RowSpan="2"
+                         VerticalOptions="Center"
                          Source="leftArrow.png"
                          Clicked="LeftArrowImageButton_Clicked" />
 
             <ImageButton x:Name="RightArrowImageButton"
                          Style="{StaticResource NavigationImageButtonStyle}"
                          Grid.Column="6"
+                         Grid.RowSpan="2"
+                         VerticalOptions="Center"
                          Source="rightArrow.png"
                          Clicked="RightArrowImageButton_Clicked" />
         </Grid>

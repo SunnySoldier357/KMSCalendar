@@ -67,7 +67,8 @@
                     <control:TransparentEntry x:Name="PasswordEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
-                                              Placeholder="Password" />
+                                              Placeholder="Password" 
+                                              IsPassword="True"/>
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"

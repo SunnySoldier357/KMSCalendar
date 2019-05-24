@@ -15,7 +15,7 @@ namespace KMSCalendar
         //* Static Properties
         public static string AzureBackendUrl = "https://kmscalendar.azurewebsites.net/";
 
-        public static bool UseMockDataStore = false;
+        public static bool UseMockDataStore = true;
 
         //* Constructors
         public App()
@@ -33,34 +33,64 @@ namespace KMSCalendar
         //* Public Methods
         public void UpdateColorResources(Theme theme)
         {
-            // Light Theme => White
-            // Dark Theme => Black
-            Color NavigationBackground = Color.FromHex(theme == Theme.Light ? "#FFF" : "#000");
+            var items = new[]
+            {
+                // Light Theme => White
+                // Dark Theme => Black
+                new
+                {
+                    Name = "NavigationBackground",
+                    Color = Color.FromHex(theme == Theme.Light ? "#FFF" : "#000")
+                },
 
-            // Dark Blue
-            Color NavigationPrimary = Color.FromHex("#154360");
+                // Light Theme => White
+                // Dark Theme => Black
+                new
+                {
+                    Name = "NavigationBackgroundLight",
+                    Color = Color.FromHex(theme == Theme.Light ? "#E6E7E8" : "#191817")
+                },
 
-            // Brown
-            Color NavigationSecondary = Color.FromHex("#603215");
+                // Dark Blue
+                new
+                {
+                    Name = "NavigationPrimary",
+                    Color = Color.FromHex("#154360")
+                },
 
-            // Orange
-            Color NavigationTertiary = Color.FromHex("#C9682C");
+                // Brown
+                new
+                {
+                    Name = "NavigationSecondary",
+                    Color = Color.FromHex("#603215")
+                },
 
-            // Light Theme => Light Gray
-            // Dark Theme => Dark Gray
-            Color LightText = Color.FromHex(theme == Theme.Light ? "#999" : "#666");
+                // Orange
+                new
+                {
+                    Name = "NavigationTertiary",
+                    Color = Color.FromHex("#C9682C")
+                },
 
-            // Light Theme => Black
-            // Dark Theme => White
-            Color Text = Color.FromHex(theme == Theme.Light ? "#000" : "#FFF");
+                // Light Theme => Light Gray
+                // Dark Theme => Dark Gray
+                new
+                {
+                    Name = "LightText",
+                    Color = Color.FromHex(theme == Theme.Light ? "#999" : "#666")
+                },
 
-            Resources[nameof(NavigationBackground)] = NavigationBackground;
-            Resources[nameof(NavigationPrimary)] = NavigationPrimary;
-            Resources[nameof(NavigationSecondary)] = NavigationSecondary;
-            Resources[nameof(NavigationTertiary)] = NavigationTertiary;
+                // Light Theme => Black
+                // Dark Theme => White
+                new
+                {
+                    Name = "Text",
+                    Color = Color.FromHex(theme == Theme.Light ? "#000" : "#FFF")
+                }
+            };
 
-            Resources[nameof(LightText)] = LightText;
-            Resources[nameof(Text)] = Text;
+            foreach (var item in items)
+                Resources[item.Name] = item.Color;
         }
 
         //* Overridden Methods

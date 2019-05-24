@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
@@ -20,23 +16,7 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            List<ThemeItem> pickerItems = new List<ThemeItem>
-            {
-                new ThemeItem
-                {
-                    Name = nameof(Theme.Light),
-                    Theme = Theme.Light
-                },
-                new ThemeItem
-                {
-                    Name = nameof(Theme.Dark),
-                    Theme = Theme.Dark
-                }
-            };
-
-            ThemePicker.ItemsSource = pickerItems;
-            ThemePicker.SelectedItem = pickerItems.First(a => a.Theme == settings.Theme);
-
+            ThemeSwitch.IsToggled = settings.Theme == Theme.Dark;
             CalendarDaySwitch.IsToggled = settings.ShowCalendarDays;
         }
 
@@ -44,12 +24,7 @@ namespace KMSCalendar.Views
         private void CalendarDaySwitch_Toggled(object sender, ToggledEventArgs e) =>
             settings.ShowCalendarDays = CalendarDaySwitch.IsToggled;
 
-        private void ThemePicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ThemeItem item = ThemePicker.SelectedItem as ThemeItem;
-
-            if (item != null)
-                settings.Theme = item.Theme;
-        }
+        private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e) => 
+            settings.Theme = ThemeSwitch.IsToggled ? Theme.Dark : Theme.Light;
     }
 }
