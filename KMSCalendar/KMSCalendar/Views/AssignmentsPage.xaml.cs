@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ModernXamarinCalendar;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Controls;
 using KMSCalendar.Models;
 using KMSCalendar.ViewModels;
 
