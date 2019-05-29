@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using KMSCalendar.MobileAppService.Models;
 
-namespace KMSCalendar.MobileAppService.Controllers
+namespace KMSCalendar.MobileAppService.Controllers.API
 {
     [Route("api/[controller]")]
     public class AssignmentController : BaseController<Assignment>
