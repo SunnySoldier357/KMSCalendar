@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
-using KMSCalendar.MobileAppService.Models;
+using KMSCalendar.MobileAppService.Models.Entities;
 
 namespace KMSCalendar.MobileAppService.Controllers.API
 {

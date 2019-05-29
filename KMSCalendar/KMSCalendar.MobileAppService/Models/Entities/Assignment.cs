@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KMSCalendar.MobileAppService.Models
+namespace KMSCalendar.MobileAppService.Models.Entities
 {
     public class Assignment : TableData
     {

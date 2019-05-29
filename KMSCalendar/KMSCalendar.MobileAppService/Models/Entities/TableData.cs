@@ -1,4 +1,4 @@
-namespace KMSCalendar.MobileAppService.Models
+namespace KMSCalendar.MobileAppService.Models.Entities
 {
     public abstract class TableData
     {

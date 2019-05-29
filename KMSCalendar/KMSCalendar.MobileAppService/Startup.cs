@@ -5,16 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using KMSCalendar.MobileAppService.Models.Environment;
+
 namespace KMSCalendar.MobileAppService
 {
     public class Startup
     {
         //* Public Properties
-        public IConfiguration Configuration { get; }
+        private readonly Configuration configuration;
 
         //* Constructors
-        public Startup(IConfiguration configuration) =>
-            Configuration = configuration;
+        public Startup(IConfiguration configuration)
+        {
+            this.configuration = new Configuration();
+            configuration.Bind(this.configuration);
+        }
 
         //* Public Methods
 

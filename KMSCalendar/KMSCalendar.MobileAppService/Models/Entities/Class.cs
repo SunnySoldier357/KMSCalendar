@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace KMSCalendar.MobileAppService.Models
+namespace KMSCalendar.MobileAppService.Models.Entities
 {
     public class Class : TableData
     {
