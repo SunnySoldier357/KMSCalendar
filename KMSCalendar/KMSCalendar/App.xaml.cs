@@ -13,9 +13,9 @@ namespace KMSCalendar
     public partial class App : Application
     {
         //* Static Properties
-        public static string AzureBackendUrl = "https://kmscalendar.azurewebsites.net/";
+        public static string AzureBackendUrl = "https://kmscalendar.azurewebsites.net";
 
-        public static bool UseMockDataStore = true;
+        public static bool UseMockDataStore = false;
 
         //* Constructors
         public App()
