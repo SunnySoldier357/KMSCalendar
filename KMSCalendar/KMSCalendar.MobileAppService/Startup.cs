@@ -13,12 +13,17 @@ namespace KMSCalendar.MobileAppService
 {
     public class Startup
     {
-        //* Public Properties
+        //* Static Properties
+        public static bool isDevelopment = false;
+
+        //* Private Properties
         private readonly Configuration configuration;
 
         //* Constructors
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            isDevelopment = env.IsDevelopment();
+
             this.configuration = new Configuration();
             configuration.Bind(this.configuration);
         }
@@ -58,7 +63,7 @@ namespace KMSCalendar.MobileAppService
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                // This lambda determines whether ufser consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -67,7 +72,7 @@ namespace KMSCalendar.MobileAppService
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<CalendarDbDataContext>(options =>
-                options.UseSqlServer(configuration.Database.ConnectionString));
+                options.UseSqlServer(configuration.ConnectionStrings.ConnectionString));
         }
     }
 }
