@@ -5,6 +5,8 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
 using KMSCalendar.ViewModels;
+using KMSCalendar.Services;
+using System.Threading.Tasks;
 
 namespace KMSCalendar.Views
 {
@@ -34,6 +36,11 @@ namespace KMSCalendar.Views
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
+        }
+
+        private async Task Delete_Clicked(object sender, EventArgs e)
+        {
+            //TODO: Sunny delete the assignment
         }
     }
 }

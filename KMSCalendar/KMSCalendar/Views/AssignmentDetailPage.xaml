@@ -4,20 +4,30 @@
              x:Class="KMSCalendar.Views.AssignmentDetailPage"
              Title="{Binding Title}">
 
-    <StackLayout Spacing="20"
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete"
+                     Icon="save.png"
+                     Clicked="Delete_Clicked"/>
+        <!-- TODO: Change it from a save icon to a delete icon -->
+
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="20"
                  Padding="15"
                  BackgroundColor="{DynamicResource NavigationBackground}">
-        <Label Text="Name:"
+            <Label Text="Name:"
                FontSize="Medium" />
-        <Label Text="{Binding Assignment.Name}"
+            <Label Text="{Binding Assignment.Name}"
                FontSize="Small" />
-        <Label Text="Description:"
+            <Label Text="Description:"
                FontSize="Medium" />
-        <Label Text="{Binding Assignment.Description}"
+            <Label Text="{Binding Assignment.Description}"
                FontSize="Small" />
-        <Label Text="Due Date:"
+            <Label Text="Due Date:"
                FontSize="Medium" />
-        <Label Text="{Binding Assignment.Date}"
+            <Label Text="{Binding Assignment.Date}"
                FontSize="Small" />
-    </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
