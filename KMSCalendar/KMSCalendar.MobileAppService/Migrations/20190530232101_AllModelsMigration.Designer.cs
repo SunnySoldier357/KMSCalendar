@@ -4,14 +4,16 @@ using KMSCalendar.MobileAppService.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KMSCalendar.MobileAppService.Migrations
 {
     [DbContext(typeof(CalendarDbDataContext))]
-    partial class CalendarDbDataContextModelSnapshot : ModelSnapshot
+    [Migration("20190530232101_AllModelsMigration")]
+    partial class AllModelsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

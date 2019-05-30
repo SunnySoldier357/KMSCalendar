@@ -2,9 +2,9 @@ using KMSCalendar.MobileAppService.Models.Entities;
 
 namespace KMSCalendar.MobileAppService.Controllers.API
 {
-    public class AssignmentController : BaseController<Assignment>
+    public class ClassController : BaseController<Class>
     {
         //* Constructors
-        public AssignmentController(CalendarDbDataContext db) : base(db) { }
+        public ClassController(CalendarDbDataContext db) : base(db) { }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,9 @@ namespace KMSCalendar.MobileAppService.Models.Entities
     {
         //* Public Properties
         public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         //* Constructors
         public CalendarDbDataContext(DbContextOptions<CalendarDbDataContext> options)
@@ -15,8 +19,16 @@ namespace KMSCalendar.MobileAppService.Models.Entities
         //* Public Methods
         public IQueryable GetTable<T>() where T : TableData
         {
-            if (typeof(T).Equals(typeof(Assignment)))
+            Type type = typeof(T);
+
+            if (type.Equals(typeof(Assignment)))
                 return Assignments;
+            else if (type.Equals(typeof(Class)))
+                return Classes;
+            else if (type.Equals(typeof(Teacher)))
+                return Teachers;
+            else if (type.Equals(typeof(User)))
+                return Users;
 
             return null;
         }
