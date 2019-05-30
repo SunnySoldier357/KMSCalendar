@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>@RenderSection("Title", true)</title>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="@Url.Content("~/css/styles.css")" />
+
+    <script type="text/javascript"
+            src="@Url.Content("~/scripts/main.js")"></script>
+  </head>
+
+  <body>
+      @RenderBody()
+  </body>
+  
+</html>

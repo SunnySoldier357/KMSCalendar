@@ -1,0 +1,12 @@
+@model string
+
+@section Title { @string.Format("{0}Error!", Model) }
+
+@if (string.IsNullOrWhiteSpace(Model))
+{
+    <h1>An unknown error has occured!</h1>
+}
+else
+{
+    <h1>A @Model error has occured!</h1>
+}

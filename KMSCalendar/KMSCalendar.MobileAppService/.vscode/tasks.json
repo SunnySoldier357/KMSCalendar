@@ -10,6 +10,18 @@
                 "${workspaceFolder}/KMSCalendar.MobileAppService.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build release",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "-c",
+                "Release",
+                "${workspaceFolder}/KMSCalendar.MobileAppService.csproj"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

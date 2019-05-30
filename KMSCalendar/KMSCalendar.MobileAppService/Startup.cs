@@ -35,7 +35,7 @@ namespace KMSCalendar.MobileAppService
                 app.UseDeveloperExceptionPage();
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
                 app.UseHsts();
             }
 
