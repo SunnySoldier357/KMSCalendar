@@ -28,6 +28,26 @@ namespace KMSCalendar.Views
             BindingContext = this;
         }
 
+        /// <summary>
+        /// This constructor is used with the date selected on the calendar.
+        /// </summary>
+        /// <param name="dateSelected"></param>
+        public NewAssignmentPage(DateTime dateSelected)
+        {
+            InitializeComponent();
+
+            Assignment = new Assignment
+            {
+                Name = "",
+                Description = "",
+                DueDate = dateSelected
+            };
+
+            BindingContext = this;
+        }
+
+
+
         //* Event Handlers
         public async void Cancel_Clicked(object sender, EventArgs e) =>
             await Navigation.PopModalAsync();

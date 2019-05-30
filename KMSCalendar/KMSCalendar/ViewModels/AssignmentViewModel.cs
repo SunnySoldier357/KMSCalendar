@@ -13,6 +13,8 @@ namespace KMSCalendar.ViewModels
 {
     public class AssignmentViewModel : BaseViewModel
     {
+        //TODO: Sunny please put documentation on the methods in this file!!!!
+
         //* Public Properties
         public Command LoadAssignmentsCommand { get; set; }
 
