@@ -7,6 +7,8 @@ using KMSCalendar.Models;
 
 namespace KMSCalendar.Views
 {
+    // TODO: Put user name on top
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : ContentPage
     {

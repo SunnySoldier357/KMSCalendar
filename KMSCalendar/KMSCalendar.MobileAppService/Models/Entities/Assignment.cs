@@ -5,6 +5,8 @@ namespace KMSCalendar.MobileAppService.Models.Entities
     public class Assignment : TableData
     {
         //* Public Properties
+        public Class Class { get; set; }
+
         public DateTime DueDate { get; set; }
 
         public string Description { get; set; }
@@ -17,6 +19,7 @@ namespace KMSCalendar.MobileAppService.Models.Entities
             {
                 Assignment other = (Assignment) td;
 
+                Class = other.Class;
                 DueDate = other.DueDate;
                 Description = other.Description;
                 Name = other.Name;
