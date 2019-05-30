@@ -4,5 +4,8 @@ namespace KMSCalendar.MobileAppService.Models.Entities
     {
         //* Public Properties
         public string Id { get; set; }
+
+        //* Public Method
+        public abstract void Update(TableData td);
     }
 }

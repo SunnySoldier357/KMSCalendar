@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using KMSCalendar.MobileAppService.Models.Entities;
 using KMSCalendar.MobileAppService.Models.Environment;
 
 namespace KMSCalendar.MobileAppService
@@ -63,6 +65,9 @@ namespace KMSCalendar.MobileAppService
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<CalendarDbDataContext>(options =>
+                options.UseSqlServer(configuration.Database.ConnectionString));
         }
     }
 }

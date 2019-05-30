@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Concurrent;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 using KMSCalendar.MobileAppService.Models.Entities;
 
@@ -9,24 +10,33 @@ namespace KMSCalendar.MobileAppService.Controllers.API
     [Route("api/[controller]")]
     public abstract class BaseController<T> : Controller where T : TableData
     {
-        //* Static Properties
-        protected static ConcurrentDictionary<string, T> items =
-            new ConcurrentDictionary<string, T>();
+        //* Private Properties
+        private readonly CalendarDbDataContext db;
 
-        //* Protected Methods
-        protected void add(T item)
+        private readonly DbSet<T> items;
+
+        //* Constructors
+        public BaseController(CalendarDbDataContext db)
         {
-            item.Id = Guid.NewGuid().ToString();
-            items[item.Id] = item;
+            this.db = db;
+            items = (DbSet<T>) db.GetTable<T>();
         }
 
         //* Public Methods
         [HttpGet]
-        public IActionResult List() =>
-            Ok(items.Values);
+        public async Task<IActionResult> List() =>
+            Ok(await items.ToArrayAsync());
 
         [HttpGet("{id}")]
-        public T GetItem(string id) => items[id];
+        public async Task<IActionResult> GetItem(string id)
+        {
+            T item = await items.FirstOrDefaultAsync(t => t.Id == id);
+
+            if (item == null)
+                return NotFound();
+
+            return Ok(item);
+        }
 
         [HttpPost]
         public IActionResult Create([FromBody] T item)
@@ -36,35 +46,56 @@ namespace KMSCalendar.MobileAppService.Controllers.API
                 if (item == null || !ModelState.IsValid)
                     return BadRequest("Invalid State");
 
-                add(item);
+                item.Id = Guid.NewGuid().ToString();
+
+                items.Add(item);
+                db.SaveChanges();
+
+                return Ok(item);
             }
             catch (Exception)
             {
                 return BadRequest("Error while creating");
             }
-
-            return Ok(item);
         }
 
         [HttpPut]
-        public IActionResult Edit([FromBody] T item)
+        public async Task<IActionResult> Edit([FromBody] T item)
         {
             try
             {
                 if (item == null || !ModelState.IsValid)
                     return BadRequest("Invalid State");
 
-                items[item.Id] = item;
+                T find = await items.FirstOrDefaultAsync(t => t.Id == item.Id);
+
+                if (find == null)
+                    return NotFound();
+
+                find.Update(item);
+
+                await db.SaveChangesAsync();
+
+                return Ok(find);
             }
             catch (Exception)
             {
                 return BadRequest("Error while creating");
             }
-
-            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public void Delete(string id) => items.TryRemove(id, out T item);
+        public async Task<IActionResult> Delete(string id)
+        {
+            T item = await items.FirstOrDefaultAsync(t => t.Id == id);
+
+            if (item == null)
+                return NotFound();
+
+            items.Remove(item);
+            await db.SaveChangesAsync();
+
+            return Ok(item);
+        }
     }
 }

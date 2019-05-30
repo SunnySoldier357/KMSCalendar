@@ -11,6 +11,20 @@ namespace KMSCalendar.MobileAppService.Models.Entities
 
         public string Name { get; set; }
 
-        public Teacher teacher { get; set; }
+        public Teacher Teacher { get; set; }
+
+        //* Public Methods
+        public override void Update(TableData td)
+        {
+            if (td is Class)
+            {
+                Class other = (Class) td;
+
+                Period = other.Period;
+                Assignments = other.Assignments;
+                Name = other.Name;
+                Teacher = other.Teacher;
+            }
+        }
     }
 }
