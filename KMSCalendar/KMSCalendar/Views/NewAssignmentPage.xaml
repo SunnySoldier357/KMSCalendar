@@ -24,15 +24,17 @@
 
             <Entry BackgroundColor="{DynamicResource NavigationBackground}"
                    Text="{Binding Assignment.Name}"
+                   Placeholder="Assignment name"
                    TextColor="{DynamicResource Text}"
                    FontSize="Small" />
 
             <Label Text="Description"
                    FontSize="Medium" />
 
-            <Editor Margin="0"
+            <Editor HeightRequest="100"
                     BackgroundColor="{DynamicResource NavigationBackground}"
                     Text="{Binding Assignment.Description}"
+                    Placeholder="This is an item description"
                     TextColor="{DynamicResource Text}"
                     FontSize="Small" />
 

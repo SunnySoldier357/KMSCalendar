@@ -42,14 +42,14 @@ namespace KMSCalendar.Views
 
         //* Event Handlers
         public async void AddAssignment_Clicked(object sender, EventArgs e) =>
-            await Navigation.PushModalAsync(new NavigationPage(new NewAssignmentPage()));
+            await Navigation.PushModalAsync(new NavigationPage(new NewAssignmentPage(CalendarWeekControl.DateSelected))); //add date selected
 
         public void DateSelectedChanged(object sender, EventArgs e)
         {
             WeekControl control = sender as WeekControl;
             viewModel.FilterAssignments(control.DateSelected);
         }
-
+        
         public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Assignment assignment = e.SelectedItem as Assignment;
