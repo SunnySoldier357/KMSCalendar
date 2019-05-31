@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
 using KMSCalendar.Services;
 
 namespace KMSCalendar.ViewModels
@@ -25,7 +25,7 @@ namespace KMSCalendar.ViewModels
         }
 
         public IDataStore<Assignment> DataStore =>
-            DependencyService.Get<IDataStore<Assignment>>() ?? new MockDataStore();
+            DependencyService.Get<IDataStore<Assignment>>() ?? new MockDataStore<Assignment>();
 
         public string Title
         {

@@ -1,104 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
 
 namespace KMSCalendar.Services
 {
-    public class MockDataStore : IDataStore<Assignment>
+    public class MockDataStore<T> : IDataStore<T> where T : TableData
     {
         //* Private Properties
-        private List<Assignment> assignments;
+        private List<T> items;
 
         //* Contructors
         public MockDataStore()
         {
-            assignments = new List<Assignment>();
-            List<Assignment> mockAssignments = new List<Assignment>
-            {
-                new Assignment
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "First item",
-                    Description ="This is an item description.",
-                    DueDate = DateTime.Today
-                },
-                new Assignment
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Second item",
-                    Description ="This is an item description.",
-                    DueDate = DateTime.Today
-                },
-                new Assignment
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Third item",
-                    Description="This is an item description.",
-                    DueDate = DateTime.Today
-                },
-                new Assignment
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Fourth item",
-                    Description="This is an item description.",
-                    DueDate = DateTime.Today
-                },
-                new Assignment
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Fifth item",
-                    Description="This is an item description.",
-                    DueDate = DateTime.Today
-                },
-                new Assignment
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Sixth item",
-                    Description="This is an item description.",
-                    DueDate = DateTime.Today
-                }
-            };
+            items = new List<T>();
+            List<T> mockItems = (List<T>) TableData.Seed<T>();
 
-            foreach (Assignment assignment in mockAssignments)
-                assignments.Add(assignment);
+            foreach (T item in mockItems)
+                items.Add(item);
         }
 
         //* Interface Implementations
-        public async Task<bool> AddItemAsync(Assignment assignment)
+        public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false) =>
+            await Task.FromResult(items);
+
+        public async Task<T> GetItemAsync(string id) =>
+            await Task.FromResult(items.FirstOrDefault(i => i.Id == id));
+
+        public async Task<bool> AddItemAsync(T item)
         {
-            assignments.Add(assignment);
+            items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Assignment assignment)
+        public async Task<bool> UpdateItemAsync(T item)
         {
-            Assignment oldItem = assignments
-                .Where(a => a.Id == assignment.Id)
+            T oldItem = items
+                .Where(i => i.Id == item.Id)
                 .FirstOrDefault();
-            assignments.Remove(oldItem);
-            assignments.Add(assignment);
+            items.Remove(oldItem);
+            items.Add(item);
 
             return await Task.FromResult(true);
         }
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            Assignment oldItem = assignments
-                .Where(a => a.Id == id)
+            T oldItem = items
+                .Where(i => i.Id == id)
                 .FirstOrDefault();
-            assignments.Remove(oldItem);
+            items.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
-
-        public async Task<Assignment> GetItemAsync(string id) =>
-            await Task.FromResult(assignments.FirstOrDefault(a => a.Id == id));
-
-        public async Task<IEnumerable<Assignment>> GetItemsAsync(bool forceRefresh = false) =>
-            await Task.FromResult(assignments);
     }
 }
