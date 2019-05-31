@@ -4,6 +4,7 @@ namespace KMSCalendar.ViewModels
 {
     public class LogInViewModel : INotifyPropertyChanged
     {
+        
         //* Private Properties
         private string username;
         private string email;
@@ -45,11 +46,23 @@ namespace KMSCalendar.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         //* Constructor
-        public LogInViewModel() => LogInAttempts = 0;
+        public LogInViewModel()
+        {
+            LogInAttempts = 0;
+            Username = "";
+            Email = "";
+            LoginValidationMessage = "";
+            Password = "";
+            ConfirmPassword = "";
+        }
+
+
 
         //* Event Handlers
         public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+
+
 
         //* Private Methods
         private void modifyProperty<T>(ref T value, ref T privateProperty, string nameOfProperty)
