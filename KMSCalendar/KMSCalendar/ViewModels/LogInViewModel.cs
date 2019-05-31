@@ -56,8 +56,6 @@ namespace KMSCalendar.ViewModels
             ConfirmPassword = "";
         }
 
-
-
         //* Event Handlers
         public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));

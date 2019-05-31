@@ -17,27 +17,61 @@ namespace KMSCalendar.Views
             InitializeComponent();
 
             viewModel = new LogInViewModel();
-            setBindings();
+            BindingContext = viewModel;
         }
 
         //* Private Methods
-        private void setBindings()
+        private bool checkEmail()
         {
-            EmailEntry.BindingContext = viewModel;
-            PasswordEntry.BindingContext = viewModel;
-            LoginValidationLabel.BindingContext = viewModel;
+            if(viewModel.Email.Length < 5)
+            {
+                viewModel.LoginValidationMessage = "Email too short";
+                return false;
+            }
+            if(viewModel.Email.Length < 254)
+            {
+                clearValidation();
+                return true;
+            }
+
+            viewModel.LoginValidationMessage = "Email too long";
+            return false;
         }
+        private bool checkPassword()
+        {
+            if(viewModel.Password.Length < 8)
+            {
+                viewModel.LoginValidationMessage = "Password too short";
+            }
+            if(viewModel.Password.Length < 64)
+            {
+                clearValidation();
+                return true;
+            }
+
+            viewModel.LoginValidationMessage = "Password too long";
+            return false;
+        }
+        private void clearValidation()
+        {
+            viewModel.LoginValidationMessage = "";
+        }
+
+
 
         //* Event Handlers
 
         /// <summary> Check if correct login and password </summary>
         private void AuthenticateLoginButton_Clicked(object sender, System.EventArgs e)
         {
-            viewModel.LoginValidationMessage = "Login totally invalid.";
-            string email = viewModel.Email;
-            string password = viewModel.Password;
+            if(checkEmail() && checkPassword())
+            {
+                string email = viewModel.Email;
+                string password = viewModel.Password;
 
-            //TODO: Authenticate with backend
+                viewModel.LoginValidationMessage = "login sucess";
+                //TODO: Authenticate with backend
+            }
         }
 
 
