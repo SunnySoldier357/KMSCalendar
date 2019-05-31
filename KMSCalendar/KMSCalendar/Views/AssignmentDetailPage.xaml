@@ -7,7 +7,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete"
                      Icon="save.png"
-                     Clicked="Delete_Clicked"/>
+                     Clicked="Delete_Clicked" />
         <!-- TODO: Change it from a save icon to a delete icon -->
 
     </ContentPage.ToolbarItems>
