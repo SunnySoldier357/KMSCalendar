@@ -38,9 +38,12 @@ namespace KMSCalendar.Views
             BindingContext = this.viewModel = viewModel;
         }
 
-        private async Task Delete_Clicked(object sender, EventArgs e)
+        private async void Delete_Clicked(object sender, EventArgs e)
         {
-            //TODO: Sunny delete the assignment
+            IDataStore<Assignment> data = DependencyService.Get<IDataStore<Assignment>>();
+            await data.DeleteItemAsync(viewModel.Assignment.Id);
+
+            await Navigation.PushAsync(new AssignmentsPage());
         }
     }
 }
