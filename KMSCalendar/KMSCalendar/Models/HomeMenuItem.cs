@@ -22,5 +22,6 @@
         Login,
         Settings,
         SignUp,
+        SchoolSearch
     }
 }

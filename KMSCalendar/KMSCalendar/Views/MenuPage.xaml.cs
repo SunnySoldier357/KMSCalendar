@@ -49,6 +49,11 @@ namespace KMSCalendar.Views
                 {
                     Id = MenuItemType.Settings,
                     Title = "Settings"
+                },
+                new HomeMenuItem
+                {
+                    Id = MenuItemType.SchoolSearch,
+                    Title = "Search"
                 }
 
             };
