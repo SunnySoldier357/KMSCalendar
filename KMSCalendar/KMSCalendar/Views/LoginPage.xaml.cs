@@ -37,6 +37,7 @@ namespace KMSCalendar.Views
             viewModel.LoginValidationMessage = "Email too long";
             return false;
         }
+
         private bool checkPassword()
         {
             if(viewModel.Password.Length < 8)
@@ -53,36 +54,37 @@ namespace KMSCalendar.Views
             viewModel.LoginValidationMessage = "Password too long";
             return false;
         }
+
         private void clearValidation()
         {
             viewModel.LoginValidationMessage = "";
         }
 
-
-
         //* Event Handlers
 
-        /// <summary> Check if correct login and password </summary>
+        /// <summary>Check if correct login and password.</summary>
         private void AuthenticateLoginButton_Clicked(object sender, System.EventArgs e)
         {
-            if(checkEmail() && checkPassword())
+            if (checkEmail() && checkPassword())
             {
                 string email = viewModel.Email;
                 string password = viewModel.Password;
 
-                viewModel.LoginValidationMessage = "login sucess";
-                //TODO: Authenticate with backend
+                viewModel.LoginValidationMessage = "login success";
+
+                // TODO: Authenticate with backend
             }
         }
 
-
         private void ForgotPasswordButton_Clicked(object sender, System.EventArgs e) =>
-            viewModel.LoginValidationMessage = "You can't forget your password if you don't have an account.";
+            viewModel.LoginValidationMessage = "You can't forget your password " +
+                "if you don't have an account.";
 
-        /// <summary>
-        /// Go to sign up page
-        /// </summary>
-        private async void NewUserButton_Clicked(object sender, System.EventArgs e) =>
-            await Navigation.PushAsync(new SignUpPage(), true); //true makes it animated
+        /// <summary>Go to sign up page.</summary>
+        private async void NewUserButton_Clicked(object sender, System.EventArgs e)
+        {
+            // true makes it animated
+            await Navigation.PushAsync(new SignUpPage(), true);
+        }
     }
 }

@@ -26,7 +26,8 @@ namespace KMSCalendar.Views
             BindingContext = viewModel = new AssignmentViewModel();
 
             CalendarWeekControl.BindingContext = settings;
-            // Subscrible to the event
+
+            // Subscribe to the event
             CalendarWeekControl.DataSelectedChanged += DateSelectedChanged;
 
             ListTitleDate.BindingContext = CalendarWeekControl;
@@ -43,7 +44,8 @@ namespace KMSCalendar.Views
 
         //* Event Handlers
         public async void AddAssignment_Clicked(object sender, EventArgs e) =>
-            await Navigation.PushModalAsync(new NavigationPage(new NewAssignmentPage(CalendarWeekControl.DateSelected))); //add date selected
+            await Navigation.PushModalAsync(new NavigationPage(
+                new NewAssignmentPage(CalendarWeekControl.DateSelected)));
 
         public void DateSelectedChanged(object sender, EventArgs e)
         {
@@ -53,8 +55,7 @@ namespace KMSCalendar.Views
         
         public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            Assignment assignment = e.SelectedItem as Assignment;
-            if (assignment == null)
+            if (!(e.SelectedItem is Assignment assignment))
                 return;
 
             await Navigation.PushAsync(new AssignmentDetailPage(

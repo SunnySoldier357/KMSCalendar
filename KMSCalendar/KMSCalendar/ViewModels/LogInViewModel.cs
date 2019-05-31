@@ -4,22 +4,16 @@ namespace KMSCalendar.ViewModels
 {
     public class LogInViewModel : INotifyPropertyChanged
     {
-        
         //* Private Properties
-        private string username;
         private string email;
         private string loginValidationMessage;
         private string password;
         private string confirmPassword;
+        private string userName;
 
         //* Public Properties
-        public int LogInAttempts;
+        public int LogInAttempts { get; set; }
 
-        public string Username
-        {
-            get => username;
-            set => modifyProperty(ref value, ref username, nameof(Username));
-        }
         public string Email
         {
             get => email;
@@ -41,6 +35,11 @@ namespace KMSCalendar.ViewModels
             get => confirmPassword;
             set => modifyProperty(ref value, ref confirmPassword, nameof(ConfirmPassword));
         }
+        public string UserName
+        {
+            get => userName;
+            set => modifyProperty(ref value, ref userName, nameof(UserName));
+        }
 
         //* Events
         public event PropertyChangedEventHandler PropertyChanged;
@@ -48,19 +47,16 @@ namespace KMSCalendar.ViewModels
         //* Constructor
         public LogInViewModel()
         {
-            LogInAttempts = 0;
-            Username = "";
-            Email = "";
-            LoginValidationMessage = "";
-            Password = "";
-            ConfirmPassword = "";
+            Email = string.Empty;
+            LoginValidationMessage = string.Empty;
+            Password = string.Empty;
+            ConfirmPassword = string.Empty;
+            UserName = string.Empty;
         }
 
         //* Event Handlers
         public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-
-
 
         //* Private Methods
         private void modifyProperty<T>(ref T value, ref T privateProperty, string nameOfProperty)

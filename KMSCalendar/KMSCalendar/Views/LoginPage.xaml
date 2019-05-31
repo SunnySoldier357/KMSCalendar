@@ -68,7 +68,7 @@
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
                                               Placeholder="Password" 
-                                              IsPassword="True"/>
+                                              IsPassword="True" />
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"
