@@ -46,40 +46,47 @@
 
                     <!-- Title 1 -->
                     <RowDefinition Height="60" />
+                    
                     <!-- SubTitle 2 -->
                     <RowDefinition Height="40" />
 
                     <!-- Spacing 3 -->
                     <RowDefinition Height="35*" />
 
-                    <!-- Email 4 -->
+                    <!-- Username 4 -->
                     <RowDefinition Height="40" />
 
                     <!-- Spacing 5 -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Password 6 -->
+                    <!-- Email 6 -->
                     <RowDefinition Height="40" />
 
                     <!-- Spacing 7 -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Confirm Password 8 -->
+                    <!-- Password 8 -->
                     <RowDefinition Height="40" />
 
                     <!-- Spacing 9 -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Button 10 -->
+                    <!-- Confirm Password 10 -->
                     <RowDefinition Height="40" />
 
                     <!-- Spacing 11 -->
+                    <RowDefinition Height="10*" />
+
+                    <!-- Button 12 -->
+                    <RowDefinition Height="40" />
+
+                    <!-- Spacing 13 -->
                     <RowDefinition Height="7*" />
 
-                    <!-- Error Message 12 -->
+                    <!-- Error Message 14 -->
                     <RowDefinition Height="14" />
                     
-                    <!-- Spacing 13 -->
+                    <!-- Spacing 15 -->
                     <RowDefinition Height="50*" />
 
                 </Grid.RowDefinitions>
@@ -101,13 +108,22 @@
                 <Frame Grid.Row="4"
                        Style="{StaticResource LoginEntryFrame}">
 
+                    <control:TransparentEntry x:Name="UsernameEntry"
+                                              Style="{StaticResource LoginEntry}"
+                                              Text="{Binding Username}"
+                                              Placeholder="Username" />
+                </Frame>
+                
+                <Frame Grid.Row="6"
+                       Style="{StaticResource LoginEntryFrame}">
+
                     <control:TransparentEntry x:Name="EmailEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Email}"
                                               Placeholder="Email" />
                 </Frame>
 
-                <Frame Grid.Row="6"
+                <Frame Grid.Row="8"
                        Style="{StaticResource LoginEntryFrame}">
 
                     <control:TransparentEntry x:Name="PasswordEntry"
@@ -117,7 +133,7 @@
                                               IsPassword="True"/>
                 </Frame>
 
-                <Frame Grid.Row="8"
+                <Frame Grid.Row="10"
                        Style="{StaticResource LoginEntryFrame}">
 
                     <control:TransparentEntry x:Name="ConfirmPasswordEntry"
@@ -128,7 +144,7 @@
                 </Frame>
 
                 <Button x:Name="AuthenticateSignUpButton"
-                        Grid.Row="10"
+                        Grid.Row="12"
                         HorizontalOptions="Center"
                         WidthRequest="100"
                         Padding="5"
@@ -140,11 +156,11 @@
                         Clicked="AuthenticateSignUpButton_Clicked" />
 
                 <StackLayout Orientation="Vertical"
-                             Grid.Row="12">
+                             Grid.Row="14">
 
                     <Label x:Name="SignUpValidationLabel"
                            HorizontalOptions="Center"
-                           Margin="0,20,0,0"
+                           Margin="0,10,10,0"
                            BackgroundColor="Transparent"
                            Text="{Binding LoginValidationMessage}"
                            TextColor="{StaticResource NavigationTertiary}"

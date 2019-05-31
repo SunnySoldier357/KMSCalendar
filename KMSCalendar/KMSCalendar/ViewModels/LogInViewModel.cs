@@ -5,6 +5,7 @@ namespace KMSCalendar.ViewModels
     public class LogInViewModel : INotifyPropertyChanged
     {
         //* Private Properties
+        private string username;
         private string email;
         private string loginValidationMessage;
         private string password;
@@ -13,6 +14,11 @@ namespace KMSCalendar.ViewModels
         //* Public Properties
         public int LogInAttempts;
 
+        public string Username
+        {
+            get => username;
+            set => modifyProperty(ref value, ref username, nameof(Username));
+        }
         public string Email
         {
             get => email;

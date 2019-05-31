@@ -33,7 +33,8 @@
                        TextColor="Gray"
                        FontSize="Small" />
 
-                <ListView x:Name="AssignmentsListView"
+                <ScrollView>
+                    <ListView x:Name="AssignmentsListView"
                           VerticalOptions="FillAndExpand"
                           HasUnevenRows="true"
                           ItemsSource="{Binding FilteredAssignments}"
@@ -42,36 +43,37 @@
                           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                           CachingStrategy="RecycleElement"
                           ItemSelected="OnItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="10">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
 
-                                    <Label Text="{Binding Name}"
+                                        <Label Text="{Binding Name}"
                                            FontSize="16"
                                            LineBreakMode="NoWrap" />
 
-                                    <Label Grid.Row="1"
+                                        <Label Grid.Row="1"
                                            Text="{Binding Description}"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />
 
-                                    <Label Grid.RowSpan="2"
+                                        <Label Grid.RowSpan="2"
                                            HorizontalOptions="End"
                                            VerticalOptions="Center"
                                            Text="{Binding ShortDate}"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />
 
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
             </StackLayout>
         </Frame>
     </StackLayout>

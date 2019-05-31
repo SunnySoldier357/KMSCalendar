@@ -7,6 +7,23 @@
     <!-- This view is the hamburger menu -->
     <StackLayout VerticalOptions="FillAndExpand"
                  BackgroundColor="{DynamicResource NavigationBackground}">
+
+        <Frame BorderColor="{DynamicResource NavigationPrimary}"
+               CornerRadius="0"
+               Margin="-10, -10, -10, 0">
+
+            <StackLayout>
+                <Image Source="userIcon.png"
+                   HeightRequest="30"
+                   WidthRequest="30" />
+
+                <Label Text="SinghIsKing"
+                       FontSize="Small"
+                       Margin="0, 5, 0, 0"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+
         <ListView x:Name="MenuListView"
                   HasUnevenRows="True">
             <ListView.ItemTemplate>
@@ -16,7 +33,7 @@
                             <Label Text="{Binding Title}"
                                    TextColor="{DynamicResource Text}"
                                    FontSize="20" />
-                        </Grid>
+                        </Grid>   
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
