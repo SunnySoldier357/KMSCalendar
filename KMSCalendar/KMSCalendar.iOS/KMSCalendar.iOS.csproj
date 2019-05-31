@@ -147,6 +147,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\add.png" />
     <BundleResource Include="Resources\cancel.png" />
+    <Content Include="Resources\delete-icon.png" />
     <Content Include="Resources\leftArrow.png" />
     <Content Include="Resources\rightArrow.png" />
     <BundleResource Include="Resources\BackgroundForLogin.png" />

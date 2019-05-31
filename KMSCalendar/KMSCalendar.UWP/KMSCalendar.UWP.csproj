@@ -105,6 +105,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="delete-icon.png" />
     <Content Include="leftArrow.png" />
     <Content Include="rightArrow.png" />
     <Content Include="Assets\arrow-pointing-left.png" />
