@@ -42,6 +42,7 @@ namespace KMSCalendar.Views
             if(viewModel.Password.Length < 8)
             {
                 viewModel.LoginValidationMessage = "Password too short";
+                return false;
             }
             if(viewModel.Password.Length < 64)
             {
