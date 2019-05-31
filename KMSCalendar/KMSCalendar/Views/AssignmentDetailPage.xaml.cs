@@ -3,10 +3,9 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
 using KMSCalendar.ViewModels;
 using KMSCalendar.Services;
-using System.Threading.Tasks;
 
 namespace KMSCalendar.Views
 {

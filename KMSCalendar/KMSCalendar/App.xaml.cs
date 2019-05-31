@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
 using KMSCalendar.Services;
 using KMSCalendar.Views;
 
@@ -15,7 +16,7 @@ namespace KMSCalendar
         //* Static Properties
         public static string AzureBackendUrl = "https://kmscalendar.azurewebsites.net";
 
-        public static bool UseMockDataStore = false;
+        public static bool UseMockDataStore = true;
 
         //* Constructors
         public App()
@@ -23,9 +24,19 @@ namespace KMSCalendar
             InitializeComponent();
 
             if (UseMockDataStore)
-                DependencyService.Register<MockDataStore>();
+            {
+                DependencyService.Register<MockDataStore<Assignment>>();
+                DependencyService.Register<MockDataStore<Class>>();
+                DependencyService.Register<MockDataStore<Teacher>>();
+                DependencyService.Register<MockDataStore<User>>();
+            }
             else
-                DependencyService.Register<AzureDataStore>();
+            {
+                DependencyService.Register<AzureDataStore<Assignment>>();
+                DependencyService.Register<AzureDataStore<Class>>();
+                DependencyService.Register<AzureDataStore<Teacher>>();
+                DependencyService.Register<AzureDataStore<User>>();
+            }
 
             MainPage = new MainPage();
         }

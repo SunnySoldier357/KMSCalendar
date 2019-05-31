@@ -10,7 +10,7 @@ namespace KMSCalendar.MobileAppService.Models.Entities
         public string Email { get; set; }
         public string UserName { get; set; }
 
-        //* Public Methods
+        //* Overridden Methods
         public override void Update(TableData td)
         {
             if (td is User)

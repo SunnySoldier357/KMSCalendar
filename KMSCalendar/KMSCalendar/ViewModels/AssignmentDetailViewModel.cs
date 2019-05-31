@@ -1,4 +1,4 @@
-using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
 
 namespace KMSCalendar.ViewModels
 {

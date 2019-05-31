@@ -13,7 +13,7 @@ namespace KMSCalendar.MobileAppService.Models.Entities
 
         public Teacher Teacher { get; set; }
 
-        //* Public Methods
+        //* Overridden Methods
         public override void Update(TableData td)
         {
             if (td is Class)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
 using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels

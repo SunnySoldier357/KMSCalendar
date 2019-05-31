@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace KMSCalendar.Models
+namespace KMSCalendar.Models.Entities
 {
     /// <summary>A class representing a particular assignment.</summary>
-    public class Assignment
+    public class Assignment : TableData
     {
         //* Public Properties
 
@@ -17,10 +18,6 @@ namespace KMSCalendar.Models
         public string Date => DueDate.ToLongDateString();
         /// <summary>The description of the assignment.</summary>
         public string Description { get; set; }
-        /// <summary>
-        /// The unique Id of the assignment.
-        /// </summary>
-        public string Id { get; set; }
         /// <summary>The name of the assignment.</summary>
         public string Name { get; set; }
         /// <summary>
