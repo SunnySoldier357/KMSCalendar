@@ -25,7 +25,7 @@ namespace KMSCalendar.Views
         /// <summary>Check if correct login and password.</summary>
         private void AuthenticateLoginButton_Clicked(object sender, System.EventArgs e)
         {
-            if (viewModel.IsModelValid())
+            if (viewModel.IsLoginModelValid())
             {
                 string email = viewModel.Email;
                 string password = viewModel.Password;

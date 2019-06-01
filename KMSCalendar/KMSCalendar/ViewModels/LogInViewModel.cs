@@ -55,14 +55,43 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Public Methods
-        public bool IsModelValid()
+        public bool IsLoginModelValid()
         {
             LoginValidationMessage = string.Empty;
 
             bool result = validateProperty(ref email, nameof(Email), 5, 254);
 
+            if (result && Email.Contains(" "))
+            {
+                LoginValidationMessage = "No spaces in email please";
+                result = false;
+            }
+            if (result && !Email.Contains("@"))
+            {
+                LoginValidationMessage = "Please use valid email";
+                result = false;
+            }
+
             if (result)
                 result = validateProperty(ref password, nameof(Password), 8, 64);
+
+            return result;
+        }
+
+        public bool IsSignUpModelValid()
+        {
+            LoginValidationMessage = string.Empty;
+
+            bool result = validateProperty(ref userName, nameof(UserName), 2, 64);
+
+            if (result)
+                result = IsLoginModelValid();
+
+            if (result && (Password != ConfirmPassword))
+            {
+                LoginValidationMessage = "Passwords do not match";
+                result = false;
+            }
 
             return result;
         }
