@@ -50,7 +50,7 @@ namespace KMSCalendar.Views
                 },
                 new HomeMenuItem
                 {
-                    Id = MenuItemType.SchoolSearch,
+                    Id = MenuItemType.ClassSearch,
                     Title = "Search"
                 }
 

@@ -5,7 +5,7 @@
         About,
         Calendar,
         Login,
-        SchoolSearch,
+        ClassSearch,
         Settings,
         SignUp,
     }

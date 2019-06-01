@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KMSCalendar.Views.ClassSearchPage"
+             Title="Search For Class">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Search for your Class!"
+                   VerticalOptions="Start" 
+                   HorizontalOptions="CenterAndExpand" 
+                   Margin="0, 0, 0, 0"/>
+
+            <StackLayout Orientation="Vertical" Spacing="0"  Margin="0, 100, 0, 0">
+                <SearchBar x:Name="sbSearch" Placeholder="Search"/>
+                <ListView x:Name="ClassesLv" IsPullToRefreshEnabled="true">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" Detail="{Binding Period}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

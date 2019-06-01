@@ -71,6 +71,48 @@ namespace KMSCalendar.Models.Entities
                     }
                 };
             }
+            else if (temp.Equals(typeof(Class)))
+            {
+                return new List<Class>
+                {
+                    new Class
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "IB Math HL 2"
+                    },
+                    new Class
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "IB Physics HL 2",
+                        Period = 5
+                    },
+                    new Class
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "IB Comp Sci HL",
+                        Period = 6
+                    },
+                    new Class
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "Dystopian Fiction",
+                        Period = 1
+                    },
+                    new Class
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "Graphic Design 1",
+                        Period = 3
+                    },
+                    new Class
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "IB Economics SL",
+                        Period = 2
+                    },
+                };
+            }
+
             else
                 return Enumerable.Empty<T>();
         }
