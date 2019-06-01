@@ -12,24 +12,38 @@ namespace KMSCalendar.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SelectPeriodView : ContentView
 	{
-        //public event EventHandler DataViewChanged;
         public ClassSearchPage parentPage;
+
+        public List<string> periods;
 
         public SelectPeriodView()
         {
             InitializeComponent();
+
+            periods = new List<string>
+            {
+                "Period 0",
+                "Period 1",
+                "Period 2",
+                "Period 3",
+                "Period 4",
+                "Period 5",
+                "Period 6",
+                "Period 7",
+                "Period 8",
+            };
+
+            ListOfPeriods.ItemsSource = periods;
         }
 
         private void BackButton_Clicked(object sender, EventArgs e)
         {
             parentPage.swap();
-            // Raise the event
-            //DataViewChanged?.Invoke(this, e);
         }
 
-        private void DoneButton_Clicked(object sender, EventArgs e)
+        private async Task DoneButton_ClickedAsync(object sender, EventArgs e)
         {
-            //TODO: MATEO go to the calendar and add the peiod selected to the database.
+            await parentPage.GoToCalendarAsync();
         }
     }
 }

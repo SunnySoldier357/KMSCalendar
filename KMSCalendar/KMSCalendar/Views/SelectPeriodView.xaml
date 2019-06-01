@@ -36,16 +36,29 @@
             </Grid>
 
             <ScrollView>
-                <StackLayout>
-                    <Label Margin="20">Period 0</Label>
-                    <Label Margin="20">Period 1</Label>
-                    <Label Margin="20">Period 2</Label>
-                    <Label Margin="20">Period 3</Label>
-                    <Label Margin="20">Period 4</Label>
-                    <Label Margin="20">Period 5</Label>
-                    <Label Margin="20">Period 6</Label>
-                    <Label Margin="20">Period 7</Label>
-                </StackLayout>
+                <ListView x:Name="ListOfPeriods">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Label Text="x"
+                                           FontSize="16"
+                                           LineBreakMode="NoWrap" />
+
+                                    <Label Grid.Column="1"
+                                           Text="Period"
+                                           FontSize="13"
+                                           LineBreakMode="NoWrap" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </ScrollView>
            
 

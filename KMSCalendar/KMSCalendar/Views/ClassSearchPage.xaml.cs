@@ -86,6 +86,15 @@ namespace KMSCalendar.Views
             }
         }
 
+        public async Task GoToCalendarAsync()
+        {
+            //TODO: MATEO make it actually go to the calendar
+            //TODO: SUNNY add the peiod selected and class selected to the database.
+
+            //true makes it animated
+            await Navigation.PushAsync(new AssignmentsPage(), true);
+        }
+
         private void ClassesLv_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             swap();
