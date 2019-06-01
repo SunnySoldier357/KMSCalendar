@@ -28,7 +28,7 @@ namespace KMSCalendar.Views
             CalendarWeekControl.BindingContext = settings;
 
             // Subscribe to the event
-            CalendarWeekControl.DataSelectedChanged += DateSelectedChanged;
+            CalendarWeekControl.DataSelectedChanged += DateSelectedChanged; //dateselectedchanged is the name of the event
 
             ListTitleDate.BindingContext = CalendarWeekControl;
         }

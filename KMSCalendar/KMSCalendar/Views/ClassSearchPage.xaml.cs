@@ -16,9 +16,15 @@ namespace KMSCalendar.Views
 	{
         private List<Class> classList;
 
+        private SelectPeriodView selectPeriodView;
+
         public ClassSearchPage()
         {
             InitializeComponent();
+
+            selectPeriodView = new SelectPeriodView();
+            SelectPeriods.parentPage = this;
+            popUpGrid.IsVisible = false;
 
             LoadList();
 
@@ -47,6 +53,11 @@ namespace KMSCalendar.Views
         /// <param name="filter"> The search term that the user puts in </param>
         private async void FilterContacts(string filter)
         {
+            if(filter == "hide")
+            {
+                swap();
+            }
+
             //    lvAddressBook.BeginRefresh();
             if (string.IsNullOrWhiteSpace(filter))
             {
@@ -60,5 +71,24 @@ namespace KMSCalendar.Views
             }
             ClassesLv.EndRefresh();
         }
-	}
+
+        public void swap()
+        {
+            if(SearchArea.IsVisible)
+            {
+                SearchArea.IsVisible = false;
+                popUpGrid.IsVisible = true;
+            }
+            else
+            {
+                popUpGrid.IsVisible = false;
+                SearchArea.IsVisible = true;
+            }
+        }
+
+        private void ClassesLv_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            swap();
+        }
+    }
 }

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KMSCalendar.Views.SelectPeriodView">
+  <ContentView.Content>
+      <StackLayout>
+            <Grid Margin="0, 0, 0, 0"
+                  Padding="0"
+                  HeightRequest="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton"
+                        Text="Back"
+                        BorderColor="Transparent" 
+                        BorderWidth="0"
+                        BackgroundColor="Transparent"
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                        Padding="0"
+                        Margin="0"
+                        Clicked="BackButton_Clicked"/>
+
+                <Button x:Name="DoneButton"
+                        Text="Done"
+                        BorderColor="Transparent"
+                        BorderWidth="0"
+                        BackgroundColor="Transparent"
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Margin="0"
+                        Padding="0"
+                        Clicked="DoneButton_Clicked"/>
+            </Grid>
+
+            <ScrollView>
+                <StackLayout>
+                    <Label Margin="20">Period 0</Label>
+                    <Label Margin="20">Period 1</Label>
+                    <Label Margin="20">Period 2</Label>
+                    <Label Margin="20">Period 3</Label>
+                    <Label Margin="20">Period 4</Label>
+                    <Label Margin="20">Period 5</Label>
+                    <Label Margin="20">Period 6</Label>
+                    <Label Margin="20">Period 7</Label>
+                </StackLayout>
+            </ScrollView>
+           
+
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>
