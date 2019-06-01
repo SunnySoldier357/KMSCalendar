@@ -14,13 +14,4 @@
         /// </summary>
         public string Title { get; set; }
     }
-
-    public enum MenuItemType
-    {
-        About,
-        Calendar,
-        Login,
-        Settings,
-        SignUp,
-    }
 }

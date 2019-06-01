@@ -7,23 +7,36 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 
 using KMSCalendar.Models.Entities;
+using KMSCalendar.Services;
 using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels
 {
     public class AssignmentViewModel : BaseViewModel
     {
-        //TODO: Sunny please put documentation on the methods in this file!!!!
+        //* Private Properties
+        private IDataStore<Assignment> dataStore;
 
         //* Public Properties
+
+        /// <summary>
+        /// The Command that loads Assignments from the IDataStore
+        /// </summary>
         public Command LoadAssignmentsCommand { get; set; }
 
+        /// <summary>A List of all the Assignments to display</summary>
         public ObservableCollection<Assignment> Assignments { get; set; }
+        /// <summary>
+        /// A filtered set of all the Assignments that are only for the
+        /// current day selected
+        /// </summary>
         public ObservableCollection<Assignment> FilteredAssignments { get; set; }
 
         //* Constructors
         public AssignmentViewModel()
         {
+            dataStore = DependencyService.Get<IDataStore<Assignment>>();
+
             Title = "Assignments Calendar";
 
             Assignments = new ObservableCollection<Assignment>();
@@ -37,11 +50,15 @@ namespace KMSCalendar.ViewModels
             {
                 Assignment newItem = a as Assignment;
                 Assignments.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                await dataStore.AddItemAsync(newItem);
             });
         }
 
         //* Public Methods
+
+        /// <summary>
+        /// Loads Assignments from the IDataStore.
+        /// </summary>
         public async Task ExecuteLoadAssignmentsCommand()
         {
             if (IsBusy)
@@ -52,7 +69,7 @@ namespace KMSCalendar.ViewModels
             try
             {
                 Assignments.Clear();
-                var assignments = await DataStore.GetItemsAsync(true);
+                var assignments = await dataStore.GetItemsAsync(true);
                 foreach (Assignment assignment in assignments)
                     Assignments.Add(assignment);
             }
@@ -77,6 +94,7 @@ namespace KMSCalendar.ViewModels
                 where a.DueDate.Day == date.Day &&
                     a.DueDate.Month == date.Month &&
                     a.DueDate.Year == date.Year
+                orderby a.Name, a.Description
                 select a;
 
             foreach (Assignment assignment in result)

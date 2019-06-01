@@ -93,12 +93,12 @@ namespace KMSCalendar.Views
 
         private bool checkUsernameLength()
         {
-            if (viewModel.Username.Length < 2)
+            if (viewModel.UserName.Length < 2)
             {
                 viewModel.LoginValidationMessage = "Username length too short";
                 return false;
             }
-            if (viewModel.Username.Length < 64)
+            if (viewModel.UserName.Length < 64)
             {
                 clearValidation();
                 return true;

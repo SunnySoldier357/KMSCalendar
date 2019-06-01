@@ -37,6 +37,7 @@ namespace KMSCalendar.Views
             BindingContext = this.viewModel = viewModel;
         }
 
+        //* Event Handlers
         private async void Delete_Clicked(object sender, EventArgs e)
         {
             IDataStore<Assignment> data = DependencyService.Get<IDataStore<Assignment>>();
