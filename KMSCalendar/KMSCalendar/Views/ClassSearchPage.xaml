@@ -2,23 +2,72 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KMSCalendar.Views.ClassSearchPage"
-             Title="Search For Class">
+             Title="Search For Class"
+             BackgroundColor="{DynamicResource NavigationBackgroundLight}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Search for your Class!"
+            <!--<Label Text="Search for your Class!"
                    VerticalOptions="Start" 
                    HorizontalOptions="CenterAndExpand" 
-                   Margin="0, 0, 0, 0"/>
+                   Margin="0, 0, 0, 0"/>-->
 
-            <StackLayout Orientation="Vertical" Spacing="0"  Margin="0, 100, 0, 0">
-                <SearchBar x:Name="sbSearch" Placeholder="Search"/>
-                <ListView x:Name="ClassesLv" IsPullToRefreshEnabled="true">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Name}" Detail="{Binding Period}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+            <!-- TODO: MATEO Make this page look pretty -->
+
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         Orientation="Vertical" 
+                         Spacing="0"  
+                         Margin="0, 100, 0, 100">
+
+                <Frame BackgroundColor="{DynamicResource NavigationBackground}"
+                       Margin="30, 0, 30, 0"
+                       CornerRadius="10">
+                    <StackLayout>
+                        <SearchBar x:Name="sbSearch" Placeholder="Search" Margin="0, 0, 0, 10"/>
+                        <ListView x:Name="ClassesLv" IsPullToRefreshEnabled="true">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <Label Text="{Binding Name}"
+                                           FontSize="16"
+                                           LineBreakMode="NoWrap" />
+
+                                            <Label Grid.Row="1"
+                                           Text="Teacher"
+                                           FontSize="13"
+                                           LineBreakMode="NoWrap" />
+
+                                            <!--<Label Grid.RowSpan="2"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"
+                                           Text="{Binding Period}"
+                                           FontSize="13"
+                                           LineBreakMode="NoWrap" />-->
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+                    </StackLayout>
+                </Frame>
+
+                
+                
+                <!--<ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" Detail="{Binding Period}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>-->
+
+
+
             </StackLayout>
 
         </StackLayout>
