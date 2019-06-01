@@ -12,8 +12,8 @@
     
     <ContentPage.Content>
         <StackLayout Spacing="20"
-                 Padding="15"
-                 BackgroundColor="{DynamicResource NavigationBackground}">
+                     Padding="15"
+                     BackgroundColor="{DynamicResource NavigationBackground}">
             <Label Text="Name:"
                FontSize="Medium" />
             <Label Text="{Binding Assignment.Name}"

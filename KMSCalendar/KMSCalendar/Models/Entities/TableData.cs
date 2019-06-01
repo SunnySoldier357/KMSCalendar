@@ -9,10 +9,17 @@ namespace KMSCalendar.Models.Entities
     {
         //* Public Properties
 
-        /// <summary>The unique Id of the entity.</summary>
+        /// <summary>The unique ID of the entity.</summary>
         public string Id { get; set; }
 
-        public static IEnumerable Seed<T>()
+        //* Static Methods
+
+        /// <summary>
+        /// A method used to seed values if the MockDataStore is being used.
+        /// </summary>
+        /// <typeparam name="T">A subclass of TableData.</typeparam>
+        /// <returns>An IEnumerable of the seeded instances of TableData.</returns>
+        public static IEnumerable Seed<T>() where T : TableData
         {
             Type temp = typeof(T);
 

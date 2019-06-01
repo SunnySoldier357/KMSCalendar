@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Xamarin.Forms;
-
-using KMSCalendar.Models.Entities;
-using KMSCalendar.Services;
-
 namespace KMSCalendar.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
@@ -24,14 +19,14 @@ namespace KMSCalendar.ViewModels
             set => setProperty(ref isBusy, value);
         }
 
-        public IDataStore<Assignment> DataStore =>
-            DependencyService.Get<IDataStore<Assignment>>() ?? new MockDataStore<Assignment>();
-
         public string Title
         {
             get => title;
             set => setProperty(ref title, value);
         }
+
+        //* Public Events
+        public event PropertyChangedEventHandler PropertyChanged;
 
         //* Protected Methods
         protected bool setProperty<T>(ref T backingStore, T value,
@@ -48,9 +43,7 @@ namespace KMSCalendar.ViewModels
             return true;
         }
 
-        //* Event & Event Handlers
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        //* Event Handlers
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;

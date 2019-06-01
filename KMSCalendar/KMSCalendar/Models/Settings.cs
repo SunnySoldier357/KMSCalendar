@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Newtonsoft.Json;
+using System.ComponentModel;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace KMSCalendar.Models
 {
@@ -29,7 +29,7 @@ namespace KMSCalendar.Models
         //* Public Properties
 
         /// <summary>
-        /// If <see langword="true"/>, the WeekControl will display the day of the
+        /// If <see langword="true"/>, the WeekControl will display the days of the
         /// week.
         /// </summary>
         public bool ShowCalendarDays
@@ -77,9 +77,9 @@ namespace KMSCalendar.Models
 
         /// <summary>
         /// Initialises the Singleton Settings class either with values pulled out
-        /// from the App's 
+        /// from the App's Properties Dictionary or setting the default values
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Settings object created.</returns>
         private static async Task<Settings> initAsync()
         {
             Settings settings = null;
@@ -129,11 +129,5 @@ namespace KMSCalendar.Models
                 UpdateDictionaryAsync();
             }
         }
-    }
-
-    public enum Theme
-    {
-        Light,
-        Dark
     }
 }

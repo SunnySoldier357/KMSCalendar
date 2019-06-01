@@ -35,14 +35,14 @@
 
                 <ScrollView>
                     <ListView x:Name="AssignmentsListView"
-                          VerticalOptions="FillAndExpand"
-                          HasUnevenRows="true"
-                          ItemsSource="{Binding FilteredAssignments}"
-                          IsPullToRefreshEnabled="true"
-                          RefreshCommand="{Binding LoadAssignmentsCommand}"
-                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                          CachingStrategy="RecycleElement"
-                          ItemSelected="OnItemSelected">
+                              VerticalOptions="FillAndExpand"
+                              HasUnevenRows="true"
+                              ItemsSource="{Binding FilteredAssignments}"
+                              IsPullToRefreshEnabled="true"
+                              RefreshCommand="{Binding LoadAssignmentsCommand}"
+                              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                              CachingStrategy="RecycleElement"
+                              ItemSelected="OnItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
