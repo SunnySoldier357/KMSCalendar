@@ -54,11 +54,30 @@ namespace KMSCalendar.ViewModels
             UserName = string.Empty;
         }
 
+        //* Public Methods
+        public bool IsModelValid()
+        {
+            LoginValidationMessage = string.Empty;
+
+            bool result = validateProperty(ref email, nameof(Email), 5, 254);
+
+            if (result)
+                result = validateProperty(ref password, nameof(Password), 8, 64);
+
+            return result;
+        }
+
         //* Event Handlers
         public void OnNotifyPropertyChanged(string property) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 
         //* Private Methods
+        private bool invalidModel(string validationMessage)
+        {
+            LoginValidationMessage = validationMessage;
+            return false;
+        }
+
         private void modifyProperty<T>(ref T value, ref T privateProperty, string nameOfProperty)
         {
             if (!value.Equals(privateProperty))
@@ -66,6 +85,19 @@ namespace KMSCalendar.ViewModels
                 privateProperty = value;
                 OnNotifyPropertyChanged(nameOfProperty);
             }
+        }
+
+        private bool validateProperty(ref string property, string nameOfProperty,
+            int minimum, int maximum)
+        {
+            if (string.IsNullOrWhiteSpace(property))
+                return invalidModel($"No {nameOfProperty}");
+            else if (property.Length < minimum)
+                return invalidModel($"{nameOfProperty} Too Short");
+            else if (property.Length > maximum)
+                return invalidModel($"{nameOfProperty} Too Long");
+
+            return true;
         }
     }
 }

@@ -20,57 +20,17 @@ namespace KMSCalendar.Views
             BindingContext = viewModel;
         }
 
-        //* Private Methods
-        private bool checkEmail()
-        {
-            if(viewModel.Email.Length < 5)
-            {
-                viewModel.LoginValidationMessage = "Email too short";
-                return false;
-            }
-            if(viewModel.Email.Length < 254)
-            {
-                clearValidation();
-                return true;
-            }
-
-            viewModel.LoginValidationMessage = "Email too long";
-            return false;
-        }
-
-        private bool checkPassword()
-        {
-            if(viewModel.Password.Length < 8)
-            {
-                viewModel.LoginValidationMessage = "Password too short";
-                return false;
-            }
-            if(viewModel.Password.Length < 64)
-            {
-                clearValidation();
-                return true;
-            }
-
-            viewModel.LoginValidationMessage = "Password too long";
-            return false;
-        }
-
-        private void clearValidation()
-        {
-            viewModel.LoginValidationMessage = "";
-        }
-
         //* Event Handlers
 
         /// <summary>Check if correct login and password.</summary>
         private void AuthenticateLoginButton_Clicked(object sender, System.EventArgs e)
         {
-            if (checkEmail() && checkPassword())
+            if (viewModel.IsModelValid())
             {
                 string email = viewModel.Email;
                 string password = viewModel.Password;
 
-                viewModel.LoginValidationMessage = "login success";
+                viewModel.LoginValidationMessage = "Login success";
 
                 // TODO: Authenticate with backend
             }
