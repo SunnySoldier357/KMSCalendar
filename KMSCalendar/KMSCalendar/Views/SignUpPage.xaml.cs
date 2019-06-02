@@ -12,21 +12,21 @@ namespace KMSCalendar.Views
     {
         //* Private Properties
         //private SignUpViewModel viewModel;
-        private LogInViewModel viewModel;
+        private SignUpViewModel viewModel;
 
         //* Constructors
         public SignUpPage()
         {
             InitializeComponent();
 
-            viewModel = new LogInViewModel();
+            viewModel = new SignUpViewModel();
             BindingContext = viewModel;
         }
 
         //* Event Handlers
         private void AuthenticateSignUpButton_Clicked(object sender, EventArgs e)
         {
-            if (viewModel.IsSignUpModelValid())
+            if (viewModel.Validate())
             {
                 // Success!
                 string userEmail = viewModel.Email;
