@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,23 +15,24 @@ namespace KMSCalendar.Views
 	{
         public ClassSearchPage parentPage;
 
-        public List<string> periods;
+        public List<int> periods;
 
         public SelectPeriodView()
         {
             InitializeComponent();
 
-            periods = new List<string>
+            periods = new List<int>
             {
-                "Period 0",
-                "Period 1",
-                "Period 2",
-                "Period 3",
-                "Period 4",
-                "Period 5",
-                "Period 6",
-                "Period 7",
-                "Period 8",
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
             };
 
             ListOfPeriods.ItemsSource = periods;
@@ -41,9 +43,17 @@ namespace KMSCalendar.Views
             parentPage.swap();
         }
 
-        private async Task DoneButton_ClickedAsync(object sender, EventArgs e)
+        private void DoneButton_Clicked(object sender, EventArgs e)
         {
-            await parentPage.GoToCalendarAsync();
+            if(ListOfPeriods.SelectedItem != null)
+            {
+                int periodChosen = (int)ListOfPeriods.SelectedItem;
+
+                parentPage.GoToCalendarAsync(periodChosen);
+            }
+
         }
+
+
     }
 }

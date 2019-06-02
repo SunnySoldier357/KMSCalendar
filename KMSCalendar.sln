@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar.iOS", "KMSCalen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar.UWP", "KMSCalendar\KMSCalendar.UWP\KMSCalendar.UWP.csproj", "{938D43FB-9D64-460A-9D3B-CF9B899D8209}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar.MobileAppService", "KMSCalendar\KMSCalendar.MobileAppService\KMSCalendar.MobileAppService.csproj", "{22CE9F51-4A09-4571-836C-24B3D9B2E437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KMSCalendar.MobileAppService", "KMSCalendar\KMSCalendar.MobileAppService\KMSCalendar.MobileAppService.csproj", "{22CE9F51-4A09-4571-836C-24B3D9B2E437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar", "KMSCalendar\KMSCalendar\KMSCalendar.csproj", "{F6E20DB3-1863-4486-B8D5-64D507144055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KMSCalendar", "KMSCalendar\KMSCalendar\KMSCalendar.csproj", "{F6E20DB3-1863-4486-B8D5-64D507144055}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

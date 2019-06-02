@@ -1,7 +1,9 @@
-﻿using KMSCalendar.Models.Entities;
+﻿using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
 using KMSCalendar.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -86,13 +88,36 @@ namespace KMSCalendar.Views
             }
         }
 
-        public async Task GoToCalendarAsync()
-        {
-            //TODO: MATEO make it actually go to the calendar
-            //TODO: SUNNY add the peiod selected and class selected to the database.
+        public MainPage RootPage => Application.Current.MainPage as MainPage;
 
-            //true makes it animated
-            await Navigation.PushAsync(new AssignmentsPage(), true);
+        public async Task GoToCalendarAsync(int periodChosen)
+        {
+            //TODO: SUNNY add the period selected and class selected to the database.
+
+            //TODO: MATEO get the selected class
+
+            var x = ClassesLv.SelectedItem;
+
+            
+
+
+
+            //TODO: MATEO fix the navigation mess!
+
+            //   Clears all of the pages on the navigation stack
+            //var existingPages = Navigation.NavigationStack.ToList();
+            //foreach (var page in existingPages)
+            //{
+            //    Navigation.RemovePage(page);
+            //}
+
+            //var MyAppsFirstPage = new AssignmentsPage();
+            //Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
+
+            //await Application.Current.MainPage.Navigation.PushAsync(new AssignmentsPage());
+            //await Application.Current.MainPage.Navigation.PopAsync();
+
+            await RootPage.NavigateFromMenu(1);     //This navigates to the instance of the calendar page through the menu
         }
 
         private void ClassesLv_ItemSelected(object sender, SelectedItemChangedEventArgs e)

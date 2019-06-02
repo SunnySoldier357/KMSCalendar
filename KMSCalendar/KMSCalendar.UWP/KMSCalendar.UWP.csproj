@@ -105,6 +105,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="calendar.png" />
+    <Content Include="calendar_b.png" />
     <Content Include="delete-icon.png" />
     <Content Include="leftArrow.png" />
     <Content Include="rightArrow.png" />

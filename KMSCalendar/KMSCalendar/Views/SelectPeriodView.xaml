@@ -31,7 +31,7 @@
                         Grid.Column="1"
                         HorizontalOptions="End"
                         Margin="0"
-                        Padding="0"
+                        Padding="0" 
                         Clicked="DoneButton_Clicked"/>
             </Grid>
 
@@ -49,9 +49,9 @@
                                     <Label Text="x"
                                            FontSize="16"
                                            LineBreakMode="NoWrap" />
-
+                                  
                                     <Label Grid.Column="1"
-                                           Text="Period"
+                                           Text="{Binding}"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />
                                 </Grid>
