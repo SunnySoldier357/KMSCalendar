@@ -6,7 +6,7 @@
 
     <!-- This view is the hamburger menu -->
     <StackLayout VerticalOptions="FillAndExpand"
-                 BackgroundColor="{DynamicResource NavigationBackground}">
+                 BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
         <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
 
@@ -14,7 +14,7 @@
                 <StackLayout>
                     <Image HeightRequest="30"
                        WidthRequest="30" 
-                       Source="calendar.png" />
+                       Source="Icons/calendar_white.png" />
 
                     <Label HorizontalOptions="Center"
                        Margin="0,5,0,0"
@@ -33,7 +33,7 @@
                     <ViewCell>
                         <StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <Image Source="calendar_b.png"
+                                <Image Source="{Binding Icon}"
                                        HeightRequest="20"
                                        WidthRequest="20"
                                        Margin="20, 5, 0, -3"/>      
@@ -43,7 +43,7 @@
                                        FontSize="20" 
                                        Margin="60, 15, 0, 7"/>
                             </StackLayout>
-                            <BoxView HeightRequest="0.5" BackgroundColor="LightGray"/>
+                            <BoxView HeightRequest="0.5" BackgroundColor="{DynamicResource NavigationBackground}"/>
                         </StackLayout>   
                     </ViewCell>
                 </DataTemplate>

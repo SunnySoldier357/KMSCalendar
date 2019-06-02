@@ -106,9 +106,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="calendar.png" />
-    <Content Include="calendar_b.png" />
     <Content Include="delete-icon.png" />
+    <Content Include="Icons\calendar.png" />
+    <Content Include="Icons\calendar_white.png" />
+    <Content Include="Icons\file.png" />
+    <Content Include="Icons\gear.png" />
+    <Content Include="Icons\next.png" />
+    <Content Include="Icons\search.png" />
+    <Content Include="Icons\upload.png" />
+    <Content Include="Icons\user.png" />
     <Content Include="leftArrow.png" />
+    <Content Include="loupe.png" />
     <Content Include="rightArrow.png" />
     <Content Include="Assets\arrow-pointing-left.png" />
     <Content Include="Assets\arrow-pointing-right.png" />
@@ -168,6 +176,7 @@
       <Name>KMSCalendar</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

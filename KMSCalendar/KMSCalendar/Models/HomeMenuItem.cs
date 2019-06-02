@@ -13,5 +13,10 @@
         /// The Title that is shown in the Hamburger Menu.
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// The file name of the icon for each navigation item.
+        /// </summary>
+        public string Icon { get; set; }
     }
 }

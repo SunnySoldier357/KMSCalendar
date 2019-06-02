@@ -26,32 +26,38 @@ namespace KMSCalendar.Views
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Calendar,
-                    Title ="Calendar"
+                    Title = "Calendar",
+                    Icon = "Icons/calendar.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.SignUp,
-                    Title = "Sign Up"
+                    Title = "Sign Up",
+                    Icon = "Icons/upload.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Login,
-                    Title = "Login"
+                    Title = "Login",
+                    Icon = "Icons/next.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.About,
-                    Title ="About"
+                    Title ="About",
+                    Icon = "Icons/file.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Settings,
-                    Title = "Settings"
+                    Title = "Settings",
+                    Icon = "Icons/gear.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.ClassSearch,
-                    Title = "Search"
+                    Title = "Search",
+                    Icon = "Icons/search.png"
                 }
 
             };
