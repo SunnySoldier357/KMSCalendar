@@ -45,6 +45,8 @@
                         Date="{Binding Assignment.DueDate}"
                         TextColor="{DynamicResource Text}"
                         BackgroundColor="{DynamicResource NavigationBackground}" />
+
+            <Picker x:Name="ClassPicker" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
