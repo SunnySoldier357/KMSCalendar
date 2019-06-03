@@ -1,4 +1,4 @@
-﻿namespace KMSCalendar.Models
+﻿namespace KMSCalendar.Models.Navigation
 {
     public enum MenuItemType
     {

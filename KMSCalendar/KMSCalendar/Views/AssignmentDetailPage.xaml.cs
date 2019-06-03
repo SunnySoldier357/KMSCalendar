@@ -6,7 +6,6 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Models.Entities;
 using KMSCalendar.ViewModels;
 using KMSCalendar.Services;
-using System.Collections.Generic;
 
 namespace KMSCalendar.Views
 {
@@ -46,33 +45,5 @@ namespace KMSCalendar.Views
 
             await Navigation.PushAsync(new AssignmentsPage());
         }
-
-        List<Class> listOfClassesSubscribed = new List<Class>()
-        {
-            new Class
-            {
-                Name = "Dystopian Fiction",
-                Period = 1
-            },
-            new Class
-            {
-                Name = "Econ",
-                Period = 2
-            },
-            new Class
-            {
-                Name = "Comp sci",
-                Period = 6
-            },
-            new Class
-            {
-                Name = "Physics",
-                Period = 4
-            }
-        };
-
-        //TODO: MATEO add a dropdown for people to choose a class the assignment belongs to
-
-        //TODO: MATEO add a button to got to the search for class if the class isn't there
     }
 }

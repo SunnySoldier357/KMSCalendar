@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Navigation;
  
 namespace KMSCalendar.Views
 {
