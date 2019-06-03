@@ -64,7 +64,7 @@
                                         <Label Grid.RowSpan="2"
                                            HorizontalOptions="End"
                                            VerticalOptions="Center"
-                                           Text="{Binding ShortDate}"
+                                           Text="{Binding Class.Name}"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />
 

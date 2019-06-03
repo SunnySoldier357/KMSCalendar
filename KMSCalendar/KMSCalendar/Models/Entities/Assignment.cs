@@ -21,10 +21,5 @@ namespace KMSCalendar.Models.Entities
         public string Description { get; set; }
         /// <summary>The name of the assignment.</summary>
         public string Name { get; set; }
-        /// <summary>
-        /// The Due Date of the assignment in the following format:
-        /// 5/16/2001
-        /// </summary>
-        public string ShortDate => DueDate.ToShortDateString();
     }
 }
