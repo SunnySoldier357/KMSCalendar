@@ -13,14 +13,14 @@ namespace KMSCalendar.ViewModels
         public string ConfirmPassword
         {
             get => confirmPassword;
-            set => modifyProperty(ref value, ref confirmPassword, nameof(ConfirmPassword));
+            set => setProperty(ref confirmPassword, value);
         }
         [MinimumLength(2)]
         [MaximumLength(64)]
         public string UserName
         {
             get => userName;
-            set => modifyProperty(ref value, ref userName, nameof(UserName));
+            set => setProperty(ref userName, value);
         }
 
         //* Constructors

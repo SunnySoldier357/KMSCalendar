@@ -35,9 +35,9 @@ namespace KMSCalendar.ViewModels
         //* Constructors
         public AssignmentViewModel()
         {
-            dataStore = DependencyService.Get<IDataStore<Assignment>>();
-
             Title = "Assignments Calendar";
+
+            dataStore = DependencyService.Get<IDataStore<Assignment>>();
 
             Assignments = new ObservableCollection<Assignment>();
             FilteredAssignments = new ObservableCollection<Assignment>();

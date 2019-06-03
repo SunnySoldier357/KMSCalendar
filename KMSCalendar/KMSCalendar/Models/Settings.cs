@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace KMSCalendar.Models
@@ -37,7 +39,7 @@ namespace KMSCalendar.Models
         public bool ShowCalendarDays
         {
             get => showCalendarDays;
-            set => modifyProperty(ref value, ref showCalendarDays, nameof(ShowCalendarDays));
+            set => setProperty(ref showCalendarDays, value);
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace KMSCalendar.Models
         public string SignedInUserId
         {
             get => signedInUserId;
-            set => modifyProperty(ref value, ref signedInUserId, nameof(SignedInUserId));
+            set => setProperty(ref signedInUserId, value);
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace KMSCalendar.Models
         public Theme Theme
         {
             get => theme;
-            set => modifyProperty(ref value, ref theme, nameof(Theme));
+            set => setProperty(ref theme, value);
         }
 
         //* Events
@@ -135,16 +137,17 @@ namespace KMSCalendar.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 
         //* Private Methods
-        private void modifyProperty<T>(ref T value, ref T privateProperty, string nameOfProperty)
+        private bool setProperty<T>(ref T backingStore, T value, 
+            [CallerMemberName] string propertyName = "")
         {
-            if (value == null && privateProperty == null)
-                return;
-            else if ((value == null && privateProperty != null) || !value.Equals(privateProperty))
-            {
-                privateProperty = value;
-                OnNotifyPropertyChanged(nameOfProperty);
-                UpdateDictionaryAsync();
-            }
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
+
+            backingStore = value;
+            UpdateDictionaryAsync();
+            OnNotifyPropertyChanged(propertyName);
+
+            return true;
         }
     }
 }
