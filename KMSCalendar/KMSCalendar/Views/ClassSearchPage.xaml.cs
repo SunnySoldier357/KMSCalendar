@@ -81,5 +81,7 @@ namespace KMSCalendar.Views
             SelectPeriodControlLoaded.Invoke(this, new EventArgs());
             Swap();
         }
+
+        //TODO: MATEO add class page
     }
 }

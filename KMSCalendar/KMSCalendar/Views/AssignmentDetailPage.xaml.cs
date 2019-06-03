@@ -45,5 +45,9 @@ namespace KMSCalendar.Views
 
             await Navigation.PushAsync(new AssignmentsPage());
         }
+
+        //TODO: MATEO add a dropdown for people to choose a class the assignment belongs to
+
+        //TODO: MATEO add a button to got to the search for class if the class isn't there
     }
 }
