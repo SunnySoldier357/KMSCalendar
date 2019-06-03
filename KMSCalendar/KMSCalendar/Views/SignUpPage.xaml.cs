@@ -5,6 +5,8 @@ using KMSCalendar.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using KMSCalendar.Models;
+
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -35,7 +37,9 @@ namespace KMSCalendar.Views
                 viewModel.LoginValidationMessage = 
                     string.Format("Email: {0} Password: {1}", userEmail, userPassword);
 
-                // TODO: KENNY Do something with the sign up info.
+                string hashedPassword = PasswordHash.HashPassword(userPassword);
+
+                // TODO: Send to Database
             }
         }
 

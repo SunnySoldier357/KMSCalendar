@@ -33,20 +33,29 @@ namespace KMSCalendar.Views
             if (viewModel.Validate())
             {
                 string email = viewModel.Email;
-
                 // TODO: Authenticate with backend
-                var dataStore = DependencyService.Get<IDataStore<User>>();
-                var users = await dataStore.GetItemsAsync();
-                User signedInUser = users.FirstOrDefault(u => u.Email == email);
+                string password = viewModel.Password;
+                string databasePassword = "temp"; //TODO: Grab password from database
+                if (PasswordHash.ValidatePassword(password, databasePassword))
+                {
+                    var dataStore = DependencyService.Get<IDataStore<User>>();
+                    var users = await dataStore.GetItemsAsync();
+                    User signedInUser = users.FirstOrDefault(u => u.Email == email);
 
-                App app = Application.Current as App;
+                    App app = Application.Current as App;
 
-                app.SignedInUser = signedInUser;
-                Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+                    app.SignedInUser = signedInUser;
+                    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
 
-                app.MainPage = new MainPage();
+                    app.MainPage = new MainPage();
+                }
+                else
+                {
+                    // TODO: Output "Invalid Password"
+                }
             }
         }
+
 
         private void ForgotPasswordButton_Clicked(object sender, System.EventArgs e) =>
             viewModel.LoginValidationMessage = "You can't forget your password " +
