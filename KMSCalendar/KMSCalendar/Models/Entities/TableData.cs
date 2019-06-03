@@ -7,10 +7,18 @@ namespace KMSCalendar.Models.Entities
 {
     public abstract class TableData
     {
+        //* Static Properties
+        private static bool seedLoaded = false;
+
+        private static List<Assignment> assignments;
+        private static List<Class> classes;
+        private static List<Teacher> teachers;
+        private static List<User> users;
+
         //* Public Properties
 
         /// <summary>The unique ID of the entity.</summary>
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         //* Static Methods
 
@@ -21,100 +29,119 @@ namespace KMSCalendar.Models.Entities
         /// <returns>An IEnumerable of the seeded instances of TableData.</returns>
         public static IEnumerable Seed<T>() where T : TableData
         {
+            if (!seedLoaded)
+            {
+                seedListsInit();
+                seedLoaded = true;
+            }
+
             Type temp = typeof(T);
 
             if (temp.Equals(typeof(Assignment)))
-            {
-                return new List<Assignment>
-                {
-                    new Assignment
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "First item",
-                        Description ="This is an item description.",
-                        DueDate = DateTime.Today
-                    },
-                    new Assignment
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "Second item",
-                        Description ="This is an item description.",
-                        DueDate = DateTime.Today
-                    },
-                    new Assignment
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "Third item",
-                        Description="This is an item description.",
-                        DueDate = DateTime.Today
-                    },
-                    new Assignment
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "Fourth item",
-                        Description="This is an item description.",
-                        DueDate = DateTime.Today
-                    },
-                    new Assignment
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "Fifth item",
-                        Description="This is an item description.",
-                        DueDate = DateTime.Today
-                    },
-                    new Assignment
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "Sixth item",
-                        Description="This is an item description.",
-                        DueDate = DateTime.Today
-                    }
-                };
-            }
+                return assignments;
             else if (temp.Equals(typeof(Class)))
+                return classes;
+            else if (temp.Equals(typeof(Teacher)))
+                return teachers;
+            else if (temp.Equals(typeof(User)))
+                return users;
+
+            return null;
+        }
+
+        private static int getAnotherNumber(int min, int max, int num)
+        {
+            Random random = new Random();
+            int temp = num;
+
+            while (temp == num)
+                temp = random.Next(min, max);
+
+            return temp;
+        }
+
+        private static void seedListsInit()
+        {
+            Random random = new Random();
+
+            teachers = new List<Teacher>();
+            for (int i = 0; i < 3; i++)
             {
-                return new List<Class>
+                teachers.Add(new Teacher
                 {
-                    new Class
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "IB Math HL 2"
-                    },
-                    new Class
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "IB Physics HL 2",
-                        Period = 5
-                    },
-                    new Class
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "IB Comp Sci HL",
-                        Period = 6
-                    },
-                    new Class
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "Dystopian Fiction",
-                        Period = 1
-                    },
-                    new Class
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "Graphic Design 1",
-                        Period = 3
-                    },
-                    new Class
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = "IB Economics SL",
-                        Period = 2
-                    },
+                    Name = $"Test Teacher 1"
+                });
+            }
+
+            classes = new List<Class>();
+            for (int i = 0; i < 3; i++)
+            {
+                int num = random.Next(1, 7);
+                string className = $"Test Class {i}";
+                Teacher teacher = teachers[i];
+
+                classes.Add(new Class
+                {
+                    Name = className,
+                    Period = num,
+                    Teacher = teacher
+                });
+
+                classes.Add(new Class
+                {
+                    Name = className,
+                    Period = getAnotherNumber(1, 7, num),
+                    Teacher = teacher
+                });
+            }
+
+            int count = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                teachers[i].Classes = new List<Class>
+                {
+                    classes[count++],
+                    classes[count++]
                 };
             }
 
-            else
-                return Enumerable.Empty<T>();
+            assignments = new List<Assignment>();
+            for (int i = 0; i < 30; i++)
+            {
+                assignments.Add(new Assignment
+                {
+                    Name = $"Test Item {i}",
+                    Description = "This is an item description.",
+                    DueDate = DateTime.Today.AddDays(random.Next(-2, 3)),
+                    Class = classes[random.Next(0, classes.Count)]
+                });
+            }
+
+            var groupedAssignments = assignments.GroupBy(a => a.Class);
+            foreach (var group in groupedAssignments)
+            {
+                Class _class = group.Key;
+                _class.Assignments = new List<Assignment>();
+
+                foreach (Assignment assignment in group)
+                    _class.Assignments.Add(assignment);
+            }
+
+            users = new List<User>
+            {
+                new User
+                {
+                    Email = "test@email.com",
+                    UserName = "SinghIsKing",
+                    EnrolledClasses = classes
+                },
+                new User
+                {
+                    Email = "test@email.com",
+                    UserName = "No Class Test",
+                    EnrolledClasses = new List<Class>()
+                }
+            };
         }
     }
 }

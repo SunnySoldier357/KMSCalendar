@@ -7,6 +7,8 @@ namespace KMSCalendar.Models.Entities
     {
         //* Public Properties
 
+        public Class Class { get; set; }
+
         /// <summary>The Due Date of the assignment.</summary>
         public DateTime DueDate { get; set; }
 
