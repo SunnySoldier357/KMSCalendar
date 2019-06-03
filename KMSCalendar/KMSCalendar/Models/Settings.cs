@@ -24,6 +24,8 @@ namespace KMSCalendar.Models
         //* Private Properties
         private bool showCalendarDays;
 
+        private string signedInUserId;
+
         private Theme theme;
 
         //* Public Properties
@@ -36,6 +38,15 @@ namespace KMSCalendar.Models
         {
             get => showCalendarDays;
             set => modifyProperty(ref value, ref showCalendarDays, nameof(ShowCalendarDays));
+        }
+
+        /// <summary>
+        /// The ID of the User signed in.
+        /// </summary>
+        public string SignedInUserId
+        {
+            get => signedInUserId;
+            set => modifyProperty(ref value, ref signedInUserId, nameof(SignedInUserId));
         }
 
         /// <summary>
@@ -60,6 +71,8 @@ namespace KMSCalendar.Models
             // Default Values
             showCalendarDays = false;
 
+            signedInUserId = null;
+
             theme = Theme.Light;
         }
 
@@ -68,6 +81,8 @@ namespace KMSCalendar.Models
             if (settings != null)
             {
                 ShowCalendarDays = settings.ShowCalendarDays;
+
+                SignedInUserId = settings.SignedInUserId;
 
                 Theme = settings.Theme;
             }
@@ -122,7 +137,9 @@ namespace KMSCalendar.Models
         //* Private Methods
         private void modifyProperty<T>(ref T value, ref T privateProperty, string nameOfProperty)
         {
-            if (!value.Equals(privateProperty))
+            if (value == null && privateProperty == null)
+                return;
+            else if ((value == null && privateProperty != null) || !value.Equals(privateProperty))
             {
                 privateProperty = value;
                 OnNotifyPropertyChanged(nameOfProperty);

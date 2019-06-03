@@ -39,10 +39,7 @@ namespace KMSCalendar.Views
             }
         }
 
-        private async void AlreadyUserButton_Clicked(object sender, EventArgs e)
-        {
-            // true makes it animated
-            await Navigation.PushAsync(new LoginPage(), true);
-        }
+        private void AlreadyUserButton_Clicked(object sender, EventArgs e) => 
+            (Application.Current as App).MainPage = new LoginPage();
     }
 }

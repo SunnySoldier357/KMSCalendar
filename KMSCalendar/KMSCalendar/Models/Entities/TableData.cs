@@ -131,13 +131,15 @@ namespace KMSCalendar.Models.Entities
             {
                 new User
                 {
-                    Email = "test@email.com",
+                    Id = "1",
+                    Email = "singh@king.com",
                     UserName = "SinghIsKing",
                     EnrolledClasses = classes
                 },
                 new User
                 {
-                    Email = "test@email.com",
+                    Id = "2",
+                    Email = "test@king.com",
                     UserName = "No Class Test",
                     EnrolledClasses = new List<Class>()
                 }

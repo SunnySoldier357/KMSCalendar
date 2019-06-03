@@ -52,6 +52,7 @@ Page Design:
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -81,6 +82,11 @@ Page Design:
                                Grid.Column="1"
                                HorizontalOptions="Center"
                                Text="•••••••••" />
+
+                        <Button x:Name="LogOutButton"
+                                Grid.Row="3"
+                                Grid.ColumnSpan="2"
+                                Clicked="LogOutButton_Clicked" />
                     </Grid>
                 </Frame>
 

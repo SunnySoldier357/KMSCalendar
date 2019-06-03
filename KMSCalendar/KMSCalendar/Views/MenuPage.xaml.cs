@@ -31,18 +31,6 @@ namespace KMSCalendar.Views
                 },
                 new HomeMenuItem
                 {
-                    Id = MenuItemType.SignUp,
-                    Title = "Sign Up",
-                    Icon = "Icons/upload.png"
-                },
-                new HomeMenuItem
-                {
-                    Id = MenuItemType.Login,
-                    Title = "Login",
-                    Icon = "Icons/next.png"
-                },
-                new HomeMenuItem
-                {
                     Id = MenuItemType.About,
                     Title ="About",
                     Icon = "Icons/file.png"

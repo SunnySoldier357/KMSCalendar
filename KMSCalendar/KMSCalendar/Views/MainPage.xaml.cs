@@ -45,16 +45,8 @@ namespace KMSCalendar.Views
                         MenuPages.Add(id, new NavigationPage(new ClassSearchPage()));
                         break;
 
-                    case (int) MenuItemType.Login:
-                        MenuPages.Add(id, new NavigationPage(new LoginPage()));
-                        break;
-
                     case (int) MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
-                        break;
-
-                    case (int) MenuItemType.SignUp:
-                        MenuPages.Add(id, new NavigationPage(new SignUpPage()));
                         break;
                 }
             }

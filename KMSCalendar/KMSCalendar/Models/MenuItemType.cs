@@ -5,8 +5,6 @@
         About,
         Calendar,
         ClassSearch,
-        Login,
         Settings,
-        SignUp,
     }
 }

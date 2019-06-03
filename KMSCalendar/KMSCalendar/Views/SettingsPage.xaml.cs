@@ -24,6 +24,16 @@ namespace KMSCalendar.Views
         private void CalendarDaySwitch_Toggled(object sender, ToggledEventArgs e) =>
             settings.ShowCalendarDays = CalendarDaySwitch.IsToggled;
 
+        private void LogOutButton_Clicked(object sender, System.EventArgs e)
+        {
+            App app = Application.Current as App;
+
+            settings.SignedInUserId = null;
+            app.SignedInUser = null;
+
+            app.MainPage = new LoginPage();
+        }
+
         private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e) => 
             settings.Theme = ThemeSwitch.IsToggled ? Theme.Dark : Theme.Light;
     }

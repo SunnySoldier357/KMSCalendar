@@ -1,6 +1,11 @@
-﻿using Xamarin.Forms;
+﻿using System.Linq;
+
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
+using KMSCalendar.Services;
 using KMSCalendar.ViewModels;
 
 namespace KMSCalendar.Views
@@ -23,16 +28,23 @@ namespace KMSCalendar.Views
         //* Event Handlers
 
         /// <summary>Check if correct login and password.</summary>
-        private void AuthenticateLoginButton_Clicked(object sender, System.EventArgs e)
+        private async void AuthenticateLoginButton_Clicked(object sender, System.EventArgs e)
         {
             if (viewModel.Validate())
             {
                 string email = viewModel.Email;
-                string password = viewModel.Password;
-
-                viewModel.LoginValidationMessage = "Login success";
 
                 // TODO: Authenticate with backend
+                var dataStore = DependencyService.Get<IDataStore<User>>();
+                var users = await dataStore.GetItemsAsync();
+                User signedInUser = users.FirstOrDefault(u => u.Email == email);
+
+                App app = Application.Current as App;
+
+                app.SignedInUser = signedInUser;
+                Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+
+                app.MainPage = new MainPage();
             }
         }
 
@@ -41,10 +53,7 @@ namespace KMSCalendar.Views
                 "if you don't have an account.";
 
         /// <summary>Go to sign up page.</summary>
-        private async void NewUserButton_Clicked(object sender, System.EventArgs e)
-        {
-            // true makes it animated
-            await Navigation.PushAsync(new SignUpPage(), true);
-        }
+        private void NewUserButton_Clicked(object sender, System.EventArgs e) =>
+            (Application.Current as App).MainPage = new SignUpPage();
     }
 }
