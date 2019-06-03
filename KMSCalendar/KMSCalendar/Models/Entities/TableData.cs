@@ -69,7 +69,7 @@ namespace KMSCalendar.Models.Entities
             {
                 teachers.Add(new Teacher
                 {
-                    Name = $"Test Teacher 1"
+                    Name = $"Test Teacher {i}"
                 });
             }
 
