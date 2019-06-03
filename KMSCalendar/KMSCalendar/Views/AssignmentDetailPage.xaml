@@ -9,23 +9,29 @@
                      Icon="delete-icon.png"
                      Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <StackLayout Spacing="20"
-                     Padding="15"
+        <StackLayout Padding="15"
                      BackgroundColor="{DynamicResource NavigationBackground}">
-            <Label Text="Name:"
-               FontSize="Medium" />
+            
             <Label Text="{Binding Assignment.Name}"
-               FontSize="Small" />
-            <Label Text="Description:"
-               FontSize="Medium" />
-            <Label Text="{Binding Assignment.Description}"
-               FontSize="Small" />
-            <Label Text="Due Date:"
-               FontSize="Medium" />
-            <Label Text="{Binding Assignment.Date}"
-               FontSize="Small" />
+                   FontSize="Medium" 
+                   FontAttributes="Bold" />
+            
+            <Label Margin="0,5,0,20" 
+                   Text="{Binding Assignment.Description}"
+                   FontSize="Small" />
+
+            <Label Text="{Binding Assignment.Class.Name}"
+                   FontSize="Medium" 
+                   FontAttributes="Bold" />
+
+            <Label Margin="0,5,0,20" 
+                   Text="{Binding Assignment.Class.Teacher.Name}"
+                   FontSize="Small" />
+
+            <Label Text="{Binding Assignment.Date, StringFormat='Due Date: {0}'}"
+                   FontSize="Small" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -53,20 +53,20 @@
                                         </Grid.RowDefinitions>
 
                                         <Label Text="{Binding Name}"
-                                           FontSize="16"
-                                           LineBreakMode="NoWrap" />
+                                               FontSize="16"
+                                               LineBreakMode="NoWrap" />
 
                                         <Label Grid.Row="1"
-                                           Text="{Binding Description}"
-                                           FontSize="13"
-                                           LineBreakMode="NoWrap" />
+                                               Text="{Binding Description}"
+                                               FontSize="13"
+                                               LineBreakMode="NoWrap" />
 
                                         <Label Grid.RowSpan="2"
-                                           HorizontalOptions="End"
-                                           VerticalOptions="Center"
-                                           Text="{Binding Class.Name}"
-                                           FontSize="13"
-                                           LineBreakMode="NoWrap" />
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               Text="{Binding Class.Name}"
+                                               FontSize="13"
+                                               LineBreakMode="NoWrap" />
 
                                     </Grid>
                                 </ViewCell>

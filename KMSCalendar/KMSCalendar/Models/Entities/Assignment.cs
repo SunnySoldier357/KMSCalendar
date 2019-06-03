@@ -6,7 +6,6 @@ namespace KMSCalendar.Models.Entities
     public class Assignment : TableData
     {
         //* Public Properties
-
         public Class Class { get; set; }
 
         /// <summary>The Due Date of the assignment.</summary>
