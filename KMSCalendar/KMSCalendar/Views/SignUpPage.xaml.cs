@@ -1,11 +1,12 @@
 ﻿using System;
 
-using KMSCalendar.ViewModels;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
+using KMSCalendar.Services;
+using KMSCalendar.ViewModels;
 
 namespace KMSCalendar.Views
 {
@@ -13,7 +14,6 @@ namespace KMSCalendar.Views
     public partial class SignUpPage : ContentPage
     {
         //* Private Properties
-        //private SignUpViewModel viewModel;
         private SignUpViewModel viewModel;
 
         //* Constructors
@@ -26,20 +26,31 @@ namespace KMSCalendar.Views
         }
 
         //* Event Handlers
-        private void AuthenticateSignUpButton_Clicked(object sender, EventArgs e)
+        private async void AuthenticateSignUpButton_Clicked(object sender, EventArgs e)
         {
             if (viewModel.Validate())
             {
-                // Success!
-                string userEmail = viewModel.Email;
-                string userPassword = viewModel.Password;
+                string hashedPassword = PasswordHasher.HashPassword(viewModel.Password);
 
-                viewModel.LoginValidationMessage = 
-                    string.Format("Email: {0} Password: {1}", userEmail, userPassword);
+                User user = new User
+                {
+                    Email = viewModel.Email,
+                    UserName = viewModel.UserName,
+                    Password = viewModel.Password
+                };
 
-                string hashedPassword = PasswordHash.HashPassword(userPassword);
+                var dataStore = DependencyService.Get<IDataStore<User>>();
 
-                // TODO: Send to Database
+                //* Have DataStore return the Created User
+                var signedInUser = await dataStore.AddItemAsync(user);
+
+                App app = Application.Current as App;
+
+                // TODO: Change this
+                app.SignedInUser = user;
+                Settings.DefaultInstance.SignedInUserId = user.Id;
+
+                app.MainPage = new MainPage();
             }
         }
 

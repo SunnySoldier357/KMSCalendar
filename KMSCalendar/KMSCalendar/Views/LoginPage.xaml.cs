@@ -33,10 +33,13 @@ namespace KMSCalendar.Views
             if (viewModel.Validate())
             {
                 string email = viewModel.Email;
-                // TODO: Authenticate with backend
                 string password = viewModel.Password;
-                string databasePassword = "temp"; //TODO: Grab password from database
-                if (PasswordHash.ValidatePassword(password, databasePassword))
+
+                // TODO: Grab password from database
+                string databasePassword = "temp";
+
+                // TODO: Authenticate with backend
+                if (PasswordHasher.ValidatePassword(password, databasePassword))
                 {
                     var dataStore = DependencyService.Get<IDataStore<User>>();
                     var users = await dataStore.GetItemsAsync();
@@ -50,9 +53,7 @@ namespace KMSCalendar.Views
                     app.MainPage = new MainPage();
                 }
                 else
-                {
-                    // TODO: Output "Invalid Password"
-                }
+                    viewModel.LoginValidationMessage = "Invalid Password";
             }
         }
 
