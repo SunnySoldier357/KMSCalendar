@@ -27,25 +27,25 @@ namespace KMSCalendar.Views
                 {
                     Id = MenuItemType.Calendar,
                     Title = "Calendar",
-                    Icon = "Icons/calendar.png"
+                    Icon = "calendar.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.About,
                     Title ="About",
-                    Icon = "Icons/file.png"
+                    Icon = "file.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Settings,
                     Title = "Settings",
-                    Icon = "Icons/gear.png"
+                    Icon = "gear.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.ClassSearch,
                     Title = "Search",
-                    Icon = "Icons/search.png"
+                    Icon = "search.png"
                 }
             };
 
