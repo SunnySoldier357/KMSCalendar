@@ -69,8 +69,16 @@ namespace KMSCalendar.ViewModels
             try
             {
                 Assignments.Clear();
-                var assignments = await dataStore.GetItemsAsync(true);
-                foreach (Assignment assignment in assignments)
+
+                var userAssignments =
+                    from assignment in await dataStore.GetItemsAsync(true)
+                    let userClasses = 
+                        from _class in (Application.Current as App).SignedInUser.EnrolledClasses
+                        select _class.Id
+                    where userClasses.Contains(assignment.Class.Id)
+                    select assignment;
+
+                foreach (Assignment assignment in userAssignments)
                     Assignments.Add(assignment);
             }
             catch (Exception ex)
@@ -90,12 +98,10 @@ namespace KMSCalendar.ViewModels
             FilteredAssignments.Clear();
 
             var result =
-                from a in Assignments.AsParallel()
-                where a.DueDate.Day == date.Day &&
-                    a.DueDate.Month == date.Month &&
-                    a.DueDate.Year == date.Year
-                orderby a.Name, a.Description
-                select a;
+                from assignment in Assignments.AsParallel()
+                where assignment.DueDate.Date.Equals(date.Date)
+                orderby assignment.Class.Name, assignment.Name
+                select assignment;
 
             foreach (Assignment assignment in result)
                 FilteredAssignments.Add(assignment);
