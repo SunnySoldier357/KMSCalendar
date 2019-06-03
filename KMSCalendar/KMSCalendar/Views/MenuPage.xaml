@@ -9,28 +9,17 @@
                  BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
         <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
-
-            <Frame Margin="15"
-                   Padding="0"
-                   Opacity="0.9"
-                   BorderColor="Transparent"
-                   CornerRadius="5">
-
-                <StackLayout>
-                    <Image HeightRequest="30"
+                <Image HeightRequest="30"
                            WidthRequest="30"
-                           Source="Icons/calendar_white.png" />
+                           Source="calendar_white.png" />
 
-                    <Label x:Name="UserNameLabel" 
+                <Label x:Name="UserNameLabel" 
                            HorizontalOptions="Center"
                            Margin="0,5,0,0"
                            Text="{Binding}"
                            FontSize="Small"
                            TextColor="White" />
-                </StackLayout>
-            </Frame>
-
-        </StackLayout>
+         </StackLayout>
 
         <ListView x:Name="MenuListView"
                   HasUnevenRows="True">
