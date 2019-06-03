@@ -43,7 +43,7 @@ namespace KMSCalendar.ViewModels
         //* Public Methods
         public void FilterClasses(string userInput)
         {
-            if (!string.IsNullOrWhiteSpace(userInput))
+            if (string.IsNullOrWhiteSpace(userInput))
                 FilteredClasses = new ObservableCollection<Class>(uniqueClasses);
             else
             {
