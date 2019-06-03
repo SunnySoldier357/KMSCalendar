@@ -2,15 +2,21 @@
 
 namespace KMSCalendar.ViewModels
 {
-    public class LogInViewModel : ValidatableObject
+    public class LogInViewModel : BaseViewModel
     {
         //* Private Properties
+        private int logInAttempts;
+
         private string email;
         private string loginValidationMessage;
         private string password;
 
         //* Public Properties
-        public int LogInAttempts { get; set; }
+        public int LogInAttempts
+        {
+            get => logInAttempts;
+            set => setProperty(ref logInAttempts, value);
+        }
 
         [ContainsCharacter('@')]
         [DoesNotContainCharacter(' ')]
@@ -19,7 +25,7 @@ namespace KMSCalendar.ViewModels
         public string Email
         {
             get => email;
-            set => modifyProperty(ref value, ref email, nameof(Email));
+            set => setProperty(ref email, value);
         }
         public string LoginValidationMessage
         {
@@ -28,24 +34,22 @@ namespace KMSCalendar.ViewModels
                 if (Errors != null && Errors.Count > 0)
                     return Errors[0];
 
-                return loginValidationMessage;  
+                return loginValidationMessage;
             }
-            set => modifyProperty(ref value, ref loginValidationMessage,
-                nameof(LoginValidationMessage));
+            set => setProperty(ref loginValidationMessage, value);
         }
         [MinimumLength(8)]
         [MaximumLength(64)]
         public string Password
         {
             get => password;
-            set => modifyProperty(ref value, ref password, nameof(Password));
+            set => setProperty(ref password, value);
         }
 
         //* Constructor
         public LogInViewModel()
         {
             Email = string.Empty;
-            LoginValidationMessage = string.Empty;
             Password = string.Empty;
 
             PropertyChanged += (sender, args) =>

@@ -32,6 +32,9 @@
 
             <Label Text="{Binding Assignment.Date, StringFormat='Due Date: {0}'}"
                    FontSize="Small" />
+
+            <Picker />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

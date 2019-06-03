@@ -44,7 +44,7 @@
 
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <ViewCell>
+                                        <ViewCell Height="40">
                                             <Grid Padding="10">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition />

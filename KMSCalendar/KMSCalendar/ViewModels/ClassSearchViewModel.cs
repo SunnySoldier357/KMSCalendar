@@ -9,17 +9,34 @@ using KMSCalendar.Services;
 
 namespace KMSCalendar.ViewModels
 {
-    public class ClassSearchViewModel
+    public class ClassSearchViewModel : BaseViewModel
     {
         //* Private Properties
+        private Class selectedClass;
+
         private List<Class> classes;
+        private List<Class> filteredClasses;
         private List<Class> uniqueClasses;
 
-        //* Public Properties
-        public Class SelectedClass { get; set; }
+        private List<int> periods;
 
-        public ObservableCollection<Class> FilteredClasses { get; set; }
-        public ObservableCollection<int> Periods { get; set; }
+        //* Public Properties
+        public Class SelectedClass
+        {
+            get => selectedClass;
+            set => setProperty(ref selectedClass, value);
+        }
+
+        public List<Class> FilteredClasses
+        {
+            get => filteredClasses;
+            set => setProperty(ref filteredClasses, value);
+        }
+        public List<int> Periods
+        {
+            get => periods;
+            set => setProperty(ref periods, value);
+        }
 
         //* Constructors
         public ClassSearchViewModel()
@@ -36,15 +53,15 @@ namespace KMSCalendar.ViewModels
 
             this.classes = classes.ToList();
             uniqueClasses = this.classes.Distinct(new DuplicateClassNameComparer()).ToList();
-            FilteredClasses = new ObservableCollection<Class>(uniqueClasses);
-            Periods = new ObservableCollection<int>();
+            FilteredClasses = new List<Class>(uniqueClasses);
+            Periods = new List<int>();
         }
 
         //* Public Methods
         public void FilterClasses(string userInput)
         {
             if (string.IsNullOrWhiteSpace(userInput))
-                FilteredClasses = new ObservableCollection<Class>(uniqueClasses);
+                FilteredClasses = new List<Class>(uniqueClasses);
             else
             {
                 FilteredClasses.Clear();
