@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -7,18 +6,20 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Controls;
 using KMSCalendar.Models.Entities;
-using KMSCalendar.Services;
+using KMSCalendar.ViewModels;
 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ClassSearchPage : ContentPage
 	{
-        //* Private Properties
-        private List<Class> classes;
-
         //* Public Properties
+        public ClassSearchViewModel ViewModel = new ClassSearchViewModel();
+
         public MainPage RootPage => Application.Current.MainPage as MainPage;
+
+        //* Events
+        public event EventHandler SelectPeriodControlLoaded;
 
         //* Constructors
         public ClassSearchPage()
@@ -26,13 +27,15 @@ namespace KMSCalendar.Views
             InitializeComponent();
 
             SelectPeriodControl.ParentPage = this;
+            SelectPeriodControlLoaded += SelectPeriodControl.OnLoaded;
+
             PopUpGrid.IsVisible = false;
 
-            loadListAsync();
+            ClassesListView.ItemsSource = ViewModel.FilteredClasses;
 
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
-            ClassSearchBar.TextChanged += (sender, args) => filterContactsAsync(ClassSearchBar.Text);
-            ClassSearchBar.SearchButtonPressed += (sender, args) => filterContactsAsync(ClassSearchBar.Text);
+            ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
+            ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
         }
 
         //* Public Methods
@@ -70,50 +73,13 @@ namespace KMSCalendar.Views
             PopUpGrid.IsVisible = !PopUpGrid.IsVisible;
         }
 
-        //* Private Methods
-
-        /// <summary>
-        /// Loads the list with data before the user searches anything.
-        /// </summary>
-        private async Task loadListAsync()
-        {
-            var data = DependencyService.Get<IDataStore<Class>>();
-            var tempClassList = await data.GetItemsAsync();
-            classes = tempClassList.ToList();
-            ClassesListView.ItemsSource = classes;
-
-            // _lstContacts = modDatabase.GetContacts(string.Empty); 
-            // lvAddressBook.ItemsSource = _lstContacts;
-        }
-
-        /// <summary>
-        /// Filters the ListView below the SearchBar based off of what the user types in.
-        /// </summary>
-        /// <param name="filter">The search term that the user enters.</param>
-        private async Task filterContactsAsync(string filter)
-        {
-            if (filter == "hide")
-                Swap();
-
-            // lvAddressBook.BeginRefresh();
-
-            if (string.IsNullOrWhiteSpace(filter))
-            {
-                ClassesListView.ItemsSource = classes;
-                // lvAddressBook.ItemsSource = _lstContacts;
-            }
-            else
-            {
-                // Filter the data list for only items that contain the search term.
-                ClassesListView.ItemsSource = classes.Where(
-                    c => c.Name.ToLower().Contains(filter.ToLower()));
-            }
-
-            ClassesListView.EndRefresh();
-        }
-
         //* Event Handlers
-        private void ClassesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) =>
+        private void ClassesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ViewModel.SelectedClass = ClassesListView.SelectedItem as Class;
+
+            SelectPeriodControlLoaded.Invoke(this, new EventArgs());
             Swap();
+        }
     }
 }
