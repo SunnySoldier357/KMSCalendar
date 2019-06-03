@@ -65,27 +65,30 @@ Page Design:
                                TextColor="Gray" />
 
                         <Label Grid.Row="1"
-                               Text="Email" />
+                               Text="User Name" />
 
-                        <Label x:Name="EmailLabel"
+                        <Label x:Name="UserNameLabel"
                                Grid.Row="1"
                                Grid.Column="1"
                                HorizontalOptions="Center"
                                Margin="0,0,0,5"
-                               Text="SinghIsKing@buddy.com" />
+                               Text="{Binding UserName}" />
 
                         <Label Grid.Row="2"
-                               Text="Password" />
+                               Text="Email" />
 
-                        <Label x:Name="PasswordLabel"
+                        <Label x:Name="EmailLabel"
                                Grid.Row="2"
                                Grid.Column="1"
                                HorizontalOptions="Center"
-                               Text="•••••••••" />
+                               Margin="0,0,0,5"
+                               Text="{Binding Email}" />
 
                         <Button x:Name="LogOutButton"
                                 Grid.Row="3"
                                 Grid.ColumnSpan="2"
+                                Text="Log Out"
+                                TextColor="{DynamicResource Text}"
                                 Clicked="LogOutButton_Clicked" />
                     </Grid>
                 </Frame>

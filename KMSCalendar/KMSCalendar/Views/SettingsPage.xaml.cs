@@ -18,6 +18,8 @@ namespace KMSCalendar.Views
 
             ThemeSwitch.IsToggled = settings.Theme == Theme.Dark;
             CalendarDaySwitch.IsToggled = settings.ShowCalendarDays;
+
+            BindingContext = (Application.Current as App).SignedInUser;
         }
 
         //* Event Handlers
