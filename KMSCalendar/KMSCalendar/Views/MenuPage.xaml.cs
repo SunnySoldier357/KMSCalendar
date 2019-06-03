@@ -58,9 +58,11 @@ namespace KMSCalendar.Views
                 if (e.SelectedItem == null)
                     return;
 
-                int id = (int) ((HomeMenuItem) e.SelectedItem).Id;
+                int id = (int) ((HomeMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
+
+            UserNameLabel.BindingContext = (Application.Current as App).SignedInUser.UserName;
         }
     }
 }

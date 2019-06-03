@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Views;
-using System.Linq;
 
 namespace KMSCalendar.Controls
 {
@@ -15,17 +15,15 @@ namespace KMSCalendar.Controls
         //* Public Properties
         public ClassSearchPage ParentPage;
 
-        //* Private Properties
-        private List<int> periods;
+        public List<int> Periods;
 
         //* Constructors
         public SelectPeriodControl()
         {
             InitializeComponent();
 
-            periods = Enumerable.Range(0, 10).ToList();
-
-            PeriodsListView.ItemsSource = periods;
+            Periods = Enumerable.Range(0, 10).ToList();
+            PeriodsListView.ItemsSource = Periods;
         }
 
         //* Event Handlers

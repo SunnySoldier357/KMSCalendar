@@ -21,9 +21,10 @@
                            WidthRequest="30"
                            Source="Icons/calendar_white.png" />
 
-                    <Label HorizontalOptions="Center"
+                    <Label x:Name="UserNameLabel" 
+                           HorizontalOptions="Center"
                            Margin="0,5,0,0"
-                           Text="SinghIsKing"
+                           Text="{Binding}"
                            FontSize="Small"
                            TextColor="White" />
                 </StackLayout>
