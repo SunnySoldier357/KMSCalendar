@@ -46,6 +46,5 @@ namespace KMSCalendar.Views
             // true makes it animated
             await Navigation.PushAsync(new SignUpPage(), true);
         }
-
     }
 }

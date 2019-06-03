@@ -10,17 +10,22 @@
 
         <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
 
-            <Frame Margin="15" BorderColor="Transparent" CornerRadius="5" Opacity="0.9" Padding="0">
+            <Frame Margin="15"
+                   Padding="0"
+                   Opacity="0.9"
+                   BorderColor="Transparent"
+                   CornerRadius="5">
+
                 <StackLayout>
                     <Image HeightRequest="30"
-                       WidthRequest="30" 
-                       Source="Icons/calendar_white.png" />
+                           WidthRequest="30"
+                           Source="Icons/calendar_white.png" />
 
                     <Label HorizontalOptions="Center"
-                       Margin="0,5,0,0"
-                       Text="SinghIsKing"
-                       FontSize="Small"
-                       TextColor="White"/>
+                           Margin="0,5,0,0"
+                           Text="SinghIsKing"
+                           FontSize="Small"
+                           TextColor="White" />
                 </StackLayout>
             </Frame>
 
@@ -33,18 +38,21 @@
                     <ViewCell>
                         <StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <Image Source="{Binding Icon}"
+                                <Image Margin="20,5,0,-3"
                                        HeightRequest="20"
                                        WidthRequest="20"
-                                       Margin="20, 5, 0, -3"/>      
+                                       Source="{Binding Icon}" />
 
-                                <Label Text="{Binding Title}"
+                                <Label Margin="60,15,0,7"
+                                       Text="{Binding Title}"
                                        TextColor="{DynamicResource Text}"
-                                       FontSize="20" 
-                                       Margin="60, 15, 0, 7"/>
+                                       FontSize="20" />
+                                
                             </StackLayout>
-                            <BoxView HeightRequest="0.5" BackgroundColor="{DynamicResource NavigationBackground}"/>
-                        </StackLayout>   
+                            
+                            <BoxView HeightRequest="0.5"
+                                     BackgroundColor="{DynamicResource NavigationBackground}" />
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

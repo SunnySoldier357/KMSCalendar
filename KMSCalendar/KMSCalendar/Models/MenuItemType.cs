@@ -4,8 +4,8 @@
     {
         About,
         Calendar,
-        Login,
         ClassSearch,
+        Login,
         Settings,
         SignUp,
     }

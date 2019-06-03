@@ -59,7 +59,6 @@ namespace KMSCalendar.Views
                     Title = "Search",
                     Icon = "Icons/search.png"
                 }
-
             };
 
             MenuListView.ItemsSource = menuItems;

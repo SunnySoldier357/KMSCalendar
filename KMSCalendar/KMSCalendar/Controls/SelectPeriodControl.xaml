@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="KMSCalendar.Controls.SelectPeriodControl">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ActionButtonStyle"
+                   TargetType="Button">
+                <Setter Property="Margin"
+                        Value="0" />
+
+                <Setter Property="Padding"
+                        Value="0" />
+
+                <Setter Property="TextColor"
+                        Value="{DynamicResource Text}}" />
+
+                <Setter Property="BorderColor"
+                        Value="Transparent" />
+
+                <Setter Property="BorderWidth"
+                        Value="0" />
+
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <StackLayout>
+            <Grid Margin="0"
+                  Padding="0"
+                  HeightRequest="50">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton"
+                        Style="{StaticResource ActionButtonStyle}"
+                        HorizontalOptions="Start"
+                        Text="Back"
+                        BackgroundColor="Transparent"
+                        Clicked="BackButton_Clicked" />
+
+                <Button x:Name="DoneButton"
+                        Style="{StaticResource ActionButtonStyle}"
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Text="Done"
+                        BackgroundColor="Transparent"
+                        Clicked="DoneButton_Clicked" />
+            </Grid>
+
+            <ScrollView>
+                <ListView x:Name="PeriodsListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="x"
+                                           FontSize="16"
+                                           LineBreakMode="NoWrap" />
+
+                                    <Label Grid.Column="1"
+                                           Text="{Binding}"
+                                           FontSize="13"
+                                           LineBreakMode="NoWrap" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+        </StackLayout>
+    </ContentView.Content>
+
+</ContentView>
