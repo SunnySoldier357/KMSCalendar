@@ -38,22 +38,33 @@ namespace KMSCalendar.Views
                 // TODO: Grab password from database
                 string databasePassword = "temp";
 
+                var dataStore = DependencyService.Get<IDataStore<User>>();
+                var users = await dataStore.GetItemsAsync();
+                User signedInUser = users.FirstOrDefault(u => u.Email == email);
+
+                App app = Application.Current as App;
+
+                app.SignedInUser = signedInUser;
+                Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+
+                app.MainPage = new MainPage();
+
                 // TODO: Authenticate with backend
-                if (PasswordHasher.ValidatePassword(password, databasePassword))
-                {
-                    var dataStore = DependencyService.Get<IDataStore<User>>();
-                    var users = await dataStore.GetItemsAsync();
-                    User signedInUser = users.FirstOrDefault(u => u.Email == email);
+                //if (PasswordHasher.ValidatePassword(password, databasePassword))
+                //{
+                //    var dataStore = DependencyService.Get<IDataStore<User>>();
+                //    var users = await dataStore.GetItemsAsync();
+                //    User signedInUser = users.FirstOrDefault(u => u.Email == email);
 
-                    App app = Application.Current as App;
+                //    App app = Application.Current as App;
 
-                    app.SignedInUser = signedInUser;
-                    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+                //    app.SignedInUser = signedInUser;
+                //    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
 
-                    app.MainPage = new MainPage();
-                }
-                else
-                    viewModel.LoginValidationMessage = "Invalid Password";
+                //    app.MainPage = new MainPage();
+                //}
+                //else
+                //    viewModel.LoginValidationMessage = "Invalid Password";
             }
         }
 
