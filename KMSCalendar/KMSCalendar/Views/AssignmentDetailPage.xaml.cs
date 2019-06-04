@@ -5,7 +5,6 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models.Entities;
 using KMSCalendar.ViewModels;
-using KMSCalendar.Services;
 
 namespace KMSCalendar.Views
 {
@@ -38,12 +37,7 @@ namespace KMSCalendar.Views
         }
 
         //* Event Handlers
-        private async void Delete_Clicked(object sender, EventArgs e)
-        {
-            IDataStore<Assignment> data = DependencyService.Get<IDataStore<Assignment>>();
-            await data.DeleteItemAsync(viewModel.Assignment.Id);
-
+        private async void Delete_Clicked(object sender, EventArgs e) => 
             await Navigation.PushAsync(new AssignmentsPage());
-        }
     }
 }
