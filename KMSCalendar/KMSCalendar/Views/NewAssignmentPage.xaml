@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              x:Class="KMSCalendar.Views.NewAssignmentPage"
              Title="New Assignment">
 
@@ -46,7 +47,16 @@
                         TextColor="{DynamicResource Text}"
                         BackgroundColor="{DynamicResource NavigationBackground}" />
 
-            <Picker x:Name="ClassPicker" />
+            <Label Text="Class"
+                   FontSize="Medium" />
+            
+            <Picker x:Name="ClassPicker"
+                    Title="Choose a class"/>
+
+            <Picker Title="Select a Class"
+                    ItemsSource="{Binding ClassesSubscribed}"
+                    ItemDisplayBinding="{Binding Name}" />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
