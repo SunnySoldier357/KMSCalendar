@@ -10,6 +10,8 @@ namespace KMSCalendar.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
         //* Private Properties
+        private App app = (Application.Current as App);
+
         private Settings settings = Settings.DefaultInstance;
 
         //* Public Properties
@@ -33,6 +35,9 @@ namespace KMSCalendar.ViewModels
         }
 
         public ICommand LogOutCommand { get; set; }
+
+        public string Email => app.SignedInUser?.Email;
+        public string UserName => app.SignedInUser?.UserName;
 
         //* Constructors
         public SettingsViewModel()
