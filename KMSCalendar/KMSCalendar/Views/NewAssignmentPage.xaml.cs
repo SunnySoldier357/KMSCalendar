@@ -3,36 +3,18 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models.Entities;
+using KMSCalendar.ViewModels;
 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewAssignmentPage : ContentPage
     {
-        //* Public Properties
-        public Assignment Assignment { get; set; }
+        //* Private Properties
+        private NewAssignmentViewModel viewModel;
 
         //* Contructors
-        public NewAssignmentPage()
-        {
-            InitializeComponent();
-
-            Assignment = new Assignment
-            {
-                Name = "Assignment name",
-                Description = "This is an item description",
-                DueDate = DateTime.Today
-            };
-
-            BindingContext = this;
-
-            var subsribedClasses = (Application.Current as App).SignedInUser.EnrolledClasses;
-
-            // TODO: MATEO add a dropdown for people to choose a class the assignment belongs to
-
-            // TODO: MATEO add a button to got to the search for class if the class isn't there
-        }
+        public NewAssignmentPage() : this(DateTime.Today) { }
 
         /// <summary>
         /// This constructor is used with the date selected on the calendar.
@@ -42,14 +24,11 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            Assignment = new Assignment
-            {
-                Name = "",
-                Description = "",
-                DueDate = dateSelected
-            };
+            BindingContext = viewModel = new NewAssignmentViewModel(dateSelected);
 
-            BindingContext = this;
+            // TODO: MATEO add a dropdown for people to choose a class the assignment belongs to
+
+            // TODO: MATEO add a button to got to the search for class if the class isn't there
         }
 
         //* Event Handlers
@@ -58,7 +37,7 @@ namespace KMSCalendar.Views
 
         public async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddAssignment", Assignment);
+            MessagingCenter.Send(this, "AddAssignment", viewModel.Assignment);
             await Navigation.PopModalAsync();
         }
     }
