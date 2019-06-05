@@ -35,6 +35,9 @@ namespace KMSCalendar.Views
 
         public async void Save_Clicked(object sender, EventArgs e)
         {
+            var data = ClassPicker.SelectedItem;
+            // TODO: SUNNY get the class selected for the assignment
+
             MessagingCenter.Send(this, "AddAssignment", viewModel.Assignment);
             await Navigation.PopModalAsync();
         }
