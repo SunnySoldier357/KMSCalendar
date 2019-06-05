@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Controls;
 using KMSCalendar.Models.Entities;
+using KMSCalendar.ViewModels;
 
 namespace KMSCalendar.Views
 {
@@ -13,6 +14,8 @@ namespace KMSCalendar.Views
 	public partial class ClassSearchPage : ContentPage
 	{
         //* Public Properties
+        public ClassSearchViewModel ViewModel;
+
         public MainPage RootPage => Application.Current.MainPage as MainPage;
 
         //* Events
@@ -22,6 +25,8 @@ namespace KMSCalendar.Views
         public ClassSearchPage()
         {
             InitializeComponent();
+
+            BindingContext = ViewModel = new ClassSearchViewModel();
 
             SelectPeriodControl.ParentPage = this;
             SelectPeriodControlLoaded += SelectPeriodControl.OnLoaded;

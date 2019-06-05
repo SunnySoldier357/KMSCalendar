@@ -34,8 +34,8 @@ namespace KMSCalendar.Controls
 
         public void OnLoaded(object sender, EventArgs e)
         {
-            if (PeriodsListView.ItemsSource == null)
-                PeriodsListView.ItemsSource = ParentPage.ViewModel.Periods;
+            if (PeriodsListView.BindingContext == null)
+                PeriodsListView.BindingContext = ParentPage.ViewModel;
 
             ParentPage.ViewModel.LoadPeriods();
         }

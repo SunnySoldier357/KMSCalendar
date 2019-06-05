@@ -8,7 +8,7 @@
              BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
     <ContentPage.BindingContext>
-        <vm:ClassSearchViewModel x:Name="ViewModel"/>
+        <vm:ClassSearchViewModel />
     </ContentPage.BindingContext>
     
     <ContentPage.Content>

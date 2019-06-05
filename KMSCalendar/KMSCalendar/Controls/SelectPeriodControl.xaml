@@ -59,7 +59,8 @@
             </Grid>
 
             <ScrollView>
-                <ListView x:Name="PeriodsListView">
+                <ListView x:Name="PeriodsListView"
+                          ItemsSource="{Binding Periods}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
