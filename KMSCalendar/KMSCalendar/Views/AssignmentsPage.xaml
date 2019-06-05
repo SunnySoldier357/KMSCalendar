@@ -26,10 +26,10 @@
                              Margin="5,10,5,15"
                              ShowDayName="{Binding ShowCalendarDays}" />
 
-        <!-- TODO: Put a Grid around ListView so that it looks better -->
         <Frame x:Name="BottomAreaFrame"
                BackgroundColor="{DynamicResource NavigationBackground}"
-               CornerRadius="15">
+               CornerRadius="15"
+               Margin="0, 0, 0, -20">
             <StackLayout>
 
                 <!-- You might want to make this a content view for abstraction! -->
