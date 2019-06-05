@@ -159,7 +159,7 @@
                         TextColor="White"
                         CornerRadius="20"
                         BorderColor="Transparent"
-                        Clicked="AuthenticateSignUpButton_Clicked" />
+                        Command="{Binding AuthenticateUserCommand}" />
 
                 <StackLayout Orientation="Vertical"
                              Grid.Row="14">
