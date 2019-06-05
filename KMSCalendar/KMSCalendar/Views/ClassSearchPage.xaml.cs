@@ -65,6 +65,9 @@ namespace KMSCalendar.Views
             await RootPage.NavigateFromMenu(1);
         }
 
+        /// <summary>
+        /// Swaps from the class search view to the period selection view.
+        /// </summary>
         public void Swap()
         {
             SearchAreaStackLayout.IsVisible = !SearchAreaStackLayout.IsVisible;
@@ -72,6 +75,9 @@ namespace KMSCalendar.Views
         }
 
         //* Event Handlers
+        /// <summary>
+        /// Invoked when the user selects a class, then shows the selectPeriodView where the user can select a period.
+        /// </summary>
         private void ClassesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             ViewModel.SelectedClass = ClassesListView.SelectedItem as Class;
@@ -79,12 +85,9 @@ namespace KMSCalendar.Views
             SelectPeriodControlLoaded.Invoke(this, new EventArgs());
             Swap();
         }
-
         private void GoToNewClassButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new NewClassPage());
         }
-
-        //TODO: MATEO add class page
     }
 }

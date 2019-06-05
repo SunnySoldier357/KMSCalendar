@@ -32,7 +32,6 @@
                Margin="0, 0, 0, -20">
             <StackLayout>
 
-                <!-- You might want to make this a content view for abstraction! -->
                 <Label x:Name="ListTitleDate"
                        HorizontalOptions="CenterAndExpand"
                        Margin="0,-10,0,0"

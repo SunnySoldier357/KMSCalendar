@@ -32,9 +32,10 @@
                     <!-- Spacing -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Spacing -->
+                    <!-- Password -->
                     <RowDefinition Height="40" />
 
+                    <!-- Spacing -->
                     <RowDefinition Height="10*" />
 
                     <!-- Button -->

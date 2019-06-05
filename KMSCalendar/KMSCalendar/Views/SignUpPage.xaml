@@ -12,37 +12,6 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-
-        <!-- Layout: 
-
-                Spacing
-
-                Title - Label
-                Subitle - Label
-
-                Spacing
-
-                Email - Entry
-
-                Spacing
-
-                Password - Entry
-
-                Spacing
-
-                Confirm Password - Entry
-
-                Spacing 
-
-                Sign Up - Button
-
-
-                New Grid at bottom of page:
-                    Two columns
-                        Already a user? label
-                        Sign in - button
-      -->
-
         <StackLayout VerticalOptions="Fill">
             <Grid>
                 <Grid.RowDefinitions>
