@@ -2,8 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:KMSCalendar.Controls"
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              x:Class="KMSCalendar.Views.LoginPage"
-             BackgroundImage="BackgroundForLogin.png">
+             BackgroundImage="BackgroundForLogin.png"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:LogInViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
 
@@ -81,7 +87,7 @@
                         TextColor="White"
                         CornerRadius="20"
                         BorderColor="Transparent"
-                        Clicked="AuthenticateLoginButton_Clicked" />
+                        Command="{Binding AuthenticateUserCommand}" />
 
                 <StackLayout Orientation="Vertical"
                              Grid.Row="9">
@@ -93,7 +99,7 @@
                             TextColor="White"
                             FontSize="Small"
                             BorderColor="Transparent"
-                            Clicked="ForgotPasswordButton_Clicked" />
+                            Command="{Binding ForgotPasswordCommand}" />
 
                     <Label x:Name="LoginValidationLabel"
                            BackgroundColor="Transparent"
@@ -130,7 +136,7 @@
                         Text="SignUp"
                         TextColor="{StaticResource NavigationTertiary}"
                         BorderColor="Transparent"
-                        Clicked="NewUserButton_Clicked" />
+                        Command="{Binding NewUserCommand}" />
 
             </Grid>
         </StackLayout>

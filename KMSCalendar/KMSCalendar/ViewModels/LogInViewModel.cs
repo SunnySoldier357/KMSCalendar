@@ -1,4 +1,14 @@
 ﻿using ModelValidation;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+
+using Xamarin.Forms;
+
+using KMSCalendar.Models;
+using KMSCalendar.Models.Entities;
+using KMSCalendar.Views;
+using KMSCalendar.Services;
 
 namespace KMSCalendar.ViewModels
 {
@@ -12,6 +22,10 @@ namespace KMSCalendar.ViewModels
         private string password;
 
         //* Public Properties
+        public ICommand AuthenticateUserCommand { get; set; }
+        public ICommand ForgotPasswordCommand { get; set; }
+        public ICommand NewUserCommand { get; set; }
+
         public int LogInAttempts
         {
             get => logInAttempts;
@@ -49,6 +63,8 @@ namespace KMSCalendar.ViewModels
         //* Constructor
         public LogInViewModel()
         {
+            Title = "Log In";
+
             Email = string.Empty;
             Password = string.Empty;
 
@@ -57,6 +73,51 @@ namespace KMSCalendar.ViewModels
                 if (args.PropertyName == nameof(Errors))
                     OnNotifyPropertyChanged(nameof(LoginValidationMessage));
             };
+
+            AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
+            ForgotPasswordCommand = new Command(() => ExecuteForgotPasswordCommand());
+            NewUserCommand = new Command(() => (Application.Current as App).MainPage = new SignUpPage());
         }
+
+        //* Public Methods
+        public async Task ExecuteAuthenticateUserCommand()
+        {
+            if (Validate())
+            {
+                // TODO: Grab password from database
+                string databasePassword = "temp";
+
+                var dataStore = DependencyService.Get<IDataStore<User>>();
+                var users = await dataStore.GetItemsAsync();
+                User signedInUser = users.FirstOrDefault(u => u.Email == Email);
+
+                App app = Application.Current as App;
+
+                app.SignedInUser = signedInUser;
+                Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+
+                app.MainPage = new MainPage();
+
+                // TODO: Authenticate with backend
+                //if (PasswordHasher.ValidatePassword(password, databasePassword))
+                //{
+                //    var dataStore = DependencyService.Get<IDataStore<User>>();
+                //    var users = await dataStore.GetItemsAsync();
+                //    User signedInUser = users.FirstOrDefault(u => u.Email == email);
+
+                //    App app = Application.Current as App;
+
+                //    app.SignedInUser = signedInUser;
+                //    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+
+                //    app.MainPage = new MainPage();
+                //}
+                //else
+                //    viewModel.LoginValidationMessage = "Invalid Password";
+            }
+        }
+
+        public void ExecuteForgotPasswordCommand() =>
+            LoginValidationMessage = "You can't forget your password if you don't have an account.";
     }
 }
