@@ -64,6 +64,8 @@
                     BorderWidth="0"
                     CornerRadius="10"
                     Clicked="GoToSearchButton_Clicked" />
+            
+            
 
         </StackLayout>
     </ContentPage.Content>

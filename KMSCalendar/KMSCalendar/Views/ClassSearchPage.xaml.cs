@@ -80,6 +80,11 @@ namespace KMSCalendar.Views
             Swap();
         }
 
+        private void GoToNewClassButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NewClassPage());
+        }
+
         //TODO: MATEO add class page
     }
 }

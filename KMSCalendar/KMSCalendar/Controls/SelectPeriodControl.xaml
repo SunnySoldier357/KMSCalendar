@@ -102,7 +102,7 @@
                                  HorizontalOptions="Center"
                                  VerticalOptions="CenterAndExpand"
                                  Value="1"/>
-                        
+
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
