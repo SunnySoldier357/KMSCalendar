@@ -3,7 +3,6 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models;
 using KMSCalendar.Models.Entities;
 using KMSCalendar.ViewModels;
 
@@ -12,9 +11,6 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AssignmentsPage : ContentPage
     {
-
-        public Settings settings = Settings.DefaultInstance;
-
         //* Constructors
         public AssignmentsPage()
         {

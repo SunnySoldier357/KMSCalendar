@@ -6,7 +6,6 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Controls;
 using KMSCalendar.Models.Entities;
-using KMSCalendar.ViewModels;
 
 namespace KMSCalendar.Views
 {
@@ -14,8 +13,6 @@ namespace KMSCalendar.Views
 	public partial class ClassSearchPage : ContentPage
 	{
         //* Public Properties
-        public ClassSearchViewModel ViewModel = new ClassSearchViewModel();
-
         public MainPage RootPage => Application.Current.MainPage as MainPage;
 
         //* Events
@@ -28,10 +25,6 @@ namespace KMSCalendar.Views
 
             SelectPeriodControl.ParentPage = this;
             SelectPeriodControlLoaded += SelectPeriodControl.OnLoaded;
-
-            PopUpGrid.IsVisible = false;
-
-            ClassesListView.ItemsSource = ViewModel.FilteredClasses;
 
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
             ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);

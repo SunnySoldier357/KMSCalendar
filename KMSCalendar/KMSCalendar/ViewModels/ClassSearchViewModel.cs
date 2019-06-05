@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 using Xamarin.Forms;
@@ -41,6 +40,8 @@ namespace KMSCalendar.ViewModels
         //* Constructors
         public ClassSearchViewModel()
         {
+            Title = "Search For Class";
+
             var dataStore = DependencyService.Get<IDataStore<Class>>();
 
             var classes =
@@ -64,30 +65,24 @@ namespace KMSCalendar.ViewModels
                 FilteredClasses = new List<Class>(uniqueClasses);
             else
             {
-                FilteredClasses.Clear();
-
                 var result =
                     from _class in uniqueClasses.AsParallel()
                     where _class.Name.ToLower().Contains(userInput.ToLower())
                     select _class;
 
-                foreach (Class _class in result)
-                    FilteredClasses.Add(_class);
+                FilteredClasses = result.ToList();
             }
         }
 
         public void LoadPeriods()
         {
-            Periods.Clear();
-
             var periods =
                 from _class in classes.AsParallel()
                 where _class.Name == SelectedClass.Name &&
                     _class.Teacher.Equals(SelectedClass.Teacher)
                 select _class.Period;
 
-            foreach (int period in periods)
-                Periods.Add(period);
+            Periods = periods.ToList();
         }
 
         private class DuplicateClassNameComparer : EqualityComparer<Class>

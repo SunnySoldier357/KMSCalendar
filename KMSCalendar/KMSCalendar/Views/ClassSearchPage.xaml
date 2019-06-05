@@ -2,9 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:KMSCalendar.Controls"
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              x:Class="KMSCalendar.Views.ClassSearchPage"
-             Title="Search For Class"
+             Title="{Binding Title}"
              BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+
+    <ContentPage.BindingContext>
+        <vm:ClassSearchViewModel x:Name="ViewModel"/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <StackLayout>
             <!--
@@ -28,7 +34,8 @@
 
                     <Grid>
 
-                        <Grid x:Name="PopUpGrid">
+                        <Grid x:Name="PopUpGrid"
+                              IsVisible="False">
                             <control:SelectPeriodControl x:Name="SelectPeriodControl" />
                         </Grid>
 
@@ -40,6 +47,7 @@
 
                             <ListView x:Name="ClassesListView"
                                       IsPullToRefreshEnabled="true"
+                                      ItemsSource="{Binding FilteredClasses}"
                                       ItemSelected="ClassesListView_ItemSelected">
 
                                 <ListView.ItemTemplate>
