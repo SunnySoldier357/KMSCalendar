@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.NewAssignmentPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
-             x:Class="KMSCalendar.Views.NewAssignmentPage"
-             Title="New Assignment">
+             Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel"
+        <ToolbarItem Clicked="Cancel_Clicked"
                      Icon="cancel.png"
-                     Clicked="Cancel_Clicked" />
+                     Text="Cancel" />
 
-        <ToolbarItem Text="Save"
+        <ToolbarItem Clicked="Save_Clicked"
                      Icon="save.png"
-                     Clicked="Save_Clicked" />
+                     Text="Save" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout Spacing="20"
-                     Padding="15"
+        <StackLayout Padding="15"
+                     Spacing="20"
                      BackgroundColor="{DynamicResource NavigationBackground}">
 
             <Label Text="Name"
@@ -32,8 +32,8 @@
             <Label Text="Description"
                    FontSize="Medium" />
 
-            <Editor HeightRequest="100"
-                    BackgroundColor="{DynamicResource NavigationBackground}"
+            <Editor BackgroundColor="{DynamicResource NavigationBackground}"
+                    HeightRequest="100"
                     Text="{Binding Assignment.Description}"
                     Placeholder="This is an item description"
                     TextColor="{DynamicResource Text}"
@@ -43,20 +43,18 @@
                    FontSize="Medium" />
 
             <DatePicker Margin="0"
+                        BackgroundColor="{DynamicResource NavigationBackground}"
                         Date="{Binding Assignment.DueDate}"
-                        TextColor="{DynamicResource Text}"
-                        BackgroundColor="{DynamicResource NavigationBackground}" />
+                        TextColor="{DynamicResource Text}" />
 
             <Label Text="Class"
                    FontSize="Medium" />
-            
-            <Picker x:Name="ClassPicker"
-                    Title="Choose a class"/>
 
-            <Picker Title="Select a Class"
-                    ItemsSource="{Binding ClassesSubscribed}"
+            <Picker x:Name="ClassPicker"
+                    Title="Select a Class"
+                    ItemsSource="{Binding SubscribedClasses}"
                     ItemDisplayBinding="{Binding Name}" />
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,6 +1,7 @@
-﻿using KMSCalendar.Models.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
+using KMSCalendar.Models.Entities;
 
 namespace KMSCalendar.ViewModels
 {
@@ -25,13 +26,15 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructors
-        public NewAssignmentViewModel(DateTime? dateTime = null)
+        public NewAssignmentViewModel(DateTime dateTime)
         {
+            Title = "New Assignment";
+
             Assignment = new Assignment
             {
                 Name = "Assignment name",
                 Description = "This is an item description",
-                DueDate = dateTime ?? DateTime.Today
+                DueDate = dateTime
             };
 
             SubscribedClasses = new List<Class>

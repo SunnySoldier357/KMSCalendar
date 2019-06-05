@@ -3,9 +3,6 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models.Entities;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using KMSCalendar.ViewModels;
 
 namespace KMSCalendar.Views
@@ -17,22 +14,7 @@ namespace KMSCalendar.Views
         private NewAssignmentViewModel viewModel;
 
         //* Contructors
-        public NewAssignmentPage()
-        {
-            BindingContext = viewModel = new NewAssignmentViewModel();
-
-            var names = new List<string>();
-            names.Add("wow");
-            names.Add("who");
-            names.Add("why");
-
-            ClassPicker.ItemsSource = names;
-
-            InitializeComponent();
-            // TODO: MATEO add a dropdown for people to choose a class the assignment belongs to
-
-            // TODO: MATEO add a button to got to the search for class if the class isn't there
-        }
+        public NewAssignmentPage() : this(DateTime.Today) { }
 
         /// <summary>
         /// This constructor is used with the date selected on the calendar.
@@ -43,6 +25,10 @@ namespace KMSCalendar.Views
             InitializeComponent();
 
             BindingContext = viewModel = new NewAssignmentViewModel(dateSelected);
+
+            // TODO: MATEO add a dropdown for people to choose a class the assignment belongs to
+
+            // TODO: MATEO add a button to got to the search for class if the class isn't there
         }
 
         //* Event Handlers
@@ -54,7 +40,5 @@ namespace KMSCalendar.Views
             MessagingCenter.Send(this, "AddAssignment", viewModel.Assignment);
             await Navigation.PopModalAsync();
         }
-
-        
     }
 }
