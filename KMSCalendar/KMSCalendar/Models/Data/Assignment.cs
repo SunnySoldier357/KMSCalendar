@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KMSCalendar.Models.Entities
+namespace KMSCalendar.Models.Data
 {
     /// <summary>A class representing a particular assignment.</summary>
     public class Assignment : TableData

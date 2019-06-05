@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KMSCalendar.Models.Entities
+namespace KMSCalendar.Models.Data
 {
     public abstract class TableData
     {

@@ -3,7 +3,7 @@ using System.Linq;
 
 using Xamarin.Forms;
 
-using KMSCalendar.Models.Entities;
+using KMSCalendar.Models.Data;
 using KMSCalendar.Services;
 
 namespace KMSCalendar.ViewModels

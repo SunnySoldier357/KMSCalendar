@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
-using KMSCalendar.Models.Entities;
+using KMSCalendar.Models.Data;
 using KMSCalendar.Services;
 using KMSCalendar.Views;
 

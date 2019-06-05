@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using KMSCalendar.Models.Entities;
+using KMSCalendar.Models.Data;
 
 namespace KMSCalendar.ViewModels
 {

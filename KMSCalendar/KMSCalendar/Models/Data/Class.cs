@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KMSCalendar.Models.Entities
+namespace KMSCalendar.Models.Data
 {
     public class Class : TableData
     {

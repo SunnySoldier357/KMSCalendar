@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-using KMSCalendar.Models.Entities;
+using KMSCalendar.Models.Data;
 
 namespace KMSCalendar.Services
 {

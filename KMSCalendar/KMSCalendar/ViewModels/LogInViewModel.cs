@@ -6,7 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 using KMSCalendar.Models;
-using KMSCalendar.Models.Entities;
+using KMSCalendar.Models.Data;
 using KMSCalendar.Views;
 using KMSCalendar.Services;
 
