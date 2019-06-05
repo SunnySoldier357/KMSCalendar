@@ -8,7 +8,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 using KMSCalendar.Models.Data;
-using KMSCalendar.Services;
+using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels

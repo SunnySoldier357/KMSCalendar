@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using KMSCalendar.Models.Data;
 
-namespace KMSCalendar.Services
+namespace KMSCalendar.Services.Data
 {
     public class AzureDataStore<T> : IDataStore<T> where T : TableData
     {

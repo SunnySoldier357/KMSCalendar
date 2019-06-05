@@ -7,7 +7,7 @@ using KMSCalendar.Views;
 using System.Threading.Tasks;
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
-using KMSCalendar.Services;
+using KMSCalendar.Services.Data;
 
 namespace KMSCalendar.ViewModels
 {
