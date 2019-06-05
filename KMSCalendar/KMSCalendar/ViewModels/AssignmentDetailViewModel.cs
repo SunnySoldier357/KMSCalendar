@@ -16,7 +16,7 @@ namespace KMSCalendar.ViewModels
         public ICommand DeleteAssignmentCommand { get; set; }
 
         //* Constructors
-        public AssignmentDetailViewModel(Assignment assignment = null)
+        public AssignmentDetailViewModel(Assignment assignment)
         {
             Title = assignment?.Name;
             Assignment = assignment;

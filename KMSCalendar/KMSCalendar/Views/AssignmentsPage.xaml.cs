@@ -35,8 +35,7 @@ namespace KMSCalendar.Views
         {
             if (e.SelectedItem is Assignment assignment)
             {
-                await Navigation.PushAsync(new AssignmentDetailPage(
-                    new AssignmentDetailViewModel(assignment)));
+                await Navigation.PushAsync(new AssignmentDetailPage(assignment));
 
                 // Manually deselect item.
                 AssignmentsListView.SelectedItem = null;

@@ -15,25 +15,11 @@ namespace KMSCalendar.Views
         private AssignmentDetailViewModel viewModel;
 
         //* Constructors
-        public AssignmentDetailPage()
+        public AssignmentDetailPage(Assignment assignment)
         {
             InitializeComponent();
-
-            Assignment assignment = new Assignment
-            {
-                Name = "Item 1",
-                Description = "This is an item description",
-                DueDate = DateTime.Today
-            };
 
             BindingContext = viewModel = new AssignmentDetailViewModel(assignment);
-        }
-
-        public AssignmentDetailPage(AssignmentDetailViewModel viewModel)
-        {
-            InitializeComponent();
-
-            BindingContext = this.viewModel = viewModel;
         }
 
         //* Event Handlers
