@@ -23,6 +23,7 @@ namespace KMSCalendar.ViewModels
         private List<Assignment> filteredAssignments;
 
         //* Public Properties
+        public bool ShowCalendarDays => Settings.ShowCalendarDays;
 
         public ICommand FilterAssignmentsCommand { get; set; }
         /// <summary>
@@ -65,6 +66,12 @@ namespace KMSCalendar.ViewModels
             });
 
             LoadAssignmentsCommand.Execute(null);
+
+            Settings.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(Settings.ShowCalendarDays))
+                    OnNotifyPropertyChanged(nameof(ShowCalendarDays));
+            };
         }
 
         //* Public Methods

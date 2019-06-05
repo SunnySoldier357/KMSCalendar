@@ -24,7 +24,6 @@
         <control:WeekControl x:Name="CalendarWeekControl"
                              HorizontalOptions="CenterAndExpand"
                              Margin="5,10,5,15"
-                             BindingContext="{x:Static model:Settings.DefaultInstance}"
                              ShowDayName="{Binding ShowCalendarDays}" />
 
         <!-- TODO: Put a Grid around ListView so that it looks better -->

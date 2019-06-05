@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+using KMSCalendar.Models;
+
 namespace KMSCalendar.ViewModels
 {
-    public class BaseViewModel : ValidatableObject, INotifyPropertyChanged
+    public abstract class BaseViewModel : ValidatableObject, INotifyPropertyChanged
     {
         //* Private Properties
         private bool isBusy = false;
@@ -19,6 +21,8 @@ namespace KMSCalendar.ViewModels
             get => isBusy;
             set => setProperty(ref isBusy, value);
         }
+
+        public Settings Settings { get; }
 
         public string Title
         {
@@ -40,6 +44,10 @@ namespace KMSCalendar.ViewModels
 
             return true;
         }
+
+        //* Constructors
+        public BaseViewModel() => 
+            Settings = Settings.DefaultInstance;
 
         //* Event Handlers
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
