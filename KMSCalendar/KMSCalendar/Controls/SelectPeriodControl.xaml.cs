@@ -39,5 +39,7 @@ namespace KMSCalendar.Controls
 
             ParentPage.ViewModel.LoadPeriods();
         }
+
+        //TODO: MATEO add the option to add a new period
     }
 }

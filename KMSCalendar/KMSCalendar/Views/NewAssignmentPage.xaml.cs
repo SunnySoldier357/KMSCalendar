@@ -26,9 +26,7 @@ namespace KMSCalendar.Views
 
             BindingContext = viewModel = new NewAssignmentViewModel(dateSelected);
 
-            // TODO: MATEO add a dropdown for people to choose a class the assignment belongs to
-
-            // TODO: MATEO add a button to got to the search for class if the class isn't there
+            // TODO: SUNNY populate the subscribedClasses in the viewModel with actual data from database
         }
 
         //* Event Handlers
@@ -37,8 +35,16 @@ namespace KMSCalendar.Views
 
         public async void Save_Clicked(object sender, EventArgs e)
         {
+            var data = ClassPicker.SelectedItem;
+            // TODO: SUNNY get the class selected for the assignment
+
             MessagingCenter.Send(this, "AddAssignment", viewModel.Assignment);
             await Navigation.PopModalAsync();
+        }
+
+        private void GoToSearchButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ClassSearchPage());
         }
     }
 }
