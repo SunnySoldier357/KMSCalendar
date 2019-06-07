@@ -32,8 +32,8 @@ namespace KMSCalendar.ViewModels
 
             Assignment = new Assignment
             {
-                Name = "Assignment name",
-                Description = "This is an item description",
+                Name = "",
+                Description = "",
                 DueDate = dateTime
             };
 

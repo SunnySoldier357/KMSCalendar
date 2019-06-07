@@ -55,19 +55,21 @@
                                     <DataTemplate>
                                         <ViewCell Height="100">
                                             <Grid Padding="5">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
 
                                                 <Label Text="{Binding Name}"
-                                                       FontSize="Small"
-                                                       TextColor="{DynamicResource Text}"/>
+                                                       FontSize="14"
+                                                       TextColor="{DynamicResource Text}"
+                                                       VerticalOptions="End"/>
 
-                                                <Label Grid.Row="1"
+                                                <Label Grid.Column="1"
                                                        Text="Teacher"
-                                                       FontSize="Micro"
-                                                       TextColor="{DynamicResource Text}"/>
+                                                       FontSize="11"
+                                                       TextColor="{DynamicResource Text}"
+                                                       VerticalOptions="End"/>
 
                                                 <!--
                                                 <Label Grid.RowSpan="2"

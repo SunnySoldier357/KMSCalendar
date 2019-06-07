@@ -28,7 +28,8 @@
                    Text="{Binding Assignment.Name}"
                    Placeholder="Assignment name"
                    TextColor="{DynamicResource Text}"
-                   FontSize="Small" />
+                   FontSize="Small" 
+                   Keyboard="Text"/>
 
             <Label Text="Description"
                    FontSize="Medium" />
@@ -39,7 +40,8 @@
                     Text="{Binding Assignment.Description}"
                     Placeholder="This is an item description"
                     TextColor="{DynamicResource Text}"
-                    FontSize="Small" />
+                    FontSize="Small" 
+                    Keyboard="Text"/>
 
             <Label Text="Due Date"
                    FontSize="Medium" />
