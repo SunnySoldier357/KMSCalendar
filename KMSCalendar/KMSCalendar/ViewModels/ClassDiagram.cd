@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KMSCalendar.ViewModels.AssignmentDetailViewModel">
+    <Position X="5.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQIAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AssignmentDetailViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KMSCalendar.ViewModels.AssignmentViewModel">
+    <Position X="11.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABAAAAAAAAAAAAAAAABAAAACFIAAAAAAgAAAACAAA=</HashCode>
+      <FileName>ViewModels\AssignmentViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KMSCalendar.ViewModels.BaseViewModel">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAEAAIEAAAABAAAAAAAABgAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="KMSCalendar.ViewModels.ClassSearchViewModel">
+    <Position X="19.5" Y="1.25" Width="1.5" />
+    <NestedTypes>
+      <Class Name="KMSCalendar.ViewModels.ClassSearchViewModel.DuplicateClassNameComparer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\ClassSearchViewModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAEIAAAABQAAAAAAAAACAAAAEgAAACAAAAAQ=</HashCode>
+      <FileName>ViewModels\ClassSearchViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KMSCalendar.ViewModels.LogInViewModel">
+    <Position X="3.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABBAAAIAAKAAAAQgAABAAAIAAAAAAAACEAAAAgIAAAA=</HashCode>
+      <FileName>ViewModels\LogInViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KMSCalendar.ViewModels.NewAssignmentViewModel">
+    <Position X="13.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAQAAAAUAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\NewAssignmentViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KMSCalendar.ViewModels.SignUpViewModel">
+    <Position X="1.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAQAAAAAAAIAAgAAAAAAAQAAAAMAIAA=</HashCode>
+      <FileName>ViewModels\SignUpViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KMSCalendar.ViewModels.SettingsViewModel">
+    <Position X="17.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACAAAAAAAAAAAAAAAACAAAAAISiAAAAAAAA=</HashCode>
+      <FileName>ViewModels\SettingsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KMSCalendar.ViewModels.NewClassViewModel">
+    <Position X="15.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAI=</HashCode>
+      <FileName>ViewModels\NewClassViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
