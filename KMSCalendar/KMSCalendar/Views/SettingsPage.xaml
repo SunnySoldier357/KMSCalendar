@@ -9,34 +9,6 @@
         <vm:SettingsViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
 
-    <!-- 
-Page Design:
-
-           Centered Title                      - label
-        
-        Centered Account Photo                 - Image 
-    
-                                               - grid 3 rows, 2 columns
-
-        Account Subtitle                       - label                                       
-    
-        Email Subtitle         Email           - label      label
-    
-        Password Subtitle      ••••••          - label      label
-
-
-        Design Subtitle                        - label                                       
-    
-        Theme Subtitle         Light / Dark              - label      picker
-    
-        Show Days of Week Subtitle     Show / Hide       - label      picker
-    
-    
-         Centered Rating Button                - buton
-    
-    -->
-
-
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource NavigationBackgroundLight}">
@@ -93,8 +65,12 @@ Page Design:
                                 Grid.Row="3"
                                 Grid.ColumnSpan="2"
                                 Text="Log Out"
-                                TextColor="{DynamicResource Text}"
-                                Command="{Binding LogOutCommand}" />
+                                TextColor="White"
+                                CornerRadius="10"
+                                BorderWidth="0"
+                                Padding="10"
+                                Command="{Binding LogOutCommand}"
+                                BackgroundColor="{DynamicResource NavigationTertiary}"/>
                     </Grid>
                 </Frame>
 

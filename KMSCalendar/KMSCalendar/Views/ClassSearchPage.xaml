@@ -28,7 +28,7 @@
                          Spacing="0">
 
                 <Frame VerticalOptions="CenterAndExpand"
-                       Margin="30,0,30,0"
+                       Margin="20,0,20,0"
                        BackgroundColor="{DynamicResource NavigationBackground}"
                        CornerRadius="10">
 
@@ -39,9 +39,12 @@
                         </Grid>
 
                         <StackLayout x:Name="SearchAreaStackLayout">
-                            <SearchBar x:Name="ClassSearchBar"
+                            <Frame Padding="0" CornerRadius="10" BorderColor="{DynamicResource NavigationBackgroundLight}">
+                                <SearchBar x:Name="ClassSearchBar"
                                        Placeholder="Search"
-                                       Margin="0,0,0,10" />
+                                       Margin="0,0,0,10" 
+                                       TextColor="{DynamicResource Text}"/>
+                            </Frame>
 
                             <ListView x:Name="ClassesListView"
                                       IsPullToRefreshEnabled="true"
@@ -50,21 +53,21 @@
 
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <ViewCell Height="40">
-                                            <Grid Padding="10">
+                                        <ViewCell Height="100">
+                                            <Grid Padding="5">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition />
-                                                    <RowDefinition />
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
                                                 </Grid.RowDefinitions>
 
                                                 <Label Text="{Binding Name}"
-                                                       FontSize="16"
-                                                       LineBreakMode="NoWrap" />
+                                                       FontSize="Small"
+                                                       TextColor="{DynamicResource Text}"/>
 
                                                 <Label Grid.Row="1"
                                                        Text="Teacher"
-                                                       FontSize="13"
-                                                       LineBreakMode="NoWrap" />
+                                                       FontSize="Micro"
+                                                       TextColor="{DynamicResource Text}"/>
 
                                                 <!--
                                                 <Label Grid.RowSpan="2"
