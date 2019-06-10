@@ -87,7 +87,7 @@ namespace KMSCalendar.Views
         }
         private void GoToNewClassButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NewClassPage());
+            Navigation.PushAsync(new NewClassPage(this));
         }
     }
 }

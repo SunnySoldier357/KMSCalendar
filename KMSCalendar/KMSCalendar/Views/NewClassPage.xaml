@@ -2,88 +2,119 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:KMSCalendar.Controls"
-             x:Class="KMSCalendar.Views.NewClassPage">
+             x:Class="KMSCalendar.Views.NewClassPage"
+             Title="Create a new class"
+             BackgroundColor="{DynamicResource NavigationBackgroundLight}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Add a new class"
+            <!--<Label Text="Add a new class"
                 VerticalOptions="Start" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand" />-->
 
-            <!-- Enter a name -->
-            <Frame Grid.Row="5"
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="CenterAndExpand"
+                         Margin="0,70,0,70"
+                         Spacing="0">
+
+                <Frame VerticalOptions="CenterAndExpand"
+                       Margin="20,0,20,0"
+                       BackgroundColor="{DynamicResource NavigationBackground}"
+                       CornerRadius="10">
+
+                    <StackLayout>
+                        <!-- contents go here -->
+                        <!-- Enter a name -->
+                        <Frame Grid.Row="5"
                        Style="{StaticResource LoginEntryFrame}">
 
-                <control:TransparentEntry x:Name="PasswordEntry"
+                            <control:TransparentEntry x:Name="PasswordEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text=""
                                               Placeholder="Class Name" 
                                               IsPassword="True" />
-            </Frame>
+                        </Frame>
 
 
-            <!-- Select a period -->
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Period: "/>
-                <Label x:Name="NewPeriodLabel"
+                        <!-- Select a period -->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Period: "/>
+                            <Label x:Name="NewPeriodLabel"
                                BindingContext="{x:Reference Name=PeriodStepper}"
                                Text="{Binding Value}"/>
-                <Stepper x:Name="PeriodStepper"
+                            <Stepper x:Name="PeriodStepper"
                                  Minimum="0"
                                  Maximum="15"
                                  Increment="1"
                                  HorizontalOptions="Center"
                                  VerticalOptions="CenterAndExpand"
                                  Value="1"/>
-            </StackLayout>
-            
-            <!-- Search for a Teacher -->
+                        </StackLayout>
 
-            <StackLayout x:Name="SearchAreaStackLayout">
+                        <!-- Search for a Teacher -->
 
-                <SearchBar x:Name="TeacherSearchBar"
+                        <StackLayout x:Name="SearchAreaStackLayout">
+
+                            <SearchBar x:Name="TeacherSearchBar"
                                        Placeholder="Search"
                                        Margin="0,0,0,10" />
 
-                <ListView x:Name="TeachersListView"
+                            <ListView x:Name="TeachersListView"
                                       IsPullToRefreshEnabled="true"
                                       ItemsSource="{Binding Teachers}"
                                       ItemSelected="TeachersListView_ItemSelected">
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell Height="40">
-                                <Grid Padding="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <Label Text="{Binding Name}"
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell Height="40">
+                                            <Grid Padding="10">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Text="{Binding Name}"
                                                        FontSize="16"
                                                        LineBreakMode="NoWrap" />
 
-                                    <Label Grid.Column="1"
+                                                <Label Grid.Column="1"
                                            Text="Teacher"
                                            FontSize="13"
                                            LineBreakMode="NoWrap" />
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+
+
+
+
+
+                        <Button x:Name="DoneButton"
+                    BackgroundColor="{DynamicResource NavigationTertiary}"
+                    TextColor="White"
+                    Text="Add the class"
+                    BorderWidth="0"
+                    CornerRadius="10"
+                    Clicked="DoneButton_Clicked" />
+
+
+                    </StackLayout>
+
+
+
+
+
+
+
+                </Frame>
             </StackLayout>
 
 
 
 
 
-                <Button x:Name="DoneButton"
-                    BackgroundColor="{DynamicResource NavigationTertiary}"
-                    TextColor="White"
-                    Text="Can't find your class? Add a new one to the cloud"
-                    BorderWidth="0"
-                    CornerRadius="10"
-                    Clicked="DoneButton_Clicked" />
 
 
             <!--
