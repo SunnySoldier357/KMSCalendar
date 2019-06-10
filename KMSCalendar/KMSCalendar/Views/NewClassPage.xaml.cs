@@ -39,6 +39,8 @@ namespace KMSCalendar.Views
         /// </summary>
         private void DoneButton_Clicked(object sender, EventArgs e)
         {
+            //TODO: SUNNY: Add the new class to the database
+
             var MyAppsFirstPage = new ClassSearchPage();
             Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
 
