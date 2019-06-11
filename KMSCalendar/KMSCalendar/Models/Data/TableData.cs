@@ -128,6 +128,13 @@ namespace KMSCalendar.Models.Data
                     _class.Assignments.Add(assignment);
             }
 
+            List<Class> tempClasses = new List<Class>
+            {
+                classes[0],
+                classes[2],
+                classes[4]
+            };
+
             users = new List<User>
             {
                 new User
@@ -135,7 +142,7 @@ namespace KMSCalendar.Models.Data
                     Id = "1",
                     Email = "singh@king.com",
                     UserName = "SinghIsKing",
-                    EnrolledClasses = classes
+                    EnrolledClasses = tempClasses
                 },
                 new User
                 {

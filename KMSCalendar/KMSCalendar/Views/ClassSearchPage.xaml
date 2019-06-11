@@ -70,7 +70,7 @@
 
                                                 <Label Grid.Column="1"
                                                        VerticalOptions="End"
-                                                       Text="Teacher"
+                                                       Text="{Binding Teacher.Name}"
                                                        FontSize="11"
                                                        TextColor="{DynamicResource Text}" />
 

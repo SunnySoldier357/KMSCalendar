@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 
+using Xamarin.Forms;
+
 using KMSCalendar.Models.Data;
+using KMSCalendar.Services.Data;
 
 namespace KMSCalendar.ViewModels
 {
@@ -17,6 +20,10 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructors
-        public NewClassViewModel() => Teachers = new List<Teacher>();
+        public NewClassViewModel()
+        {
+            var dataStore = DependencyService.Get<IDataStore<Teacher>>();
+            Teachers = new List<Teacher>(dataStore.GetItemsAsync(false).Result);
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Xamarin.Forms;
+
 using KMSCalendar.Models.Data;
 
 namespace KMSCalendar.ViewModels
@@ -37,39 +39,7 @@ namespace KMSCalendar.ViewModels
                 DueDate = dateTime
             };
 
-            SubscribedClasses = new List<Class>
-            {
-                new Class
-                {
-                    Name = "Dystopian Fiction",
-                    Period = 1
-                },
-                new Class
-                {
-                    Name = "Econ",
-                    Period = 2
-                },
-                new Class
-                {
-                    Name = "Graphic Design",
-                    Period = 3
-                },
-                new Class
-                {
-                    Name = "Physics",
-                    Period = 4
-                },
-                new Class
-                {
-                    Name = "Math",
-                    Period = 5
-                },
-                new Class
-                {
-                    Name = "Comp Sci",
-                    Period = 6
-                }
-            };
+            SubscribedClasses = (Application.Current as App).SignedInUser.EnrolledClasses;
         }
     }
 }

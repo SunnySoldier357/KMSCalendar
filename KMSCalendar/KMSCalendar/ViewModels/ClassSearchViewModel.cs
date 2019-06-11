@@ -87,12 +87,12 @@ namespace KMSCalendar.ViewModels
 
         private class DuplicateClassNameComparer : EqualityComparer<Class>
         {
-            // TODO SUNNY Update sort algorithm
-
             //* Overridden Methods
-            public override bool Equals(Class x, Class y) => x.Name == y.Name;
+            public override bool Equals(Class x, Class y) => 
+                x.Name == y.Name && x.Teacher?.Name == y.Teacher?.Name;
 
-            public override int GetHashCode(Class obj) => obj.Name.GetHashCode();
+            public override int GetHashCode(Class obj) => 
+                $"{obj.Name} ({obj.Teacher?.Name ?? ""})".GetHashCode();
         }
     }
 }

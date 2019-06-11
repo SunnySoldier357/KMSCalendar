@@ -22,18 +22,8 @@ namespace KMSCalendar.Views
 		{
             // ParentPage = parentPage;
 
-            ViewModel = new NewClassViewModel();
-
-            Teacher t = new Teacher();
-            t.Name = "Mr. Parker";
-            ViewModel.Teachers.Add(t);
-
-            Teacher t1 = new Teacher();
-            t1.Name = "Ms. Boas";
-            ViewModel.Teachers.Add(t1);
-
             InitializeComponent();
-            BindingContext = ViewModel;
+            BindingContext = ViewModel= new NewClassViewModel();
 		}
 
         //* Event Handlers

@@ -15,6 +15,9 @@ namespace KMSCalendar.ViewModels
 
         public ICommand DeleteAssignmentCommand { get; set; }
 
+        public string ClassDetail => string.Format("{0} (Per {1})",
+            Assignment.Class.Name, Assignment.Class.Period);
+
         //* Constructors
         public AssignmentDetailViewModel(Assignment assignment)
         {

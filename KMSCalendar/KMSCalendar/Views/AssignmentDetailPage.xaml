@@ -23,7 +23,7 @@
                    Text="{Binding Assignment.Description}"
                    FontSize="Small" />
 
-            <Label Text="{Binding Assignment.Class.Name}"
+            <Label Text="{Binding ClassDetail}"
                    FontAttributes="Bold"
                    FontSize="Medium" />
 
