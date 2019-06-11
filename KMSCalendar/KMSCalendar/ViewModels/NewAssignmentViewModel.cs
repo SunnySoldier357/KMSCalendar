@@ -39,11 +39,11 @@ namespace KMSCalendar.ViewModels
 
             SubscribedClasses = new List<Class>
             {
-                 new Class
-                 {
-                     Name = "Dystopian Fiction",
-                     Period = 1
-                 },
+                new Class
+                {
+                    Name = "Dystopian Fiction",
+                    Period = 1
+                },
                 new Class
                 {
                     Name = "Econ",

@@ -37,7 +37,6 @@ namespace KMSCalendar.Views
         }
 
         //* Public Methods
-
         public async Task GoToCalendarAsync(int periodChosen)
         {
             // TODO: SUNNY add the period selected and class selected to the database.
@@ -75,8 +74,10 @@ namespace KMSCalendar.Views
         }
 
         //* Event Handlers
+
         /// <summary>
-        /// Invoked when the user selects a class, then shows the selectPeriodView where the user can select a period.
+        /// Invoked when the user selects a class, then shows the selectPeriodView where
+        /// the user can select a period.
         /// </summary>
         private void ClassesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -85,9 +86,8 @@ namespace KMSCalendar.Views
             SelectPeriodControlLoaded.Invoke(this, new EventArgs());
             Swap();
         }
-        private void GoToNewClassButton_Clicked(object sender, EventArgs e)
-        {
+
+        private void GoToNewClassButton_Clicked(object sender, EventArgs e) => 
             Navigation.PushAsync(new NewClassPage(this));
-        }
     }
 }

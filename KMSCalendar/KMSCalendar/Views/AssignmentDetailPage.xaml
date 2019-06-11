@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.AssignmentDetailPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KMSCalendar.Views.AssignmentDetailPage"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete"
-                     Icon="delete-icon.png"
+        <ToolbarItem Icon="delete-icon.png"
+                     Text="Delete"
                      Command="{Binding DeleteAssignmentCommand}"
                      Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
@@ -14,20 +14,20 @@
     <ContentPage.Content>
         <StackLayout Padding="15"
                      BackgroundColor="{DynamicResource NavigationBackground}">
-            
+
             <Label Text="{Binding Assignment.Name}"
-                   FontSize="Medium" 
-                   FontAttributes="Bold" />
-            
-            <Label Margin="0,5,0,20" 
+                   FontAttributes="Bold"
+                   FontSize="Medium" />
+
+            <Label Margin="0,5,0,20"
                    Text="{Binding Assignment.Description}"
                    FontSize="Small" />
 
             <Label Text="{Binding Assignment.Class.Name}"
-                   FontSize="Medium" 
-                   FontAttributes="Bold" />
+                   FontAttributes="Bold"
+                   FontSize="Medium" />
 
-            <Label Margin="0,5,0,20" 
+            <Label Margin="0,5,0,20"
                    Text="{Binding Assignment.Class.Teacher.Name}"
                    FontSize="Small" />
 

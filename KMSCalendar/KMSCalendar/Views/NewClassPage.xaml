@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.NewClassPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:control="clr-namespace:KMSCalendar.Controls"
-             x:Class="KMSCalendar.Views.NewClassPage"
              Title="Create a new class"
              BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Vertical"
@@ -18,72 +18,80 @@
                        CornerRadius="10">
 
                     <ScrollView>
-                        <!-- contents go here -->
-                        <!-- Enter a name -->
+                        <!--  contents go here  -->
+                        <!--  Enter a name  -->
                         <Frame Grid.Row="5">
                             <Grid>
+
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="32"/>
-                                    <RowDefinition Height="32"/>
-                                    <RowDefinition Height="300"/>
-                                    <RowDefinition Height="32"/>
+                                    <RowDefinition Height="32" />
+                                    <RowDefinition Height="32" />
+                                    <RowDefinition Height="300" />
+                                    <RowDefinition Height="32" />
                                 </Grid.RowDefinitions>
+
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="Class Name:" />
+
                                 <Entry x:Name="ClassNameEntry"
-                                       Placeholder="Class Name"
+                                       Grid.Column="1"
                                        Text=""
-                                       Grid.Column="1"/>
+                                       Placeholder="Class Name" />
 
+                                <!--  Select a period  -->
+                                <Label Grid.Row="1"
+                                       Text="Period: " />
 
-                                <!-- Select a period -->
-                                <Label Text="Period: "
-                                       Grid.Row="1"/>
-                                <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                                <StackLayout Grid.Row="1"
+                                             Grid.Column="1"
+                                             Orientation="Horizontal">
+
                                     <Label x:Name="NewPeriodLabel"
-                                       BindingContext="{x:Reference Name=PeriodStepper}"
-                                       Text="{Binding Value}"/>
+                                           BindingContext="{x:Reference Name=PeriodStepper}"
+                                           Text="{Binding Value}" />
+
                                     <Stepper x:Name="PeriodStepper"
-                                         Minimum="0"
-                                         Maximum="15"
-                                         Increment="1"
-                                         HorizontalOptions="Center"
-                                         VerticalOptions="CenterAndExpand"
-                                         Value="1"/>
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="CenterAndExpand"
+                                             Increment="1"
+                                             Maximum="15"
+                                             Minimum="0"
+                                             Value="1" />
+
                                 </StackLayout>
 
 
-                                <!-- Search for a Teacher -->
-                                <StackLayout x:Name="SearchAreaStackLayout" 
-                                             Grid.Row="2" 
+                                <!--  Search for a Teacher  -->
+                                <StackLayout x:Name="SearchAreaStackLayout"
+                                             Grid.Row="2"
                                              Grid.ColumnSpan="2"
                                              HorizontalOptions="Center">
 
                                     <SearchBar x:Name="TeacherSearchBar"
-                                       Placeholder="Search"
-                                       Margin="0,0,0,10" />
+                                               Margin="0,0,0,10"
+                                               Placeholder="Search" />
 
                                     <ListView x:Name="TeachersListView"
-                                      IsPullToRefreshEnabled="true"
-                                      ItemsSource="{Binding Teachers}"
-                                      ItemSelected="TeachersListView_ItemSelected">
+                                              ItemsSource="{Binding Teachers}"
+                                              IsPullToRefreshEnabled="true"
+                                              ItemSelected="TeachersListView_ItemSelected">
 
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <ViewCell Height="30">
                                                     <Grid Padding="10">
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition/>
-                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
                                                         </Grid.ColumnDefinitions>
 
                                                         <Label Text="{Binding Name}"
-                                                       FontSize="16"
-                                                       LineBreakMode="NoWrap" />
+                                                               FontSize="16"
+                                                               LineBreakMode="NoWrap" />
 
                                                         <Label Grid.Column="1"
                                                                Text="School"
@@ -96,16 +104,15 @@
                                     </ListView>
                                 </StackLayout>
 
-
                                 <Button x:Name="DoneButton"
+                                        Grid.Row="3"
+                                        Grid.ColumnSpan="2"
                                         BackgroundColor="{DynamicResource NavigationTertiary}"
-                                        TextColor="White"
-                                        Text="Add the class"
                                         BorderWidth="0"
                                         CornerRadius="10"
-                                        Clicked="DoneButton_Clicked" 
-                                        Grid.Row="3"
-                                        Grid.ColumnSpan="2"/>
+                                        Text="Add the class"
+                                        TextColor="White"
+                                        Clicked="DoneButton_Clicked" />
                             </Grid>
                         </Frame>
                     </ScrollView>

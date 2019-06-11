@@ -2,17 +2,16 @@
 <ContentPage x:Class="KMSCalendar.Views.NewAssignmentPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="Cancel_Clicked"
-                     Icon="cancel.png"
-                     Text="Cancel" />
+        <ToolbarItem Icon="cancel.png"
+                     Text="Cancel"
+                     Clicked="Cancel_Clicked" />
 
-        <ToolbarItem Clicked="Save_Clicked"
-                     Icon="save.png"
-                     Text="Save" />
+        <ToolbarItem Icon="save.png"
+                     Text="Save"
+                     Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -27,47 +26,45 @@
                    BackgroundColor="{DynamicResource NavigationBackground}"
                    Text="{Binding Assignment.Name}"
                    Placeholder="Assignment name"
+                   FontSize="Small"
                    TextColor="{DynamicResource Text}"
-                   FontSize="Small" 
-                   Keyboard="Text"/>
+                   Keyboard="Text" />
 
             <Label Text="Description"
                    FontSize="Medium" />
 
-            <Editor BackgroundColor="{DynamicResource NavigationBackground}"
-                    HeightRequest="100"
+            <Editor HeightRequest="100"
                     Margin="0,-10,0,0"
+                    BackgroundColor="{DynamicResource NavigationBackground}"
                     Text="{Binding Assignment.Description}"
                     Placeholder="This is an item description"
+                    FontSize="Small"
                     TextColor="{DynamicResource Text}"
-                    FontSize="Small" 
-                    Keyboard="Text"/>
+                    Keyboard="Text" />
 
             <Label Text="Due Date"
                    FontSize="Medium" />
 
             <DatePicker Margin="0,-10,0,0"
                         BackgroundColor="{DynamicResource NavigationBackground}"
-                        Date="{Binding Assignment.DueDate}"
-                        TextColor="{DynamicResource Text}" />
+                        TextColor="{DynamicResource Text}"
+                        Date="{Binding Assignment.DueDate}" />
 
             <Label Text="Class"
                    FontSize="Medium" />
 
             <Picker x:Name="ClassPicker"
                     ItemsSource="{Binding SubscribedClasses}"
-                    ItemDisplayBinding="{Binding Name}"
-                    Margin="0, -10, 0, 20" />
+                    Margin="0,-10,0,20"
+                    ItemDisplayBinding="{Binding Name}" />
 
             <Button x:Name="GoToSearchButton"
                     BackgroundColor="{DynamicResource NavigationTertiary}"
-                    TextColor="White"
-                    Text="Can't find your class? Add a new one here"
                     BorderWidth="0"
                     CornerRadius="10"
+                    Text="Can't find your class? Add a new one here"
+                    TextColor="White"
                     Clicked="GoToSearchButton_Clicked" />
-            
-            
 
         </StackLayout>
     </ContentPage.Content>

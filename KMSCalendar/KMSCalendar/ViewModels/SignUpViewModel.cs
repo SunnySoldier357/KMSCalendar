@@ -1,13 +1,14 @@
-﻿using ModelValidation;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
+
+using ModelValidation;
 
 using Xamarin.Forms;
 
-using KMSCalendar.Views;
-using System.Threading.Tasks;
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
+using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels
 {

@@ -13,8 +13,7 @@ namespace KMSCalendar.Models.Data
         public override bool Equals(object obj)
         {
             if (obj is Teacher teacher)
-                return Name == teacher.Name &&
-                    Id == teacher.Id;
+                return Id == teacher.Id;
 
             return false;
         }

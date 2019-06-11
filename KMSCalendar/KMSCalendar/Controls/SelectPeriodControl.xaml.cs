@@ -5,7 +5,6 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Views;
 
-
 namespace KMSCalendar.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]

@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.MenuPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KMSCalendar.Views.MenuPage"
              Title="Menu">
 
-    <!-- This view is the hamburger menu -->
+    <!--  This view is the hamburger menu  -->
     <StackLayout VerticalOptions="FillAndExpand"
                  BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
         <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
-                <Image HeightRequest="30"
-                           WidthRequest="30"
-                           Source="calendar_white.png" />
+            <Image HeightRequest="30"
+                   WidthRequest="30"
+                   Source="calendar_white.png" />
 
-                <Label x:Name="UserNameLabel" 
-                           HorizontalOptions="Center"
-                           Margin="0,5,0,0"
-                           Text="{Binding}"
-                           FontSize="Small"
-                           TextColor="White" />
-         </StackLayout>
+            <Label x:Name="UserNameLabel"
+                   HorizontalOptions="Center"
+                   Margin="0,5,0,0"
+                   Text="{Binding}"
+                   FontSize="Small"
+                   TextColor="White" />
+        </StackLayout>
 
         <ListView x:Name="MenuListView"
                   HasUnevenRows="True">
@@ -28,18 +28,18 @@
                     <ViewCell>
                         <StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <Image Margin="20,5,0,-3"
-                                       HeightRequest="20"
+                                <Image HeightRequest="20"
                                        WidthRequest="20"
-                                       Source="{Binding Icon}" />
+                                       Source="{Binding Icon}"
+                                       Margin="20,5,0,-3" />
 
                                 <Label Margin="60,15,0,7"
                                        Text="{Binding Title}"
-                                       TextColor="{DynamicResource Text}"
-                                       FontSize="20" />
-                                
+                                       FontSize="20"
+                                       TextColor="{DynamicResource Text}" />
+
                             </StackLayout>
-                            
+
                             <BoxView HeightRequest="0.5"
                                      BackgroundColor="{DynamicResource NavigationBackground}" />
                         </StackLayout>

@@ -11,15 +11,12 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AssignmentDetailPage : ContentPage
     {
-        //* Private Properties
-        private AssignmentDetailViewModel viewModel;
-
         //* Constructors
         public AssignmentDetailPage(Assignment assignment)
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AssignmentDetailViewModel(assignment);
+            BindingContext = new AssignmentDetailViewModel(assignment);
         }
 
         //* Event Handlers

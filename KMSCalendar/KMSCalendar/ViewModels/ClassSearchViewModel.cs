@@ -87,6 +87,8 @@ namespace KMSCalendar.ViewModels
 
         private class DuplicateClassNameComparer : EqualityComparer<Class>
         {
+            // TODO SUNNY Update sort algorithm
+
             //* Overridden Methods
             public override bool Equals(Class x, Class y) => x.Name == y.Name;
 

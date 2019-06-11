@@ -20,7 +20,7 @@ namespace KMSCalendar.Models.Data
         /// <summary>The unique ID of the entity.</summary>
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        //* Static Methods
+        //* Public Static Methods
 
         /// <summary>
         /// A method used to seed values if the MockDataStore is being used.
@@ -49,6 +49,7 @@ namespace KMSCalendar.Models.Data
             return null;
         }
 
+        //* Private Static Methods
         private static int getAnotherNumber(int min, int max, int num)
         {
             Random random = new Random();

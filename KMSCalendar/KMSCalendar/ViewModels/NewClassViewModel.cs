@@ -1,25 +1,22 @@
-﻿using KMSCalendar.Models.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-using KMSCalendar.Services.Data;
+using KMSCalendar.Models.Data;
 
 namespace KMSCalendar.ViewModels
 {
     public class NewClassViewModel : BaseViewModel
     {
+        //* Private Properties
         private List<Teacher> teachers;
 
+        //* Public Properties
         public List<Teacher> Teachers
         {
             get => teachers;
             set => setProperty(ref teachers, value);
         }
 
-        public NewClassViewModel()
-        {
-            Teachers = new List<Teacher>();
-        }
+        //* Constructors
+        public NewClassViewModel() => Teachers = new List<Teacher>();
     }
 }

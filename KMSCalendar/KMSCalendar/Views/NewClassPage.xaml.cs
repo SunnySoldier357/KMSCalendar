@@ -1,56 +1,62 @@
-﻿using KMSCalendar.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using KMSCalendar.Models.Data;
+using KMSCalendar.ViewModels;
+
 namespace KMSCalendar.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewClassPage : ContentPage
 	{
-        //public Page parentPage;
+        //* Public Properties
 
-        public NewClassViewModel viewModel;
+        // public Page ParentPage;
 
+        public NewClassViewModel ViewModel;
+
+        //* Constructors
 		public NewClassPage(Page parentPage)
 		{
-            //this.parentPage = parentPage;
+            // ParentPage = parentPage;
 
-            viewModel = new NewClassViewModel();
-            Models.Data.Teacher t = new Models.Data.Teacher();
+            ViewModel = new NewClassViewModel();
+
+            Teacher t = new Teacher();
             t.Name = "Mr. Parker";
-            viewModel.Teachers.Add(t);
+            ViewModel.Teachers.Add(t);
 
-            Models.Data.Teacher t1 = new Models.Data.Teacher();
+            Teacher t1 = new Teacher();
             t1.Name = "Ms. Boas";
-            viewModel.Teachers.Add(t1);
+            ViewModel.Teachers.Add(t1);
 
-            InitializeComponent ();
-            BindingContext = viewModel;
+            InitializeComponent();
+            BindingContext = ViewModel;
 		}
+
+        //* Event Handlers
 
         /// <summary>
         /// Goes back to the class search page
         /// </summary>
         private void DoneButton_Clicked(object sender, EventArgs e)
         {
-            //TODO: SUNNY: Add the new class to the database
+            // TODO: SUNNY: Add the new class to the database
 
             var MyAppsFirstPage = new ClassSearchPage();
             Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
 
             Application.Current.MainPage.Navigation.PushAsync(new ClassSearchPage());
-            Application.Current.MainPage.Navigation.PopAsync(); //Remove the page currently on top.
+
+            // Remove the page currently on top.
+            Application.Current.MainPage.Navigation.PopAsync();
         }
 
         private void TeachersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            //get the teacher selected
+            // Get the teacher selected
         }
     }
 }

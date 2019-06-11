@@ -7,6 +7,7 @@ namespace KMSCalendar.Services.Data
 {
     public interface IDataStore<T> where T : TableData
     {
+        //* Interface Methods
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
         Task<T> GetItemAsync(string id);
         Task<T> AddItemAsync(T item);
