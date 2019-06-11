@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar.Android", "KMSCalendar\KMSCalendar.Android\KMSCalendar.Android.csproj", "{24CE3C36-16B9-426D-AA0C-5961ECF8D88C}"
 EndProject
@@ -9,9 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar.iOS", "KMSCalen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar.UWP", "KMSCalendar\KMSCalendar.UWP\KMSCalendar.UWP.csproj", "{938D43FB-9D64-460A-9D3B-CF9B899D8209}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar.MobileAppService", "KMSCalendar\KMSCalendar.MobileAppService\KMSCalendar.MobileAppService.csproj", "{22CE9F51-4A09-4571-836C-24B3D9B2E437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KMSCalendar.MobileAppService", "KMSCalendar\KMSCalendar.MobileAppService\KMSCalendar.MobileAppService.csproj", "{22CE9F51-4A09-4571-836C-24B3D9B2E437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar", "KMSCalendar\KMSCalendar\KMSCalendar.csproj", "{F6E20DB3-1863-4486-B8D5-64D507144055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KMSCalendar", "KMSCalendar\KMSCalendar\KMSCalendar.csproj", "{F6E20DB3-1863-4486-B8D5-64D507144055}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{B5C75333-0A35-4F4B-994C-9041C80FA30C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSCalendar.UnitTest", "Unit Tests\KMSCalendar.UnitTest\KMSCalendar.UnitTest.csproj", "{FD438E7A-0480-4FCF-BF07-00D0C831747C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -209,9 +213,36 @@ Global
 		{F6E20DB3-1863-4486-B8D5-64D507144055}.Release|x86.ActiveCfg = Release|Any CPU
 		{F6E20DB3-1863-4486-B8D5-64D507144055}.Release|x86.Build.0 = Release|Any CPU
 		{F6E20DB3-1863-4486-B8D5-64D507144055}.Release|x86.Deploy.0 = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|x64.Build.0 = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Debug|x86.Build.0 = Debug|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|ARM.Build.0 = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|iPhone.Build.0 = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|x64.ActiveCfg = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|x64.Build.0 = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FD438E7A-0480-4FCF-BF07-00D0C831747C} = {B5C75333-0A35-4F4B-994C-9041C80FA30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87468CB1-1363-40D8-BEE5-A869B6C10CAE}
