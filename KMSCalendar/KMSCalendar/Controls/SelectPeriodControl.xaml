@@ -27,7 +27,7 @@
 
     <ContentView.Content>
         <StackLayout>
-            <Grid HeightRequest="50"
+            <Grid HeightRequest="60"
                   Margin="0"
                   Padding="0">
 
@@ -53,54 +53,55 @@
             </Grid>
 
             <ScrollView>
-                <StackLayout>
-                    <ListView x:Name="PeriodsListView"
-                              ItemsSource="{Binding Periods}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid Padding="10">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="5*" />
-                                        </Grid.ColumnDefinitions>
+                <ListView x:Name="PeriodsListView"
+                          ItemsSource="{Binding Periods}"
+                          VerticalOptions="Start">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="100">
+                                <Grid Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5*" />
+                                    </Grid.ColumnDefinitions>
 
-                                        <Label Text="x"
-                                               FontSize="16"
-                                               LineBreakMode="NoWrap" />
+                                    <Label Text="x"
+                                           FontSize="14"
+                                           VerticalOptions="End"/>
 
-                                        <Label Grid.Column="1"
-                                               Text="{Binding}"
-                                               FontSize="13"
-                                               LineBreakMode="NoWrap" />
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-
-                    <Label Text="Can't find your period? Add a new one here:" />
-
-                    <StackLayout Orientation="Horizontal">
-
-                        <Label Text="Period: " />
-
-                        <Label x:Name="NewPeriodLabel"
-                               BindingContext="{x:Reference Name=PeriodStepper}"
-                               Text="{Binding Value}" />
-
-                        <Stepper x:Name="PeriodStepper"
-                                 HorizontalOptions="Center"
-                                 VerticalOptions="CenterAndExpand"
-                                 Increment="1"
-                                 Maximum="15"
-                                 Minimum="0"
-                                 Value="1" />
-
-                    </StackLayout>
-                </StackLayout>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding}"
+                                           FontSize="11"
+                                           VerticalOptions="End"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </ScrollView>
+
+            <StackLayout>
+
+                <Label Text="Can't find your period? Add a new one here:" HorizontalOptions="Center"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                    <Label Text="Period: " />
+
+                    <Label x:Name="NewPeriodLabel"
+                           BindingContext="{x:Reference Name=PeriodStepper}"
+                           Text="{Binding Value}" />
+
+                    <Stepper x:Name="PeriodStepper"
+                             HorizontalOptions="Center"
+                             VerticalOptions="CenterAndExpand"
+                             Increment="1"
+                             Maximum="15"
+                             Minimum="0"
+                             Value="1" />
+
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
     </ContentView.Content>
-
 </ContentView>
