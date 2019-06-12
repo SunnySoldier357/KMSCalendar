@@ -42,7 +42,12 @@ namespace KMSCalendar.Controls
         private void AddNewPeriodButton_Clicked(object sender, EventArgs e)
         {
             int newPeriod = int.Parse(NewPeriodLabel.Text);
-            ParentPage.ViewModel.Periods.Add(newPeriod);
+
+            ParentPage.ViewModel.LoadPeriods(newPeriod);
+
+            //I tried using these to update the list but they didn't work. Databinding issue?
+            //ParentPage.ViewModel.Periods.Add(newPeriod);
+            //PeriodsListView.BeginRefresh();
 
             //TODO: SUNNY add the new Period to the listview and database
         }

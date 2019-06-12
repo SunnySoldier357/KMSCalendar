@@ -85,6 +85,21 @@ namespace KMSCalendar.ViewModels
             Periods = periods.ToList();
         }
 
+        /// <summary>
+        /// For some reason I need this method and cannot just add a new int to the periods list
+        /// </summary>
+        public void LoadPeriods(int newPeriod)
+        {
+            var periods =
+                from _class in classes.AsParallel()
+                where _class.Name == SelectedClass.Name &&
+                    _class.Teacher.Equals(SelectedClass.Teacher)
+                select _class.Period;
+
+            Periods = periods.ToList();
+            Periods.Add(newPeriod);
+        }
+
         private class DuplicateClassNameComparer : EqualityComparer<Class>
         {
             //* Overridden Methods
