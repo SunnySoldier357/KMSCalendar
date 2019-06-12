@@ -39,6 +39,13 @@ namespace KMSCalendar.Controls
             ParentPage.ViewModel.LoadPeriods();
         }
 
-        //TODO: MATEO add the option to add a new period
+        private void AddNewPeriodButton_Clicked(object sender, EventArgs e)
+        {
+            int newPeriod = int.Parse(NewPeriodLabel.Text);
+            ParentPage.ViewModel.Periods.Add(newPeriod);
+
+            //TODO: SUNNY add the new Period to the listview and database
+        }
+
     }
 }
