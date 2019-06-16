@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Controls;
 using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
+using System.Diagnostics;
 
 namespace KMSCalendar.Views
 {
@@ -39,11 +40,10 @@ namespace KMSCalendar.Views
         //* Public Methods
         public async Task GoToCalendarAsync(int periodChosen)
         {
+            var selectedClass = ViewModel.SelectedClass;
+
             // TODO: SUNNY add the period selected and class selected to the database.
 
-            // TODO: MATEO get the selected class
-
-            var x = ClassesListView.SelectedItem;
 
             // TODO: MATEO fix the navigation mess!
 
@@ -72,6 +72,7 @@ namespace KMSCalendar.Views
             SearchAreaStackLayout.IsVisible = !SearchAreaStackLayout.IsVisible;
             PopUpGrid.IsVisible = !PopUpGrid.IsVisible;
         }
+
 
         //* Event Handlers
 
