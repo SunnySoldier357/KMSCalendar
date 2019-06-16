@@ -7,7 +7,6 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Controls;
 using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
-using System.Diagnostics;
 
 namespace KMSCalendar.Views
 {

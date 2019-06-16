@@ -28,6 +28,7 @@
                                     <RowDefinition Height="32" />
                                     <RowDefinition Height="300" />
                                     <RowDefinition Height="32" />
+                                    <RowDefinition Height="32" />
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
@@ -39,7 +40,7 @@
 
                                 <Entry x:Name="ClassNameEntry"
                                        Grid.Column="1"
-                                       Text=""
+                                       Text="{Binding ClassName}"
                                        Placeholder="Class Name" />
 
                                 <!--  Select a period  -->
@@ -60,7 +61,7 @@
                                              Increment="1"
                                              Maximum="15"
                                              Minimum="0"
-                                             Value="1" />
+                                             Value="{Binding Period}" />
 
                                 </StackLayout>
 
@@ -104,8 +105,19 @@
                                     </ListView>
                                 </StackLayout>
 
+                                <Label Text="Add a new teacher:" 
+                                       Grid.Row="3"
+                                       Grid.Column="0"
+                                       VerticalOptions="Center"/>
+                                <Entry x:Name="newTeacherNameEntry"
+                                       Placeholder="Teacher's Name"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       VerticalOptions="Center"
+                                       Text="{Binding TeacherName}"/>
+
                                 <Button x:Name="DoneButton"
-                                        Grid.Row="3"
+                                        Grid.Row="4"
                                         Grid.ColumnSpan="2"
                                         BackgroundColor="{DynamicResource NavigationTertiary}"
                                         BorderWidth="0"
