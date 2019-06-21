@@ -25,8 +25,6 @@ namespace KMSCalendar.Views
             InitializeComponent();
 
             BindingContext = viewModel = new NewAssignmentViewModel(dateSelected);
-
-            // TODO: SUNNY populate the subscribedClasses in the viewModel with actual data from database
         }
 
         //* Event Handlers
@@ -42,7 +40,7 @@ namespace KMSCalendar.Views
             await Navigation.PopModalAsync();
         }
 
-        private void GoToSearchButton_Clicked(object sender, EventArgs e) => 
+        private void GoToSearchButton_Clicked(object sender, EventArgs e) =>
             Navigation.PushAsync(new ClassSearchPage());
     }
 }
