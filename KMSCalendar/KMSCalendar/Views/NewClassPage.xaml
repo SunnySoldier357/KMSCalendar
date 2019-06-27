@@ -9,7 +9,7 @@
         <StackLayout>
             <StackLayout Orientation="Vertical"
                          VerticalOptions="CenterAndExpand"
-                         Margin="0,70,0,70"
+                         Margin="0,50,0,50"
                          Spacing="0">
 
                 <Frame VerticalOptions="CenterAndExpand"
@@ -26,8 +26,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="32" />
                                     <RowDefinition Height="32" />
-                                    <RowDefinition Height="300" />
-                                    <RowDefinition Height="32" />
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition Height="50" />
                                     <RowDefinition Height="32" />
                                 </Grid.RowDefinitions>
 
@@ -53,7 +53,8 @@
 
                                     <Label x:Name="NewPeriodLabel"
                                            BindingContext="{x:Reference Name=PeriodStepper}"
-                                           Text="{Binding Value}" />
+                                           Text="{Binding Value}" 
+                                           VerticalOptions="Center"/>
 
                                     <Stepper x:Name="PeriodStepper"
                                              HorizontalOptions="Center"
@@ -72,9 +73,13 @@
                                              Grid.ColumnSpan="2"
                                              HorizontalOptions="Center">
 
+                                    <Label Text="Search for your Teacher"/>
+
                                     <SearchBar x:Name="TeacherSearchBar"
-                                               Margin="0,0,0,10"
-                                               Placeholder="Search" />
+                                               Margin="0,0,0,4"
+                                               Placeholder="Search" 
+                                               Text="{Binding SearchTerm}"
+                                               TextChanged="TeacherSearchBar_TextChanged"/>
 
                                     <ListView x:Name="TeachersListView"
                                               ItemsSource="{Binding Teachers}"
@@ -83,29 +88,32 @@
 
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
-                                                <ViewCell Height="30">
-                                                    <Grid Padding="10">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition />
-                                                            <ColumnDefinition />
-                                                        </Grid.ColumnDefinitions>
+                                                <ViewCell Height="25">
+                                                    <Frame BorderColor="LightGray" CornerRadius="3" Padding="10, 4, 10, 4" Margin="0, 0, 0, 2">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition />
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
 
-                                                        <Label Text="{Binding Name}"
-                                                               FontSize="16"
-                                                               LineBreakMode="NoWrap" />
+                                                            <Label Text="{Binding Name}"
+                                                                   FontSize="16"
+                                                                   LineBreakMode="NoWrap" />
 
-                                                        <Label Grid.Column="1"
-                                                               Text="School"
-                                                               FontSize="13"
-                                                               LineBreakMode="NoWrap" />
-                                                    </Grid>
+                                                            <Label Grid.Column="1"
+                                                                   Text="School"
+                                                                   FontSize="13"
+                                                                   LineBreakMode="NoWrap" 
+                                                                   HorizontalOptions="End"/>
+                                                        </Grid>
+                                                    </Frame>
                                                 </ViewCell>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
                                 </StackLayout>
 
-                                <Label Text="Add a new teacher:" 
+                                <Label Text="Add a new teacher (if not on the list):" 
                                        Grid.Row="3"
                                        Grid.Column="0"
                                        VerticalOptions="Center"/>
@@ -124,7 +132,8 @@
                                         CornerRadius="10"
                                         Text="Add the class"
                                         TextColor="White"
-                                        Clicked="DoneButton_Clicked" />
+                                        Clicked="DoneButton_Clicked"
+                                        Margin="0, 5, 0, 0"/>
                             </Grid>
                         </Frame>
                     </ScrollView>

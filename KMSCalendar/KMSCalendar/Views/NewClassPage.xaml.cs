@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
+using System.Linq;
 
 namespace KMSCalendar.Views
 {
@@ -12,23 +13,38 @@ namespace KMSCalendar.Views
 	public partial class NewClassPage : ContentPage
 	{
         //* Public Properties
-
-            //TODO: MATEO get the filtering of the teachers to work.
-
-        // public Page ParentPage;
-
         public NewClassViewModel ViewModel;
 
         //* Constructors
 		public NewClassPage(Page parentPage)
 		{
-            // ParentPage = parentPage;
-
             InitializeComponent();
             BindingContext = ViewModel= new NewClassViewModel();
 		}
 
-        //* Event Handlers
+        //* Event Handlers 
+        private void TeacherSearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterData(ViewModel.SearchTerm);
+        }
+        /// <summary>
+        /// filters the list of teachers only if the teachers name contains the searchbar term entered
+        /// </summary>
+        /// <param name="filter">The searchbar term entered</param>
+        private void FilterData(string filter)
+        {
+            TeachersListView.BeginRefresh();
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                TeachersListView.ItemsSource = ViewModel.Teachers;
+            }
+            else
+            {
+                TeachersListView.ItemsSource = ViewModel.Teachers.Where(x => x.Name.ToLower().Contains(filter.ToLower()));
+            }
+            TeachersListView.EndRefresh();
+        }
+
         private void TeachersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             // Set the teacher selected
@@ -43,6 +59,9 @@ namespace KMSCalendar.Views
             if(ViewModel.TeacherName != null && ViewModel.ClassName != null)
             {
                 Teacher t = new Teacher { Name = ViewModel.TeacherName };
+
+                //TODO: SUNNY add the new teacher to the database
+
                 addClass(ViewModel.ClassName, ViewModel.Period, t);
             }
             else if(ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)

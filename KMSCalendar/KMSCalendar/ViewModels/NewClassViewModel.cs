@@ -12,6 +12,7 @@ namespace KMSCalendar.ViewModels
         //* Private Properties
         private List<Teacher> teachers;
         private Teacher selectedTeacher;
+        private string searchTerm;
         private string className;
         private string teacherName;
         private int period;
@@ -21,6 +22,11 @@ namespace KMSCalendar.ViewModels
         {
             get => teachers;
             set => setProperty(ref teachers, value);
+        }
+        public string SearchTerm
+        {
+            get => searchTerm;
+            set => setProperty(ref searchTerm, value);
         }
         public Teacher SelectedTeacher
         {
@@ -50,6 +56,7 @@ namespace KMSCalendar.ViewModels
             var dataStore = DependencyService.Get<IDataStore<Teacher>>();
             Teachers = new List<Teacher>(dataStore.GetItemsAsync(false).Result);
             Period = 1;
+            SearchTerm = "";
         }
     }
 }
