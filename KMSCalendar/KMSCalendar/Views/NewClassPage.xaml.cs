@@ -85,10 +85,11 @@ namespace KMSCalendar.Views
             //TODO: SUNNY add the new class to the database
 
             //Navigates back to the class search page
-            var MyAppsFirstPage = new ClassSearchPage();
-            Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
-            Application.Current.MainPage.Navigation.PushAsync(new ClassSearchPage());
-            Application.Current.MainPage.Navigation.PopAsync();         // Remove the page currently on top.
+            //var MyAppsFirstPage = new ClassSearchPage();
+            //Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
+            //Application.Current.MainPage.Navigation.PushAsync(new ClassSearchPage());
+            //Application.Current.MainPage.Navigation.PopAsync();         // Remove the page currently on top.
+            Navigation.PopModalAsync();
         }
     }
 }
