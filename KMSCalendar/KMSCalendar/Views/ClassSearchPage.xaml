@@ -39,6 +39,12 @@
                         </Grid>
 
                         <StackLayout x:Name="SearchAreaStackLayout">
+                            <Button x:Name="BackButton"
+                                    Text="Back"
+                                    BorderWidth="0"
+                                    BackgroundColor="Transparent"
+                                    Clicked="BackButton_Clicked"/>
+
                             <Frame Padding="0"
                                    CornerRadius="10"
                                    BorderColor="{DynamicResource NavigationBackgroundLight}">

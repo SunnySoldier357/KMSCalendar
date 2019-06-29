@@ -4,7 +4,6 @@
     {
         About,
         Calendar,
-        ClassSearch,
         Settings,
     }
 }

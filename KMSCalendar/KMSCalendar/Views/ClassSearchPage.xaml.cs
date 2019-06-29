@@ -60,7 +60,7 @@ namespace KMSCalendar.Views
             // await Application.Current.MainPage.Navigation.PopAsync();
 
             // This navigates to the instance of the calendar page through the menu
-            await RootPage.NavigateFromMenu(1);
+            await Navigation.PopModalAsync();
         }
 
         /// <summary>
@@ -88,6 +88,11 @@ namespace KMSCalendar.Views
         }
 
         private void GoToNewClassButton_Clicked(object sender, EventArgs e) => 
-            Navigation.PushAsync(new NewClassPage(this));
+            Navigation.PushModalAsync(new NewClassPage(this));
+
+        private void BackButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
     }
 }

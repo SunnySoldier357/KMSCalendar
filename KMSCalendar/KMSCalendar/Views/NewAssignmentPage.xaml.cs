@@ -41,6 +41,6 @@ namespace KMSCalendar.Views
         }
 
         private void GoToSearchButton_Clicked(object sender, EventArgs e) =>
-            Navigation.PushAsync(new ClassSearchPage());
+            Navigation.PushModalAsync(new ClassSearchPage());
     }
 }

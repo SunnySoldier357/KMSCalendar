@@ -5,7 +5,7 @@
              Title="Menu">
 
     <!--  This view is the hamburger menu  -->
-    <StackLayout VerticalOptions="FillAndExpand"
+    <StackLayout VerticalOptions="Start"
                  BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
         <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
@@ -20,6 +20,14 @@
                    FontSize="Small"
                    TextColor="White" />
         </StackLayout>
+
+        <Button x:Name="SearchButton"
+                Text="Class Search"
+                BorderWidth="0"
+                BackgroundColor="{DynamicResource NavigationTertiary}"
+                Padding="5"
+                CornerRadius="5"
+                Clicked="SearchButton_Clicked"/>
 
         <ListView x:Name="MenuListView"
                   HasUnevenRows="True">
