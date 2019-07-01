@@ -11,6 +11,25 @@
         <vm:ClassSearchViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ActionButtonStyle"
+                   TargetType="Button">
+                <Setter Property="Margin" Value="0" />
+
+                <Setter Property="Padding" Value="0" />
+
+                <Setter Property="TextColor" Value="{DynamicResource Text}" />
+
+                <Setter Property="BorderColor" Value="Transparent" />
+
+                <Setter Property="BorderWidth" Value="0" />
+
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
             <!--
@@ -39,11 +58,30 @@
                         </Grid>
 
                         <StackLayout x:Name="SearchAreaStackLayout">
-                            <Button x:Name="BackButton"
+
+                            <Grid HeightRequest="60"
+                                  Margin="0"
+                                  Padding="0">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:Name="BackButton"
+                                    HorizontalOptions="Start"
+                                    Style="{StaticResource ActionButtonStyle}"
                                     Text="Back"
                                     BorderWidth="0"
-                                    BackgroundColor="Transparent"
                                     Clicked="BackButton_Clicked"/>
+
+                                <Button x:Name="DoneButton"
+                                    Grid.Column="1"
+                                    HorizontalOptions="End"
+                                    Style="{StaticResource ActionButtonStyle}"
+                                    Text="Done"
+                                    Clicked="DoneButton_Clicked"/>
+                            </Grid>
 
                             <Frame Padding="0"
                                    CornerRadius="10"

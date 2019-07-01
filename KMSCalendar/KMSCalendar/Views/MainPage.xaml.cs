@@ -15,6 +15,10 @@ namespace KMSCalendar.Views
         public Dictionary<int, NavigationPage> MenuPages =
             new Dictionary<int, NavigationPage>();
 
+        // This is a static public property that allows downstream pages to get a handle to the MainPage instance 
+        // in order to call methods that are in this class. Hide() is called from MenuPage.xaml.cs 
+        public static MainPage Current;
+
         //* Constructor
         public MainPage()
         {
@@ -24,6 +28,8 @@ namespace KMSCalendar.Views
 
             // The default page to load
             MenuPages.Add((int) MenuItemType.Calendar, (NavigationPage) Detail);
+
+            Current = this;
         }
 
         // Public Methods
@@ -59,5 +65,11 @@ namespace KMSCalendar.Views
                 IsPresented = false;
             }
         }
+
+        /// <summary>
+        /// Hides the hamburger menu navigation drawer so when the user goes to the modal ClassSearchPage.xaml.cs page
+        /// </summary>
+        public void Hide() =>
+            IsPresented = false;
     }
 }

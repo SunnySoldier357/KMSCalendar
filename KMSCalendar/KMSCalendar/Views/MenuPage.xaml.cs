@@ -64,6 +64,7 @@ namespace KMSCalendar.Views
         private void SearchButton_Clicked(object sender, System.EventArgs e)
         {
             Navigation.PushModalAsync(new ClassSearchPage());
+            MainPage.Current.Hide(); //Hides the hamburger menu navigation drawer.
         }
     }
 }

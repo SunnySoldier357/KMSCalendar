@@ -94,5 +94,10 @@ namespace KMSCalendar.Views
         {
             Navigation.PopModalAsync();
         }
+
+        private void DoneButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
