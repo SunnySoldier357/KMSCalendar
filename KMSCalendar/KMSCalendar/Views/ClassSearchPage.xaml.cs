@@ -13,6 +13,8 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ClassSearchPage : ContentPage
 	{
+        //TODO: MATEO add the ability to go back from this page.
+
         //* Public Properties
         public ClassSearchViewModel ViewModel;
 
@@ -43,23 +45,7 @@ namespace KMSCalendar.Views
 
             // TODO: SUNNY add the period selected and class selected to the database.
 
-
-            // TODO: MATEO fix the navigation mess!
-
-            //    Clears all of the pages on the navigation stack
-            // var existingPages = Navigation.NavigationStack.ToList();
-            // foreach (var page in existingPages)
-            // {
-            //     Navigation.RemovePage(page);
-            // }
-
-            // var MyAppsFirstPage = new AssignmentsPage();
-            // Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
-
-            // await Application.Current.MainPage.Navigation.PushAsync(new AssignmentsPage());
-            // await Application.Current.MainPage.Navigation.PopAsync();
-
-            // This navigates to the instance of the calendar page through the menu
+            //Closes the page and goes to the last one on the stack
             await Navigation.PopModalAsync();
         }
 
@@ -72,9 +58,7 @@ namespace KMSCalendar.Views
             PopUpGrid.IsVisible = !PopUpGrid.IsVisible;
         }
 
-
         //* Event Handlers
-
         /// <summary>
         /// Invoked when the user selects a class, then shows the selectPeriodView where
         /// the user can select a period.
@@ -95,9 +79,13 @@ namespace KMSCalendar.Views
             Navigation.PopModalAsync();
         }
 
-        private void DoneButton_Clicked(object sender, EventArgs e)
+        private void NextButton_Clicked(object sender, EventArgs e)
         {
-
+            if (ViewModel.SelectedClass != null)
+            {
+                SelectPeriodControlLoaded.Invoke(this, new EventArgs());
+                Swap();
+            }
         }
     }
 }

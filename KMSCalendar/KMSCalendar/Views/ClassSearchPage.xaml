@@ -75,12 +75,12 @@
                                     BorderWidth="0"
                                     Clicked="BackButton_Clicked"/>
 
-                                <Button x:Name="DoneButton"
+                                <Button x:Name="NextButton"
                                     Grid.Column="1"
                                     HorizontalOptions="End"
                                     Style="{StaticResource ActionButtonStyle}"
-                                    Text="Done"
-                                    Clicked="DoneButton_Clicked"/>
+                                    Text="Next"
+                                    Clicked="NextButton_Clicked"/>
                             </Grid>
 
                             <Frame Padding="0"
