@@ -21,11 +21,13 @@
 
                 <Setter Property="TextColor" Value="{DynamicResource Text}" />
 
-                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="BorderColor" Value="{DynamicResource NavigationTertiary}" />
 
                 <Setter Property="BorderWidth" Value="0" />
 
                 <Setter Property="BackgroundColor" Value="Transparent" />
+
+                <Setter Property="TextColor" Value="{DynamicResource NavigationTertiary}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -65,7 +67,6 @@
                                     HorizontalOptions="Start"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Text="Back"
-                                    BorderWidth="0"
                                     Clicked="BackButton_Clicked"/>
 
                                 <Button x:Name="NextButton"

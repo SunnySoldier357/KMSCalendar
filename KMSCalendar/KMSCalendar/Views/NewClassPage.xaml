@@ -20,6 +20,8 @@
                 <Setter Property="BorderWidth" Value="0" />
 
                 <Setter Property="BackgroundColor" Value="Transparent" />
+
+                <Setter Property="TextColor" Value="{DynamicResource NavigationTertiary}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
