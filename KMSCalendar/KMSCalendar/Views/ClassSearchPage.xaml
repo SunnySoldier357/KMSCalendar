@@ -32,13 +32,6 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <!--
-            <Label HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Start"
-                   Margin="0,0,0,0"
-                   Text="Search for your Class!" />
-            -->
-
             <!--  TODO: MATEO Make this page look pretty  -->
 
             <StackLayout Orientation="Vertical"

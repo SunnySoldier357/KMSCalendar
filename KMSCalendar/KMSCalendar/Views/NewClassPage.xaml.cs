@@ -51,12 +51,27 @@ namespace KMSCalendar.Views
             ViewModel.SelectedTeacher = TeachersListView.SelectedItem as Teacher;
         }
 
+        private void DoneButton_Clicked(object sender, EventArgs e)
+        {
+            authenticate();
+        }
+
+        private void BackButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
+
+        private void NextButton_Clicked(object sender, EventArgs e)
+        {
+            authenticate();
+        }
+
         /// <summary>
         /// If the viewModel data is valid, it will go to the addClass() method
         /// </summary>
-        private void DoneButton_Clicked(object sender, EventArgs e)
+        private void authenticate()
         {
-            if(ViewModel.TeacherName != null && ViewModel.ClassName != null)
+            if (ViewModel.TeacherName != null && ViewModel.ClassName != null)
             {
                 Teacher t = new Teacher { Name = ViewModel.TeacherName };
 
@@ -64,7 +79,7 @@ namespace KMSCalendar.Views
 
                 addClass(ViewModel.ClassName, ViewModel.Period, t);
             }
-            else if(ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)
+            else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)
             {
                 addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher);
             }
