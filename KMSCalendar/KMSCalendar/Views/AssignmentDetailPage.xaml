@@ -1,31 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.AssignmentDetailPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KMSCalendar.Views.AssignmentDetailPage"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete"
-                     Icon="delete-icon.png"
+        <ToolbarItem Icon="delete-icon.png"
+                     Text="Delete"
+                     Command="{Binding DeleteAssignmentCommand}"
                      Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <StackLayout Spacing="20"
-                     Padding="15"
+        <StackLayout Padding="15"
                      BackgroundColor="{DynamicResource NavigationBackground}">
-            <Label Text="Name:"
-               FontSize="Medium" />
+
             <Label Text="{Binding Assignment.Name}"
-               FontSize="Small" />
-            <Label Text="Description:"
-               FontSize="Medium" />
-            <Label Text="{Binding Assignment.Description}"
-               FontSize="Small" />
-            <Label Text="Due Date:"
-               FontSize="Medium" />
-            <Label Text="{Binding Assignment.Date}"
-               FontSize="Small" />
+                   FontAttributes="Bold"
+                   FontSize="Medium" />
+
+            <Label Margin="0,5,0,20"
+                   Text="{Binding Assignment.Description}"
+                   FontSize="Small" />
+
+            <Label Text="{Binding ClassDetail}"
+                   FontAttributes="Bold"
+                   FontSize="Medium" />
+
+            <Label Margin="0,5,0,20"
+                   Text="{Binding Assignment.Class.Teacher.Name}"
+                   FontSize="Small" />
+
+            <Label Text="{Binding Assignment.Date, StringFormat='Due Date: {0}'}"
+                   FontSize="Small" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,13 +1,14 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 using Xamarin.Forms;
 
-using KMSCalendar.Models.Entities;
-using KMSCalendar.Services;
+using KMSCalendar.Models.Data;
+using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels
@@ -17,44 +18,74 @@ namespace KMSCalendar.ViewModels
         //* Private Properties
         private IDataStore<Assignment> dataStore;
 
-        //* Public Properties
+        /// <summary>A List of all the Assignments to display</summary>
+        private List<Assignment> assignments;
+        private List<Assignment> filteredAssignments;
 
+        //* Public Properties
+        public bool ShowCalendarDays => Settings.ShowCalendarDays;
+
+        public ICommand FilterAssignmentsCommand { get; set; }
         /// <summary>
         /// The Command that loads Assignments from the IDataStore
         /// </summary>
-        public Command LoadAssignmentsCommand { get; set; }
-
-        /// <summary>A List of all the Assignments to display</summary>
-        public ObservableCollection<Assignment> Assignments { get; set; }
+        public ICommand LoadAssignmentsCommand { get; set; }
+        
         /// <summary>
         /// A filtered set of all the Assignments that are only for the
         /// current day selected
         /// </summary>
-        public ObservableCollection<Assignment> FilteredAssignments { get; set; }
+        public List<Assignment> FilteredAssignments
+        {
+            get => filteredAssignments;
+            set => setProperty(ref filteredAssignments, value);
+        }
 
         //* Constructors
         public AssignmentViewModel()
         {
-            dataStore = DependencyService.Get<IDataStore<Assignment>>();
-
             Title = "Assignments Calendar";
 
-            Assignments = new ObservableCollection<Assignment>();
-            FilteredAssignments = new ObservableCollection<Assignment>();
+            dataStore = DependencyService.Get<IDataStore<Assignment>>();
+
+            assignments = new List<Assignment>();
+            FilteredAssignments = new List<Assignment>();
 
             LoadAssignmentsCommand = new Command(async () =>
                 await ExecuteLoadAssignmentsCommand());
+
+            FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
+                ExecuteFilterAssignmentsCommand(selectedDate));
 
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
                 "AddAssignment", async (page, a) =>
             {
                 Assignment newItem = a as Assignment;
-                Assignments.Add(newItem);
+                assignments.Add(newItem);
                 await dataStore.AddItemAsync(newItem);
             });
+
+            LoadAssignmentsCommand.Execute(null);
+
+            Settings.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(Settings.ShowCalendarDays))
+                    OnNotifyPropertyChanged(nameof(ShowCalendarDays));
+            };
         }
 
         //* Public Methods
+
+        public void ExecuteFilterAssignmentsCommand(DateTime date)
+        {
+            var result =
+                from assignment in assignments.AsParallel()
+                where assignment.DueDate.Date.Equals(date.Date)
+                orderby assignment.Class.Name, assignment.Name
+                select assignment;
+
+            FilteredAssignments = result.ToList();
+        }
 
         /// <summary>
         /// Loads Assignments from the IDataStore.
@@ -68,10 +99,15 @@ namespace KMSCalendar.ViewModels
 
             try
             {
-                Assignments.Clear();
-                var assignments = await dataStore.GetItemsAsync(true);
-                foreach (Assignment assignment in assignments)
-                    Assignments.Add(assignment);
+                var userAssignments =
+                    from assignment in await dataStore.GetItemsAsync(true)
+                    let userClasses = 
+                        from _class in (Application.Current as App).SignedInUser.EnrolledClasses
+                        select _class.Id
+                    where userClasses.Contains(assignment.Class.Id)
+                    select assignment;
+
+                assignments = userAssignments.ToList();
             }
             catch (Exception ex)
             {
@@ -82,23 +118,7 @@ namespace KMSCalendar.ViewModels
                 IsBusy = false;
             }
 
-            FilterAssignments(DateTime.Today);
-        }
-
-        public void FilterAssignments(DateTime date)
-        {
-            FilteredAssignments.Clear();
-
-            var result =
-                from a in Assignments.AsParallel()
-                where a.DueDate.Day == date.Day &&
-                    a.DueDate.Month == date.Month &&
-                    a.DueDate.Year == date.Year
-                orderby a.Name, a.Description
-                select a;
-
-            foreach (Assignment assignment in result)
-                FilteredAssignments.Add(assignment);
+            ExecuteFilterAssignmentsCommand(DateTime.Today);
         }
     }
 }

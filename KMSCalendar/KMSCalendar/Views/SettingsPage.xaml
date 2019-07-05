@@ -1,54 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.SettingsPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KMSCalendar.Views.SettingsPage"
-             Title="Settings">
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             Title="{Binding Title}">
 
-    <!-- 
-Page Design:
-
-           Centered Title                      - label
-        
-        Centered Account Photo                 - Image 
-    
-                                               - grid 3 rows, 2 columns
-
-        Account Subtitle                       - label                                       
-    
-        Email Subtitle         Email           - label      label
-    
-        Password Subtitle      ••••••          - label      label
-
-
-        Design Subtitle                        - label                                       
-    
-        Theme Subtitle         Light / Dark              - label      picker
-    
-        Show Days of Week Subtitle     Show / Hide       - label      picker
-    
-    
-         Centered Rating Button                - buton
-    
-    -->
-
+    <ContentPage.BindingContext>
+        <vm:SettingsViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
-                <Image Source="userIcon.png"
-                       HorizontalOptions="Center"
-                       HeightRequest="50"
+                <Image HeightRequest="50"
                        WidthRequest="50"
+                       HorizontalOptions="Center"
+                       Source="userIcon.png"
                        Margin="20" />
 
                 <Frame Margin="50,0,50,0"
                        BackgroundColor="{DynamicResource NavigationBackground}"
                        CornerRadius="10">
 
-                    <!-- Account Settings -->
+                    <!--  Account Settings  -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
@@ -59,28 +37,40 @@ Page Design:
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Margin="0,0,0,15" 
+                        <Label Margin="0,0,0,15"
                                Text="Account"
                                TextColor="Gray" />
 
                         <Label Grid.Row="1"
-                               Text="Email" />
+                               Text="User Name" />
 
-                        <Label x:Name="EmailLabel"
+                        <Label x:Name="UserNameLabel"
                                Grid.Row="1"
                                Grid.Column="1"
                                HorizontalOptions="Center"
                                Margin="0,0,0,5"
-                               Text="SinghIsKing@buddy.com" />
+                               Text="{Binding UserName}" />
 
                         <Label Grid.Row="2"
-                               Text="Password" />
+                               Text="Email" />
 
-                        <Label x:Name="PasswordLabel"
+                        <Label x:Name="EmailLabel"
                                Grid.Row="2"
                                Grid.Column="1"
                                HorizontalOptions="Center"
-                               Text="•••••••••" />
+                               Margin="0,0,0,5"
+                               Text="{Binding Email}" />
+
+                        <Button x:Name="LogOutButton"
+                                Grid.Row="3"
+                                Grid.ColumnSpan="2"
+                                Padding="10"
+                                BackgroundColor="{DynamicResource NavigationTertiary}"
+                                BorderWidth="0"
+                                CornerRadius="10"
+                                Text="Log Out"
+                                TextColor="White"
+                                Command="{Binding LogOutCommand}" />
                     </Grid>
                 </Frame>
 
@@ -88,7 +78,7 @@ Page Design:
                        BackgroundColor="{DynamicResource NavigationBackground}"
                        CornerRadius="10">
 
-                    <!-- Design Settings -->
+                    <!--  Design Settings  -->
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -106,7 +96,7 @@ Page Design:
 
                         <Label Grid.Row="1"
                                VerticalOptions="Center"
-                               Text="Dark Theme" 
+                               Text="Dark Theme"
                                LineBreakMode="WordWrap" />
 
                         <Switch x:Name="ThemeSwitch"
@@ -114,11 +104,11 @@ Page Design:
                                 Grid.Column="1"
                                 HorizontalOptions="EndAndExpand"
                                 VerticalOptions="Center"
-                                Toggled="ThemeSwitch_Toggled" />
+                                IsToggled="{Binding IsDarkThemeEnabled}" />
 
                         <Label Grid.Row="2"
                                VerticalOptions="Center"
-                               Text="Show Days of Week on Calendar" 
+                               Text="Show Days of Week on Calendar"
                                LineBreakMode="WordWrap" />
 
                         <Switch x:Name="CalendarDaySwitch"
@@ -126,7 +116,7 @@ Page Design:
                                 Grid.Column="1"
                                 HorizontalOptions="EndAndExpand"
                                 VerticalOptions="Center"
-                                Toggled="CalendarDaySwitch_Toggled" />
+                                IsToggled="{Binding ShowCalendarDays}" />
                     </Grid>
                 </Frame>
 

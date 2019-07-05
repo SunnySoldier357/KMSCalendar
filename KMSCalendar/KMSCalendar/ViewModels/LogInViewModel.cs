@@ -1,16 +1,37 @@
-﻿using ModelValidation;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+
+using ModelValidation;
+
+using Xamarin.Forms;
+
+using KMSCalendar.Models;
+using KMSCalendar.Models.Data;
+using KMSCalendar.Views;
+using KMSCalendar.Services.Data;
 
 namespace KMSCalendar.ViewModels
 {
-    public class LogInViewModel : ValidatableObject
+    public class LogInViewModel : BaseViewModel
     {
         //* Private Properties
+        private int logInAttempts;
+
         private string email;
         private string loginValidationMessage;
         private string password;
 
         //* Public Properties
-        public int LogInAttempts { get; set; }
+        public ICommand AuthenticateUserCommand { get; set; }
+        public ICommand ForgotPasswordCommand { get; set; }
+        public ICommand NewUserCommand { get; set; }
+
+        public int LogInAttempts
+        {
+            get => logInAttempts;
+            set => setProperty(ref logInAttempts, value);
+        }
 
         [ContainsCharacter('@')]
         [DoesNotContainCharacter(' ')]
@@ -19,7 +40,7 @@ namespace KMSCalendar.ViewModels
         public string Email
         {
             get => email;
-            set => modifyProperty(ref value, ref email, nameof(Email));
+            set => setProperty(ref email, value);
         }
         public string LoginValidationMessage
         {
@@ -28,24 +49,24 @@ namespace KMSCalendar.ViewModels
                 if (Errors != null && Errors.Count > 0)
                     return Errors[0];
 
-                return loginValidationMessage;  
+                return loginValidationMessage;
             }
-            set => modifyProperty(ref value, ref loginValidationMessage,
-                nameof(LoginValidationMessage));
+            set => setProperty(ref loginValidationMessage, value);
         }
         [MinimumLength(8)]
         [MaximumLength(64)]
         public string Password
         {
             get => password;
-            set => modifyProperty(ref value, ref password, nameof(Password));
+            set => setProperty(ref password, value);
         }
 
         //* Constructor
         public LogInViewModel()
         {
+            Title = "Log In";
+
             Email = string.Empty;
-            LoginValidationMessage = string.Empty;
             Password = string.Empty;
 
             PropertyChanged += (sender, args) =>
@@ -53,6 +74,51 @@ namespace KMSCalendar.ViewModels
                 if (args.PropertyName == nameof(Errors))
                     OnNotifyPropertyChanged(nameof(LoginValidationMessage));
             };
+
+            AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
+            ForgotPasswordCommand = new Command(() => ExecuteForgotPasswordCommand());
+            NewUserCommand = new Command(() => (Application.Current as App).MainPage = new SignUpPage());
         }
+
+        //* Public Methods
+        public async Task ExecuteAuthenticateUserCommand()
+        {
+            if (Validate())
+            {
+                // TODO: Grab password from database
+                string databasePassword = "temp";
+
+                var dataStore = DependencyService.Get<IDataStore<User>>();
+                var users = await dataStore.GetItemsAsync();
+                User signedInUser = users.FirstOrDefault(u => u.Email == Email);
+
+                App app = Application.Current as App;
+
+                app.SignedInUser = signedInUser;
+                Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+
+                app.MainPage = new MainPage();
+
+                // TODO: Authenticate with backend
+                //if (PasswordHasher.ValidatePassword(password, databasePassword))
+                //{
+                //    var dataStore = DependencyService.Get<IDataStore<User>>();
+                //    var users = await dataStore.GetItemsAsync();
+                //    User signedInUser = users.FirstOrDefault(u => u.Email == email);
+
+                //    App app = Application.Current as App;
+
+                //    app.SignedInUser = signedInUser;
+                //    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+
+                //    app.MainPage = new MainPage();
+                //}
+                //else
+                //    viewModel.LoginValidationMessage = "Invalid Password";
+            }
+        }
+
+        public void ExecuteForgotPasswordCommand() =>
+            LoginValidationMessage = "You can't forget your password if you don't have an account.";
     }
 }

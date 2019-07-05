@@ -105,8 +105,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="calendar.png" />
+    <Content Include="calendar_white.png" />
     <Content Include="delete-icon.png" />
+    <Content Include="file.png" />
+    <Content Include="gear.png" />
     <Content Include="leftArrow.png" />
+    <Content Include="loupe.png" />
+    <Content Include="next.png" />
     <Content Include="rightArrow.png" />
     <Content Include="Assets\arrow-pointing-left.png" />
     <Content Include="Assets\arrow-pointing-right.png" />
@@ -139,6 +145,9 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="search.png" />
+    <Content Include="upload.png" />
+    <Content Include="user.png" />
     <Content Include="userIcon.png" />
     <Content Include="xamarin_logo.png" />
     <Content Include="add.png" />
@@ -166,6 +175,7 @@
       <Name>KMSCalendar</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

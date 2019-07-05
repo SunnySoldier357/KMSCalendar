@@ -1,50 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.NewAssignmentPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KMSCalendar.Views.NewAssignmentPage"
-             Title="New Assignment">
+             Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel"
-                     Icon="cancel.png"
+        <ToolbarItem Icon="cancel.png"
+                     Text="Cancel"
                      Clicked="Cancel_Clicked" />
 
-        <ToolbarItem Text="Save"
-                     Icon="save.png"
+        <ToolbarItem Icon="save.png"
+                     Text="Save"
                      Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout Spacing="20"
-                     Padding="15"
+        <StackLayout Padding="15"
+                     Spacing="20"
                      BackgroundColor="{DynamicResource NavigationBackground}">
 
             <Label Text="Name"
                    FontSize="Medium" />
 
-            <Entry BackgroundColor="{DynamicResource NavigationBackground}"
+            <Entry Margin="0,-10,0,0"
+                   BackgroundColor="{DynamicResource NavigationBackground}"
                    Text="{Binding Assignment.Name}"
                    Placeholder="Assignment name"
+                   FontSize="Small"
                    TextColor="{DynamicResource Text}"
-                   FontSize="Small" />
+                   Keyboard="Text" />
 
             <Label Text="Description"
                    FontSize="Medium" />
 
             <Editor HeightRequest="100"
+                    Margin="0,-10,0,0"
                     BackgroundColor="{DynamicResource NavigationBackground}"
                     Text="{Binding Assignment.Description}"
                     Placeholder="This is an item description"
+                    FontSize="Small"
                     TextColor="{DynamicResource Text}"
-                    FontSize="Small" />
+                    Keyboard="Text" />
 
             <Label Text="Due Date"
                    FontSize="Medium" />
 
-            <DatePicker Margin="0"
-                        Date="{Binding Assignment.DueDate}"
+            <DatePicker Margin="0,-10,0,0"
+                        BackgroundColor="{DynamicResource NavigationBackground}"
                         TextColor="{DynamicResource Text}"
-                        BackgroundColor="{DynamicResource NavigationBackground}" />
+                        Date="{Binding Assignment.DueDate}" />
+
+            <Label Text="Class"
+                   FontSize="Medium" />
+
+            <Picker x:Name="ClassPicker"
+                    ItemsSource="{Binding SubscribedClasses}"
+                    Margin="0,-10,0,20"
+                    ItemDisplayBinding="{Binding DisplayName}" />
+
+            <Button x:Name="GoToSearchButton"
+                    BackgroundColor="{DynamicResource NavigationTertiary}"
+                    BorderWidth="0"
+                    CornerRadius="10"
+                    Text="Can't find your class? Add a new one here"
+                    TextColor="White"
+                    Clicked="GoToSearchButton_Clicked" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

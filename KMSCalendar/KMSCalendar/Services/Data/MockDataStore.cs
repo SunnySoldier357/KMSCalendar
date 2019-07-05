@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-using KMSCalendar.Models.Entities;
+using KMSCalendar.Models.Data;
 
-namespace KMSCalendar.Services
+namespace KMSCalendar.Services.Data
 {
     public class MockDataStore<T> : IDataStore<T> where T : TableData
     {
@@ -28,14 +28,14 @@ namespace KMSCalendar.Services
         public async Task<T> GetItemAsync(string id) =>
             await Task.FromResult(items.FirstOrDefault(i => i.Id == id));
 
-        public async Task<bool> AddItemAsync(T item)
+        public async Task<T> AddItemAsync(T item)
         {
             items.Add(item);
 
-            return await Task.FromResult(true);
+            return await Task.FromResult(item);
         }
 
-        public async Task<bool> UpdateItemAsync(T item)
+        public async Task<T> UpdateItemAsync(T item)
         {
             T oldItem = items
                 .Where(i => i.Id == item.Id)
@@ -43,7 +43,7 @@ namespace KMSCalendar.Services
             items.Remove(oldItem);
             items.Add(item);
 
-            return await Task.FromResult(true);
+            return await Task.FromResult(item);
         }
 
         public async Task<bool> DeleteItemAsync(string id)

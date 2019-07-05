@@ -1,6 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+using Newtonsoft.Json;
 
 namespace KMSCalendar.Models
 {
@@ -24,6 +27,8 @@ namespace KMSCalendar.Models
         //* Private Properties
         private bool showCalendarDays;
 
+        private string signedInUserId;
+
         private Theme theme;
 
         //* Public Properties
@@ -35,7 +40,16 @@ namespace KMSCalendar.Models
         public bool ShowCalendarDays
         {
             get => showCalendarDays;
-            set => modifyProperty(ref value, ref showCalendarDays, nameof(ShowCalendarDays));
+            set => setProperty(ref showCalendarDays, value);
+        }
+
+        /// <summary>
+        /// The ID of the User signed in.
+        /// </summary>
+        public string SignedInUserId
+        {
+            get => signedInUserId;
+            set => setProperty(ref signedInUserId, value);
         }
 
         /// <summary>
@@ -44,7 +58,7 @@ namespace KMSCalendar.Models
         public Theme Theme
         {
             get => theme;
-            set => modifyProperty(ref value, ref theme, nameof(Theme));
+            set => setProperty(ref theme, value);
         }
 
         //* Events
@@ -60,6 +74,8 @@ namespace KMSCalendar.Models
             // Default Values
             showCalendarDays = false;
 
+            signedInUserId = null;
+
             theme = Theme.Light;
         }
 
@@ -68,6 +84,8 @@ namespace KMSCalendar.Models
             if (settings != null)
             {
                 ShowCalendarDays = settings.ShowCalendarDays;
+
+                SignedInUserId = settings.SignedInUserId;
 
                 Theme = settings.Theme;
             }
@@ -120,14 +138,17 @@ namespace KMSCalendar.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 
         //* Private Methods
-        private void modifyProperty<T>(ref T value, ref T privateProperty, string nameOfProperty)
+        private bool setProperty<T>(ref T backingStore, T value, 
+            [CallerMemberName] string propertyName = "")
         {
-            if (!value.Equals(privateProperty))
-            {
-                privateProperty = value;
-                OnNotifyPropertyChanged(nameOfProperty);
-                UpdateDictionaryAsync();
-            }
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
+
+            backingStore = value;
+            UpdateDictionaryAsync();
+            OnNotifyPropertyChanged(propertyName);
+
+            return true;
         }
     }
 }

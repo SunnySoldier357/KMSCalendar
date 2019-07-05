@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView x:Class="KMSCalendar.Controls.SelectPeriodControl"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ActionButtonStyle"
+                   TargetType="Button">
+                <Setter Property="Margin" Value="0" />
+
+                <Setter Property="Padding" Value="0" />
+
+                <Setter Property="TextColor" Value="{DynamicResource Text}" />
+
+                <Setter Property="BorderColor" Value="Transparent" />
+
+                <Setter Property="BorderWidth" Value="0" />
+
+                <Setter Property="BackgroundColor" Value="Transparent" />
+
+                <Setter Property="TextColor" Value="{DynamicResource NavigationTertiary}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <StackLayout>
+            <Grid HeightRequest="60"
+                  Margin="0"
+                  Padding="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource ActionButtonStyle}"
+                        BackgroundColor="Transparent"
+                        Text="Back"
+                        Clicked="BackButton_Clicked" />
+
+                <Button x:Name="DoneButton"
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Style="{StaticResource ActionButtonStyle}"
+                        BackgroundColor="Transparent"
+                        Text="Done"
+                        Clicked="DoneButton_Clicked" />
+            </Grid>
+
+            <ScrollView>
+                <ListView x:Name="PeriodsListView"
+                          ItemsSource="{Binding Periods}"
+                          VerticalOptions="Start">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="100">
+                                <Grid Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="x"
+                                           FontSize="14"
+                                           VerticalOptions="End"/>
+
+                                    <Label Grid.Column="1"
+                                           Text="{Binding}"
+                                           FontSize="11"
+                                           VerticalOptions="End"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+
+            <StackLayout>
+
+                <Label Text="Can't find your period? Add a new one here:" HorizontalOptions="Center"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                    <Label Text="Period: "
+                           Margin="0, 0, 0, 5"/>
+
+                    <Label x:Name="NewPeriodLabel"
+                           BindingContext="{x:Reference Name=PeriodStepper}"
+                           Text="{Binding Value}" />
+
+                    <Stepper x:Name="PeriodStepper"
+                             HorizontalOptions="Center"
+                             VerticalOptions="CenterAndExpand"
+                             Increment="1"
+                             Maximum="15"
+                             Minimum="0"
+                             Value="1"/>
+
+                    <Button x:Name="AddNewPeriodButton"
+                            Margin="5, 0, 0, 0"
+                            BorderWidth="0"
+                            BackgroundColor="{DynamicResource NavigationTertiary}"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Text="Add this period."
+                            Clicked="AddNewPeriodButton_Clicked"/>
+
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

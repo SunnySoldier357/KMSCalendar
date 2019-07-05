@@ -3,7 +3,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Navigation;
+using System.Diagnostics;
 
 namespace KMSCalendar.Views
 {
@@ -26,29 +27,21 @@ namespace KMSCalendar.Views
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Calendar,
-                    Title ="Calendar"
-                },
-                new HomeMenuItem
-                {
-                    Id = MenuItemType.SignUp,
-                    Title = "Sign Up"
-                },
-                new HomeMenuItem
-                {
-                    Id = MenuItemType.Login,
-                    Title = "Login"
+                    Title = "Calendar",
+                    Icon = "calendar.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.About,
-                    Title ="About"
+                    Title ="About",
+                    Icon = "file.png"
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Settings,
-                    Title = "Settings"
-                }
-
+                    Title = "Settings",
+                    Icon = "gear.png"
+                },
             };
 
             MenuListView.ItemsSource = menuItems;
@@ -61,8 +54,17 @@ namespace KMSCalendar.Views
                     return;
 
                 int id = (int) ((HomeMenuItem) e.SelectedItem).Id;
+
                 await RootPage.NavigateFromMenu(id);
             };
+
+            UserNameLabel.BindingContext = (Application.Current as App).SignedInUser.UserName;
+        }
+
+        private void SearchButton_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushModalAsync(new ClassSearchPage());
+            MainPage.Current.Hide(); //Hides the hamburger menu navigation drawer.
         }
     }
 }

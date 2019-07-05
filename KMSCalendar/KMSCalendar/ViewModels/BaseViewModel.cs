@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+using ModelValidation;
+
+using KMSCalendar.Models;
+
 namespace KMSCalendar.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : ValidatableObject, INotifyPropertyChanged
     {
         //* Private Properties
         private bool isBusy = false;
@@ -19,14 +23,13 @@ namespace KMSCalendar.ViewModels
             set => setProperty(ref isBusy, value);
         }
 
+        public Settings Settings { get; }
+
         public string Title
         {
             get => title;
             set => setProperty(ref title, value);
         }
-
-        //* Public Events
-        public event PropertyChangedEventHandler PropertyChanged;
 
         //* Protected Methods
         protected bool setProperty<T>(ref T backingStore, T value,
@@ -43,14 +46,12 @@ namespace KMSCalendar.ViewModels
             return true;
         }
 
-        //* Event Handlers
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
+        //* Constructors
+        public BaseViewModel() => 
+            Settings = Settings.DefaultInstance;
 
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        //* Event Handlers
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
+            OnNotifyPropertyChanged(propertyName);
     }
 }

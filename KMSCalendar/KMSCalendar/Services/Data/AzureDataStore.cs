@@ -1,13 +1,14 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-using KMSCalendar.Models.Entities;
+using Newtonsoft.Json;
 
-namespace KMSCalendar.Services
+using KMSCalendar.Models.Data;
+
+namespace KMSCalendar.Services.Data
 {
     public class AzureDataStore<T> : IDataStore<T> where T : TableData
     {
@@ -52,23 +53,24 @@ namespace KMSCalendar.Services
             return null;
         }
 
-        public async Task<bool> AddItemAsync(T item)
+        public async Task<T> AddItemAsync(T item)
         {
             if (item == null)
-                return false;
+                return null;
 
             string serializedItem = JsonConvert.SerializeObject(item);
 
             HttpResponseMessage response = await client.PostAsync($"api/{nameof(T)}",
                 new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
-            return response.IsSuccessStatusCode;
+            return await Task.Run(async () =>
+                JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync()));
         }
 
-        public async Task<bool> UpdateItemAsync(T item)
+        public async Task<T> UpdateItemAsync(T item)
         {
             if (item == null || item.Id == null)
-                return false;
+                return null;
 
             string serializedItem = JsonConvert.SerializeObject(item);
             byte[] buffer = Encoding.UTF8.GetBytes(serializedItem);
@@ -78,7 +80,8 @@ namespace KMSCalendar.Services
                 new Uri($"api/{nameof(T)}/{item.Id}"),
                 byteContent);
 
-            return response.IsSuccessStatusCode;
+            return await Task.Run(async () =>
+                JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync()));
         }
 
         public async Task<bool> DeleteItemAsync(string id)

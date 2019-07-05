@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.AboutPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
-             x:Class="KMSCalendar.Views.AboutPage"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -23,9 +23,9 @@
                          VerticalOptions="Center">
                 <ContentView VerticalOptions="FillAndExpand"
                              Padding="0,40,0,40">
-                    <Image Source="xamarin_logo.png"
+                    <Image HeightRequest="64"
                            VerticalOptions="Center"
-                           HeightRequest="64" />
+                           Source="xamarin_logo.png" />
                 </ContentView>
             </StackLayout>
         </StackLayout>
@@ -42,8 +42,8 @@
                                       FontAttributes="Bold"
                                       FontSize="22" />
                                 <Span Text=" " />
-                                <Span Text="1.0"
-                                      ForegroundColor="{DynamicResource LightText}" />
+                                <Span ForegroundColor="{DynamicResource LightText}"
+                                      Text="1.0" />
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>
@@ -78,26 +78,16 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Margin="0,35,0,10">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Developed by KMS - Kenneth, Matthew, &amp; Sandeep" />
-                                <Span Text=" " />
-                                <Span Text="iOS, Android, and Windows"
-                                      FontAttributes="Bold" />
-                                <Span Text=" " />
-                                <Span Text="versions." />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <Label Margin="0,35,0,10"
+                       Text="Developed by KMS - Kenneth, Matthew, &amp; Sandeep" />
+
+                <Label Text="Icons made by Eleonor Wang from www.flaticon.com" />
 
                 <Button Margin="0,10,0,0"
-                        Command="{Binding OpenWebCommand}"
                         BackgroundColor="{DynamicResource NavigationTertiary}"
                         Text="Learn more"
-                        TextColor="White" />
+                        TextColor="White"
+                        Command="{Binding OpenWebCommand}" />
             </StackLayout>
         </ScrollView>
     </Grid>

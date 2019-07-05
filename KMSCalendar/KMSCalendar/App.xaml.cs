@@ -4,8 +4,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
-using KMSCalendar.Models.Entities;
-using KMSCalendar.Services;
+using KMSCalendar.Models.Data;
+using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -17,6 +17,9 @@ namespace KMSCalendar
         public static string AzureBackendUrl = "https://kmscalendar.azurewebsites.net";
 
         public static bool UseMockDataStore = true;
+
+        //* Public Properties
+        public User SignedInUser { get; set; }
 
         //* Constructors
         public App()
@@ -37,8 +40,6 @@ namespace KMSCalendar
                 DependencyService.Register<AzureDataStore<Teacher>>();
                 DependencyService.Register<AzureDataStore<User>>();
             }
-
-            MainPage = new MainPage();
         }
 
         //* Public Methods
@@ -105,11 +106,20 @@ namespace KMSCalendar
         }
 
         //* Overridden Methods
-        protected override void OnStart()
+        protected override async void OnStart()
         {
             Settings settings = Settings.DefaultInstance;
             UpdateColorResources(settings.Theme);
             settings.PropertyChanged += ThemeChanged;
+
+            if (string.IsNullOrWhiteSpace(settings.SignedInUserId))
+                MainPage = new LoginPage();
+            else
+            {
+                SignedInUser = await DependencyService.Get<IDataStore<User>>()
+                    .GetItemAsync(settings.SignedInUserId);
+                MainPage = new MainPage();
+            }
         }
 
         //* Event Handlers

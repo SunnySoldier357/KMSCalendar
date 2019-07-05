@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using KMSCalendar.Models.Entities;
+using KMSCalendar.Models.Data;
 
-namespace KMSCalendar.Services
+namespace KMSCalendar.Services.Data
 {
     public interface IDataStore<T> where T : TableData
     {
+        //* Interface Methods
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
         Task<T> GetItemAsync(string id);
-        Task<bool> AddItemAsync(T item);
-        Task<bool> UpdateItemAsync(T item);
+        Task<T> AddItemAsync(T item);
+        Task<T> UpdateItemAsync(T item);
         Task<bool> DeleteItemAsync(string id);
     }
 }

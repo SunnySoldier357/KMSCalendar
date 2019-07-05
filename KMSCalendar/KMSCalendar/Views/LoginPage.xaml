@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="KMSCalendar.Views.LoginPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:KMSCalendar.Controls"
-             x:Class="KMSCalendar.Views.LoginPage"
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             Title="{Binding Title}"
              BackgroundImage="BackgroundForLogin.png">
+
+    <ContentPage.BindingContext>
+        <vm:LogInViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
 
@@ -11,36 +17,37 @@
             <Grid>
                 <Grid.RowDefinitions>
 
-                    <!-- Spacing -->
+                    <!--  Spacing  -->
                     <RowDefinition Height="80*" />
 
-                    <!-- Title -->
+                    <!--  Title  -->
                     <RowDefinition Height="60" />
 
-                    <!-- Spacing -->
+                    <!--  Spacing  -->
                     <RowDefinition Height="45*" />
 
-                    <!-- Email -->
+                    <!--  Email  -->
                     <RowDefinition Height="40" />
 
-                    <!-- Spacing -->
+                    <!--  Spacing  -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Spacing -->
+                    <!--  Password  -->
                     <RowDefinition Height="40" />
 
+                    <!--  Spacing  -->
                     <RowDefinition Height="10*" />
 
-                    <!-- Button -->
+                    <!--  Button  -->
                     <RowDefinition Height="40" />
 
-                    <!-- Spacing -->
+                    <!--  Spacing  -->
                     <RowDefinition Height="7*" />
 
-                    <!-- Forgot Password Button -->
+                    <!--  Forgot Password Button  -->
                     <RowDefinition Height="60" />
 
-                    <!-- Spacing -->
+                    <!--  Spacing  -->
                     <RowDefinition Height="30*" />
 
                 </Grid.RowDefinitions>
@@ -49,8 +56,8 @@
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="Start"
                        Text="HW Calendar"
-                       TextColor="White"
-                       FontSize="Large" />
+                       FontSize="Large"
+                       TextColor="White" />
 
                 <Frame Grid.Row="3"
                        Style="{StaticResource LoginEntryFrame}">
@@ -67,41 +74,41 @@
                     <control:TransparentEntry x:Name="PasswordEntry"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
-                                              Placeholder="Password" 
+                                              Placeholder="Password"
                                               IsPassword="True" />
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"
                         Grid.Row="7"
-                        HorizontalOptions="Center"
                         WidthRequest="100"
+                        HorizontalOptions="Center"
                         Padding="5"
                         BackgroundColor="{StaticResource NavigationTertiary}"
-                        Text="LOG IN"
-                        TextColor="White"
                         CornerRadius="20"
                         BorderColor="Transparent"
-                        Clicked="AuthenticateLoginButton_Clicked" />
+                        Text="LOG IN"
+                        TextColor="White"
+                        Command="{Binding AuthenticateUserCommand}" />
 
-                <StackLayout Orientation="Vertical"
-                             Grid.Row="9">
+                <StackLayout Grid.Row="9"
+                             Orientation="Vertical">
 
                     <Button x:Name="ForgotPasswordButton"
                             HorizontalOptions="Center"
                             BackgroundColor="Transparent"
-                            Text="Forgot Password?"
-                            TextColor="White"
-                            FontSize="Small"
                             BorderColor="Transparent"
-                            Clicked="ForgotPasswordButton_Clicked" />
+                            Text="Forgot Password?"
+                            FontSize="Small"
+                            TextColor="White"
+                            Command="{Binding ForgotPasswordCommand}" />
 
                     <Label x:Name="LoginValidationLabel"
-                           BackgroundColor="Transparent"
-                           TextColor="{StaticResource NavigationTertiary}"
-                           FontSize="Small"
                            HorizontalOptions="Center"
-                           Margin="50, 10, 50, 20"
-                           Text="{Binding LoginValidationMessage}" />
+                           Margin="50,10,50,20"
+                           BackgroundColor="Transparent"
+                           Text="{Binding LoginValidationMessage}"
+                           FontSize="Small"
+                           TextColor="{StaticResource NavigationTertiary}" />
 
                 </StackLayout>
             </Grid>
@@ -127,10 +134,10 @@
                         Grid.Column="1"
                         VerticalOptions="Center"
                         BackgroundColor="Transparent"
+                        BorderColor="Transparent"
                         Text="SignUp"
                         TextColor="{StaticResource NavigationTertiary}"
-                        BorderColor="Transparent"
-                        Clicked="NewUserButton_Clicked" />
+                        Command="{Binding NewUserCommand}" />
 
             </Grid>
         </StackLayout>

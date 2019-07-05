@@ -1,11 +1,9 @@
-﻿namespace KMSCalendar.Models
+﻿namespace KMSCalendar.Models.Navigation
 {
     public enum MenuItemType
     {
         About,
         Calendar,
-        Login,
         Settings,
-        SignUp,
     }
 }

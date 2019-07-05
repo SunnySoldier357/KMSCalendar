@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KMSCalendar.Models.Entities
+namespace KMSCalendar.Models.Data
 {
     public class Class : TableData
     {
@@ -9,6 +9,7 @@ namespace KMSCalendar.Models.Entities
 
         public List<Assignment> Assignments { get; set; }
 
+        public string DisplayName => $"{Name} (Per {Period})";
         public string Name { get; set; }
 
         public Teacher Teacher { get; set; }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Navigation;
  
 namespace KMSCalendar.Views
 {
@@ -15,6 +15,10 @@ namespace KMSCalendar.Views
         public Dictionary<int, NavigationPage> MenuPages =
             new Dictionary<int, NavigationPage>();
 
+        // This is a static public property that allows downstream pages to get a handle to the MainPage instance 
+        // in order to call methods that are in this class. Hide() is called from MenuPage.xaml.cs 
+        public static MainPage Current;
+
         //* Constructor
         public MainPage()
         {
@@ -24,6 +28,8 @@ namespace KMSCalendar.Views
 
             // The default page to load
             MenuPages.Add((int) MenuItemType.Calendar, (NavigationPage) Detail);
+
+            Current = this;
         }
 
         // Public Methods
@@ -41,16 +47,8 @@ namespace KMSCalendar.Views
                         MenuPages.Add(id, new NavigationPage(new AssignmentsPage()));
                         break;
 
-                    case (int) MenuItemType.Login:
-                        MenuPages.Add(id, new NavigationPage(new LoginPage()));
-                        break;
-
                     case (int) MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
-                        break;
-
-                    case (int) MenuItemType.SignUp:
-                        MenuPages.Add(id, new NavigationPage(new SignUpPage()));
                         break;
                 }
             }
@@ -67,5 +65,11 @@ namespace KMSCalendar.Views
                 IsPresented = false;
             }
         }
+
+        /// <summary>
+        /// Hides the hamburger menu navigation drawer so when the user goes to the modal ClassSearchPage.xaml.cs page
+        /// </summary>
+        public void Hide() =>
+            IsPresented = false;
     }
 }

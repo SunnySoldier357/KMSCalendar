@@ -1,4 +1,4 @@
-﻿namespace KMSCalendar.Models
+﻿namespace KMSCalendar.Models.Navigation
 {
     public class HomeMenuItem
     {
@@ -9,6 +9,10 @@
         /// </summary>
         public MenuItemType Id { get; set; }
 
+        /// <summary>
+        /// The file name of the icon for each navigation item.
+        /// </summary>
+        public string Icon { get; set; }
         /// <summary>
         /// The Title that is shown in the Hamburger Menu.
         /// </summary>
