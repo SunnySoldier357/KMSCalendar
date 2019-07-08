@@ -150,6 +150,13 @@ namespace KMSCalendar.Models.Data
                     Email = "test@king.com",
                     UserName = "No Class Test",
                     EnrolledClasses = new List<Class>()
+                },
+                new User
+                {
+                    Id = "3",
+                    Email = "mattmorgan6@gmail.com",
+                    UserName = "mattmorgan6",
+                    EnrolledClasses = tempClasses
                 }
             };
         }
