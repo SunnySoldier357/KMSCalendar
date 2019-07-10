@@ -11,11 +11,12 @@
         <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
             <Image HeightRequest="30"
                    WidthRequest="30"
-                   Source="calendar_white.png" />
+                   Source="calendar_white.png"
+                   Margin="0, 10, 0, 0"/>
 
             <Label x:Name="UserNameLabel"
                    HorizontalOptions="Center"
-                   Margin="0,5,0,0"
+                   Margin="0,5,0,10"
                    Text="{Binding}"
                    FontSize="Small"
                    TextColor="White" />

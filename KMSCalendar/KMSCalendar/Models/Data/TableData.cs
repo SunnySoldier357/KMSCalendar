@@ -20,6 +20,30 @@ namespace KMSCalendar.Models.Data
         /// <summary>The unique ID of the entity.</summary>
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
+        //* Private Static Properties
+        private static List<string> testClasses = new List<string>
+        {
+            "Physics",
+            "Calculus",
+            "Biology",
+            "History",
+            "American Literature",
+            "Chemistry",
+            "Economics",
+            "Computer Science",
+            "Theory of Knowledge"
+        };
+
+        private static List<string> testItems = new List<string>
+        {
+            "Reading",
+            "Complete the Assignment",
+            "Finish online HW",
+            "Take notes",
+            "Group Project Due",
+            "Comparative Essay"
+        };
+
         //* Public Static Methods
 
         /// <summary>
@@ -66,7 +90,7 @@ namespace KMSCalendar.Models.Data
             Random random = new Random();
 
             teachers = new List<Teacher>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 teachers.Add(new Teacher
                 {
@@ -75,10 +99,11 @@ namespace KMSCalendar.Models.Data
             }
 
             classes = new List<Class>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int num = random.Next(1, 7);
-                string className = $"Test Class {i}";
+                //string className = $"Test Class {i}";
+                string className = testClasses.ElementAt(random.Next(0, 8));
                 Teacher teacher = teachers[i];
 
                 classes.Add(new Class
@@ -111,8 +136,9 @@ namespace KMSCalendar.Models.Data
             {
                 assignments.Add(new Assignment
                 {
-                    Name = $"Test Item {i}",
-                    Description = "This is an item description.",
+                    //Name = $"Test Item {i}",
+                    Name = testItems.ElementAt(getAnotherNumber(0, 5, 1)),
+                    Description = $"From pages 1 - {i}   (test item)",
                     DueDate = DateTime.Today.AddDays(random.Next(-2, 3)),
                     Class = classes[random.Next(0, classes.Count)]
                 });
