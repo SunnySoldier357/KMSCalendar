@@ -17,9 +17,15 @@ namespace KMSCalendar.Views
             InitializeComponent();
 
             // TODO SUNNY Update WeekControl to have a Command & Command Property XAML Attribute
-            CalendarWeekControl.DataSelectedChanged += (sender, args) =>
+            EventHandler eventHandler = (sender, args) =>
+            {
                 (BindingContext as AssignmentViewModel)
                     .ExecuteFilterAssignmentsCommand(CalendarWeekControl.DateSelected);
+
+                (BindingContext as AssignmentViewModel)
+                    .DateChoosen = CalendarWeekControl.DateSelected;
+            };
+            CalendarWeekControl.DataSelectedChanged += eventHandler;
         }
 
         //* Event Handlers

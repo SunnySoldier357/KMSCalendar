@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.ViewModels;
+using System.Diagnostics;
 
 namespace KMSCalendar.Views
 {
@@ -33,11 +34,15 @@ namespace KMSCalendar.Views
 
         public async void Save_Clicked(object sender, EventArgs e)
         {
-            var data = ClassPicker.SelectedItem;
-            // TODO: SUNNY get the class selected for the assignment
+            if(ClassPicker.SelectedItem != null && viewModel.Assignment.Name != "" && viewModel.Assignment.Description != null)
+            {
+                var selectedClass = ClassPicker.SelectedItem;
+                viewModel.Assignment.Class = selectedClass as Models.Data.Class;    //sets the viewModel's assignment to the class selected from the picker
+            
+                MessagingCenter.Send(this, "AddAssignment", viewModel.Assignment);
 
-            MessagingCenter.Send(this, "AddAssignment", viewModel.Assignment);
-            await Navigation.PopModalAsync();
+                await Navigation.PopModalAsync();
+            }
         }
 
         private void GoToSearchButton_Clicked(object sender, EventArgs e) =>

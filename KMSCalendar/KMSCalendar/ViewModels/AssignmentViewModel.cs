@@ -18,12 +18,15 @@ namespace KMSCalendar.ViewModels
         //* Private Properties
         private IDataStore<Assignment> dataStore;
 
+        //private AssignmentsPage parentPage;
+
         /// <summary>A List of all the Assignments to display</summary>
         private List<Assignment> assignments;
         private List<Assignment> filteredAssignments;
 
         //* Public Properties
         public bool ShowCalendarDays => Settings.ShowCalendarDays;
+        public DateTime DateChoosen;
 
         public ICommand FilterAssignmentsCommand { get; set; }
         /// <summary>
@@ -45,6 +48,7 @@ namespace KMSCalendar.ViewModels
         public AssignmentViewModel()
         {
             Title = "Assignments Calendar";
+            DateChoosen = DateTime.Today;
 
             dataStore = DependencyService.Get<IDataStore<Assignment>>();
 
@@ -63,6 +67,8 @@ namespace KMSCalendar.ViewModels
                 Assignment newItem = a as Assignment;
                 assignments.Add(newItem);
                 await dataStore.AddItemAsync(newItem);
+
+                ExecuteFilterAssignmentsCommand(DateChoosen);
             });
 
             LoadAssignmentsCommand.Execute(null);

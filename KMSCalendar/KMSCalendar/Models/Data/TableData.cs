@@ -10,7 +10,7 @@ namespace KMSCalendar.Models.Data
         //* Static Properties
         private static bool seedLoaded = false;
 
-        private static List<Assignment> assignments;
+        private static List<Assignment> assignments { get; set; }
         private static List<Class> classes;
         private static List<Teacher> teachers;
         private static List<User> users;
@@ -21,6 +21,18 @@ namespace KMSCalendar.Models.Data
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         //* Private Static Properties
+        private static List<string> testTeachers = new List<string>
+        {
+            "Smith",
+            "Johnson",
+            "Williams",
+            "Brown",
+            "Davis",
+            "Miller",
+            "Wilson",
+            "Moore",
+            "Taylor"
+        };
         private static List<string> testClasses = new List<string>
         {
             "Physics",
@@ -92,9 +104,21 @@ namespace KMSCalendar.Models.Data
             teachers = new List<Teacher>();
             for (int i = 0; i < 5; i++)
             {
+                int rand = random.Next(0, 2);
+                string surname = "";
+                switch (rand)
+                {
+                    case 0: surname = "Ms. ";
+                        break;
+                    case 1: surname = "Mrs. ";
+                        break;
+                    case 2: surname = "Mr. ";
+                        break;
+                }
+    
                 teachers.Add(new Teacher
                 {
-                    Name = $"Test Teacher {i}"
+                    Name = surname + testTeachers.ElementAt(i)
                 });
             }
 

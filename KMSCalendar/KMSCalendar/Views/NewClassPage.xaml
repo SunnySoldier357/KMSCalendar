@@ -39,7 +39,7 @@
                        BackgroundColor="{DynamicResource NavigationBackground}"
                        CornerRadius="10">
 
-                    <ScrollView>
+                    <ScrollView BackgroundColor="Transparent">
                         <!--  contents go here  -->
                         <!--  Enter a name  -->
                         <Frame Grid.Row="5">

@@ -77,15 +77,15 @@
                                     Clicked="NextButton_Clicked"/>
                             </Grid>
 
-                            <Frame Padding="0"
+                            <!--<Frame Padding="0"
                                    CornerRadius="10"
-                                   BorderColor="{DynamicResource NavigationBackgroundLight}">
+                                   BorderColor="{DynamicResource NavigationBackgroundLight}">-->
 
                                 <SearchBar x:Name="ClassSearchBar"
                                            Margin="0,0,0,10"
                                            Placeholder="Search"
                                            TextColor="{DynamicResource Text}" />
-                            </Frame>
+                            <!--</Frame>-->
 
                             <ListView x:Name="ClassesListView"
                                       ItemsSource="{Binding FilteredClasses}"

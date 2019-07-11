@@ -56,7 +56,7 @@
             <Picker x:Name="ClassPicker"
                     ItemsSource="{Binding SubscribedClasses}"
                     Margin="0,-10,0,20"
-                    ItemDisplayBinding="{Binding DisplayName}" />
+                    ItemDisplayBinding="{Binding DisplayName}"/>
 
             <Button x:Name="GoToSearchButton"
                     BackgroundColor="{DynamicResource NavigationTertiary}"
