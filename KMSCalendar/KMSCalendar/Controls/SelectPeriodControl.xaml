@@ -104,8 +104,8 @@
                              Maximum="15"
                              Minimum="0"
                              Value="1"
-                             HeightRequest="60"
-                             WidthRequest="60"/>
+                             HeightRequest="100"
+                             WidthRequest="100"/>
 
                     <Button x:Name="AddNewPeriodButton"
                             Margin="5, 0, 0, 0"
@@ -114,6 +114,7 @@
                             TextColor="White"
                             CornerRadius="10"
                             Text="Add this period."
+                            VerticalOptions="Center"
                             Clicked="AddNewPeriodButton_Clicked"/>
 
                 </StackLayout>

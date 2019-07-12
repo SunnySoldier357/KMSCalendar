@@ -84,7 +84,8 @@
                                 <SearchBar x:Name="ClassSearchBar"
                                            Margin="0,0,0,10"
                                            Placeholder="Search"
-                                           TextColor="{DynamicResource Text}" />
+                                           TextColor="{DynamicResource Text}" 
+                                           BackgroundColor="{DynamicResource LightText}"/>
                             <!--</Frame>-->
 
                             <ListView x:Name="ClassesListView"

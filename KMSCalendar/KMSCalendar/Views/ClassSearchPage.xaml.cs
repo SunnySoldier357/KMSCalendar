@@ -13,8 +13,6 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ClassSearchPage : ContentPage
 	{
-        //TODO: MATEO add the ability to go back from this page.
-
         //* Public Properties
         public ClassSearchViewModel ViewModel;
 
@@ -43,6 +41,8 @@ namespace KMSCalendar.Views
         {
             var selectedClass = ViewModel.SelectedClass;
 
+            // TODO: MATEO add this to the sample data
+            
             // TODO: SUNNY add the period selected and class selected to the database.
 
             //Closes the page and goes to the last one on the stack
