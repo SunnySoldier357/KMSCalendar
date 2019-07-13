@@ -37,10 +37,14 @@ namespace KMSCalendar.Views
         }
 
         //* Public Methods
+        /// <summary>
+        /// This method goes to the calendar once the user has selected a class and a period
+        /// </summary>
+        /// <param name="periodChosen">Period that the user is in</param>
         public async Task GoToCalendarAsync(int periodChosen)
         {
-            var selectedClass = ViewModel.SelectedClass;
-
+            Class selectedClass = ViewModel.SelectedClass;
+            
             // TODO: MATEO add this to the sample data
             
             // TODO: SUNNY add the period selected and class selected to the database.
