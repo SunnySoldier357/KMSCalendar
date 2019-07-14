@@ -6,27 +6,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
 
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <Style x:Key="ActionButtonStyle"
-                   TargetType="Button">
-                <Setter Property="Margin" Value="0" />
-
-                <Setter Property="Padding" Value="0" />
-
-                <Setter Property="TextColor" Value="{DynamicResource Text}" />
-
-                <Setter Property="BorderColor" Value="Transparent" />
-
-                <Setter Property="BorderWidth" Value="0" />
-
-                <Setter Property="BackgroundColor" Value="Transparent" />
-
-                <Setter Property="TextColor" Value="{DynamicResource NavigationTertiary}" />
-            </Style>
-        </ResourceDictionary>
-    </ContentView.Resources>
-
     <ContentView.Content>
         <StackLayout>
             <Grid HeightRequest="60"
@@ -41,7 +20,6 @@
                 <Button x:Name="BackButton"
                         HorizontalOptions="Start"
                         Style="{StaticResource ActionButtonStyle}"
-                        BackgroundColor="Transparent"
                         Text="Back"
                         Clicked="BackButton_Clicked" />
 
@@ -49,7 +27,6 @@
                         Grid.Column="1"
                         HorizontalOptions="End"
                         Style="{StaticResource ActionButtonStyle}"
-                        BackgroundColor="Transparent"
                         Text="Done"
                         Clicked="DoneButton_Clicked" />
             </Grid>

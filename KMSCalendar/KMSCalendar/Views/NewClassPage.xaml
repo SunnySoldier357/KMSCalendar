@@ -5,28 +5,6 @@
              Title="Create a new class"
              BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="ActionButtonStyle"
-                   TargetType="Button">
-                <Setter Property="Margin" Value="0" />
-
-                <Setter Property="Padding" Value="0" />
-
-                <Setter Property="TextColor" Value="{DynamicResource Text}" />
-
-                <Setter Property="BorderColor" Value="Transparent" />
-
-                <Setter Property="BorderWidth" Value="0" />
-
-                <Setter Property="BackgroundColor" Value="Transparent" />
-
-                <Setter Property="TextColor" Value="{DynamicResource NavigationTertiary}" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
-    
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Vertical"
@@ -101,7 +79,6 @@
                                              Maximum="15"
                                              Minimum="0"
                                              Value="{Binding Period}" />
-
                                 </StackLayout>
 
                                 <!--  Search for a Teacher  -->

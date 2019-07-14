@@ -11,27 +11,6 @@
         <vm:ClassSearchViewModel />
     </ContentPage.BindingContext>
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="ActionButtonStyle"
-                   TargetType="Button">
-                <Setter Property="Margin" Value="0" />
-
-                <Setter Property="Padding" Value="0" />
-
-                <Setter Property="TextColor" Value="{DynamicResource Text}" />
-
-                <Setter Property="BorderColor" Value="{DynamicResource NavigationTertiary}" />
-
-                <Setter Property="BorderWidth" Value="0" />
-
-                <Setter Property="BackgroundColor" Value="Transparent" />
-
-                <Setter Property="TextColor" Value="{DynamicResource NavigationTertiary}" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.Content>
         <StackLayout>
             <!--  TODO: MATEO Make this page look pretty  -->
