@@ -10,30 +10,21 @@ namespace KMSCalendar.Models.Data
         //* Static Properties
         private static bool seedLoaded = false;
 
-        private static List<Assignment> assignments { get; set; }
+        private static List<Assignment> assignments;
         private static List<Class> classes;
         private static List<Teacher> teachers;
         private static List<User> users;
 
-        //* Public Properties
-
-        /// <summary>The unique ID of the entity.</summary>
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-
-        //* Private Static Properties
-        private static List<string> testTeachers = new List<string>
+        private static List<string> assignmentPool = new List<string>
         {
-            "Smith",
-            "Johnson",
-            "Williams",
-            "Brown",
-            "Davis",
-            "Miller",
-            "Wilson",
-            "Moore",
-            "Taylor"
+            "Reading",
+            "Complete the Assignment",
+            "Finish online HW",
+            "Take notes",
+            "Group Project Due",
+            "Comparative Essay"
         };
-        private static List<string> testClasses = new List<string>
+        private static List<string> classPool = new List<string>
         {
             "Physics",
             "Calculus",
@@ -45,16 +36,23 @@ namespace KMSCalendar.Models.Data
             "Computer Science",
             "Theory of Knowledge"
         };
-
-        private static List<string> testItems = new List<string>
+        private static List<string> teacherPool = new List<string>
         {
-            "Reading",
-            "Complete the Assignment",
-            "Finish online HW",
-            "Take notes",
-            "Group Project Due",
-            "Comparative Essay"
+            "Smith",
+            "Johnson",
+            "Williams",
+            "Brown",
+            "Davis",
+            "Miller",
+            "Wilson",
+            "Moore",
+            "Taylor"
         };
+
+        //* Public Properties
+
+        /// <summary>The unique ID of the entity.</summary>
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         //* Public Static Methods
 
@@ -86,12 +84,12 @@ namespace KMSCalendar.Models.Data
         }
 
         //* Private Static Methods
-        private static int getAnotherNumber(int min, int max, int num)
+        private static int getAnotherNumber(int min, int max, params int[] nums)
         {
             Random random = new Random();
-            int temp = num;
+            int temp = nums[0];
 
-            while (temp == num)
+            while (nums.Contains(temp))
                 temp = random.Next(min, max);
 
             return temp;
@@ -102,11 +100,10 @@ namespace KMSCalendar.Models.Data
             Random random = new Random();
 
             teachers = new List<Teacher>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                int rand = random.Next(0, 2);
                 string surname = "";
-                switch (rand)
+                switch (random.Next(0, 2))
                 {
                     case 0: surname = "Ms. ";
                         break;
@@ -118,16 +115,15 @@ namespace KMSCalendar.Models.Data
     
                 teachers.Add(new Teacher
                 {
-                    Name = surname + testTeachers.ElementAt(i)
+                    Name = surname + teacherPool.ElementAt(i)
                 });
             }
 
             classes = new List<Class>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 int num = random.Next(1, 7);
-                //string className = $"Test Class {i}";
-                string className = testClasses.ElementAt(random.Next(0, 8));
+                string className = classPool.ElementAt(random.Next(0, classPool.Count));
                 Teacher teacher = teachers[i];
 
                 classes.Add(new Class
@@ -137,10 +133,19 @@ namespace KMSCalendar.Models.Data
                     Teacher = teacher
                 });
 
+                int num2 = getAnotherNumber(1, 7, num);
+
                 classes.Add(new Class
                 {
                     Name = className,
-                    Period = getAnotherNumber(1, 7, num),
+                    Period = num2,
+                    Teacher = teacher
+                });
+
+                classes.Add(new Class
+                {
+                    Name = className,
+                    Period = getAnotherNumber(1, 7, num, num2),
                     Teacher = teacher
                 });
             }
@@ -151,6 +156,7 @@ namespace KMSCalendar.Models.Data
                 teachers[i].Classes = new List<Class>
                 {
                     classes[count++],
+                    classes[count++],
                     classes[count++]
                 };
             }
@@ -160,9 +166,8 @@ namespace KMSCalendar.Models.Data
             {
                 assignments.Add(new Assignment
                 {
-                    //Name = $"Test Item {i}",
-                    Name = testItems.ElementAt(getAnotherNumber(0, 5, 1)),
-                    Description = $"From pages 1 - {i}   (test item)",
+                    Name = assignmentPool.ElementAt(random.Next(0, assignmentPool.Count)),
+                    Description = $"From pages 1 - {i} (test item)",
                     DueDate = DateTime.Today.AddDays(random.Next(-2, 3)),
                     Class = classes[random.Next(0, classes.Count)]
                 });
@@ -181,8 +186,8 @@ namespace KMSCalendar.Models.Data
             List<Class> tempClasses = new List<Class>
             {
                 classes[0],
-                classes[2],
-                classes[4]
+                classes[3],
+                classes[6]
             };
 
             users = new List<User>
