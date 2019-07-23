@@ -43,28 +43,28 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Button x:Name="BackButton"
-                                    HorizontalOptions="Start"
-                                    Style="{StaticResource ActionButtonStyle}"
-                                    Text="Back"
-                                    Clicked="BackButton_Clicked"/>
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource ActionButtonStyle}"
+                                        Text="Back"
+                                        Clicked="BackButton_Clicked" />
 
                                 <Button x:Name="NextButton"
-                                    Grid.Column="1"
-                                    HorizontalOptions="End"
-                                    Style="{StaticResource ActionButtonStyle}"
-                                    Text="Next"
-                                    Clicked="NextButton_Clicked"/>
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        Style="{StaticResource ActionButtonStyle}"
+                                        Text="Next"
+                                        Clicked="NextButton_Clicked" />
                             </Grid>
 
                             <!--<Frame Padding="0"
                                    CornerRadius="10"
                                    BorderColor="{DynamicResource NavigationBackgroundLight}">-->
 
-                                <SearchBar x:Name="ClassSearchBar"
-                                           Margin="0,0,0,10"
-                                           Placeholder="Search"
-                                           TextColor="{DynamicResource Text}" 
-                                           BackgroundColor="{DynamicResource LightText}"/>
+                            <SearchBar x:Name="ClassSearchBar"
+                                       Margin="0,0,0,10"
+                                       BackgroundColor="{DynamicResource LightText}"
+                                       Placeholder="Search"
+                                       TextColor="{DynamicResource Text}" />
                             <!--</Frame>-->
 
                             <ListView x:Name="ClassesListView"

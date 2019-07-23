@@ -27,7 +27,7 @@
                                     <RowDefinition />
                                     <RowDefinition Height="32" />
                                     <RowDefinition Height="32" />
-                                    <RowDefinition Height="300"/>
+                                    <RowDefinition Height="300" />
                                     <RowDefinition Height="50" />
                                     <RowDefinition Height="32" />
                                 </Grid.RowDefinitions>
@@ -38,20 +38,20 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Button x:Name="BackButton"
-                                    HorizontalOptions="Start"
-                                    Text="Back"
-                                    Style="{StaticResource ActionButtonStyle}"
-                                    Clicked="BackButton_Clicked"/>
+                                        HorizontalOptions="Start"
+                                        Style="{StaticResource ActionButtonStyle}"
+                                        Text="Back"
+                                        Clicked="BackButton_Clicked" />
 
                                 <Button x:Name="NextButton"
-                                    Grid.Column="1"
-                                    HorizontalOptions="End"
-                                    Style="{StaticResource ActionButtonStyle}"
-                                    Text="Next"
-                                    Clicked="NextButton_Clicked"/>
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        Style="{StaticResource ActionButtonStyle}"
+                                        Text="Next"
+                                        Clicked="NextButton_Clicked" />
 
-                                <Label Text="Class Name:" 
-                                       Grid.Row="1"/>
+                                <Label Grid.Row="1"
+                                       Text="Class Name:" />
 
                                 <Entry x:Name="ClassNameEntry"
                                        Grid.Row="1"
@@ -68,9 +68,9 @@
                                              Orientation="Horizontal">
 
                                     <Label x:Name="NewPeriodLabel"
+                                           VerticalOptions="Center"
                                            BindingContext="{x:Reference Name=PeriodStepper}"
-                                           Text="{Binding Value}" 
-                                           VerticalOptions="Center"/>
+                                           Text="{Binding Value}" />
 
                                     <Stepper x:Name="PeriodStepper"
                                              HorizontalOptions="Center"
@@ -87,13 +87,13 @@
                                              Grid.ColumnSpan="2"
                                              HorizontalOptions="Center">
 
-                                    <Label Text="Search for your Teacher"/>
+                                    <Label Text="Search for your Teacher" />
 
                                     <SearchBar x:Name="TeacherSearchBar"
                                                Margin="0,0,0,4"
-                                               Placeholder="Search" 
                                                Text="{Binding SearchTerm}"
-                                               TextChanged="TeacherSearchBar_TextChanged"/>
+                                               Placeholder="Search"
+                                               TextChanged="TeacherSearchBar_TextChanged" />
 
                                     <ListView x:Name="TeachersListView"
                                               ItemsSource="{Binding Teachers}"
@@ -103,49 +103,49 @@
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <ViewCell Height="100">
-                                                        <Grid Padding="5">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition />
-                                                                <ColumnDefinition />
-                                                            </Grid.ColumnDefinitions>
+                                                    <Grid Padding="5">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
 
-                                                            <Label Text="{Binding Name}"
-                                                                   FontSize="14"
-                                                                   LineBreakMode="NoWrap" />
+                                                        <Label Text="{Binding Name}"
+                                                               FontSize="14"
+                                                               LineBreakMode="NoWrap" />
 
-                                                            <Label Grid.Column="1"
-                                                                   Text="School"
-                                                                   FontSize="11"
-                                                                   LineBreakMode="NoWrap" 
-                                                                   HorizontalOptions="End"/>
-                                                        </Grid>
+                                                        <Label Grid.Column="1"
+                                                               HorizontalOptions="End"
+                                                               Text="School"
+                                                               FontSize="11"
+                                                               LineBreakMode="NoWrap" />
+                                                    </Grid>
                                                 </ViewCell>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
                                 </StackLayout>
 
-                                <Label Text="Add a new teacher (if not on the list):" 
-                                       Grid.Row="4"
+                                <Label Grid.Row="4"
                                        Grid.Column="0"
-                                       VerticalOptions="Center"/>
+                                       VerticalOptions="Center"
+                                       Text="Add a new teacher (if not on the list):" />
                                 <Entry x:Name="newTeacherNameEntry"
-                                       Placeholder="Teacher's Name"
                                        Grid.Row="4"
                                        Grid.Column="1"
                                        VerticalOptions="Center"
-                                       Text="{Binding TeacherName}"/>
+                                       Text="{Binding TeacherName}"
+                                       Placeholder="Teacher's Name" />
 
                                 <Button x:Name="DoneButton"
                                         Grid.Row="5"
                                         Grid.ColumnSpan="2"
+                                        Margin="0,5,0,0"
                                         BackgroundColor="{DynamicResource NavigationTertiary}"
                                         BorderWidth="0"
                                         CornerRadius="10"
                                         Text="Add the class"
                                         TextColor="White"
-                                        Clicked="DoneButton_Clicked"
-                                        Margin="0, 5, 0, 0"/>
+                                        Clicked="DoneButton_Clicked" />
                             </Grid>
                         </Frame>
                     </ScrollView>

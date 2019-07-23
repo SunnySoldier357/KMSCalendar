@@ -53,7 +53,7 @@ namespace KMSCalendar.Models
 
         private static bool slowEquals(byte[] a, byte[] b)
         {
-            var diff = (uint) a.Length ^ (uint) b.Length;
+            uint diff = (uint) a.Length ^ (uint) b.Length;
             for (int i = 0; i < a.Length && i < b.Length; i++)
                 diff |= (uint) (a[i] ^ b[i]);
             return diff == 0;

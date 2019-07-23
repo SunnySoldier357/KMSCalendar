@@ -35,7 +35,7 @@
                 <Setter Property="CornerRadius" Value="20" />
             </Style>
 
-            <!--Style for next/back buttons on the class search pages-->
+            <!--  Style for next/back buttons on the class search pages  -->
             <Style x:Key="ActionButtonStyle"
                    TargetType="Button">
                 <Setter Property="Margin" Value="0" />

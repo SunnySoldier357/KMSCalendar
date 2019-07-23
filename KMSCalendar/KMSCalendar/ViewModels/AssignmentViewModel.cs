@@ -26,7 +26,8 @@ namespace KMSCalendar.ViewModels
 
         //* Public Properties
         public bool ShowCalendarDays => Settings.ShowCalendarDays;
-        public DateTime DateChoosen;
+
+        public DateTime DateChoosen { get; set; }
 
         public ICommand FilterAssignmentsCommand { get; set; }
         /// <summary>
