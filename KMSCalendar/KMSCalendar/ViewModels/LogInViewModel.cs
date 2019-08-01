@@ -85,36 +85,21 @@ namespace KMSCalendar.ViewModels
         {
             if (Validate())
             {
-                // TODO: Grab password from database
-                string databasePassword = "temp";
-
                 var dataStore = DependencyService.Get<IDataStore<User>>();
                 var users = await dataStore.GetItemsAsync();
                 User signedInUser = users.FirstOrDefault(u => u.Email == Email);
 
-                App app = Application.Current as App;
+                if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
+                {
+                    App app = Application.Current as App;
 
-                app.SignedInUser = signedInUser;
-                Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+                    app.SignedInUser = signedInUser;
+                    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
 
-                app.MainPage = new MainPage();
-
-                // TODO: Authenticate with backend
-                //if (PasswordHasher.ValidatePassword(password, databasePassword))
-                //{
-                //    var dataStore = DependencyService.Get<IDataStore<User>>();
-                //    var users = await dataStore.GetItemsAsync();
-                //    User signedInUser = users.FirstOrDefault(u => u.Email == email);
-
-                //    App app = Application.Current as App;
-
-                //    app.SignedInUser = signedInUser;
-                //    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
-
-                //    app.MainPage = new MainPage();
-                //}
-                //else
-                //    viewModel.LoginValidationMessage = "Invalid Password";
+                    app.MainPage = new MainPage();
+                }
+                else
+                    Errors.Add("Invalid Password");
             }
         }
 
