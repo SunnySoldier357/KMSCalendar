@@ -87,9 +87,16 @@ namespace KMSCalendar.ViewModels
             {
                 var dataStore = DependencyService.Get<IDataStore<User>>();
                 var users = await dataStore.GetItemsAsync();
-                User signedInUser = users.FirstOrDefault(u => u.Email == Email);
 
-                if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
+                if(users.FirstOrDefault(u => u.Email == Email) == null)
+                {
+                    LoginValidationMessage = "Email / Password Incorrect";
+                    return;
+                }
+
+                User signedInUser = users.FirstOrDefault(u => u.Email == Email);    //null exception here if the user tries to sign in with an email that is not listed.
+                                                                                       
+                if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))   //null excecption here because the mock data the passwords are null
                 {
                     App app = Application.Current as App;
 

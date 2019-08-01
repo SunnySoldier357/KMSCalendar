@@ -58,7 +58,7 @@ namespace KMSCalendar.Views
                 await RootPage.NavigateFromMenu(id);
             };
 
-            UserNameLabel.BindingContext = (Application.Current as App).SignedInUser.UserName;
+            UserNameLabel.BindingContext = (Application.Current as App).SignedInUser.UserName;  //this can create a bug
         }
 
         private void SearchButton_Clicked(object sender, System.EventArgs e)
