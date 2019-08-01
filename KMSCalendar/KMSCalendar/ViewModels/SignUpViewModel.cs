@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using ModelValidation;
@@ -56,24 +57,32 @@ namespace KMSCalendar.ViewModels
         {
             if (Validate())
             {
-                string hashedPassword = PasswordHasher.HashPassword(Password);
-
-                User user = new User
-                {
-                    Email = Email,
-                    UserName = UserName,
-                    Password = hashedPassword
-                };
-
                 var dataStore = DependencyService.Get<IDataStore<User>>();
-                User signedInUser = await dataStore.AddItemAsync(user);
+                var users = await dataStore.GetItemsAsync(true);
 
-                App app = Application.Current as App;
+                if (users.SingleOrDefault(u => u.Email == Email) != null)
+                    Errors.Add("User already exists! Please log in instead.");
+                else
+                {
+                    string hashedPassword = PasswordHasher.HashPassword(Password);
 
-                app.SignedInUser = signedInUser;
-                Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+                    User user = new User
+                    {
+                        Email = Email,
+                        UserName = UserName,
+                        Password = hashedPassword
+                    };
 
-                app.MainPage = new MainPage();
+
+                    User signedInUser = await dataStore.AddItemAsync(user);
+
+                    App app = Application.Current as App;
+
+                    app.SignedInUser = signedInUser;
+                    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+
+                    app.MainPage = new MainPage();
+                }
             }
         }
     }
