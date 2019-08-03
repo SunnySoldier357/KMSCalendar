@@ -13,7 +13,7 @@ using KMSCalendar.Services.Data;
 
 namespace KMSCalendar.ViewModels
 {
-    public class LogInViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
         //* Private Properties
         private int logInAttempts;
@@ -62,7 +62,7 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructor
-        public LogInViewModel()
+        public LoginViewModel()
         {
             Title = "Log In";
 

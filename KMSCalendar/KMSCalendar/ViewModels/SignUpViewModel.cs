@@ -12,7 +12,7 @@ using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels
 {
-    public class SignUpViewModel : LogInViewModel
+    public class SignUpViewModel : LoginViewModel
     {
         //* Private Properties
         private string confirmPassword;
