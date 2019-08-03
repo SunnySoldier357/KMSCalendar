@@ -62,7 +62,7 @@ namespace KMSCalendar.ViewModels
                 var users = await dataStore.GetItemsAsync(true);
 
                 if (users.SingleOrDefault(u => u.Email == Email) != null)
-                    Errors.Add("User already exists! Please log in instead.");
+                    LoginValidationMessage = "User already exists! Please log in instead.";
                 else
                 {
                     string hashedPassword = PasswordHasher.HashPassword(Password);

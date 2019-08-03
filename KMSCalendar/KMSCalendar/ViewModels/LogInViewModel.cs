@@ -104,12 +104,12 @@ namespace KMSCalendar.ViewModels
                         app.MainPage = new MainPage();
                     }
                     else
-                        Errors.Add("Invalid Password");
+                        LoginValidationMessage = "Invalid Password";
                 }
             }
         }
 
         public void ExecuteForgotPasswordCommand() =>
-            Errors.Add("You can't forget your password if you don't have an account.");
+            LoginValidationMessage = "You can't forget your password if you don't have an account.";
     }
 }
