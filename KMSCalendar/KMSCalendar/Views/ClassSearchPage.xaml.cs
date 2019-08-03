@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Controls;
 using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
 
@@ -18,9 +17,6 @@ namespace KMSCalendar.Views
 
         public MainPage RootPage => Application.Current.MainPage as MainPage;
 
-        //* Events
-        public event EventHandler SelectPeriodControlLoaded;
-
         //* Constructors
         public ClassSearchPage()
         {
@@ -28,15 +24,13 @@ namespace KMSCalendar.Views
 
             BindingContext = ViewModel = new ClassSearchViewModel();
 
-            SelectPeriodControl.ParentPage = this;
-            SelectPeriodControlLoaded += SelectPeriodControl.OnLoaded;
-
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
             ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
             ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
         }
 
         //* Public Methods
+
         /// <summary>
         /// This method goes to the calendar once the user has selected a class and a period
         /// </summary>
@@ -63,6 +57,23 @@ namespace KMSCalendar.Views
         }
 
         //* Event Handlers
+
+        private void AddNewPeriodButton_Clicked(object sender, EventArgs e)
+        {
+            int newPeriod = int.Parse(NewPeriodLabel.Text);
+
+            ViewModel.LoadPeriods(newPeriod);
+
+            // I tried using these to update the list but they didn't work. Databinding issue?
+            // ParentPage.ViewModel.Periods.Add(newPeriod);
+            // PeriodsListView.BeginRefresh();
+
+            // TODO: SUNNY add the new Period to the listview and database
+        }
+
+        private void BackButton_Clicked(object sender, EventArgs e) =>
+            Swap();
+
         /// <summary>
         /// Invoked when the user selects a class, then shows the selectPeriodView where
         /// the user can select a period.
@@ -71,23 +82,31 @@ namespace KMSCalendar.Views
         {
             ViewModel.SelectedClass = ClassesListView.SelectedItem as Class;
 
-            SelectPeriodControlLoaded.Invoke(this, new EventArgs());
+            ViewModel.LoadPeriods();
             Swap();
         }
 
+        private async void DoneButton_Clicked(object sender, EventArgs e)
+        {
+            if (PeriodsListView.SelectedItem != null)
+            {
+                int periodChosen = (int) PeriodsListView.SelectedItem;
+
+                await GoToCalendarAsync(periodChosen);
+            }
+        }
+
+        private void ExitButton_Clicked(object sender, EventArgs e) =>
+            Navigation.PopModalAsync();
+
         private void GoToNewClassButton_Clicked(object sender, EventArgs e) => 
             Navigation.PushModalAsync(new NewClassPage(this));
-
-        private void BackButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PopModalAsync();
-        }
 
         private void NextButton_Clicked(object sender, EventArgs e)
         {
             if (ViewModel.SelectedClass != null)
             {
-                SelectPeriodControlLoaded.Invoke(this, new EventArgs());
+                ViewModel.LoadPeriods();
                 Swap();
             }
         }

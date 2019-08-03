@@ -2,7 +2,6 @@
 <ContentPage x:Class="KMSCalendar.Views.ClassSearchPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:control="clr-namespace:KMSCalendar.Controls"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              Title="{Binding Title}"
              BackgroundColor="{DynamicResource NavigationBackgroundLight}">
@@ -28,7 +27,98 @@
                     <Grid>
                         <Grid x:Name="PopUpGrid"
                               IsVisible="False">
-                            <control:SelectPeriodControl x:Name="SelectPeriodControl" />
+                            <StackLayout>
+                                <Grid HeightRequest="60"
+                                      Margin="0"
+                                      Padding="0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button x:Name="BackButton"
+                                            HorizontalOptions="Start"
+                                            Style="{StaticResource ActionButtonStyle}"
+                                            Text="Back"
+                                            Clicked="BackButton_Clicked" />
+
+                                    <Button x:Name="DoneButton"
+                                            Grid.Column="1"
+                                            HorizontalOptions="End"
+                                            Style="{StaticResource ActionButtonStyle}"
+                                            Text="Done"
+                                            Clicked="DoneButton_Clicked" />
+                                </Grid>
+
+                                <ScrollView>
+                                    <ListView x:Name="PeriodsListView"
+                                              VerticalOptions="Start"
+                                              ItemsSource="{Binding Periods}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell Height="100">
+                                                    <Grid Padding="5">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="5*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Label VerticalOptions="End"
+                                                               Text="x"
+                                                               FontSize="14" />
+
+                                                        <Label Grid.Column="1"
+                                                               VerticalOptions="End"
+                                                               Text="{Binding}"
+                                                               FontSize="11" />
+                                                    </Grid>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </ScrollView>
+
+                                <StackLayout>
+
+                                    <Label HorizontalOptions="Center"
+                                           Text="Can't find your period? Add a new one here:" />
+
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="Center">
+
+                                        <Label VerticalOptions="Center"
+                                               Margin="0,0,0,5"
+                                               Text="Period: " />
+
+                                        <Label x:Name="NewPeriodLabel"
+                                               VerticalOptions="Center"
+                                               BindingContext="{x:Reference Name=PeriodStepper}"
+                                               Text="{Binding Value}" />
+
+                                        <Stepper x:Name="PeriodStepper"
+                                                 HeightRequest="100"
+                                                 WidthRequest="100"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center"
+                                                 Increment="1"
+                                                 Maximum="15"
+                                                 Minimum="0"
+                                                 Value="1" />
+
+                                        <Button x:Name="AddNewPeriodButton"
+                                                VerticalOptions="Center"
+                                                Margin="5,0,0,0"
+                                                BackgroundColor="{DynamicResource NavigationTertiary}"
+                                                BorderWidth="0"
+                                                CornerRadius="10"
+                                                Text="Add this period."
+                                                TextColor="White"
+                                                Clicked="AddNewPeriodButton_Clicked" />
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
                         </Grid>
 
                         <StackLayout x:Name="SearchAreaStackLayout">
@@ -42,11 +132,11 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
-                                <Button x:Name="BackButton"
+                                <Button x:Name="ExitButton"
                                         HorizontalOptions="Start"
                                         Style="{StaticResource ActionButtonStyle}"
                                         Text="Back"
-                                        Clicked="BackButton_Clicked" />
+                                        Clicked="ExitButton_Clicked" />
 
                                 <Button x:Name="NextButton"
                                         Grid.Column="1"
