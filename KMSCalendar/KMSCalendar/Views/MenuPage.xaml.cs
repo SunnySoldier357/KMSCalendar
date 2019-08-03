@@ -4,7 +4,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models.Navigation;
-using System.Diagnostics;
 
 namespace KMSCalendar.Views
 {
@@ -58,13 +57,15 @@ namespace KMSCalendar.Views
                 await RootPage.NavigateFromMenu(id);
             };
 
-            UserNameLabel.BindingContext = (Application.Current as App).SignedInUser.UserName;  //this can create a bug
+            UserNameLabel.BindingContext = (Application.Current as App).SignedInUser.UserName;
         }
 
         private void SearchButton_Clicked(object sender, System.EventArgs e)
         {
             Navigation.PushModalAsync(new ClassSearchPage());
-            MainPage.Current.Hide(); //Hides the hamburger menu navigation drawer.
+
+            // Hides the hamburger menu navigation drawer.
+            MainPage.Current.Hide();
         }
     }
 }

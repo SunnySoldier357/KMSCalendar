@@ -23,7 +23,8 @@ namespace KMSCalendar.ViewModels
         public ICommand AlreadyUserCommand { get; set; }
         public new ICommand AuthenticateUserCommand { get; set; }
 
-        [PropertyValueMatch(nameof(Password))]
+        [PropertyValueMatch(nameof(Password), 
+            ErrorMessage = "The Passwords do not match!")]
         public string ConfirmPassword
         {
             get => confirmPassword;

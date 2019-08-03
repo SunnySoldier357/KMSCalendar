@@ -190,6 +190,8 @@ namespace KMSCalendar.Models.Data
                 classes[6]
             };
 
+            string password = PasswordHasher.HashPassword("testPassword");
+
             users = new List<User>
             {
                 new User
@@ -197,6 +199,7 @@ namespace KMSCalendar.Models.Data
                     Id = "1",
                     Email = "singh@king.com",
                     UserName = "SinghIsKing",
+                    Password = password,
                     EnrolledClasses = tempClasses
                 },
                 new User
@@ -204,6 +207,7 @@ namespace KMSCalendar.Models.Data
                     Id = "2",
                     Email = "test@king.com",
                     UserName = "No Class Test",
+                    Password = password,
                     EnrolledClasses = new List<Class>()
                 },
                 new User
@@ -211,6 +215,7 @@ namespace KMSCalendar.Models.Data
                     Id = "3",
                     Email = "mattmorgan6@gmail.com",
                     UserName = "mattmorgan6",
+                    Password = password,
                     EnrolledClasses = tempClasses
                 }
             };

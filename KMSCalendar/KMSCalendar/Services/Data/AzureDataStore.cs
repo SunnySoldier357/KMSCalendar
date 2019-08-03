@@ -33,7 +33,7 @@ namespace KMSCalendar.Services.Data
         {
             if (forceRefresh)
             {
-                string json = await client.GetStringAsync($"api/{nameof(T)}");
+                string json = await client.GetStringAsync($"api/{typeof(T).Name}");
                 items = await Task.Run(() =>
                     JsonConvert.DeserializeObject<IEnumerable<T>>(json));
             }
@@ -45,7 +45,7 @@ namespace KMSCalendar.Services.Data
         {
             if (id != null)
             {
-                string json = await client.GetStringAsync($"api/{nameof(T)}/{id}");
+                string json = await client.GetStringAsync($"api/{typeof(T).Name}/{id}");
                 return await Task.Run(() =>
                     JsonConvert.DeserializeObject<T>(json));
             }
@@ -60,7 +60,7 @@ namespace KMSCalendar.Services.Data
 
             string serializedItem = JsonConvert.SerializeObject(item);
 
-            HttpResponseMessage response = await client.PostAsync($"api/{nameof(T)}",
+            HttpResponseMessage response = await client.PostAsync($"api/{typeof(T).Name}",
                 new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
             return await Task.Run(async () =>
@@ -77,7 +77,7 @@ namespace KMSCalendar.Services.Data
             ByteArrayContent byteContent = new ByteArrayContent(buffer);
 
             HttpResponseMessage response = await client.PutAsync(
-                new Uri($"api/{nameof(T)}/{item.Id}"),
+                new Uri($"api/{typeof(T).Name}/{item.Id}"),
                 byteContent);
 
             return await Task.Run(async () =>
@@ -90,7 +90,7 @@ namespace KMSCalendar.Services.Data
                 return false;
 
             HttpResponseMessage response = await client.DeleteAsync(
-                $"api/{nameof(T)}/{id}");
+                $"api/{typeof(T).Name}/{id}");
 
             return response.IsSuccessStatusCode;
         }

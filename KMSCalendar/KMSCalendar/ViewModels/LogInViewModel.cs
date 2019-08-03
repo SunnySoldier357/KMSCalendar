@@ -86,31 +86,30 @@ namespace KMSCalendar.ViewModels
             if (Validate())
             {
                 var dataStore = DependencyService.Get<IDataStore<User>>();
-                var users = await dataStore.GetItemsAsync();
+                var users = await dataStore.GetItemsAsync(true);
 
-                if(users.FirstOrDefault(u => u.Email == Email) == null)
-                {
-                    LoginValidationMessage = "Email / Password Incorrect";
-                    return;
-                }
-
-                User signedInUser = users.FirstOrDefault(u => u.Email == Email);    //null exception here if the user tries to sign in with an email that is not listed.
-                                                                                       
-                if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))   //null excecption here because the mock data the passwords are null
-                {
-                    App app = Application.Current as App;
-
-                    app.SignedInUser = signedInUser;
-                    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
-
-                    app.MainPage = new MainPage();
-                }
+                if (users.FirstOrDefault(u => u.Email == Email) == null)
+                    LoginValidationMessage = "This email does not have an account, please sign up for an account";
                 else
-                    Errors.Add("Invalid Password");
+                {
+                    User signedInUser = users.FirstOrDefault(u => u.Email == Email);
+
+                    if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
+                    {
+                        App app = Application.Current as App;
+
+                        app.SignedInUser = signedInUser;
+                        Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+
+                        app.MainPage = new MainPage();
+                    }
+                    else
+                        Errors.Add("Invalid Password");
+                }
             }
         }
 
         public void ExecuteForgotPasswordCommand() =>
-            LoginValidationMessage = "You can't forget your password if you don't have an account.";
+            Errors.Add("You can't forget your password if you don't have an account.");
     }
 }
