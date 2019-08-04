@@ -8,7 +8,7 @@
              BackgroundImage="BackgroundForLogin.png">
 
     <ContentPage.BindingContext>
-        <vm:LogInViewModel />
+        <vm:LoginViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>

@@ -13,7 +13,7 @@ using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels
 {
-    public class AssignmentViewModel : BaseViewModel
+    public class AssignmentsViewModel : BaseViewModel
     {
         //* Private Properties
         private IDataStore<Assignment> dataStore;
@@ -46,7 +46,7 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructors
-        public AssignmentViewModel()
+        public AssignmentsViewModel()
         {
             Title = "Assignments Calendar";
             DateChoosen = DateTime.Today;
