@@ -8,7 +8,7 @@
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
-        <vm:AssignmentViewModel />
+        <vm:AssignmentsViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
