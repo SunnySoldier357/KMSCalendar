@@ -109,7 +109,12 @@ namespace KMSCalendar.ViewModels
             }
         }
 
-        public void ExecuteForgotPasswordCommand() =>
+        public void ExecuteForgotPasswordCommand()
+        {
             LoginValidationMessage = "You can't forget your password if you don't have an account.";
+
+            //TODO: SUNNY send email for the forgot password webpage.
+        }
+
     }
 }
