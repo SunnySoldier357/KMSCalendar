@@ -16,8 +16,18 @@ namespace KMSCalendar.Models
         public const int PBKDF2_ITERATIONS = 1000;
         public const int SALT_BYTE_SIZE = 24;
         public const int SALT_INDEX = 1;
-        
+        public const int TOKEN_BYTE_SIZE = 24;
+
         //* Public Methods
+        public static string GetRandomToken()
+        {
+            var cryptoProvider = new RNGCryptoServiceProvider();
+            byte[] token = new byte[TOKEN_BYTE_SIZE];
+            cryptoProvider.GetBytes(token);
+
+            return Convert.ToBase64String(token);
+        }
+
         public static string HashPassword(string password)
         {
             var cryptoProvider = new RNGCryptoServiceProvider();

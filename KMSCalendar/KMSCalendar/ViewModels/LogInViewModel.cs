@@ -10,6 +10,7 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Views;
 using KMSCalendar.Services.Data;
+using KMSCalendar.Services.Email;
 
 namespace KMSCalendar.ViewModels
 {
@@ -76,7 +77,7 @@ namespace KMSCalendar.ViewModels
             };
 
             AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
-            ForgotPasswordCommand = new Command(() => ExecuteForgotPasswordCommand());
+            ForgotPasswordCommand = new Command(async () => await ExecuteForgotPasswordCommand());
             NewUserCommand = new Command(() => (Application.Current as App).MainPage = new SignUpPage());
         }
 
@@ -87,13 +88,12 @@ namespace KMSCalendar.ViewModels
             {
                 var dataStore = DependencyService.Get<IDataStore<User>>();
                 var users = await dataStore.GetItemsAsync(true);
+                User signedInUser = users.FirstOrDefault(u => u.Email == Email);
 
-                if (users.FirstOrDefault(u => u.Email == Email) == null)
+                if (signedInUser == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";
                 else
                 {
-                    User signedInUser = users.FirstOrDefault(u => u.Email == Email);
-
                     if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
                     {
                         App app = Application.Current as App;
@@ -109,12 +109,23 @@ namespace KMSCalendar.ViewModels
             }
         }
 
-        public void ExecuteForgotPasswordCommand()
+        public async Task ExecuteForgotPasswordCommand()
         {
-            LoginValidationMessage = "You can't forget your password if you don't have an account.";
+            if (string.IsNullOrWhiteSpace(Email))
+                loginValidationMessage = "Please enter an email first.";
+            else
+            {
+                var emailService = new EmailService();
 
-            //TODO: SUNNY send email for the forgot password webpage.
+                var dataStore = DependencyService.Get<IDataStore<User>>();
+                var users = await dataStore.GetItemsAsync(true);
+                User recipient = users.FirstOrDefault(user => user.Email == Email);
+
+                if (recipient == null)
+                    LoginValidationMessage = "This email does not have an account, please sign up for an account";
+                else
+                    emailService.SendResetPasswordEmail(recipient);
+            }
         }
-
     }
 }
