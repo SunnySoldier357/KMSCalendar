@@ -1,0 +1,9 @@
+element {
+    --color-primary: #154360;
+}
+
+#city {
+    background-color: var(--color-primary);
+    font-weight: 600;
+    border: 4px solid blue;
+}
