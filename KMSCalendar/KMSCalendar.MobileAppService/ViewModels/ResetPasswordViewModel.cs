@@ -10,12 +10,15 @@ namespace KMSCalendar.MobileAppService.ViewModels
 
         [Required]
         public string Password { get; set; }
+
         [Required]
         public string ConfirmPassword { get; set; }
 
         //* Constructors
         public ResetPasswordViewModel(string authToken) =>
             AuthToken = authToken;
+
+        public ResetPasswordViewModel() { }
 
         //* Interface Implementations
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using KMSCalendar.MobileAppService.ViewModels;
+using System.Diagnostics;
 
 namespace KMSCalendar.MobileAppService.Controllers
 {
@@ -13,9 +14,24 @@ namespace KMSCalendar.MobileAppService.Controllers
         [Route("auth/reset/{authToken}")]
         public IActionResult ResetPassword(string authToken)
         {
-            var viewModel = new ResetPasswordViewModel(authToken);
+            return View(new ResetPasswordViewModel(authToken));
+        }
 
-            return View(viewModel);
+        [HttpPost]
+        [Route("auth/reset/{authToken}")]
+        //[ValidateAntiForgeryToken]
+        public IActionResult ResetPassword(ResetPasswordViewModel viewModel)
+        {
+            Debug.Write("here");
+
+            if (viewModel.Password == viewModel.ConfirmPassword)
+            {
+                //TODO: SUNNY verify the data
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }
