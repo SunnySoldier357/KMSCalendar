@@ -28,10 +28,18 @@ namespace KMSCalendar.MobileAppService.Controllers
             {
                 //TODO: SUNNY verify the data
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ResetPasswordConfirmation");
             }
 
             return View();
         }
+
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+
+
     }
 }
