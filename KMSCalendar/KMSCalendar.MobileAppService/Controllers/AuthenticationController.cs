@@ -24,7 +24,7 @@ namespace KMSCalendar.MobileAppService.Controllers
         {
             Debug.Write("here");
 
-            if (viewModel.Password == viewModel.ConfirmPassword)
+            if (ModelState.IsValid)
             {
                 //TODO: SUNNY verify the data
 
@@ -38,8 +38,5 @@ namespace KMSCalendar.MobileAppService.Controllers
         {
             return View();
         }
-
-
-
     }
 }
