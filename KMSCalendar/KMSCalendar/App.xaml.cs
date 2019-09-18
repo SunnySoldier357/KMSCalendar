@@ -16,7 +16,7 @@ namespace KMSCalendar
         //* Static Properties
         public static string AzureBackendUrl = "https://kmscalendar.azurewebsites.net";
 
-        public static bool UseMockDataStore = true;
+        public static bool UseMockDataStore = false;
 
         //* Public Properties
         public User SignedInUser { get; set; }
@@ -118,7 +118,11 @@ namespace KMSCalendar
             {
                 SignedInUser = await DependencyService.Get<IDataStore<User>>()
                     .GetItemAsync(settings.SignedInUserId);
-                MainPage = new MainPage();
+
+                if (SignedInUser != null)
+                    MainPage = new MainPage();
+                else
+                    MainPage = new LoginPage();
             }
         }
 

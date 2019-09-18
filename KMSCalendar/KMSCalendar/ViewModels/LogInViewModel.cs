@@ -10,6 +10,7 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Views;
 using KMSCalendar.Services.Data;
+using KMSCalendar.Services.Email;
 
 namespace KMSCalendar.ViewModels
 {
@@ -76,7 +77,7 @@ namespace KMSCalendar.ViewModels
             };
 
             AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
-            ForgotPasswordCommand = new Command(() => ExecuteForgotPasswordCommand());
+            ForgotPasswordCommand = new Command(async () => await ExecuteForgotPasswordCommand());
             NewUserCommand = new Command(() => (Application.Current as App).MainPage = new SignUpPage());
         }
 
@@ -85,40 +86,46 @@ namespace KMSCalendar.ViewModels
         {
             if (Validate())
             {
-                // TODO: Grab password from database
-                string databasePassword = "temp";
-
                 var dataStore = DependencyService.Get<IDataStore<User>>();
-                var users = await dataStore.GetItemsAsync();
+                var users = await dataStore.GetItemsAsync(true);
                 User signedInUser = users.FirstOrDefault(u => u.Email == Email);
 
-                App app = Application.Current as App;
+                if (signedInUser == null)
+                    LoginValidationMessage = "This email does not have an account, please sign up for an account";
+                else
+                {
+                    if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
+                    {
+                        App app = Application.Current as App;
 
-                app.SignedInUser = signedInUser;
-                Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+                        app.SignedInUser = signedInUser;
+                        Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
 
-                app.MainPage = new MainPage();
-
-                // TODO: Authenticate with backend
-                //if (PasswordHasher.ValidatePassword(password, databasePassword))
-                //{
-                //    var dataStore = DependencyService.Get<IDataStore<User>>();
-                //    var users = await dataStore.GetItemsAsync();
-                //    User signedInUser = users.FirstOrDefault(u => u.Email == email);
-
-                //    App app = Application.Current as App;
-
-                //    app.SignedInUser = signedInUser;
-                //    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
-
-                //    app.MainPage = new MainPage();
-                //}
-                //else
-                //    viewModel.LoginValidationMessage = "Invalid Password";
+                        app.MainPage = new MainPage();
+                    }
+                    else
+                        LoginValidationMessage = "Invalid Password";
+                }
             }
         }
 
-        public void ExecuteForgotPasswordCommand() =>
-            LoginValidationMessage = "You can't forget your password if you don't have an account.";
+        public async Task ExecuteForgotPasswordCommand()
+        {
+            if (string.IsNullOrWhiteSpace(Email))
+                loginValidationMessage = "Please enter an email first.";
+            else
+            {
+                var emailService = new EmailService();
+
+                var dataStore = DependencyService.Get<IDataStore<User>>();
+                var users = await dataStore.GetItemsAsync(true);
+                User recipient = users.FirstOrDefault(user => user.Email == Email);
+
+                if (recipient == null)
+                    LoginValidationMessage = "This email does not have an account, please sign up for an account";
+                else
+                    emailService.SendResetPasswordEmail(recipient);
+            }
+        }
     }
 }
