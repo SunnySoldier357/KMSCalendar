@@ -6,12 +6,17 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
 using System.Linq;
+using KMSCalendar.Services.Data;
+using System.Diagnostics;
 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewClassPage : ContentPage
 	{
+        //* Private Properties
+        private IDataStore<Teacher> dataStore;
+
         //* Public Properties
         public NewClassViewModel ViewModel;
 
@@ -20,7 +25,17 @@ namespace KMSCalendar.Views
 		{
             InitializeComponent();
             BindingContext = ViewModel= new NewClassViewModel();
-		}
+
+            dataStore = DependencyService.Get<IDataStore<Teacher>>();   //this has no items
+
+            var teachers =
+                from _teacher in dataStore.GetItemsAsync().Result
+                select _teacher;    //this could be totally wrong idk linq
+
+            ViewModel.Teachers = teachers.ToList();
+
+            Debug.WriteLine("aqui");
+        }
 
         //* Event Handlers 
         private void TeacherSearchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -51,9 +66,16 @@ namespace KMSCalendar.Views
             ViewModel.SelectedTeacher = TeachersListView.SelectedItem as Teacher;
         }
 
+        /// <summary>
+        /// These next two buttons should do the same thing and add a new class (and possibly teacher) to the database with the authenticate method
+        /// </summary>
         private void DoneButton_Clicked(object sender, EventArgs e)
         {
-            authenticate();
+            authenticateAsync();
+        }
+        private void NextButton_Clicked(object sender, EventArgs e)
+        {
+            authenticateAsync();
         }
 
         private void BackButton_Clicked(object sender, EventArgs e)
@@ -61,29 +83,33 @@ namespace KMSCalendar.Views
             Navigation.PopModalAsync();
         }
 
-        private void NextButton_Clicked(object sender, EventArgs e)
-        {
-            authenticate();
-        }
-
         /// <summary>
         /// If the viewModel data is valid, it will go to the addClass() method
         /// </summary>
-        private void authenticate()
+        private async System.Threading.Tasks.Task authenticateAsync()
         {
-            if (ViewModel.TeacherName != null && ViewModel.ClassName != null)
+                //If a new teacher is written into the box:
+            if (ViewModel.TeacherName != null && ViewModel.ClassName != null && ViewModel.TeacherName != "")
             {
                 Teacher t = new Teacher { Name = ViewModel.TeacherName };
 
                 //TODO: SUNNY add the new teacher to the database
-
-                addClass(ViewModel.ClassName, ViewModel.Period, t);
+                await addTeacherAsync(t);
             }
-            else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)
+            else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)      //Otherwise if a teacher is selected
             {
                 addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher);
             }
         }
+
+        //TODO: MATEO get the teacher with id and add it to the add class method
+        private async System.Threading.Tasks.Task addTeacherAsync(Teacher t)
+        {
+            await dataStore.AddItemAsync(t);      //adds the teacher to the database
+
+            addClass(ViewModel.ClassName, ViewModel.Period, t);
+        }
+
 
         /// <summary>
         /// Goes back to the class search page
@@ -100,10 +126,6 @@ namespace KMSCalendar.Views
             //TODO: SUNNY add the new class to the database
 
             //Navigates back to the class search page
-            //var MyAppsFirstPage = new ClassSearchPage();
-            //Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
-            //Application.Current.MainPage.Navigation.PushAsync(new ClassSearchPage());
-            //Application.Current.MainPage.Navigation.PopAsync();         // Remove the page currently on top.
             Navigation.PopModalAsync();
         }
     }
