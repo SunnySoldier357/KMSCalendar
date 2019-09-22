@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 using KMSCalendar.Models.Data;
+using System.Diagnostics;
 
 namespace KMSCalendar.Services.Data
 {
@@ -33,7 +34,8 @@ namespace KMSCalendar.Services.Data
         {
             if (forceRefresh)
             {
-                string json = await client.GetStringAsync($"api/{typeof(T).Name}");
+                Debug.WriteLine("woho");
+                string json = await client.GetStringAsync($"api/{typeof(T).Name}");     //TODO: Fix this line it is causing frozen app / crash
                 items = await Task.Run(() =>
                     JsonConvert.DeserializeObject<IEnumerable<T>>(json));
             }

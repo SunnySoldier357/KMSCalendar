@@ -29,8 +29,9 @@ namespace KMSCalendar.Views
             dataStore = DependencyService.Get<IDataStore<Teacher>>();   //this has no items
 
             var teachers =
-                from _teacher in dataStore.GetItemsAsync().Result
-                select _teacher;    //this could be totally wrong idk linq
+                from teacher in dataStore.GetItemsAsync(true).Result
+                where teacher.Name != "Yuh"
+                select teacher;    //this could be totally wrong idk linq
 
             ViewModel.Teachers = teachers.ToList();
 
