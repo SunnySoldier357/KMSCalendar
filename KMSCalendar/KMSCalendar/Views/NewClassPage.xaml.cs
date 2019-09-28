@@ -26,16 +26,18 @@ namespace KMSCalendar.Views
             InitializeComponent();
             BindingContext = ViewModel= new NewClassViewModel();
 
-            dataStore = DependencyService.Get<IDataStore<Teacher>>();   //this has no items
+            dataStore = DependencyService.Get<IDataStore<Teacher>>();   //this has no item
 
-            var teachers =
-                from teacher in dataStore.GetItemsAsync(true).Result
-                where teacher.Name != "Yuh"
-                select teacher;    //this could be totally wrong idk linq
+            LoadTeachers();
+        }
+
+        public async void LoadTeachers()
+        {
+            var teachers = await dataStore.GetItemsAsync(true);
 
             ViewModel.Teachers = teachers.ToList();
 
-            Debug.WriteLine("aqui");
+            TeachersListView.ItemsSource = ViewModel.Teachers;
         }
 
         //* Event Handlers 
