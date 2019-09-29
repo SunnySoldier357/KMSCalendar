@@ -11,6 +11,7 @@ namespace KMSCalendar.Models.Data
 
         public string DisplayName => $"{Name} (Per {Period})";
         public string Name { get; set; }
+        public string TeacherId { get; set; }
 
         public Teacher Teacher { get; set; }
     }
