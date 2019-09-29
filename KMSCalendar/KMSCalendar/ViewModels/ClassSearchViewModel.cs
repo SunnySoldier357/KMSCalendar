@@ -11,6 +11,7 @@ namespace KMSCalendar.ViewModels
     public class ClassSearchViewModel : BaseViewModel
     {
         //* Private Properties
+        private IDataStore<Class> dataStore;
         private Class selectedClass;
 
         private List<Class> classes;
@@ -42,19 +43,28 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Search For Class";
 
-            var dataStore = DependencyService.Get<IDataStore<Class>>();
+            dataStore = DependencyService.Get<IDataStore<Class>>();
 
-            var classes =
-                from _class in dataStore.GetItemsAsync().Result
-                let userClasses =
-                    from userClass in (Application.Current as App).SignedInUser.EnrolledClasses
-                    select userClass.Id
-                where !userClasses.Contains(_class.Id)
-                select _class;
+            LoadClassesAsync();
+        }
+
+        public async System.Threading.Tasks.Task LoadClassesAsync()
+        {
+
+            //var classes =
+            //    from _class in dataStore.GetItemsAsync().Result
+            //    let userClasses =
+            //        from userClass in (Application.Current as App).SignedInUser.EnrolledClasses
+            //        select userClass.Id
+            //    where !userClasses.Contains(_class.Id)
+            //    select _class;
+
+            var classes = await dataStore.GetItemsAsync(true);
 
             this.classes = classes.ToList();
             uniqueClasses = this.classes.Distinct(new DuplicateClassNameComparer()).ToList();
             FilteredClasses = new List<Class>(uniqueClasses);
+            filteredClasses = this.classes;
             Periods = new List<int>();
         }
 

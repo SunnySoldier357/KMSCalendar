@@ -7,15 +7,15 @@ using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
 using System.Linq;
 using KMSCalendar.Services.Data;
-using System.Diagnostics;
-
+using System.Threading.Tasks;
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewClassPage : ContentPage
 	{
         //* Private Properties
-        private IDataStore<Teacher> dataStore;
+        private IDataStore<Teacher> teacherDataStore;
+        private IDataStore<Class> classDataStore;
 
         //* Public Properties
         public NewClassViewModel ViewModel;
@@ -26,14 +26,15 @@ namespace KMSCalendar.Views
             InitializeComponent();
             BindingContext = ViewModel= new NewClassViewModel();
 
-            dataStore = DependencyService.Get<IDataStore<Teacher>>();   //this has no item
+            teacherDataStore = DependencyService.Get<IDataStore<Teacher>>();   //this has no item
+            classDataStore = DependencyService.Get<IDataStore<Class>>();
 
             LoadTeachers();
         }
 
         public async void LoadTeachers()
         {
-            var teachers = await dataStore.GetItemsAsync(true);
+            var teachers = await teacherDataStore.GetItemsAsync(true);
 
             ViewModel.Teachers = teachers.ToList();
 
@@ -89,14 +90,13 @@ namespace KMSCalendar.Views
         /// <summary>
         /// If the viewModel data is valid, it will go to the addClass() method
         /// </summary>
-        private async System.Threading.Tasks.Task authenticateAsync()
+        private async Task authenticateAsync()
         {
                 //If a new teacher is written into the box:
             if (ViewModel.TeacherName != null && ViewModel.ClassName != null && ViewModel.TeacherName != "")
             {
                 Teacher t = new Teacher { Name = ViewModel.TeacherName };
 
-                //TODO: SUNNY add the new teacher to the database
                 await addTeacherAsync(t);
             }
             else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)      //Otherwise if a teacher is selected
@@ -106,18 +106,17 @@ namespace KMSCalendar.Views
         }
 
         //TODO: MATEO get the teacher with id and add it to the add class method
-        private async System.Threading.Tasks.Task addTeacherAsync(Teacher t)
+        private async Task addTeacherAsync(Teacher t)
         {
-            await dataStore.AddItemAsync(t);      //adds the teacher to the database
+            await teacherDataStore.AddItemAsync(t);      //adds the teacher to the database
 
             addClass(ViewModel.ClassName, ViewModel.Period, t);
         }
 
-
         /// <summary>
-        /// Goes back to the class search page
+        /// Adds new class to database and then goes back to the class search page
         /// </summary>
-        private void addClass(string className, int period, Teacher teacher)
+        private async void addClass(string className, int period, Teacher teacher)
         {
             Class newClass = new Class
             {
@@ -125,11 +124,11 @@ namespace KMSCalendar.Views
                 Period = period,
                 Teacher = teacher
             };
-
-            //TODO: SUNNY add the new class to the database
+               
+            await classDataStore.AddItemAsync(newClass);        //this only works if the class's Teacher value is null
 
             //Navigates back to the class search page
-            Navigation.PopModalAsync();
+            await Navigation.PopModalAsync();
         }
     }
 }
