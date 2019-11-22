@@ -34,7 +34,7 @@ namespace KMSCalendar.Services.Data
         {
             if (forceRefresh)
             {
-                string json = await client.GetStringAsync($"api/{typeof(T).Name}");     //TODO: Fix this line it is causing frozen app / crash
+                string json = await client.GetStringAsync($"api/{typeof(T).Name}");
                 items = await Task.Run(() =>
                     JsonConvert.DeserializeObject<IEnumerable<T>>(json));
             }

@@ -5,6 +5,7 @@ using Xamarin.Forms;
 
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
+using System.Threading.Tasks;
 
 namespace KMSCalendar.ViewModels
 {
@@ -48,11 +49,15 @@ namespace KMSCalendar.ViewModels
             LoadClassesAsync();
         }
 
-        public async System.Threading.Tasks.Task LoadClassesAsync()
+        /// <summary>
+        /// Loads a list of classes from the DB so the user can add one to their account.
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadClassesAsync()
         {
-
+            // TODO: MATEO get this to work when the db starts working so a user doesn't have duplicate classes.
             //var classes =
-            //    from _class in dataStore.GetItemsAsync().Result
+            //    from _class in await dataStore.GetItemsAsync(true)
             //    let userClasses =
             //        from userClass in (Application.Current as App).SignedInUser.EnrolledClasses
             //        select userClass.Id
@@ -86,6 +91,7 @@ namespace KMSCalendar.ViewModels
 
         public void LoadPeriods()
         {
+            //TODO: THIS IS CAUSING THE CURRENT ERROR WHEN THE USER CLICKS ON A CLASS
             var periods =
                 from _class in classes.AsParallel()
                 where _class.Name == SelectedClass.Name &&

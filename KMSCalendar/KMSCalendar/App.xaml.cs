@@ -7,6 +7,7 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KMSCalendar
@@ -116,8 +117,14 @@ namespace KMSCalendar
                 MainPage = new LoginPage();
             else
             {
-                SignedInUser = await DependencyService.Get<IDataStore<User>>()
-                    .GetItemAsync(settings.SignedInUserId);
+                try
+                {
+                    SignedInUser = await DependencyService.Get<IDataStore<User>>()
+                        .GetItemAsync(settings.SignedInUserId);
+                } catch (Exception e)
+                {
+                    //todo toast a message as to why it didn't work
+                }
 
                 if (SignedInUser != null)
                     MainPage = new MainPage();
