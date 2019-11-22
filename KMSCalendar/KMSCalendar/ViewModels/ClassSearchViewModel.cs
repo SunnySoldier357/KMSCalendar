@@ -5,12 +5,14 @@ using Xamarin.Forms;
 
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
+using System.Threading.Tasks;
 
 namespace KMSCalendar.ViewModels
 {
     public class ClassSearchViewModel : BaseViewModel
     {
         //* Private Properties
+        private IDataStore<Class> dataStore;
         private Class selectedClass;
 
         private List<Class> classes;
@@ -42,19 +44,32 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Search For Class";
 
-            var dataStore = DependencyService.Get<IDataStore<Class>>();
+            dataStore = DependencyService.Get<IDataStore<Class>>();
 
-            var classes =
-                from _class in dataStore.GetItemsAsync().Result
-                let userClasses =
-                    from userClass in (Application.Current as App).SignedInUser.EnrolledClasses
-                    select userClass.Id
-                where !userClasses.Contains(_class.Id)
-                select _class;
+            LoadClassesAsync();
+        }
+
+        /// <summary>
+        /// Loads a list of classes from the DB so the user can add one to their account.
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadClassesAsync()
+        {
+            // TODO: MATEO get this to work when the db starts working so a user doesn't have duplicate classes.
+            //var classes =
+            //    from _class in await dataStore.GetItemsAsync(true)
+            //    let userClasses =
+            //        from userClass in (Application.Current as App).SignedInUser.EnrolledClasses
+            //        select userClass.Id
+            //    where !userClasses.Contains(_class.Id)
+            //    select _class;
+
+            var classes = await dataStore.GetItemsAsync(true);
 
             this.classes = classes.ToList();
             uniqueClasses = this.classes.Distinct(new DuplicateClassNameComparer()).ToList();
             FilteredClasses = new List<Class>(uniqueClasses);
+            filteredClasses = this.classes;
             Periods = new List<int>();
         }
 
@@ -76,6 +91,7 @@ namespace KMSCalendar.ViewModels
 
         public void LoadPeriods()
         {
+            //TODO: THIS IS CAUSING THE CURRENT ERROR WHEN THE USER CLICKS ON A CLASS
             var periods =
                 from _class in classes.AsParallel()
                 where _class.Name == SelectedClass.Name &&

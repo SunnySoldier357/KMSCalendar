@@ -10,6 +10,7 @@ namespace KMSCalendar.MobileAppService.Models.Entities
         public List<Assignment> Assignments { get; set; }
 
         public string Name { get; set; }
+        public string TeacherId { get; set; }
 
         public Teacher Teacher { get; set; }
 
@@ -24,6 +25,7 @@ namespace KMSCalendar.MobileAppService.Models.Entities
                 Assignments = other.Assignments;
                 Name = other.Name;
                 Teacher = other.Teacher;
+                TeacherId = other.TeacherId;
             }
         }
     }

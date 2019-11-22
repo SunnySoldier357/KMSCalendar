@@ -1,17 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models.Data;
+using KMSCalendar.Services.Data;
 using KMSCalendar.ViewModels;
-using System.Linq;
 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewClassPage : ContentPage
 	{
+        //* Private Properties
+        private IDataStore<Teacher> teacherDataStore;
+        private IDataStore<Class> classDataStore;
+
         //* Public Properties
         public NewClassViewModel ViewModel;
 
@@ -20,7 +27,21 @@ namespace KMSCalendar.Views
 		{
             InitializeComponent();
             BindingContext = ViewModel= new NewClassViewModel();
-		}
+
+            teacherDataStore = DependencyService.Get<IDataStore<Teacher>>();
+            classDataStore = DependencyService.Get<IDataStore<Class>>();
+
+            LoadTeachers();
+        }
+
+        public async void LoadTeachers()
+        {
+            var teachers = await teacherDataStore.GetItemsAsync(true);
+
+            ViewModel.Teachers = teachers.ToList();
+
+            TeachersListView.ItemsSource = ViewModel.Teachers;
+        }
 
         //* Event Handlers 
         private void TeacherSearchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -51,60 +72,68 @@ namespace KMSCalendar.Views
             ViewModel.SelectedTeacher = TeachersListView.SelectedItem as Teacher;
         }
 
-        private void DoneButton_Clicked(object sender, EventArgs e)
-        {
-            authenticate();
-        }
+        /// <summary>
+        /// These next two buttons should do the same thing and add a new class (and possibly teacher) to the database with the authenticate method
+        /// </summary>
+        private async void DoneButton_Clicked(object sender, EventArgs e) => 
+            await authenticateAsync();
 
-        private void BackButton_Clicked(object sender, EventArgs e)
-        {
+        private async void NextButton_Clicked(object sender, EventArgs e) => 
+            await authenticateAsync();
+
+        private void BackButton_Clicked(object sender, EventArgs e) =>
             Navigation.PopModalAsync();
-        }
-
-        private void NextButton_Clicked(object sender, EventArgs e)
-        {
-            authenticate();
-        }
 
         /// <summary>
         /// If the viewModel data is valid, it will go to the addClass() method
         /// </summary>
-        private void authenticate()
+        private async Task authenticateAsync()
         {
-            if (ViewModel.TeacherName != null && ViewModel.ClassName != null)
+            // If a new teacher is written into the box:
+            if (!string.IsNullOrEmpty(ViewModel.TeacherName) && ViewModel.ClassName != null)
             {
-                Teacher t = new Teacher { Name = ViewModel.TeacherName };
+                Teacher t = new Teacher 
+                { 
+                    Name = ViewModel.TeacherName 
+                };
 
-                //TODO: SUNNY add the new teacher to the database
-
-                addClass(ViewModel.ClassName, ViewModel.Period, t);
+                await addTeacherAsync(t);
             }
-            else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)
-            {
+            // Otherwise if a teacher is selected
+            else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)      
                 addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher);
-            }
+        }
+
+        // TODO: MATEO get the teacher with id and add it to the add class method
+        private async Task addTeacherAsync(Teacher t)
+        {
+            // Adds the teacher to the database
+            await teacherDataStore.AddItemAsync(t);
+
+            addClass(ViewModel.ClassName, ViewModel.Period, t);
         }
 
         /// <summary>
-        /// Goes back to the class search page
+        /// Adds new class to database and then goes back to the class search page
         /// </summary>
-        private void addClass(string className, int period, Teacher teacher)
+        private async void addClass(string className, int period, Teacher teacher)
         {
             Class newClass = new Class
             {
                 Name = className,
                 Period = period,
-                Teacher = teacher
+                TeacherId = teacher.Id
             };
 
-            //TODO: SUNNY add the new class to the database
+            if (teacher.Classes == null)
+                teacher.Classes = new List<Class>();
+
+            teacher.Classes.Add(newClass);
+               
+            await classDataStore.AddItemAsync(newClass);        //this only works if the class's Teacher value is null
 
             //Navigates back to the class search page
-            //var MyAppsFirstPage = new ClassSearchPage();
-            //Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
-            //Application.Current.MainPage.Navigation.PushAsync(new ClassSearchPage());
-            //Application.Current.MainPage.Navigation.PopAsync();         // Remove the page currently on top.
-            Navigation.PopModalAsync();
+            await Navigation.PopModalAsync();
         }
     }
 }

@@ -22,8 +22,6 @@ namespace KMSCalendar.MobileAppService.Controllers
         //[ValidateAntiForgeryToken]
         public IActionResult ResetPassword(ResetPasswordViewModel viewModel)
         {
-            Debug.Write("here");
-
             if (ModelState.IsValid)
             {
                 //TODO: SUNNY verify the data
