@@ -57,10 +57,8 @@ namespace KMSCalendar.ViewModels
         //* Constructors
         public NewClassViewModel(string schoolName)
         {
-            var dataStore = DependencyService.Get<IDataStore<Teacher>>();
-
             Period = 1;
-            Teachers = KMSCalendar.Services.TeacherManager.LoadAllTeachers();
+            Teachers = Services.TeacherManager.LoadAllTeachers();
             SearchTerm = "";
         }
     }

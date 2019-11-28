@@ -31,7 +31,7 @@ namespace KMSCalendar.Services
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))     //grabs the connection string from the method above.
             {
-                return cnn.Query<T>(sql, new { UserId = id }).AsList();      //returns a list of generics from the database
+                return cnn.Query<T>(sql, new { Id = id }).AsList();      //returns a list of generics from the database
             }
         }
 
