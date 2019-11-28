@@ -9,12 +9,15 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.ViewModels;
+using KMSCalendar.Services;
 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewClassPage : ContentPage
 	{
+        private App app = (Application.Current as App);
+
         //* Private Properties
         private IDataStore<Teacher> teacherDataStore;
         private IDataStore<Class> classDataStore;
@@ -26,17 +29,21 @@ namespace KMSCalendar.Views
 		public NewClassPage(Page parentPage)
 		{
             InitializeComponent();
-            BindingContext = ViewModel= new NewClassViewModel();
 
-            teacherDataStore = DependencyService.Get<IDataStore<Teacher>>();
-            classDataStore = DependencyService.Get<IDataStore<Class>>();
+            string schoolName = "Skyline"; //todo change
+
+            BindingContext = ViewModel = new NewClassViewModel(schoolName);
+
+            //teacherDataStore = DependencyService.Get<IDataStore<Teacher>>();
+            //classDataStore = DependencyService.Get<IDataStore<Class>>();
 
             LoadTeachers();
         }
 
-        public async void LoadTeachers()
+        public void LoadTeachers()
         {
-            var teachers = await teacherDataStore.GetItemsAsync(true);
+            //var teachers = await teacherDataStore.GetItemsAsync(true);
+            var teachers = TeacherManager.LoadAllTeachers();
 
             ViewModel.Teachers = teachers.ToList();
 
@@ -92,26 +99,23 @@ namespace KMSCalendar.Views
             // If a new teacher is written into the box:
             if (!string.IsNullOrEmpty(ViewModel.TeacherName) && ViewModel.ClassName != null)
             {
-                Teacher t = new Teacher 
-                { 
-                    Name = ViewModel.TeacherName 
+                Teacher t = new Teacher
+                {
+                    Name = ViewModel.TeacherName,
+                    SchoolId = app.SignedInUser.SchoolId
                 };
 
-                await addTeacherAsync(t);
+                TeacherManager.PutInTeacher(t);
+
+                addClass(ViewModel.ClassName, ViewModel.Period, t);
             }
+
             // Otherwise if a teacher is selected
             else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)      
                 addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher);
         }
 
-        // TODO: MATEO get the teacher with id and add it to the add class method
-        private async Task addTeacherAsync(Teacher t)
-        {
-            // Adds the teacher to the database
-            await teacherDataStore.AddItemAsync(t);
 
-            addClass(ViewModel.ClassName, ViewModel.Period, t);
-        }
 
         /// <summary>
         /// Adds new class to database and then goes back to the class search page
@@ -122,7 +126,6 @@ namespace KMSCalendar.Views
             {
                 Name = className,
                 Period = period,
-                TeacherId = teacher.Id
             };
 
             if (teacher.Classes == null)
@@ -134,6 +137,11 @@ namespace KMSCalendar.Views
 
             //Navigates back to the class search page
             await Navigation.PopModalAsync();
+        }
+
+        private string getSchoolName(int schoolId)
+        {
+            return "Skyline HS";        //TODO MATEO TODAY: grab the school name from the db with the teacher id.
         }
     }
 }

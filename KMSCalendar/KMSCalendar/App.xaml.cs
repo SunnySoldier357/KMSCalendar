@@ -121,9 +121,14 @@ namespace KMSCalendar
                 {
                     SignedInUser = await DependencyService.Get<IDataStore<User>>()
                         .GetItemAsync(settings.SignedInUserId);
+
+                    // Sets signedInUser model's SchoolId what it is in the db
+                    SignedInUser.SchoolId = KMSCalendar.Services.DataManagers.UserManager.LoadSchoolId(settings.SignedInUserId);
+
+
                 } catch (Exception e)
                 {
-                    //todo toast a message as to why it didn't work
+                    //todo: toast a message as to why it didn't work
                 }
 
                 if (SignedInUser != null)
@@ -138,6 +143,12 @@ namespace KMSCalendar
         {
             if (e.PropertyName == nameof(Settings.Theme))
                 UpdateColorResources(Settings.DefaultInstance.Theme);
+        }
+
+        //* Accessors
+        public int GetSchoolId()
+        {
+            return SignedInUser.SchoolId;
         }
     }
 }

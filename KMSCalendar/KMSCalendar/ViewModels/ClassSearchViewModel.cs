@@ -44,9 +44,9 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Search For Class";
 
-            dataStore = DependencyService.Get<IDataStore<Class>>();
+            //dataStore = DependencyService.Get<IDataStore<Class>>();
 
-            LoadClassesAsync();
+            //LoadClassesAsync();
         }
 
         /// <summary>
@@ -64,13 +64,13 @@ namespace KMSCalendar.ViewModels
             //    where !userClasses.Contains(_class.Id)
             //    select _class;
 
-            var classes = await dataStore.GetItemsAsync(true);
+            //var classes = await dataStore.GetItemsAsync(true);
 
-            this.classes = classes.ToList();
-            uniqueClasses = this.classes.Distinct(new DuplicateClassNameComparer()).ToList();
-            FilteredClasses = new List<Class>(uniqueClasses);
-            filteredClasses = this.classes;
-            Periods = new List<int>();
+            //this.classes = classes.ToList();
+            //uniqueClasses = this.classes.Distinct(new DuplicateClassNameComparer()).ToList();
+            //FilteredClasses = new List<Class>(uniqueClasses);
+            //filteredClasses = this.classes;
+            //Periods = new List<int>();
         }
 
         //* Public Methods
@@ -116,14 +116,14 @@ namespace KMSCalendar.ViewModels
             Periods.Add(newPeriod);
         }
 
-        private class DuplicateClassNameComparer : EqualityComparer<Class>
-        {
-            //* Overridden Methods
-            public override bool Equals(Class x, Class y) => 
-                x.Name == y.Name && x.Teacher?.Name == y.Teacher?.Name;
+        //private class DuplicateClassNameComparer : EqualityComparer<Class>
+        //{
+        //    //* Overridden Methods
+        //    //public override bool Equals(Class x, Class y) => 
+        //    //    x.Name == y.Name && x.Teacher?.Name == y.Teacher?.Name;
 
-            public override int GetHashCode(Class obj) => 
-                $"{obj.Name} ({obj.Teacher?.Name ?? ""})".GetHashCode();
-        }
+        //    //public override int GetHashCode(Class obj) => 
+        //    //    $"{obj.Name} ({obj.Teacher?.Name ?? ""})".GetHashCode();
+        //}
     }
 }

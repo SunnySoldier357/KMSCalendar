@@ -12,6 +12,8 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ClassSearchPage : ContentPage
 	{
+        private App app = (Application.Current as App);
+
         //* Public Properties
         public ClassSearchViewModel ViewModel;
 
@@ -24,9 +26,13 @@ namespace KMSCalendar.Views
 
             BindingContext = ViewModel = new ClassSearchViewModel();
 
+            int schoolId = app.SignedInUser.SchoolId;
+
+            string s = "here";
+
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
-            ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
-            ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
+            //ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
+            //ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
         }
 
         //* Public Methods

@@ -9,6 +9,8 @@ namespace KMSCalendar.Models.Data
 
         public string Name { get; set; }
 
+        public int SchoolId { get; set; }
+
         //* Overridden Methods
         public override bool Equals(object obj)
         {

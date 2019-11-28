@@ -115,7 +115,7 @@
 
                                                         <Label Grid.Column="1"
                                                                HorizontalOptions="End"
-                                                               Text="School"
+                                                               Text="{Binding SchoolId}"
                                                                FontSize="11"
                                                                LineBreakMode="NoWrap" />
                                                     </Grid>
