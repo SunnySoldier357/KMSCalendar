@@ -132,8 +132,11 @@ namespace KMSCalendar.Views
                 teacher.Classes = new List<Class>();
 
             teacher.Classes.Add(newClass);
-               
-            await classDataStore.AddItemAsync(newClass);        //this only works if the class's Teacher value is null
+
+            //await classDataStore.AddItemAsync(newClass);        //this only works if the class's Teacher value is null
+
+            //TODO: MATEO TODAY add the class to the db
+            ClassManager.PutInClass(newClass);
 
             //Navigates back to the class search page
             await Navigation.PopModalAsync();
@@ -141,7 +144,7 @@ namespace KMSCalendar.Views
 
         private string getSchoolName(int schoolId)
         {
-            return "Skyline HS";        //TODO MATEO TODAY: grab the school name from the db with the teacher id.
+            return SchoolManager.GetSchoolName(schoolId)[0];
         }
     }
 }

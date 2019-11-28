@@ -28,8 +28,6 @@ namespace KMSCalendar.Views
 
             int schoolId = app.SignedInUser.SchoolId;
 
-            string s = "here";
-
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
             //ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
             //ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
