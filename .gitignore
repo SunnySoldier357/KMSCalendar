@@ -348,3 +348,4 @@ MigrationBackup/
 # Settings Configuration File contains database connection string (sensitive
 # information)
 appsettings.Development.json
+Connections.cs
