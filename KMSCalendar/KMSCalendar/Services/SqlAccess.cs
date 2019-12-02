@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace KMSCalendar.Services
@@ -34,6 +35,15 @@ namespace KMSCalendar.Services
                 return cnn.Query<T>(sql, new { Id = id }).AsList();      //returns a list of generics from the database
             }
         }
+
+        public static int SaveItemReturnId<T>(string sql, T data)   //currrent is the Id
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))     //grabs the connection string from the method above.
+            {
+                return cnn.Query<int>(sql, data).Single();
+            }
+        }
+
 
 
     }

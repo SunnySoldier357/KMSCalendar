@@ -9,7 +9,8 @@ namespace KMSCalendar.Services
     {
         public static int PutInClass(Class c)
         {
-            string sql = @"INSERT INTO dbo.Classes (Name, TeacherId) VALUES (@Name, @SchoolId)";
+            //TODO: Mateo TODAY check class model to have school Id
+            string sql = @"INSERT INTO dbo.Classes (Period, Name, TeacherId, UserId, SchoolId) VALUES (@Period, @Name, @TeacherId, @UserId, @SchoolId)";
             
             return SqlAccess.SaveData(sql, c);
         }

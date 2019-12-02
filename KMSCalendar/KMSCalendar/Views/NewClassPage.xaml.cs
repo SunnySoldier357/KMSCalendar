@@ -18,10 +18,6 @@ namespace KMSCalendar.Views
 	{
         private App app = (Application.Current as App);
 
-        //* Private Properties
-        private IDataStore<Teacher> teacherDataStore;
-        private IDataStore<Class> classDataStore;
-
         //* Public Properties
         public NewClassViewModel ViewModel;
 
@@ -33,9 +29,6 @@ namespace KMSCalendar.Views
             string schoolName = "Skyline"; //todo change
 
             BindingContext = ViewModel = new NewClassViewModel(schoolName);
-
-            //teacherDataStore = DependencyService.Get<IDataStore<Teacher>>();
-            //classDataStore = DependencyService.Get<IDataStore<Class>>();
 
             LoadTeachers();
         }
@@ -105,14 +98,17 @@ namespace KMSCalendar.Views
                     SchoolId = app.SignedInUser.SchoolId
                 };
 
-                TeacherManager.PutInTeacher(t);
 
-                addClass(ViewModel.ClassName, ViewModel.Period, t);
+                int teacherId = TeacherManager.PutInTeacher(t);
+
+                addClass(ViewModel.ClassName, ViewModel.Period, t.Id, t.SchoolId);
             }
 
             // Otherwise if a teacher is selected
             else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)      
-                addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher);
+                addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher.Id, ViewModel.SelectedTeacher.SchoolId);
+
+            await Navigation.PopModalAsync();
         }
 
 
@@ -120,23 +116,18 @@ namespace KMSCalendar.Views
         /// <summary>
         /// Adds new class to database and then goes back to the class search page
         /// </summary>
-        private async void addClass(string className, int period, Teacher teacher)
+        private async void addClass(string className, int period, int teacherId, int schoolId)
         {
             Class newClass = new Class
             {
                 Name = className,
                 Period = period,
+                TeacherId = teacherId,
+                UserId = app.SignedInUser.Id,
+                SchoolId = schoolId
             };
 
-            if (teacher.Classes == null)
-                teacher.Classes = new List<Class>();
-
-            teacher.Classes.Add(newClass);
-
-            //await classDataStore.AddItemAsync(newClass);        //this only works if the class's Teacher value is null
-
-            //TODO: MATEO TODAY add the class to the db
-            ClassManager.PutInClass(newClass);
+            ClassManager.PutInClass(newClass);  //Adds class to the db
 
             //Navigates back to the class search page
             await Navigation.PopModalAsync();

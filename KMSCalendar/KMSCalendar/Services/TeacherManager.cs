@@ -8,11 +8,18 @@ namespace KMSCalendar.Services
 {
     public static class TeacherManager
     {
+        //public static int PutInTeacher(Teacher teacher)
+        //{
+        //    string sql = @"INSERT INTO dbo.Teachers (Name, SchoolId) OUTPUT (Inserted.Id) VALUES (@Name, @SchoolId)";
+
+        //    return SqlAccess.SaveData(sql, teacher);
+        //}
+
         public static int PutInTeacher(Teacher teacher)
         {
-            string sql = @"INSERT INTO dbo.Teachers (Name, SchoolId) VALUES (@Name, @SchoolId)";
+            string sql = @"INSERT INTO dbo.Teachers (Name, SchoolId) OUTPUT (Inserted.Id) VALUES (@Name, @SchoolId)";
 
-            return SqlAccess.SaveData(sql, teacher);
+            return SqlAccess.SaveItemReturnId<Teacher>(sql, teacher);
         }
 
         public static List<Teacher> LoadAllTeachers()
@@ -22,5 +29,12 @@ namespace KMSCalendar.Services
             return SqlAccess.LoadData<Teacher>(sql);
         }
 
+        public static List<int> LoadId()
+        {
+            string sql = "SELECT * FROM dbo.Teachers WHERE Id = SCOPE_IDENTITY()";
+
+            return SqlAccess.LoadData<int>(sql);
+        }
+        
     }
 }
