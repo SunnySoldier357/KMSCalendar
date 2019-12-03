@@ -178,6 +178,7 @@
 
                                                 <Label Grid.Column="1"
                                                        VerticalOptions="End"
+                                                       HorizontalTextAlignment="End"
                                                        Text="{Binding Teacher.Name}"
                                                        FontSize="11"
                                                        TextColor="{DynamicResource Text}" />

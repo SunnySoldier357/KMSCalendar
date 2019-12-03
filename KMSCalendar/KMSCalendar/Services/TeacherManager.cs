@@ -29,6 +29,13 @@ namespace KMSCalendar.Services
             return SqlAccess.LoadData<Teacher>(sql);
         }
 
+        public static string LoadTeacherNameFromId(int teacherId)
+        {
+            string sql = @"SELECT Name FROM dbo.Teachers WHERE Id = @Id";
+
+            return SqlAccess.LoadSingularData<string>(sql, teacherId.ToString())[0];
+        }
+
         public static List<int> LoadId()
         {
             string sql = "SELECT * FROM dbo.Teachers WHERE Id = SCOPE_IDENTITY()";

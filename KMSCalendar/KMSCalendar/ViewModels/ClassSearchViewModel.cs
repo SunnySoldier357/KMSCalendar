@@ -21,6 +21,8 @@ namespace KMSCalendar.ViewModels
 
         private List<int> periods;
 
+        private App app = (Application.Current as App);
+
         //* Public Properties
         public Class SelectedClass
         {
@@ -46,16 +48,30 @@ namespace KMSCalendar.ViewModels
 
             //dataStore = DependencyService.Get<IDataStore<Class>>();
 
-            //LoadClassesAsync();
+            LoadClassesAsync();
         }
 
         /// <summary>
         /// Loads a list of classes from the DB so the user can add one to their account.
         /// </summary>
         /// <returns></returns>
-        public async Task LoadClassesAsync()
+        public void LoadClassesAsync()
         {
-            // TODO: MATEO get this to work when the db starts working so a user doesn't have duplicate classes.
+            // TODO: MATEO get this to work so a user doesn't have duplicate classes.
+
+            List<Class> classList = Services.ClassManager.LoadClasses(app.GetSchoolId());
+
+            foreach (Class c in classList)
+            {
+                string name = Services.TeacherManager.LoadTeacherNameFromId(c.TeacherId);
+                c.Teacher = new Teacher() { Name = name };
+            }
+
+            classes = classList;
+            filteredClasses = classes;
+
+            //LEGACY CODE:
+            //
             //var classes =
             //    from _class in await dataStore.GetItemsAsync(true)
             //    let userClasses =
@@ -63,9 +79,9 @@ namespace KMSCalendar.ViewModels
             //        select userClass.Id
             //    where !userClasses.Contains(_class.Id)
             //    select _class;
-
+            //
             //var classes = await dataStore.GetItemsAsync(true);
-
+            //
             //this.classes = classes.ToList();
             //uniqueClasses = this.classes.Distinct(new DuplicateClassNameComparer()).ToList();
             //FilteredClasses = new List<Class>(uniqueClasses);
@@ -91,7 +107,8 @@ namespace KMSCalendar.ViewModels
 
         public void LoadPeriods()
         {
-            //TODO: THIS IS CAUSING THE CURRENT ERROR WHEN THE USER CLICKS ON A CLASS
+            //TODO: Mateo TODAY figure out the periods db.
+            // THIS IS CAUSING THE CURRENT ERROR WHEN THE USER CLICKS ON A CLASS
             var periods =
                 from _class in classes.AsParallel()
                 where _class.Name == SelectedClass.Name &&
