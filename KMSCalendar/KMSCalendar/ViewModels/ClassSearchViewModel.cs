@@ -106,14 +106,21 @@ namespace KMSCalendar.ViewModels
         public void LoadPeriods()
         {
             //TODO: Mateo TODAY figure out the periods db.
-            // THIS IS CAUSING THE CURRENT ERROR WHEN THE USER CLICKS ON A CLASS
-            var periods =
-                from _class in classes.AsParallel()
-                where _class.Name == SelectedClass.Name &&
-                    _class.Teacher.Equals(SelectedClass.Teacher)
-                select _class.Period;
 
-            Periods = periods.ToList();
+
+            //Basically load all of the periods from db.Class_Periods
+            //  then, let the user add a period
+
+                                                               
+
+            // THIS IS CAUSING THE CURRENT ERROR WHEN THE USER CLICKS ON A CLASS
+            //var periods =
+            //    from _class in classes.AsParallel()
+            //    where _class.Name == SelectedClass.Name &&
+            //        _class.Teacher.Equals(SelectedClass.Teacher)
+            //    select _class.Period;
+
+            //Periods = periods.ToList();
         }
 
         /// <summary>

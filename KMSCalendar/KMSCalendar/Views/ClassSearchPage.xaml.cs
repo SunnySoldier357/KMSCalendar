@@ -72,7 +72,9 @@ namespace KMSCalendar.Views
             // ParentPage.ViewModel.Periods.Add(newPeriod);
             // PeriodsListView.BeginRefresh();
 
-            // TODO: SUNNY add the new Period to the listview and database
+            // TODO: Mateo TODAY add the new Period to the listview and database
+
+
         }
 
         private void BackButton_Clicked(object sender, EventArgs e) =>
