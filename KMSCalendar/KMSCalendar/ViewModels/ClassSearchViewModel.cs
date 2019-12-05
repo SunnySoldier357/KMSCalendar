@@ -105,21 +105,20 @@ namespace KMSCalendar.ViewModels
 
         public void LoadPeriods()
         {
-            //TODO: Mateo TODAY figure out the periods db.
-
-
             //Basically load all of the periods from db.Class_Periods
             //  then, let the user add a period
 
-                                                               
+            int classId = SelectedClass.Id;
+            Periods = Services.PeriodManager.LoadPeriods(classId);      //sets the period list to all of the periods in the selected class.
+            string y = "yuh";
 
-            // THIS IS CAUSING THE CURRENT ERROR WHEN THE USER CLICKS ON A CLASS
+
+            // LEGACY CODE
             //var periods =
             //    from _class in classes.AsParallel()
             //    where _class.Name == SelectedClass.Name &&
             //        _class.Teacher.Equals(SelectedClass.Teacher)
             //    select _class.Period;
-
             //Periods = periods.ToList();
         }
 
@@ -138,6 +137,13 @@ namespace KMSCalendar.ViewModels
             Periods.Add(newPeriod);
         }
 
+        public void AddNewPeriod(int newPeriod)
+        {
+            selectedClass.Period = newPeriod;
+            Services.PeriodManager.PutInClassPeriod(selectedClass);
+        }
+
+        //LEGACY CODE
         //private class DuplicateClassNameComparer : EqualityComparer<Class>
         //{
         //    //* Overridden Methods

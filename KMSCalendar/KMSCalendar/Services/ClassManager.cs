@@ -20,19 +20,7 @@ namespace KMSCalendar.Services
 
             c.Id = id;  //sets the class id to what it is in the db
 
-            return PutInClassPeriod(c);     //adds the period to the db
-        }
-
-        /// <summary>
-        /// Adds period to db.Class_Periods with it's respective classId
-        /// </summary>
-        /// <param name="c">The class that the period belongs to. Must have Id and Period non-null</param>
-        /// <returns>Whether or not adding the period to the db was successful</returns>
-        public static int PutInClassPeriod(Class c)
-        {
-            string sql = @"INSERT INTO dbo.Class_Periods (ClassId, Period) VALUES (@Id, @Period)";
-
-            return SqlAccess.SaveData<Class>(sql, c);
+            return PeriodManager.PutInClassPeriod(c);     //adds the period to the db
         }
 
 

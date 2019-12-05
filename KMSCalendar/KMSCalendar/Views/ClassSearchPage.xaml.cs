@@ -66,7 +66,9 @@ namespace KMSCalendar.Views
         {
             int newPeriod = int.Parse(NewPeriodLabel.Text);
 
-            ViewModel.LoadPeriods(newPeriod);
+            ViewModel.AddNewPeriod(newPeriod);
+
+            ViewModel.LoadPeriods();
 
             // I tried using these to update the list but they didn't work. Databinding issue?
             // ParentPage.ViewModel.Periods.Add(newPeriod);
