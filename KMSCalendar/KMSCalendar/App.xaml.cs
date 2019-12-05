@@ -30,13 +30,13 @@ namespace KMSCalendar
             if (UseMockDataStore)
             {
                 DependencyService.Register<MockDataStore<Assignment>>();
-                DependencyService.Register<MockDataStore<Class>>();
+                //DependencyService.Register<MockDataStore<Class>>();
                 DependencyService.Register<MockDataStore<User>>();
             }
             else
             {
                 DependencyService.Register<AzureDataStore<Assignment>>();
-                DependencyService.Register<AzureDataStore<Class>>();
+                //DependencyService.Register<AzureDataStore<Class>>();
                 DependencyService.Register<AzureDataStore<User>>();
             }
         }

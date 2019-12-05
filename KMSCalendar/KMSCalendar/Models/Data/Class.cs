@@ -2,9 +2,11 @@
 
 namespace KMSCalendar.Models.Data
 {
-    public class Class : TableData
+    public class Class
     {
         //* Public Properties
+        public int Id { get; set; }
+
         public int Period { get; set; }
 
         public List<Assignment> Assignments { get; set; }

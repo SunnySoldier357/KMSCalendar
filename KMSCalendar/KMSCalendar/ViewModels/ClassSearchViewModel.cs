@@ -12,9 +12,7 @@ namespace KMSCalendar.ViewModels
     public class ClassSearchViewModel : BaseViewModel
     {
         //* Private Properties
-        private IDataStore<Class> dataStore;
         private Class selectedClass;
-
         private List<Class> classes;
         private List<Class> filteredClasses;
         private List<Class> uniqueClasses;

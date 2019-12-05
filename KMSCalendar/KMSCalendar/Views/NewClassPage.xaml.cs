@@ -127,7 +127,7 @@ namespace KMSCalendar.Views
                 SchoolId = schoolId
             };
 
-            ClassManager.PutInClass(newClass);  //Adds class to the db
+            ClassManager.PutInClass(newClass);  //Adds class and new period to the db
 
             //Navigates back to the class search page
             await Navigation.PopModalAsync();
