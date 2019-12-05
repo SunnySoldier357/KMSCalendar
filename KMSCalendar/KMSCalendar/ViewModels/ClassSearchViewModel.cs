@@ -15,7 +15,7 @@ namespace KMSCalendar.ViewModels
         private Class selectedClass;
         private List<Class> classes;
         private List<Class> filteredClasses;
-        private List<Class> uniqueClasses;
+        //private List<Class> uniqueClasses;    //This used to be used to filter classes with the search function
 
         private List<int> periods;
 
@@ -90,12 +90,14 @@ namespace KMSCalendar.ViewModels
         //* Public Methods
         public void FilterClasses(string userInput)
         {
+            //TODO: Mateo Today figure out why this sucks.
+
             if (string.IsNullOrWhiteSpace(userInput))
-                FilteredClasses = new List<Class>(uniqueClasses);
+                FilteredClasses = new List<Class>(classes);
             else
             {
                 var result =
-                    from _class in uniqueClasses.AsParallel()
+                    from _class in classes.AsParallel()
                     where _class.Name.ToLower().Contains(userInput.ToLower())
                     select _class;
 
@@ -105,13 +107,8 @@ namespace KMSCalendar.ViewModels
 
         public void LoadPeriods()
         {
-            //Basically load all of the periods from db.Class_Periods
-            //  then, let the user add a period
-
             int classId = SelectedClass.Id;
-            Periods = Services.PeriodManager.LoadPeriods(classId);      //sets the period list to all of the periods in the selected class.
-            string y = "yuh";
-
+            Periods = Services.PeriodManager.LoadPeriods(classId);      //sets the period list to all of the periods in the selected class from the db.
 
             // LEGACY CODE
             //var periods =
