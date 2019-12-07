@@ -35,5 +35,12 @@ namespace KMSCalendar.Services
 
             return SqlAccess.LoadSingularData<Class>(sql, schoolId.ToString());
         }
+
+        public static int SubscribeUserToClass(Class c)
+        {
+            string sql = @"INSERT INTO dbo.Class_Users (ClassId, UserId, Period) VALUES (@Id, @UserId, @Period)";
+
+            return SqlAccess.SaveData(sql, c);
+        }
     }
 }
