@@ -36,11 +36,27 @@ namespace KMSCalendar.Services
             return SqlAccess.LoadSingularData<Class>(sql, schoolId.ToString());
         }
 
-        public static int SubscribeUserToClass(Class c)
+
+        public static int EnrollUserInClass(Class c)
         {
             string sql = @"INSERT INTO dbo.Class_Users (ClassId, UserId, Period) VALUES (@Id, @UserId, @Period)";
 
             return SqlAccess.SaveData(sql, c);
         }
+
+        public static List<Class> LoadEnrolledClasses(string userId)
+        {
+
+            //get the ClassId's from db.Class_Users; then get all the classes with those classes. HINT: USE INNER JOIN
+            string sql = @"SELECT dbo.Classes.Id, dbo.Classes.Period, dbo.Classes.Name, dbo.Classes.TeacherId
+                                FROM dbo.Classes 
+                                JOIN dbo.Class_Users
+                                ON dbo.Classes.Id = dbo.Class_Users.ClassId 
+                                WHERE dbo.Class_Users.UserId = @Id";   
+
+            return SqlAccess.LoadDataWithId<Class>(sql, userId);
+        }
+
+
     }
 }

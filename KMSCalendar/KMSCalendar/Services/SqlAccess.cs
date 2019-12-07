@@ -28,7 +28,7 @@ namespace KMSCalendar.Services
             }
         }
 
-        public static List<T> LoadDataWithId<T>(string sql, int id)   //currrent is the Id
+        public static List<T> LoadDataWithId<T>(string sql, string id)   //currrent is the Id
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))     //grabs the connection string from the method above.
             {

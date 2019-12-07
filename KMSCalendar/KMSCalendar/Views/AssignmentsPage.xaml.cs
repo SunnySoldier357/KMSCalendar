@@ -16,6 +16,8 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
+            (Application.Current as App).PullEnrolledClasses();     //initializes a list of all of the user's classes in the SignedInUser's object
+
             // TODO SUNNY Update WeekControl to have a Command & Command Property XAML Attribute
             EventHandler eventHandler = (sender, args) =>
             {

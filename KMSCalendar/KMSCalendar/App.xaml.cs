@@ -42,6 +42,12 @@ namespace KMSCalendar
         }
 
         //* Public Methods
+        public void PullEnrolledClasses()
+        {
+            var enrolledClassList = Services.ClassManager.LoadEnrolledClasses(SignedInUser.Id);
+            SignedInUser.EnrolledClasses = enrolledClassList;
+        }
+
         public void UpdateColorResources(Theme theme)
         {
             var items = new[]

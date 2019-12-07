@@ -44,7 +44,9 @@ namespace KMSCalendar.Views
             Class selectedClass = ViewModel.SelectedClass;
             selectedClass.UserId = app.SignedInUser.Id;
 
-            Services.ClassManager.SubscribeUserToClass(selectedClass);
+            Services.ClassManager.EnrollUserInClass(selectedClass);
+
+            app.PullEnrolledClasses();
 
             //Closes the page and goes to the last one on the stack
             await Navigation.PopModalAsync();

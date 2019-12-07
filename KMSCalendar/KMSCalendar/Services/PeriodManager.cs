@@ -25,7 +25,7 @@ namespace KMSCalendar.Services
         {
             string sql = @"SELECT (Period) FROM dbo.Class_Periods WHERE ClassId = (@Id)";
 
-            return SqlAccess.LoadDataWithId<int>(sql, classId);
+            return SqlAccess.LoadDataWithId<int>(sql, classId.ToString());
         }
 
     }
