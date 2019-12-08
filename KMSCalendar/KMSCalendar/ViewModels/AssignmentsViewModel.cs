@@ -17,6 +17,7 @@ namespace KMSCalendar.ViewModels
     {
         //* Private Properties
         private IDataStore<Assignment> dataStore;
+        private App app = (Application.Current as App);
 
         //private AssignmentsPage parentPage;
 
@@ -67,8 +68,11 @@ namespace KMSCalendar.ViewModels
             {
                 Assignment newItem = a as Assignment;
                 assignments.Add(newItem);
-                await dataStore.AddItemAsync(newItem);
-
+                a.UserId = app.SignedInUser.Id;
+                a.SetClassId();
+                a.SetPeriod();
+                Services.AssignmentManager.PutInAssignment(a);
+                
                 ExecuteFilterAssignmentsCommand(DateChoosen);
             });
 
@@ -106,15 +110,18 @@ namespace KMSCalendar.ViewModels
 
             try
             {
-                var userAssignments =
-                    from assignment in await dataStore.GetItemsAsync(true)
-                    let userClasses = 
-                        from _class in (Application.Current as App).SignedInUser.EnrolledClasses
-                        select _class.Id
-                    where userClasses.Contains(assignment.Class.Id)
-                    select assignment;
+                //var userAssignments;    //TODO MATEO TODAY: select assignments from the db!
+                string s = "s";
+                //LEGACY CODE
+                //var userAssignments =
+                //    from assignment in await dataStore.GetItemsAsync(true)
+                //    let userClasses = 
+                //        from _class in (Application.Current as App).SignedInUser.EnrolledClasses
+                //        select _class.Id
+                //    where userClasses.Contains(assignment.Class.Id)
+                //    select assignment;
 
-                assignments = userAssignments.ToList();
+                //assignments = userAssignments.ToList();
             }
             catch (Exception ex)
             {

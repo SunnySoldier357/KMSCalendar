@@ -48,8 +48,8 @@ namespace KMSCalendar.Services
         {
 
             //get the ClassId's from db.Class_Users; then get all the classes with those classes. HINT: USE INNER JOIN
-            string sql = @"SELECT dbo.Classes.Id, dbo.Classes.Period, dbo.Classes.Name, dbo.Classes.TeacherId
-                                FROM dbo.Classes 
+            string sql = @"SELECT dbo.Classes.Id, dbo.Class_Users.Period, dbo.Classes.Name, dbo.Classes.TeacherId
+                                FROM dbo.Classes
                                 JOIN dbo.Class_Users
                                 ON dbo.Classes.Id = dbo.Class_Users.ClassId 
                                 WHERE dbo.Class_Users.UserId = @Id";   
