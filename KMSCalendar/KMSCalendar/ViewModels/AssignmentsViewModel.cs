@@ -16,8 +16,8 @@ namespace KMSCalendar.ViewModels
     public class AssignmentsViewModel : BaseViewModel
     {
         //* Private Properties
-        private IDataStore<Assignment> dataStore;
         private App app = (Application.Current as App);
+        //private IDataStore<Assignment> dataStore;
 
         //private AssignmentsPage parentPage;
 
@@ -52,7 +52,8 @@ namespace KMSCalendar.ViewModels
             Title = "Assignments Calendar";
             DateChoosen = DateTime.Today;
 
-            dataStore = DependencyService.Get<IDataStore<Assignment>>();
+            app.PullEnrolledClasses();
+            //dataStore = DependencyService.Get<IDataStore<Assignment>>();
 
             assignments = new List<Assignment>();
             FilteredAssignments = new List<Assignment>();
@@ -92,7 +93,7 @@ namespace KMSCalendar.ViewModels
             var result =
                 from assignment in assignments.AsParallel()
                 where assignment.DueDate.Date.Equals(date.Date)
-                orderby assignment.Class.Name, assignment.Name
+                orderby assignment.Name
                 select assignment;
 
             FilteredAssignments = result.ToList();
@@ -110,8 +111,18 @@ namespace KMSCalendar.ViewModels
 
             try
             {
-                //var userAssignments;    //TODO MATEO TODAY: select assignments from the db!
-                string s = "s";
+                // Loads assignments from the db for each class that the user is in.
+                var userAssignments = new List<Assignment>();
+                if (app.SignedInUser.EnrolledClasses != null)
+                {
+                    foreach (Class c in app.SignedInUser.EnrolledClasses)
+                    {
+                        c.Assignments = Services.AssignmentManager.LoadAssignments(c.Id);
+                        userAssignments.AddRange(c.Assignments);
+                    }
+                }
+                assignments = userAssignments;
+
                 //LEGACY CODE
                 //var userAssignments =
                 //    from assignment in await dataStore.GetItemsAsync(true)
@@ -120,7 +131,6 @@ namespace KMSCalendar.ViewModels
                 //        select _class.Id
                 //    where userClasses.Contains(assignment.Class.Id)
                 //    select assignment;
-
                 //assignments = userAssignments.ToList();
             }
             catch (Exception ex)
