@@ -24,7 +24,7 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            BindingContext = ViewModel = new ClassSearchViewModel();
+            BindingContext = ViewModel = new ClassSearchViewModel();    //This is repetitive because it is already in the view's xaml code
 
             int schoolId = app.SignedInUser.SchoolId;
 

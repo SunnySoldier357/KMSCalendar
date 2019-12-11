@@ -99,6 +99,9 @@ namespace KMSCalendar.ViewModels
                         App app = Application.Current as App;
 
                         app.SignedInUser = signedInUser;
+                        // Sets signedInUser model's SchoolId what it is in the db
+                        app.SignedInUser.SchoolId = Services.DataManagers.UserManager.LoadSchoolId(app.SignedInUser.Id);
+
                         Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
 
                         app.MainPage = new MainPage();
@@ -117,7 +120,7 @@ namespace KMSCalendar.ViewModels
             {
                 var emailService = new EmailService();
 
-                var dataStore = DependencyService.Get<IDataStore<User>>();
+                var dataStore = DependencyService.Get<IDataStore<User>>();  //does not get user's schoolId
                 var users = await dataStore.GetItemsAsync(true);
                 User recipient = users.FirstOrDefault(user => user.Email == Email);
 

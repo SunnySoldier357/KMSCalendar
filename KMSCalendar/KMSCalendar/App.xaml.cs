@@ -127,7 +127,7 @@ namespace KMSCalendar
                         .GetItemAsync(settings.SignedInUserId);
 
                     // Sets signedInUser model's SchoolId what it is in the db
-                    SignedInUser.SchoolId = KMSCalendar.Services.DataManagers.UserManager.LoadSchoolId(settings.SignedInUserId);
+                    SignedInUser.SchoolId = Services.DataManagers.UserManager.LoadSchoolId(settings.SignedInUserId);
 
 
                 } catch (Exception e)
