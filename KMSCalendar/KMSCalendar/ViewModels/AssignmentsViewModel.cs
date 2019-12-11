@@ -59,7 +59,7 @@ namespace KMSCalendar.ViewModels
             FilteredAssignments = new List<Assignment>();
 
             LoadAssignmentsCommand = new Command(async () =>
-                await ExecuteLoadAssignmentsCommand());
+                ExecuteLoadAssignmentsCommand());
 
             FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
                 ExecuteFilterAssignmentsCommand(selectedDate));
@@ -77,11 +77,10 @@ namespace KMSCalendar.ViewModels
                 ExecuteFilterAssignmentsCommand(DateChoosen);
             });
 
-            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments", (sender) =>
-            {
+            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments", (sender) =>         //This is so that when the class search page closes,
+            {                                                                                       // the assignment page will update it's assignment list
                 LoadAssignmentsCommand.Execute(null);
             });
-
 
             LoadAssignmentsCommand.Execute(null);
 
@@ -92,8 +91,8 @@ namespace KMSCalendar.ViewModels
             };
         }
 
-        //* Public Methods
 
+        //* Public Methods
         public void ExecuteFilterAssignmentsCommand(DateTime date)
         {
             var result =
@@ -108,7 +107,7 @@ namespace KMSCalendar.ViewModels
         /// <summary>
         /// Loads Assignments from the db.
         /// </summary>
-        public async Task ExecuteLoadAssignmentsCommand()       //TODO: Today: make this a message center thing.
+        public void ExecuteLoadAssignmentsCommand()
         {
             if (IsBusy)
                 return;
@@ -124,6 +123,9 @@ namespace KMSCalendar.ViewModels
                     foreach (Class c in app.SignedInUser.EnrolledClasses)
                     {
                         c.Assignments = Services.AssignmentManager.LoadAssignments(c.Id);
+                        foreach (Assignment a in c.Assignments)
+                            a.Class = c;
+
                         userAssignments.AddRange(c.Assignments);
                     }
                 }
