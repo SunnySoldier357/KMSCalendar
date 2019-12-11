@@ -10,6 +10,7 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+using System;
 
 namespace KMSCalendar.ViewModels
 {
@@ -69,18 +70,21 @@ namespace KMSCalendar.ViewModels
 
                     User user = new User
                     {
+                        Id = Guid.NewGuid().ToString(),
                         Email = Email,
                         UserName = UserName,
-                        Password = hashedPassword
+                        Password = hashedPassword,
+                        SchoolId = 2
                     };
 
+                    //User signedInUser = await dataStore.AddItemAsync(user);
 
-                    User signedInUser = await dataStore.AddItemAsync(user);
+                    Services.UserManager.PutInUser(user);
 
                     App app = Application.Current as App;
 
-                    app.SignedInUser = signedInUser;
-                    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+                    app.SignedInUser = user;
+                    Settings.DefaultInstance.SignedInUserId = user.Id;
 
                     app.MainPage = new MainPage();
                 }

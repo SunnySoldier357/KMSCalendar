@@ -77,6 +77,12 @@ namespace KMSCalendar.ViewModels
                 ExecuteFilterAssignmentsCommand(DateChoosen);
             });
 
+            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments", (sender) =>
+            {
+                LoadAssignmentsCommand.Execute(null);
+            });
+
+
             LoadAssignmentsCommand.Execute(null);
 
             Settings.PropertyChanged += (sender, args) =>
@@ -100,9 +106,9 @@ namespace KMSCalendar.ViewModels
         }
 
         /// <summary>
-        /// Loads Assignments from the IDataStore.
+        /// Loads Assignments from the db.
         /// </summary>
-        public async Task ExecuteLoadAssignmentsCommand()
+        public async Task ExecuteLoadAssignmentsCommand()       //TODO: Today: make this a message center thing.
         {
             if (IsBusy)
                 return;
