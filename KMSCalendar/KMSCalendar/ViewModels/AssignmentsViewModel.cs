@@ -79,7 +79,7 @@ namespace KMSCalendar.ViewModels
 
             MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments", (sender) =>         //This is so that when the class search page closes,
             {                                                                                       // the assignment page will update it's assignment list
-                LoadAssignmentsCommand.Execute(null);
+                ExecuteLoadAssignmentsCommand();
             });
 
             LoadAssignmentsCommand.Execute(null);
@@ -122,7 +122,7 @@ namespace KMSCalendar.ViewModels
                 {
                     foreach (Class c in app.SignedInUser.EnrolledClasses)
                     {
-                        c.Assignments = Services.AssignmentManager.LoadAssignments(c.Id);
+                        c.Assignments = Services.AssignmentManager.LoadAssignments(c);
                         foreach (Assignment a in c.Assignments)
                             a.Class = c;
 
@@ -150,7 +150,7 @@ namespace KMSCalendar.ViewModels
                 IsBusy = false;
             }
 
-            ExecuteFilterAssignmentsCommand(DateTime.Today);
+            ExecuteFilterAssignmentsCommand(DateChoosen);
         }
     }
 }

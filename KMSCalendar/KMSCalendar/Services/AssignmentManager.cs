@@ -15,11 +15,11 @@ namespace KMSCalendar.Services
             return SqlAccess.SaveData(sql, a);
         }
 
-        public static List<Assignment> LoadAssignments(int classId)
+        public static List<Assignment> LoadAssignments(Class c)
         {
-            string sql = @"SELECT * FROM dbo.Assignments WHERE ClassID = @Id";
+            string sql = @"SELECT * FROM dbo.Assignments WHERE ClassID = @Id AND Period = @Period";
 
-            return SqlAccess.LoadDataWithId<Assignment>(sql, classId);
+            return SqlAccess.LoadDataWithParam<Assignment, Class>(sql, c);
         }
 
     }
