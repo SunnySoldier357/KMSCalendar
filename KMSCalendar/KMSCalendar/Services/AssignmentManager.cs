@@ -22,5 +22,12 @@ namespace KMSCalendar.Services
             return SqlAccess.LoadDataWithParam<Assignment, Class>(sql, c);
         }
 
+        public static int RemoveAssignment(Assignment a)
+        {
+            string sql = @"DELETE FROM dbo.Assignments WHERE Id = @Id";
+
+            return SqlAccess.DeleteData(sql, a);
+        }
+
     }
 }

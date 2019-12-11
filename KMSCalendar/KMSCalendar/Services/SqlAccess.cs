@@ -60,7 +60,13 @@ namespace KMSCalendar.Services
             }
         }
 
-
+        public static int DeleteData<T>(string sql, T data)
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))
+            {
+                return cnn.Execute(sql, data);
+            }
+        }
 
     }
 }
