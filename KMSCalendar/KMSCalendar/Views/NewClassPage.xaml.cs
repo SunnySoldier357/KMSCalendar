@@ -9,15 +9,14 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.ViewModels;
+using KMSCalendar.Services;
 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewClassPage : ContentPage
 	{
-        //* Private Properties
-        private IDataStore<Teacher> teacherDataStore;
-        private IDataStore<Class> classDataStore;
+        private App app = (Application.Current as App);
 
         //* Public Properties
         public NewClassViewModel ViewModel;
@@ -26,17 +25,18 @@ namespace KMSCalendar.Views
 		public NewClassPage(Page parentPage)
 		{
             InitializeComponent();
-            BindingContext = ViewModel= new NewClassViewModel();
 
-            teacherDataStore = DependencyService.Get<IDataStore<Teacher>>();
-            classDataStore = DependencyService.Get<IDataStore<Class>>();
+            string schoolName = "Skyline"; //todo change
+
+            BindingContext = ViewModel = new NewClassViewModel(schoolName);
 
             LoadTeachers();
         }
 
-        public async void LoadTeachers()
+        public void LoadTeachers()
         {
-            var teachers = await teacherDataStore.GetItemsAsync(true);
+            //var teachers = await teacherDataStore.GetItemsAsync(true);
+            var teachers = TeacherManager.LoadAllTeachers();
 
             ViewModel.Teachers = teachers.ToList();
 
@@ -92,48 +92,51 @@ namespace KMSCalendar.Views
             // If a new teacher is written into the box:
             if (!string.IsNullOrEmpty(ViewModel.TeacherName) && ViewModel.ClassName != null)
             {
-                Teacher t = new Teacher 
-                { 
-                    Name = ViewModel.TeacherName 
+                Teacher t = new Teacher
+                {
+                    Name = ViewModel.TeacherName,
+                    SchoolId = app.SignedInUser.SchoolId
                 };
 
-                await addTeacherAsync(t);
+                int teacherId = TeacherManager.PutInTeacher(t);
+
+                addClass(ViewModel.ClassName, ViewModel.Period, teacherId, t.SchoolId);
             }
+
             // Otherwise if a teacher is selected
             else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)      
-                addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher);
+                addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher.Id, ViewModel.SelectedTeacher.SchoolId);
+
+            MessagingCenter.Send<NewClassPage>(this, "LoadClasses");
+
+            await Navigation.PopModalAsync();
         }
 
-        // TODO: MATEO get the teacher with id and add it to the add class method
-        private async Task addTeacherAsync(Teacher t)
-        {
-            // Adds the teacher to the database
-            await teacherDataStore.AddItemAsync(t);
 
-            addClass(ViewModel.ClassName, ViewModel.Period, t);
-        }
 
         /// <summary>
         /// Adds new class to database and then goes back to the class search page
         /// </summary>
-        private async void addClass(string className, int period, Teacher teacher)
+        private async void addClass(string className, int period, int teacherId, int schoolId)
         {
             Class newClass = new Class
             {
                 Name = className,
                 Period = period,
-                TeacherId = teacher.Id
+                TeacherId = teacherId,
+                UserId = app.SignedInUser.Id,
+                SchoolId = schoolId
             };
 
-            if (teacher.Classes == null)
-                teacher.Classes = new List<Class>();
-
-            teacher.Classes.Add(newClass);
-               
-            await classDataStore.AddItemAsync(newClass);        //this only works if the class's Teacher value is null
+            ClassManager.PutInClass(newClass);  //Adds class and new period to the db
 
             //Navigates back to the class search page
             await Navigation.PopModalAsync();
+        }
+
+        private string getSchoolName(int schoolId)
+        {
+            return SchoolManager.GetSchoolName(schoolId)[0];
         }
     }
 }

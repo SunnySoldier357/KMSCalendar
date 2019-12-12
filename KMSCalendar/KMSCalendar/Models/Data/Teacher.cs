@@ -2,20 +2,15 @@
 
 namespace KMSCalendar.Models.Data
 {
-    public class Teacher : TableData
+    public class Teacher
     {
         //* Public Properties
+        public int Id { get; set; }
+
         public List<Class> Classes { get; set; }
 
         public string Name { get; set; }
 
-        //* Overridden Methods
-        public override bool Equals(object obj)
-        {
-            if (obj is Teacher teacher)
-                return Id == teacher.Id;
-
-            return false;
-        }
+        public int SchoolId { get; set; }
     }
 }

@@ -30,20 +30,24 @@ namespace KMSCalendar
             if (UseMockDataStore)
             {
                 DependencyService.Register<MockDataStore<Assignment>>();
-                DependencyService.Register<MockDataStore<Class>>();
-                DependencyService.Register<MockDataStore<Teacher>>();
+                //DependencyService.Register<MockDataStore<Class>>();
                 DependencyService.Register<MockDataStore<User>>();
             }
             else
             {
                 DependencyService.Register<AzureDataStore<Assignment>>();
-                DependencyService.Register<AzureDataStore<Class>>();
-                DependencyService.Register<AzureDataStore<Teacher>>();
+                //DependencyService.Register<AzureDataStore<Class>>();
                 DependencyService.Register<AzureDataStore<User>>();
             }
         }
 
         //* Public Methods
+        public void PullEnrolledClasses()
+        {
+            var enrolledClassList = Services.ClassManager.LoadEnrolledClasses(SignedInUser.Id);
+            SignedInUser.EnrolledClasses = enrolledClassList;
+        }
+
         public void UpdateColorResources(Theme theme)
         {
             var items = new[]
@@ -119,11 +123,16 @@ namespace KMSCalendar
             {
                 try
                 {
-                    SignedInUser = await DependencyService.Get<IDataStore<User>>()
-                        .GetItemAsync(settings.SignedInUserId);
+                    //This does not load on android! LEGACY CODE MUY MALO
+                    //SignedInUser = await DependencyService.Get<IDataStore<User>>()
+                    //    .GetItemAsync(settings.SignedInUserId);
+
+                    var user = Services.UserManager.LoadUser(settings.SignedInUserId);
+                    SignedInUser = user;
+
                 } catch (Exception e)
                 {
-                    //todo toast a message as to why it didn't work
+                    //todo: toast a message as to why it didn't work
                 }
 
                 if (SignedInUser != null)
@@ -138,6 +147,12 @@ namespace KMSCalendar
         {
             if (e.PropertyName == nameof(Settings.Theme))
                 UpdateColorResources(Settings.DefaultInstance.Theme);
+        }
+
+        //* Accessors
+        public int GetSchoolId()
+        {
+            return SignedInUser.SchoolId;
         }
     }
 }

@@ -10,6 +10,7 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+using System;
 
 namespace KMSCalendar.ViewModels
 {
@@ -61,7 +62,7 @@ namespace KMSCalendar.ViewModels
                 var dataStore = DependencyService.Get<IDataStore<User>>();
                 var users = await dataStore.GetItemsAsync(true);
 
-                if (users.SingleOrDefault(u => u.Email == Email) != null)
+                if (users.SingleOrDefault(u => u.Email == Email.Trim()) != null)
                     LoginValidationMessage = "User already exists! Please log in instead.";
                 else
                 {
@@ -69,18 +70,21 @@ namespace KMSCalendar.ViewModels
 
                     User user = new User
                     {
-                        Email = Email,
-                        UserName = UserName,
-                        Password = hashedPassword
+                        Id = Guid.NewGuid().ToString(),
+                        Email = Email.Trim(),
+                        UserName = UserName.Trim(),
+                        Password = hashedPassword,
+                        SchoolId = 2
                     };
 
+                    //User signedInUser = await dataStore.AddItemAsync(user);
 
-                    User signedInUser = await dataStore.AddItemAsync(user);
+                    Services.UserManager.PutInUser(user);
 
                     App app = Application.Current as App;
 
-                    app.SignedInUser = signedInUser;
-                    Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
+                    app.SignedInUser = user;
+                    Settings.DefaultInstance.SignedInUserId = user.Id;
 
                     app.MainPage = new MainPage();
                 }

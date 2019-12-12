@@ -16,7 +16,8 @@ namespace KMSCalendar.ViewModels
     public class AssignmentsViewModel : BaseViewModel
     {
         //* Private Properties
-        private IDataStore<Assignment> dataStore;
+        private App app = (Application.Current as App);
+        //private IDataStore<Assignment> dataStore;
 
         //private AssignmentsPage parentPage;
 
@@ -51,13 +52,14 @@ namespace KMSCalendar.ViewModels
             Title = "Assignments Calendar";
             DateChoosen = DateTime.Today;
 
-            dataStore = DependencyService.Get<IDataStore<Assignment>>();
+            app.PullEnrolledClasses();
+            //dataStore = DependencyService.Get<IDataStore<Assignment>>();
 
             assignments = new List<Assignment>();
             FilteredAssignments = new List<Assignment>();
 
             LoadAssignmentsCommand = new Command(async () =>
-                await ExecuteLoadAssignmentsCommand());
+                ExecuteLoadAssignmentsCommand());
 
             FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
                 ExecuteFilterAssignmentsCommand(selectedDate));
@@ -67,9 +69,17 @@ namespace KMSCalendar.ViewModels
             {
                 Assignment newItem = a as Assignment;
                 assignments.Add(newItem);
-                await dataStore.AddItemAsync(newItem);
-
+                a.UserId = app.SignedInUser.Id;
+                a.SetClassId();
+                a.SetPeriod();
+                Services.AssignmentManager.PutInAssignment(a);
+                
                 ExecuteFilterAssignmentsCommand(DateChoosen);
+            });
+
+            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments", (sender) =>         //This is so that when the class search page closes,
+            {                                                                                       // the assignment page will update it's assignment list
+                ExecuteLoadAssignmentsCommand();
             });
 
             LoadAssignmentsCommand.Execute(null);
@@ -81,23 +91,23 @@ namespace KMSCalendar.ViewModels
             };
         }
 
-        //* Public Methods
 
+        //* Public Methods
         public void ExecuteFilterAssignmentsCommand(DateTime date)
         {
             var result =
                 from assignment in assignments.AsParallel()
                 where assignment.DueDate.Date.Equals(date.Date)
-                orderby assignment.Class.Name, assignment.Name
+                orderby assignment.Name
                 select assignment;
 
             FilteredAssignments = result.ToList();
         }
 
         /// <summary>
-        /// Loads Assignments from the IDataStore.
+        /// Loads Assignments from the db.
         /// </summary>
-        public async Task ExecuteLoadAssignmentsCommand()
+        public void ExecuteLoadAssignmentsCommand()
         {
             if (IsBusy)
                 return;
@@ -106,15 +116,30 @@ namespace KMSCalendar.ViewModels
 
             try
             {
-                var userAssignments =
-                    from assignment in await dataStore.GetItemsAsync(true)
-                    let userClasses = 
-                        from _class in (Application.Current as App).SignedInUser.EnrolledClasses
-                        select _class.Id
-                    where userClasses.Contains(assignment.Class.Id)
-                    select assignment;
+                // Loads assignments from the db for each class that the user is in.
+                var userAssignments = new List<Assignment>();
+                if (app.SignedInUser.EnrolledClasses != null)
+                {
+                    foreach (Class c in app.SignedInUser.EnrolledClasses)
+                    {
+                        c.Assignments = Services.AssignmentManager.LoadAssignments(c);
+                        foreach (Assignment a in c.Assignments)
+                            a.Class = c;
 
-                assignments = userAssignments.ToList();
+                        userAssignments.AddRange(c.Assignments);
+                    }
+                }
+                assignments = userAssignments;
+
+                //LEGACY CODE
+                //var userAssignments =
+                //    from assignment in await dataStore.GetItemsAsync(true)
+                //    let userClasses = 
+                //        from _class in (Application.Current as App).SignedInUser.EnrolledClasses
+                //        select _class.Id
+                //    where userClasses.Contains(assignment.Class.Id)
+                //    select assignment;
+                //assignments = userAssignments.ToList();
             }
             catch (Exception ex)
             {
@@ -125,7 +150,7 @@ namespace KMSCalendar.ViewModels
                 IsBusy = false;
             }
 
-            ExecuteFilterAssignmentsCommand(DateTime.Today);
+            ExecuteFilterAssignmentsCommand(DateChoosen);
         }
     }
 }

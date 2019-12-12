@@ -12,6 +12,8 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ClassSearchPage : ContentPage
 	{
+        private App app = (Application.Current as App);
+
         //* Public Properties
         public ClassSearchViewModel ViewModel;
 
@@ -22,7 +24,9 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            BindingContext = ViewModel = new ClassSearchViewModel();
+            BindingContext = ViewModel = new ClassSearchViewModel();    //This is repetitive because it is already in the view's xaml code
+
+            int schoolId = app.SignedInUser.SchoolId;
 
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
             ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
@@ -38,10 +42,13 @@ namespace KMSCalendar.Views
         public async Task GoToCalendarAsync(int periodChosen)
         {
             Class selectedClass = ViewModel.SelectedClass;
-            
-            // TODO: MATEO add this to the sample data
-            
-            // TODO: SUNNY add the period selected and class selected to the database.
+            selectedClass.UserId = app.SignedInUser.Id;
+
+            Services.ClassManager.EnrollUserInClass(selectedClass);
+
+            app.PullEnrolledClasses();
+
+            MessagingCenter.Send<ClassSearchPage>(this, "LoadClasses");
 
             //Closes the page and goes to the last one on the stack
             await Navigation.PopModalAsync();
@@ -62,13 +69,13 @@ namespace KMSCalendar.Views
         {
             int newPeriod = int.Parse(NewPeriodLabel.Text);
 
-            ViewModel.LoadPeriods(newPeriod);
+            ViewModel.AddNewPeriod(newPeriod);
+
+            ViewModel.LoadPeriods();
 
             // I tried using these to update the list but they didn't work. Databinding issue?
             // ParentPage.ViewModel.Periods.Add(newPeriod);
             // PeriodsListView.BeginRefresh();
-
-            // TODO: SUNNY add the new Period to the listview and database
         }
 
         private void BackButton_Clicked(object sender, EventArgs e) =>

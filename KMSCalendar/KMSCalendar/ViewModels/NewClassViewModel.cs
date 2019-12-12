@@ -48,7 +48,6 @@ namespace KMSCalendar.ViewModels
             get => teacherName;
             set => setProperty(ref teacherName, value);
         }
-
         public Teacher SelectedTeacher
         {
             get => selectedTeacher;
@@ -56,12 +55,10 @@ namespace KMSCalendar.ViewModels
         }
         
         //* Constructors
-        public NewClassViewModel()
+        public NewClassViewModel(string schoolName)
         {
-            var dataStore = DependencyService.Get<IDataStore<Teacher>>();
-
             Period = 1;
-            Teachers = new List<Teacher>(dataStore.GetItemsAsync(false).Result);
+            Teachers = Services.TeacherManager.LoadAllTeachers();
             SearchTerm = "";
         }
     }
