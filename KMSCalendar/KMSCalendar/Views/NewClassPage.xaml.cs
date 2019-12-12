@@ -98,15 +98,16 @@ namespace KMSCalendar.Views
                     SchoolId = app.SignedInUser.SchoolId
                 };
 
-
                 int teacherId = TeacherManager.PutInTeacher(t);
 
-                addClass(ViewModel.ClassName, ViewModel.Period, t.Id, t.SchoolId);
+                addClass(ViewModel.ClassName, ViewModel.Period, teacherId, t.SchoolId);
             }
 
             // Otherwise if a teacher is selected
             else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)      
                 addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher.Id, ViewModel.SelectedTeacher.SchoolId);
+
+            MessagingCenter.Send<NewClassPage>(this, "LoadClasses");
 
             await Navigation.PopModalAsync();
         }

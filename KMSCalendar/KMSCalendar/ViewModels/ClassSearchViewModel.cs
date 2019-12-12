@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using System.Threading.Tasks;
+using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels
 {
@@ -44,6 +45,12 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Search For Class";
 
+
+            MessagingCenter.Subscribe<NewClassPage>(this, "LoadClasses", (sender) =>         //This is so that when the new class page closes,
+            {                                                                                       // the class list will update
+                LoadClassesAsync();
+            });
+
             //dataStore = DependencyService.Get<IDataStore<Class>>();
 
             LoadClassesAsync();
@@ -66,7 +73,7 @@ namespace KMSCalendar.ViewModels
             }
 
             classes = classList;
-            filteredClasses = classes;
+            FilteredClasses = classes;
 
             //LEGACY CODE:
             //
