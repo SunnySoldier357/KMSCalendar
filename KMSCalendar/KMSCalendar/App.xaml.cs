@@ -123,12 +123,12 @@ namespace KMSCalendar
             {
                 try
                 {
-                    SignedInUser = await DependencyService.Get<IDataStore<User>>()
-                        .GetItemAsync(settings.SignedInUserId);
+                    //This does not load on android! LEGACY CODE MUY MALO
+                    //SignedInUser = await DependencyService.Get<IDataStore<User>>()
+                    //    .GetItemAsync(settings.SignedInUserId);
 
-                    // Sets signedInUser model's SchoolId what it is in the db
-                    SignedInUser.SchoolId = Services.DataManagers.UserManager.LoadSchoolId(settings.SignedInUserId);
-
+                    var user = Services.UserManager.LoadUser(settings.SignedInUserId);
+                    SignedInUser = user;
 
                 } catch (Exception e)
                 {

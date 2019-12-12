@@ -13,5 +13,12 @@ namespace KMSCalendar.Services
 
             return SqlAccess.SaveData(sql, user);
         }
+
+        public static User LoadUser(string userId)
+        {
+            string sql = @"SELECT * FROM dbo.Users WHERE Id = @Id";
+
+            return SqlAccess.LoadSingularData<User>(sql, userId)[0];
+        }
     }
 }
