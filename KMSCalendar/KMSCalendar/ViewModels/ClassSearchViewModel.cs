@@ -97,8 +97,6 @@ namespace KMSCalendar.ViewModels
         //* Public Methods
         public void FilterClasses(string userInput)
         {
-            //TODO: Mateo Today figure out why this sucks.
-
             if (string.IsNullOrWhiteSpace(userInput))
                 FilteredClasses = new List<Class>(classes);
             else

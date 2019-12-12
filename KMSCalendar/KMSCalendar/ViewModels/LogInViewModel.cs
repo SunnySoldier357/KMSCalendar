@@ -88,7 +88,7 @@ namespace KMSCalendar.ViewModels
             {
                 var dataStore = DependencyService.Get<IDataStore<User>>();
                 var users = await dataStore.GetItemsAsync(true);
-                User signedInUser = users.FirstOrDefault(u => u.Email == Email);
+                User signedInUser = users.FirstOrDefault(u => u.Email == Email.Trim());
 
                 if (signedInUser == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";

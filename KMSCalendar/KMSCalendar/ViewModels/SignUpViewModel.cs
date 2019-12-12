@@ -62,7 +62,7 @@ namespace KMSCalendar.ViewModels
                 var dataStore = DependencyService.Get<IDataStore<User>>();
                 var users = await dataStore.GetItemsAsync(true);
 
-                if (users.SingleOrDefault(u => u.Email == Email) != null)
+                if (users.SingleOrDefault(u => u.Email == Email.Trim()) != null)
                     LoginValidationMessage = "User already exists! Please log in instead.";
                 else
                 {
@@ -71,8 +71,8 @@ namespace KMSCalendar.ViewModels
                     User user = new User
                     {
                         Id = Guid.NewGuid().ToString(),
-                        Email = Email,
-                        UserName = UserName,
+                        Email = Email.Trim(),
+                        UserName = UserName.Trim(),
                         Password = hashedPassword,
                         SchoolId = 2
                     };
