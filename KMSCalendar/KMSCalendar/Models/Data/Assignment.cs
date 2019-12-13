@@ -3,9 +3,11 @@
 namespace KMSCalendar.Models.Data
 {
     /// <summary>A class representing a particular assignment.</summary>
-    public class Assignment : TableData
+    public class Assignment
     {
         //* Public Properties
+        public int Id { get; set; }
+
         public Class Class { get; set; }
 
         /// <summary>The Due Date of the assignment.</summary>

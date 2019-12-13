@@ -22,34 +22,8 @@
                    TextColor="White" />
         </StackLayout>
 
-        <Grid HeightRequest="50">
-            <StackLayout Grid.Row="0"
-                         Grid.Column="0"
-                         Orientation="Horizontal">
-                <Image HeightRequest="20"
-                       WidthRequest="20"
-                       Source="search.png"
-                       Margin="20,5,0,-3" />
-
-                <Label Margin="60,10,0,0"
-                       Text="Class Search"
-                       FontSize="20"
-                       TextColor="{DynamicResource Text}" />
-            </StackLayout>
-
-            <Button x:Name="SearchButton"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    Clicked="SearchButton_Clicked" />
-        </Grid>
-
-        <BoxView HeightRequest="0.5"
-                 BackgroundColor="{DynamicResource NavigationBackground}" />
-
         <ListView x:Name="MenuListView"
-                  HasUnevenRows="True">
+                  HasUnevenRows="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
