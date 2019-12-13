@@ -5,5 +5,6 @@
         About,
         Calendar,
         Settings,
+        Search
     }
 }

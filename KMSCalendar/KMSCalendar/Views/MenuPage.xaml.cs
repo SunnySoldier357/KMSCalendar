@@ -31,6 +31,12 @@ namespace KMSCalendar.Views
                 },
                 new HomeMenuItem
                 {
+                    Id = MenuItemType.Search,
+                    Title = "Classes",
+                    Icon = "search.png"
+                },
+                new HomeMenuItem
+                {
                     Id = MenuItemType.About,
                     Title ="About",
                     Icon = "file.png"
