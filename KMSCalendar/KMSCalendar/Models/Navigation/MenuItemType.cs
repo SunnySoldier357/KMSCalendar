@@ -4,7 +4,7 @@
     {
         About,
         Calendar,
-        Settings,
-        Search
+        Search,
+        Settings
     }
 }

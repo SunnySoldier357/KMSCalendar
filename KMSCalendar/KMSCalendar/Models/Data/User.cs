@@ -5,11 +5,12 @@ namespace KMSCalendar.Models.Data
     public class User : TableData
     {
         //* Public Properties
+        public int SchoolId { get; set; }
+
         public List<Class> EnrolledClasses { get; set; }
 
         public string Email { get; set; }
         public string Password { get; set; }
         public string UserName { get; set; }
-        public int SchoolId { get; set; }
     }
 }

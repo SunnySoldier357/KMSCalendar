@@ -6,11 +6,10 @@ namespace KMSCalendar.Models.Data
     {
         //* Public Properties
         public int Id { get; set; }
+        public int SchoolId { get; set; }
 
         public List<Class> Classes { get; set; }
 
         public string Name { get; set; }
-
-        public int SchoolId { get; set; }
     }
 }

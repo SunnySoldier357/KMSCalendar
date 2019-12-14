@@ -6,28 +6,32 @@ namespace KMSCalendar.Models.Data
     public class Assignment
     {
         //* Public Properties
-        public int Id { get; set; }
-
         public Class Class { get; set; }
 
         /// <summary>The Due Date of the assignment.</summary>
         public DateTime DueDate { get; set; }
 
+        /// <summary>
+        /// The id of the class that the asignment belongs to. This is
+        /// repetitive so that Dapper can put it in the db
+        /// </summary>
+        public int ClassId { get; set; }
+        public int Id { get; set; }
+        /// <summary>The period of the class that the user belongs to.
+        /// This is repetitive so that Dapper can put it in the db.
+        /// </summary>
+        public int Period { get; set; }
+
         /// <summary>The description of the assignment.</summary>
         public string Description { get; set; }
-
         /// <summary>The name of the assignment.</summary>
         public string Name { get; set; }
-
         /// <summary>The user id of the assignment creator</summary>
         public string UserId { get; set; }
 
-        /// <summary>The id of the class that the asignment belongs to. This is repetitive so that Dapper can put it in the db</summary>
-        public int ClassId { get; set; }
+        //* Public Methods
         public void SetClassId() => ClassId = Class.Id;
-
-        /// <summary>The period of the class that the user belongs to. This is repetitive so that Dapper can put it in the db</summary>
-        public int Period { get; set; }
+        
         public void SetPeriod() => Period = Class.Period;
     }
 }
