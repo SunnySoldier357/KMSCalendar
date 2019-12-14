@@ -86,10 +86,8 @@ namespace KMSCalendar.ViewModels
         {
             if (Validate())
             {
-                var dataStore = DependencyService.Get<IDataStore<User>>();
-                var users = await dataStore.GetItemsAsync(true);
-                User signedInUser = users.FirstOrDefault(u => u.Email == Email.Trim());
-
+                User signedInUser = Services.UserManager.LoadUserFromEmail(Email);
+                
                 if (signedInUser == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";
                 else
@@ -99,6 +97,7 @@ namespace KMSCalendar.ViewModels
                         App app = Application.Current as App;
 
                         app.SignedInUser = signedInUser;
+
                         // Sets signedInUser model's SchoolId what it is in the db
                         app.SignedInUser.SchoolId = Services.DataManagers.UserManager.LoadSchoolId(app.SignedInUser.Id);
 
@@ -120,9 +119,7 @@ namespace KMSCalendar.ViewModels
             {
                 var emailService = new EmailService();
 
-                var dataStore = DependencyService.Get<IDataStore<User>>();  //does not get user's schoolId
-                var users = await dataStore.GetItemsAsync(true);
-                User recipient = users.FirstOrDefault(user => user.Email == Email);
+                User recipient = Services.UserManager.LoadUserFromEmail(Email);
 
                 if (recipient == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";

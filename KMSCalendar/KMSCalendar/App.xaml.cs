@@ -31,13 +31,13 @@ namespace KMSCalendar
             {
                 //DependencyService.Register<MockDataStore<Assignment>>();
                 //DependencyService.Register<MockDataStore<Class>>();
-                DependencyService.Register<MockDataStore<User>>();
+                //DependencyService.Register<MockDataStore<User>>();
             }
             else
             {
                 //DependencyService.Register<AzureDataStore<Assignment>>();
                 //DependencyService.Register<AzureDataStore<Class>>();
-                DependencyService.Register<AzureDataStore<User>>();
+                //DependencyService.Register<AzureDataStore<User>>();
             }
         }
 
@@ -127,7 +127,7 @@ namespace KMSCalendar
                     //SignedInUser = await DependencyService.Get<IDataStore<User>>()
                     //    .GetItemAsync(settings.SignedInUserId);
 
-                    var user = Services.UserManager.LoadUser(settings.SignedInUserId);
+                    var user = Services.UserManager.LoadUserFromId(settings.SignedInUserId);
                     SignedInUser = user;
 
                 } catch (Exception e)
