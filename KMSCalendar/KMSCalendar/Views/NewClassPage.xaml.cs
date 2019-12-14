@@ -35,7 +35,6 @@ namespace KMSCalendar.Views
 
         public void LoadTeachers()
         {
-            //var teachers = await teacherDataStore.GetItemsAsync(true);
             var teachers = TeacherManager.LoadAllTeachers();
 
             ViewModel.Teachers = teachers.ToList();

@@ -27,11 +27,6 @@ namespace KMSCalendar
         public App()
         {
             InitializeComponent();
-
-            if (UseMockDataStore)
-                DependencyService.Register<MockDataStore<User>>();
-            else
-                DependencyService.Register<AzureDataStore<User>>();
         }
 
         //* Public Methods
@@ -116,9 +111,10 @@ namespace KMSCalendar
             {
                 try
                 {
-                    SignedInUser = UserManager.LoadUser(settings.SignedInUserId);
-                } 
-                catch (Exception e)
+                    var user = Services.UserManager.LoadUserFromId(settings.SignedInUserId);
+                    SignedInUser = user;
+
+                } catch (Exception e)
                 {
                     // TODO: Toast a message as to why it didn't work
                 }
