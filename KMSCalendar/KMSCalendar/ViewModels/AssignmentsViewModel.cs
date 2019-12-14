@@ -17,9 +17,6 @@ namespace KMSCalendar.ViewModels
     {
         //* Private Properties
         private App app = (Application.Current as App);
-        //private IDataStore<Assignment> dataStore;
-
-        //private AssignmentsPage parentPage;
 
         /// <summary>A List of all the Assignments to display</summary>
         private List<Assignment> assignments;
@@ -31,6 +28,7 @@ namespace KMSCalendar.ViewModels
         public DateTime DateChoosen { get; set; }
 
         public ICommand FilterAssignmentsCommand { get; set; }
+
         /// <summary>
         /// The Command that loads Assignments from the IDataStore
         /// </summary>
@@ -53,7 +51,6 @@ namespace KMSCalendar.ViewModels
             DateChoosen = DateTime.Today;
 
             app.PullEnrolledClasses();
-            //dataStore = DependencyService.Get<IDataStore<Assignment>>();
 
             assignments = new List<Assignment>();
             FilteredAssignments = new List<Assignment>();
@@ -130,16 +127,6 @@ namespace KMSCalendar.ViewModels
                     }
                 }
                 assignments = userAssignments;
-
-                //LEGACY CODE
-                //var userAssignments =
-                //    from assignment in await dataStore.GetItemsAsync(true)
-                //    let userClasses = 
-                //        from _class in (Application.Current as App).SignedInUser.EnrolledClasses
-                //        select _class.Id
-                //    where userClasses.Contains(assignment.Class.Id)
-                //    select assignment;
-                //assignments = userAssignments.ToList();
             }
             catch (Exception ex)
             {

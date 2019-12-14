@@ -59,8 +59,6 @@ namespace KMSCalendar.ViewModels
         {
             if (Validate())
             {
-                //var dataStore = DependencyService.Get<IDataStore<User>>();
-                //var users = await dataStore.GetItemsAsync(true);
                 bool alreadyEmail = Services.UserManager.CheckForUser(Email.Trim());
 
                 if (alreadyEmail)
@@ -77,8 +75,6 @@ namespace KMSCalendar.ViewModels
                         Password = hashedPassword,
                         SchoolId = 2
                     };
-
-                    //User signedInUser = await dataStore.AddItemAsync(user);
 
                     Services.UserManager.PutInUser(user);
 

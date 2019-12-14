@@ -31,8 +31,6 @@ namespace KMSCalendar.ViewModels
         //* Private Methods
         public async Task ExecuteDeleteAssignmentCommandAssignment()
         {
-            //IDataStore<Assignment> dataStore = DependencyService.Get<IDataStore<Assignment>>();
-            //await dataStore.DeleteItemAsync(Assignment.Id);
             Services.AssignmentManager.RemoveAssignment(Assignment);
         }
     }

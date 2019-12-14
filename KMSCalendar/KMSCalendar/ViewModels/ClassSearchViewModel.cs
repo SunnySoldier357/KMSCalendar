@@ -45,13 +45,10 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Search For Class";
 
-
             MessagingCenter.Subscribe<NewClassPage>(this, "LoadClasses", (sender) =>         //This is so that when the new class page closes,
             {                                                                                       // the class list will update
                 LoadClassesAsync();
             });
-
-            //dataStore = DependencyService.Get<IDataStore<Class>>();
 
             LoadClassesAsync();
         }
@@ -74,24 +71,6 @@ namespace KMSCalendar.ViewModels
 
             classes = classList;
             FilteredClasses = classes;
-
-            //LEGACY CODE:
-            //
-            //var classes =
-            //    from _class in await dataStore.GetItemsAsync(true)
-            //    let userClasses =
-            //        from userClass in (Application.Current as App).SignedInUser.EnrolledClasses
-            //        select userClass.Id
-            //    where !userClasses.Contains(_class.Id)
-            //    select _class;
-            //
-            //var classes = await dataStore.GetItemsAsync(true);
-            //
-            //this.classes = classes.ToList();
-            //uniqueClasses = this.classes.Distinct(new DuplicateClassNameComparer()).ToList();
-            //FilteredClasses = new List<Class>(uniqueClasses);
-            //filteredClasses = this.classes;
-            //Periods = new List<int>();
         }
 
         //* Public Methods
@@ -114,14 +93,6 @@ namespace KMSCalendar.ViewModels
         {
             int classId = SelectedClass.Id;
             Periods = Services.PeriodManager.LoadPeriods(classId);      //sets the period list to all of the periods in the selected class from the db.
-
-            // LEGACY CODE
-            //var periods =
-            //    from _class in classes.AsParallel()
-            //    where _class.Name == SelectedClass.Name &&
-            //        _class.Teacher.Equals(SelectedClass.Teacher)
-            //    select _class.Period;
-            //Periods = periods.ToList();
         }
 
         /// <summary>
@@ -144,16 +115,5 @@ namespace KMSCalendar.ViewModels
             selectedClass.Period = newPeriod;
             Services.PeriodManager.PutInClassPeriod(selectedClass);
         }
-
-        //LEGACY CODE
-        //private class DuplicateClassNameComparer : EqualityComparer<Class>
-        //{
-        //    //* Overridden Methods
-        //    //public override bool Equals(Class x, Class y) => 
-        //    //    x.Name == y.Name && x.Teacher?.Name == y.Teacher?.Name;
-
-        //    //public override int GetHashCode(Class obj) => 
-        //    //    $"{obj.Name} ({obj.Teacher?.Name ?? ""})".GetHashCode();
-        //}
     }
 }

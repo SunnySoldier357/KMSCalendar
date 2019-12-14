@@ -26,19 +26,6 @@ namespace KMSCalendar
         public App()
         {
             InitializeComponent();
-
-            if (UseMockDataStore)
-            {
-                //DependencyService.Register<MockDataStore<Assignment>>();
-                //DependencyService.Register<MockDataStore<Class>>();
-                //DependencyService.Register<MockDataStore<User>>();
-            }
-            else
-            {
-                //DependencyService.Register<AzureDataStore<Assignment>>();
-                //DependencyService.Register<AzureDataStore<Class>>();
-                //DependencyService.Register<AzureDataStore<User>>();
-            }
         }
 
         //* Public Methods
@@ -123,10 +110,6 @@ namespace KMSCalendar
             {
                 try
                 {
-                    //This does not load on android! LEGACY CODE MUY MALO
-                    //SignedInUser = await DependencyService.Get<IDataStore<User>>()
-                    //    .GetItemAsync(settings.SignedInUserId);
-
                     var user = Services.UserManager.LoadUserFromId(settings.SignedInUserId);
                     SignedInUser = user;
 
