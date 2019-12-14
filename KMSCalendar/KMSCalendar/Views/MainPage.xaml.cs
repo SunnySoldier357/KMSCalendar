@@ -43,6 +43,10 @@ namespace KMSCalendar.Views
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
 
+                    //case (int)MenuItemType.Search:
+                    //    MenuPages.Add(id, new NavigationPage(new ClassSearchPage()));
+                    //    break;
+
                     case (int) MenuItemType.Calendar:
                         MenuPages.Add(id, new NavigationPage(new AssignmentsPage()));
                         break;

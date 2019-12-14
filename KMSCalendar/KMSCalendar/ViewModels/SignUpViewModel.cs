@@ -59,10 +59,11 @@ namespace KMSCalendar.ViewModels
         {
             if (Validate())
             {
-                var dataStore = DependencyService.Get<IDataStore<User>>();
-                var users = await dataStore.GetItemsAsync(true);
+                //var dataStore = DependencyService.Get<IDataStore<User>>();
+                //var users = await dataStore.GetItemsAsync(true);
+                bool alreadyEmail = Services.UserManager.CheckForUser(Email.Trim());
 
-                if (users.SingleOrDefault(u => u.Email == Email.Trim()) != null)
+                if (alreadyEmail)
                     LoginValidationMessage = "User already exists! Please log in instead.";
                 else
                 {
