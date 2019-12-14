@@ -3,8 +3,9 @@
     public enum MenuItemType
     {
         About,
+        Search,
         Calendar,
         Settings,
-        Search
+
     }
 }
