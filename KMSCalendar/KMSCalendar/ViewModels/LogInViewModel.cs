@@ -98,9 +98,6 @@ namespace KMSCalendar.ViewModels
 
                         app.SignedInUser = signedInUser;
 
-                        // Sets signedInUser model's SchoolId what it is in the db
-                        app.SignedInUser.SchoolId = Services.DataManagers.UserManager.LoadSchoolId(app.SignedInUser.Id);
-
                         Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
 
                         app.MainPage = new MainPage();
