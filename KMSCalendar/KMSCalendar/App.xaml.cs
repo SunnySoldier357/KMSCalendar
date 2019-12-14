@@ -1,13 +1,14 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
+using KMSCalendar.Services;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
-using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KMSCalendar
@@ -28,23 +29,15 @@ namespace KMSCalendar
             InitializeComponent();
 
             if (UseMockDataStore)
-            {
-                //DependencyService.Register<MockDataStore<Assignment>>();
-                //DependencyService.Register<MockDataStore<Class>>();
                 DependencyService.Register<MockDataStore<User>>();
-            }
             else
-            {
-                //DependencyService.Register<AzureDataStore<Assignment>>();
-                //DependencyService.Register<AzureDataStore<Class>>();
                 DependencyService.Register<AzureDataStore<User>>();
-            }
         }
 
         //* Public Methods
         public void PullEnrolledClasses()
         {
-            var enrolledClassList = Services.ClassManager.LoadEnrolledClasses(SignedInUser.Id);
+            var enrolledClassList = ClassManager.LoadEnrolledClasses(SignedInUser.Id);
             SignedInUser.EnrolledClasses = enrolledClassList;
         }
 
@@ -123,16 +116,11 @@ namespace KMSCalendar
             {
                 try
                 {
-                    //This does not load on android! LEGACY CODE MUY MALO
-                    //SignedInUser = await DependencyService.Get<IDataStore<User>>()
-                    //    .GetItemAsync(settings.SignedInUserId);
-
-                    var user = Services.UserManager.LoadUser(settings.SignedInUserId);
-                    SignedInUser = user;
-
-                } catch (Exception e)
+                    SignedInUser = UserManager.LoadUser(settings.SignedInUserId);
+                } 
+                catch (Exception e)
                 {
-                    //todo: toast a message as to why it didn't work
+                    // TODO: Toast a message as to why it didn't work
                 }
 
                 if (SignedInUser != null)
@@ -147,12 +135,6 @@ namespace KMSCalendar
         {
             if (e.PropertyName == nameof(Settings.Theme))
                 UpdateColorResources(Settings.DefaultInstance.Theme);
-        }
-
-        //* Accessors
-        public int GetSchoolId()
-        {
-            return SignedInUser.SchoolId;
         }
     }
 }

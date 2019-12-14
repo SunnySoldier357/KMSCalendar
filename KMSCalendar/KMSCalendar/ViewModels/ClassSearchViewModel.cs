@@ -64,7 +64,7 @@ namespace KMSCalendar.ViewModels
         {
             // TODO: MATEO get this to work so a user doesn't have duplicate classes.
 
-            List<Class> classList = Services.ClassManager.LoadClasses(app.GetSchoolId());
+            List<Class> classList = Services.ClassManager.LoadClasses(app.SignedInUser.SchoolId);
 
             foreach (Class c in classList)
             {
