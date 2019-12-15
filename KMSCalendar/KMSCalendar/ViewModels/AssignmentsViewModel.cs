@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Forms;
@@ -18,7 +17,7 @@ namespace KMSCalendar.ViewModels
         //* Private Properties
         private App app = (Application.Current as App);
 
-        /// <summary>A List of all the Assignments to display</summary>
+        /// <summary>A List of all the Assignments to display.</summary>
         private List<Assignment> assignments;
         private List<Assignment> filteredAssignments;
 
@@ -28,12 +27,8 @@ namespace KMSCalendar.ViewModels
         public DateTime DateChoosen { get; set; }
 
         public ICommand FilterAssignmentsCommand { get; set; }
-
-        /// <summary>
-        /// The Command that loads Assignments from the IDataStore
-        /// </summary>
         public ICommand LoadAssignmentsCommand { get; set; }
-        
+
         /// <summary>
         /// A filtered set of all the Assignments that are only for the
         /// current day selected
@@ -55,29 +50,28 @@ namespace KMSCalendar.ViewModels
             assignments = new List<Assignment>();
             FilteredAssignments = new List<Assignment>();
 
-            LoadAssignmentsCommand = new Command(async () =>
+            LoadAssignmentsCommand = new Command(() =>
                 ExecuteLoadAssignmentsCommand());
 
             FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
                 ExecuteFilterAssignmentsCommand(selectedDate));
 
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
-                "AddAssignment", async (page, a) =>
+                "AddAssignment", (page, a) =>
             {
-                Assignment newItem = a as Assignment;
-                assignments.Add(newItem);
+                assignments.Add(a);
                 a.UserId = app.SignedInUser.Id;
                 a.SetClassId();
                 a.SetPeriod();
                 AssignmentManager.PutInAssignment(a);
-                
+
                 ExecuteFilterAssignmentsCommand(DateChoosen);
             });
 
-            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments", (sender) =>         //This is so that when the class search page closes,
-            {                                                                                       // the assignment page will update it's assignment list
-                ExecuteLoadAssignmentsCommand();
-            });
+            // This is so that when the class search page closes,
+            // the assignment page will update it's assignment list
+            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments",
+                (sender) => ExecuteLoadAssignmentsCommand());
 
             LoadAssignmentsCommand.Execute(null);
 
@@ -87,7 +81,6 @@ namespace KMSCalendar.ViewModels
                     OnNotifyPropertyChanged(nameof(ShowCalendarDays));
             };
         }
-
 
         //* Public Methods
         public void ExecuteFilterAssignmentsCommand(DateTime date)
@@ -117,13 +110,13 @@ namespace KMSCalendar.ViewModels
                 var userAssignments = new List<Assignment>();
                 if (app.SignedInUser.EnrolledClasses != null)
                 {
-                    foreach (Class c in app.SignedInUser.EnrolledClasses)
+                    foreach (Class @class in app.SignedInUser.EnrolledClasses)
                     {
-                        c.Assignments = AssignmentManager.LoadAssignments(c);
-                        foreach (Assignment a in c.Assignments)
-                            a.Class = c;
+                        @class.Assignments = AssignmentManager.LoadAssignments(c);
+                        foreach (Assignment assignment in @class.Assignments)
+                            assignment.Class = @class;
 
-                        userAssignments.AddRange(c.Assignments);
+                        userAssignments.AddRange(@class.Assignments);
                     }
                 }
                 assignments = userAssignments;
