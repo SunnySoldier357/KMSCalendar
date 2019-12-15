@@ -1,72 +1,60 @@
-﻿using Dapper;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
+
+using Dapper;
 
 namespace KMSCalendar.Services
 {
     public static class SqlAccess
     {
+        //* Static Properties
         private static string connectionString = Connections.GetConnectionString();
 
-        public static int SaveData<T>(string sql, T data)
+        //* Public Methods
+        public static int DeleteData<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
-            {
                 return cnn.Execute(sql, data);
-            }
         }
 
         public static List<T> LoadData<T>(string sql)
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
-            {
                 return cnn.Query<T>(sql).AsList();
-            }
         }
 
-        public static List<T> LoadDataWithId<T>(string sql, string id)   //currrent is the Id
-        {
-            using (IDbConnection cnn = new SqlConnection(connectionString))     //grabs the connection string from the method above.
-            {
-                return cnn.Query<T>(sql, new { Id = id }).AsList();      //returns a list of generics from the database
-            }
-        }
-
-        public static List<TOne> LoadDataWithParam<TOne, TTwo>(string sql, TTwo data)   //currrent is the Id
-        {
-            using (IDbConnection cnn = new SqlConnection(connectionString))     //grabs the connection string from the method above.
-            {
-                return cnn.Query<TOne>(sql, data).AsList();      //returns a list of generics from the database
-            }
-        }
-
-        public static List<T> LoadSingularData<T>(string sql, string id)   //currrent is the Id
-        {
-            using (IDbConnection cnn = new SqlConnection(connectionString))     //grabs the connection string from the method above.
-            {
-                return cnn.Query<T>(sql, new { Id = id }).AsList();      //returns a list of generics from the database
-            }
-        }
-
-        public static int SaveItemReturnId<T>(string sql, T data)   //currrent is the Id
-        {
-            using (IDbConnection cnn = new SqlConnection(connectionString))     //grabs the connection string from the method above.
-            {
-                return cnn.Query<int>(sql, data).Single();
-            }
-        }
-
-        public static int DeleteData<T>(string sql, T data)
+        public static List<T> LoadDataWithId<T>(string sql, string id)
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
-            {
-                return cnn.Execute(sql, data);
-            }
+                return cnn.Query<T>(sql, new { Id = id }).AsList();
         }
 
+        public static List<T1> LoadDataWithParam<T1, T2>(string sql, T2 param)
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))
+                return cnn.Query<T1>(sql, param).AsList();
+        }
+
+        // TODO: This returns a List, not a singular data item & looks like
+        //       a duplicate of LoadDataWithId
+        public static List<T> LoadSingularData<T>(string sql, string id)
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))
+                return cnn.Query<T>(sql, new { Id = id }).AsList();
+        }
+
+        public static int SaveData<T>(string sql, T data)
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))
+                return cnn.Execute(sql, data);
+        }
+
+        public static int SaveItemReturnId<T>(string sql, T data)
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))
+                return cnn.Query<int>(sql, data).Single();
+        }
     }
 }
