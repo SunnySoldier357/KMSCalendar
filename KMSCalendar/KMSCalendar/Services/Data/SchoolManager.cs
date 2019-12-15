@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace KMSCalendar.Services.Data
 {
@@ -8,10 +6,10 @@ namespace KMSCalendar.Services.Data
     {
         public static List<string> GetSchoolName(int schoolId)
         {
-            string sql = @"SELECT Name FROM dbo.Schools WHERE Id = @Id";
+            string sql = @"SELECT Name FROM dbo.Schools
+                WHERE Id = @Id";
 
             return SqlAccess.LoadSingularData<string>(sql, schoolId.ToString());
         }
-
     }
 }
