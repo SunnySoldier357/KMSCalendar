@@ -146,16 +146,11 @@
                                         Clicked="NextButton_Clicked" />
                             </Grid>
 
-                            <!--<Frame Padding="0"
-                                   CornerRadius="10"
-                                   BorderColor="{DynamicResource NavigationBackgroundLight}">-->
-
                             <SearchBar x:Name="ClassSearchBar"
                                        Margin="0,0,0,10"
                                        BackgroundColor="{DynamicResource LightText}"
                                        Placeholder="Search"
                                        TextColor="{DynamicResource Text}" />
-                            <!--</Frame>-->
 
                             <ListView x:Name="ClassesListView"
                                       ItemsSource="{Binding FilteredClasses}"
@@ -178,19 +173,10 @@
 
                                                 <Label Grid.Column="1"
                                                        VerticalOptions="End"
-                                                       HorizontalTextAlignment="End"
                                                        Text="{Binding Teacher.Name}"
                                                        FontSize="11"
-                                                       TextColor="{DynamicResource Text}" />
-
-                                                <!--
-                                                <Label Grid.RowSpan="2"
-                                                       HorizontalOptions="End"
-                                                       VerticalOptions="Center"
-                                                       Text="{Binding Period}"
-                                                       FontSize="13"
-                                                       LineBreakMode="NoWrap" />
-                                                -->
+                                                       TextColor="{DynamicResource Text}"
+                                                       HorizontalTextAlignment="End" />
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>

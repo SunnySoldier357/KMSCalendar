@@ -11,5 +11,10 @@ namespace KMSCalendar.Models.Data
         public List<Class> Classes { get; set; }
 
         public string Name { get; set; }
+
+        //* Constructors
+        public Teacher() { }
+
+        public Teacher(string name) => Name = name;
     }
 }

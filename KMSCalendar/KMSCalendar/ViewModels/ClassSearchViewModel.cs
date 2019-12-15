@@ -5,7 +5,6 @@ using Xamarin.Forms;
 
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
-using System.Threading.Tasks;
 using KMSCalendar.Views;
 
 namespace KMSCalendar.ViewModels
@@ -14,13 +13,13 @@ namespace KMSCalendar.ViewModels
     {
         //* Private Properties
         private Class selectedClass;
+
         private List<Class> classes;
         private List<Class> filteredClasses;
-        //private List<Class> uniqueClasses;    //This used to be used to filter classes with the search function
 
         private List<int> periods;
 
-        private App app = (Application.Current as App);
+        private App app => (Application.Current as App);
 
         //* Public Properties
         public Class SelectedClass
@@ -45,35 +44,21 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Search For Class";
 
-            MessagingCenter.Subscribe<NewClassPage>(this, "LoadClasses", (sender) =>         //This is so that when the new class page closes,
-            {                                                                                       // the class list will update
-                LoadClassesAsync();
-            });
+            // This is so that when the new class page closes,
+            // the class list will update
+            MessagingCenter.Subscribe<NewClassPage>(this, "LoadClasses",
+                (sender) => LoadClassesAsync());
 
             LoadClassesAsync();
         }
 
-        /// <summary>
-        /// Loads a list of classes from the DB so the user can add one to their account.
-        /// </summary>
-        /// <returns></returns>
-        public void LoadClassesAsync()
+        //* Public Methods
+        public void AddNewPeriod(int newPeriod)
         {
-            // TODO: MATEO get this to work so a user doesn't have duplicate classes.
-
-            List<Class> classList = ClassManager.LoadClasses(app.SignedInUser.SchoolId);
-
-            foreach (Class c in classList)
-            {
-                string name = TeacherManager.LoadTeacherNameFromId(c.TeacherId);
-                c.Teacher = new Teacher() { Name = name };
-            }
-
-            classes = classList;
-            FilteredClasses = classes;
+            selectedClass.Period = newPeriod;
+            PeriodManager.PutInClassPeriod(selectedClass);
         }
 
-        //* Public Methods
         public void FilterClasses(string userInput)
         {
             if (string.IsNullOrWhiteSpace(userInput))
@@ -81,18 +66,38 @@ namespace KMSCalendar.ViewModels
             else
             {
                 var result =
-                    from _class in classes.AsParallel()
-                    where _class.Name.ToLower().Contains(userInput.ToLower())
-                    select _class;
+                    from @class in classes.AsParallel()
+                    where @class.Name.ToLower().Contains(userInput.ToLower())
+                    select @class;
 
                 FilteredClasses = result.ToList();
             }
         }
 
+        /// <summary>
+        /// Loads a list of classes from the DB so the user can add one to their account.
+        /// </summary>
+        public void LoadClassesAsync()
+        {
+            // TODO: MATEO get this to work so a user doesn't have duplicate classes.
+            List<Class> classList = ClassManager.LoadClasses(app.SignedInUser.SchoolId);
+
+            foreach (Class @class in classList)
+            {
+                string name = TeacherManager.LoadTeacherNameFromId(@class.TeacherId);
+                @class.Teacher = new Teacher(name);
+            }
+
+            classes = classList;
+            FilteredClasses = classes;
+        }
+
         public void LoadPeriods()
         {
             int classId = SelectedClass.Id;
-            Periods = PeriodManager.LoadPeriods(classId);      //sets the period list to all of the periods in the selected class from the db.
+
+            // Sets the period list to all of the periods in the selected class from the db.
+            Periods = PeriodManager.LoadPeriods(classId);
         }
 
         /// <summary>
@@ -108,12 +113,6 @@ namespace KMSCalendar.ViewModels
 
             Periods = periods.ToList();
             Periods.Add(newPeriod);
-        }
-
-        public void AddNewPeriod(int newPeriod)
-        {
-            selectedClass.Period = newPeriod;
-            PeriodManager.PutInClassPeriod(selectedClass);
         }
     }
 }
