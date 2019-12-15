@@ -61,11 +61,11 @@ namespace KMSCalendar.ViewModels
         {
             // TODO: MATEO get this to work so a user doesn't have duplicate classes.
 
-            List<Class> classList = Services.ClassManager.LoadClasses(app.SignedInUser.SchoolId);
+            List<Class> classList = ClassManager.LoadClasses(app.SignedInUser.SchoolId);
 
             foreach (Class c in classList)
             {
-                string name = Services.TeacherManager.LoadTeacherNameFromId(c.TeacherId);
+                string name = TeacherManager.LoadTeacherNameFromId(c.TeacherId);
                 c.Teacher = new Teacher() { Name = name };
             }
 
@@ -92,7 +92,7 @@ namespace KMSCalendar.ViewModels
         public void LoadPeriods()
         {
             int classId = SelectedClass.Id;
-            Periods = Services.PeriodManager.LoadPeriods(classId);      //sets the period list to all of the periods in the selected class from the db.
+            Periods = PeriodManager.LoadPeriods(classId);      //sets the period list to all of the periods in the selected class from the db.
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace KMSCalendar.ViewModels
         public void AddNewPeriod(int newPeriod)
         {
             selectedClass.Period = newPeriod;
-            Services.PeriodManager.PutInClassPeriod(selectedClass);
+            PeriodManager.PutInClassPeriod(selectedClass);
         }
     }
 }

@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
+using KMSCalendar.Services.Data;
 
 namespace KMSCalendar.Views
 {
@@ -44,7 +45,7 @@ namespace KMSCalendar.Views
             Class selectedClass = ViewModel.SelectedClass;
             selectedClass.UserId = app.SignedInUser.Id;
 
-            Services.ClassManager.EnrollUserInClass(selectedClass);
+            ClassManager.EnrollUserInClass(selectedClass);
 
             app.PullEnrolledClasses();
 

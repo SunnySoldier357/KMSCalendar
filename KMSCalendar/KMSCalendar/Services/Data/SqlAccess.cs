@@ -5,7 +5,7 @@ using System.Linq;
 
 using Dapper;
 
-namespace KMSCalendar.Services
+namespace KMSCalendar.Services.Data
 {
     public static class SqlAccess
     {

@@ -6,7 +6,6 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
-using KMSCalendar.Services;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
@@ -111,7 +110,7 @@ namespace KMSCalendar
             {
                 try
                 {
-                    var user = Services.UserManager.LoadUserFromId(settings.SignedInUserId);
+                    var user = UserManager.LoadUserFromId(settings.SignedInUserId);
                     SignedInUser = user;
 
                 } catch (Exception e)

@@ -59,7 +59,7 @@ namespace KMSCalendar.ViewModels
         {
             if (Validate())
             {
-                bool alreadyEmail = Services.UserManager.CheckForUser(Email.Trim());
+                bool alreadyEmail = UserManager.CheckForUser(Email.Trim());
 
                 if (alreadyEmail)
                     LoginValidationMessage = "User already exists! Please log in instead.";
@@ -76,7 +76,7 @@ namespace KMSCalendar.ViewModels
                         SchoolId = 2
                     };
 
-                    Services.UserManager.PutInUser(user);
+                    UserManager.PutInUser(user);
 
                     App app = Application.Current as App;
 

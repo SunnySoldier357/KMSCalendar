@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +8,6 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.ViewModels;
-using KMSCalendar.Services;
 
 namespace KMSCalendar.Views
 {

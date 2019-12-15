@@ -69,7 +69,7 @@ namespace KMSCalendar.ViewModels
                 a.UserId = app.SignedInUser.Id;
                 a.SetClassId();
                 a.SetPeriod();
-                Services.AssignmentManager.PutInAssignment(a);
+                AssignmentManager.PutInAssignment(a);
                 
                 ExecuteFilterAssignmentsCommand(DateChoosen);
             });
@@ -119,7 +119,7 @@ namespace KMSCalendar.ViewModels
                 {
                     foreach (Class c in app.SignedInUser.EnrolledClasses)
                     {
-                        c.Assignments = Services.AssignmentManager.LoadAssignments(c);
+                        c.Assignments = AssignmentManager.LoadAssignments(c);
                         foreach (Assignment a in c.Assignments)
                             a.Class = c;
 

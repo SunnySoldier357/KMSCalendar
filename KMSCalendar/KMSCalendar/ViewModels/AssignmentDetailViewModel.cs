@@ -31,7 +31,7 @@ namespace KMSCalendar.ViewModels
         //* Private Methods
         public async Task ExecuteDeleteAssignmentCommandAssignment()
         {
-            Services.AssignmentManager.RemoveAssignment(Assignment);
+            AssignmentManager.RemoveAssignment(Assignment);
         }
     }
 }

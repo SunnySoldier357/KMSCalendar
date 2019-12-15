@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace KMSCalendar.Services
+namespace KMSCalendar.Services.Data
 {
     public static class PeriodManager
     {
