@@ -112,7 +112,7 @@ namespace KMSCalendar.ViewModels
                 {
                     foreach (Class @class in app.SignedInUser.EnrolledClasses)
                     {
-                        @class.Assignments = AssignmentManager.LoadAssignments(c);
+                        @class.Assignments = AssignmentManager.LoadAssignments(@class);
                         foreach (Assignment assignment in @class.Assignments)
                             assignment.Class = @class;
 
