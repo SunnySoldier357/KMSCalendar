@@ -61,7 +61,7 @@ namespace KMSCalendar.Views
 
                 int id = (int) ((HomeMenuItem) e.SelectedItem).Id;
 
-                if (id == 1)
+                if (((HomeMenuItem)e.SelectedItem).Id == MenuItemType.Search)
                     await GoToClassSearchPage();
                 else
                     await RootPage.NavigateFromMenu(id);

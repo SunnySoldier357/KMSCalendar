@@ -5,14 +5,17 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models.Data;
+using KMSCalendar.Services.Data;
 using KMSCalendar.ViewModels;
+
 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ClassSearchPage : ContentPage
-	{
-        private App app = (Application.Current as App);
+    public partial class ClassSearchPage : ContentPage
+    {
+        //* Private Properties
+        private App app => (Application.Current as App);
 
         //* Public Properties
         public ClassSearchViewModel ViewModel;
@@ -24,33 +27,33 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            BindingContext = ViewModel = new ClassSearchViewModel();    //This is repetitive because it is already in the view's xaml code
-
-            int schoolId = app.SignedInUser.SchoolId;
+            BindingContext = ViewModel = new ClassSearchViewModel();
 
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
-            ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
             ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
+            ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
         }
 
         //* Public Methods
 
         /// <summary>
-        /// This method goes to the calendar once the user has selected a class and a period
+        /// This method goes to the calendar once the user has selected a class
+        /// and a period
         /// </summary>
         /// <param name="periodChosen">Period that the user is in</param>
         public async Task GoToCalendarAsync(int periodChosen)
         {
+            // TODO: periodChosen not used??? remove if not needed
             Class selectedClass = ViewModel.SelectedClass;
             selectedClass.UserId = app.SignedInUser.Id;
 
-            Services.ClassManager.EnrollUserInClass(selectedClass);
+            ClassManager.EnrollUserInClass(selectedClass);
 
             app.PullEnrolledClasses();
 
-            MessagingCenter.Send<ClassSearchPage>(this, "LoadClasses");
+            MessagingCenter.Send(this, "LoadClasses");
 
-            //Closes the page and goes to the last one on the stack
+            // Closes the page and goes to the last one on the stack
             await Navigation.PopModalAsync();
         }
 
@@ -64,31 +67,24 @@ namespace KMSCalendar.Views
         }
 
         //* Event Handlers
-
         private void AddNewPeriodButton_Clicked(object sender, EventArgs e)
         {
             int newPeriod = int.Parse(NewPeriodLabel.Text);
 
-            ViewModel.AddNewPeriod(newPeriod);
-
-            ViewModel.LoadPeriods();
-
-            // I tried using these to update the list but they didn't work. Databinding issue?
-            // ParentPage.ViewModel.Periods.Add(newPeriod);
-            // PeriodsListView.BeginRefresh();
+            if(ViewModel.AddNewPeriod(newPeriod));
+                ViewModel.LoadPeriods();
         }
 
         private void BackButton_Clicked(object sender, EventArgs e) =>
             Swap();
 
         /// <summary>
-        /// Invoked when the user selects a class, then shows the selectPeriodView where
-        /// the user can select a period.
+        /// Invoked when the user selects a class, then shows the selectPeriodView
+        /// where the user can select a period.
         /// </summary>
         private void ClassesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             ViewModel.SelectedClass = ClassesListView.SelectedItem as Class;
-
             ViewModel.LoadPeriods();
             Swap();
         }
@@ -97,7 +93,7 @@ namespace KMSCalendar.Views
         {
             if (PeriodsListView.SelectedItem != null)
             {
-                int periodChosen = (int) PeriodsListView.SelectedItem;
+                int periodChosen = (int)PeriodsListView.SelectedItem;
 
                 await GoToCalendarAsync(periodChosen);
             }
@@ -106,7 +102,7 @@ namespace KMSCalendar.Views
         private void ExitButton_Clicked(object sender, EventArgs e) =>
             Navigation.PopModalAsync();
 
-        private void GoToNewClassButton_Clicked(object sender, EventArgs e) => 
+        private void GoToNewClassButton_Clicked(object sender, EventArgs e) =>
             Navigation.PushModalAsync(new NewClassPage(this));
 
         private void NextButton_Clicked(object sender, EventArgs e)

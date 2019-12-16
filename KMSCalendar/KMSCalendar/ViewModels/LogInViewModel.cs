@@ -86,7 +86,7 @@ namespace KMSCalendar.ViewModels
         {
             if (Validate())
             {
-                User signedInUser = Services.UserManager.LoadUserFromEmail(Email);
+                User signedInUser = UserManager.LoadUserFromEmail(Email);
                 
                 if (signedInUser == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";
@@ -116,7 +116,7 @@ namespace KMSCalendar.ViewModels
             {
                 var emailService = new EmailService();
 
-                User recipient = Services.UserManager.LoadUserFromEmail(Email);
+                User recipient = UserManager.LoadUserFromEmail(Email);
 
                 if (recipient == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";

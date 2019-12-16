@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Forms;
@@ -24,14 +23,12 @@ namespace KMSCalendar.ViewModels
             Title = assignment?.Name;
             Assignment = assignment;
 
-            DeleteAssignmentCommand = new Command(async () =>
-                await ExecuteDeleteAssignmentCommandAssignment());
+            DeleteAssignmentCommand = new Command(() =>
+                ExecuteDeleteAssignmentCommandAssignment());
         }
 
         //* Private Methods
-        public async Task ExecuteDeleteAssignmentCommandAssignment()
-        {
-            Services.AssignmentManager.RemoveAssignment(Assignment);
-        }
+        public void ExecuteDeleteAssignmentCommandAssignment() =>
+            AssignmentManager.RemoveAssignment(Assignment);
     }
 }

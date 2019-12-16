@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace KMSCalendar.Models.Data
 {
     public class User : TableData
     {
         //* Public Properties
-        public int SchoolId { get; set; }
+        public Guid SchoolId { get; set; }
 
         public List<Class> EnrolledClasses { get; set; }
 

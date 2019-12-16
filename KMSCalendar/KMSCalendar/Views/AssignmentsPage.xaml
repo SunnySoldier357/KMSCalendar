@@ -57,22 +57,27 @@
                                             <RowDefinition />
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="7*" />
+                                            <ColumnDefinition Width="3*" />
+                                        </Grid.ColumnDefinitions>
 
                                         <Label Text="{Binding Name}"
                                                FontSize="16"
-                                               LineBreakMode="NoWrap" />
+                                               LineBreakMode="TailTruncation"/>
 
-                                        <Label Grid.RowSpan="2"
+                                        <Label Grid.Column="1"
+                                               Grid.RowSpan="2"
                                                HorizontalOptions="End"
                                                VerticalOptions="Center"
                                                Text="{Binding Class.Name}"
                                                FontSize="13"
-                                               LineBreakMode="NoWrap" />
+                                               LineBreakMode="TailTruncation" />
 
                                         <Label Grid.Row="1"
                                                Text="{Binding Description}"
                                                FontSize="13"
-                                               LineBreakMode="NoWrap" />
+                                               LineBreakMode="TailTruncation" />
 
                                     </Grid>
                                 </ViewCell>

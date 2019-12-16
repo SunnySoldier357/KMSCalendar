@@ -6,7 +6,6 @@ using Xamarin.Forms.Xaml;
 
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
-using KMSCalendar.Services;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
@@ -24,17 +23,11 @@ namespace KMSCalendar
         public User SignedInUser { get; set; }
 
         //* Constructors
-        public App()
-        {
-            InitializeComponent();
-        }
+        public App() => InitializeComponent();
 
         //* Public Methods
-        public void PullEnrolledClasses()
-        {
-            var enrolledClassList = ClassManager.LoadEnrolledClasses(SignedInUser.Id);
-            SignedInUser.EnrolledClasses = enrolledClassList;
-        }
+        public void PullEnrolledClasses() =>
+            SignedInUser.EnrolledClasses = ClassManager.LoadEnrolledClasses(SignedInUser.Id);
 
         public void UpdateColorResources(Theme theme)
         {
@@ -99,7 +92,7 @@ namespace KMSCalendar
         }
 
         //* Overridden Methods
-        protected override async void OnStart()
+        protected override void OnStart()
         {
             Settings settings = Settings.DefaultInstance;
             UpdateColorResources(settings.Theme);
@@ -111,10 +104,10 @@ namespace KMSCalendar
             {
                 try
                 {
-                    var user = Services.UserManager.LoadUserFromId(settings.SignedInUserId);
-                    SignedInUser = user;
+                    SignedInUser = UserManager.LoadUserFromId(settings.SignedInUserId);
 
-                } catch (Exception e)
+                }
+                catch (Exception)
                 {
                     // TODO: Toast a message as to why it didn't work
                 }

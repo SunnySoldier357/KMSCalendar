@@ -15,8 +15,8 @@ namespace KMSCalendar.Models.Data
         /// The id of the class that the asignment belongs to. This is
         /// repetitive so that Dapper can put it in the db
         /// </summary>
-        public int ClassId { get; set; }
-        public int Id { get; set; }
+        public Guid ClassId { get; set; }
+        public Guid Id { get; set; }
         /// <summary>The period of the class that the user belongs to.
         /// This is repetitive so that Dapper can put it in the db.
         /// </summary>

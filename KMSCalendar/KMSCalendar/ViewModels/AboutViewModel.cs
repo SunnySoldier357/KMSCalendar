@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
@@ -15,8 +16,8 @@ namespace KMSCalendar.ViewModels
         {
             Title = "About";
 
-            OpenWebCommand = new Command(() =>
-                Device.OpenUri(new Uri("https://xamarin.com/platform")));
+            OpenWebCommand = new Command(async () =>
+                await Launcher.OpenAsync(new Uri("https://xamarin.com/platform")));
         }
     }
 }
