@@ -71,8 +71,8 @@ namespace KMSCalendar.Views
         {
             int newPeriod = int.Parse(NewPeriodLabel.Text);
 
-            ViewModel.AddNewPeriod(newPeriod);
-            ViewModel.LoadPeriods();
+            if(ViewModel.AddNewPeriod(newPeriod));
+                ViewModel.LoadPeriods();
         }
 
         private void BackButton_Clicked(object sender, EventArgs e) =>

@@ -53,10 +53,16 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Public Methods
-        public void AddNewPeriod(int newPeriod)
+        public bool AddNewPeriod(int newPeriod)
         {
+            //checks if the period already exists
+            if (periods.Contains(newPeriod))
+                return false;
+            
+            //else add the period to the db
             selectedClass.Period = newPeriod;
             PeriodManager.PutInClassPeriod(selectedClass);
+            return true;
         }
 
         public void FilterClasses(string userInput)
