@@ -58,7 +58,7 @@ namespace KMSCalendar.ViewModels
             //checks if the period already exists
             if (periods.Contains(newPeriod))
                 return false;
-            
+
             //else add the period to the db
             selectedClass.Period = newPeriod;
             PeriodManager.PutInClassPeriod(selectedClass);

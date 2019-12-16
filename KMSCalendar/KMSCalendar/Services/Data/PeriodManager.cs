@@ -26,7 +26,7 @@ namespace KMSCalendar.Services.Data
         /// </returns>
         public static int PutInClassPeriod(Class @class)
         {
-            string sql = @"INSERT INTO dbo.Class_Periods (ClassId, Period)
+            string sql = @"IF NOT EXISTS (SELECT 1 FROM dbo.CLass_Periods WHERE Period = @Period) INSERT INTO dbo.Class_Periods (ClassId, Period)
                 VALUES (@Id, @Period)";
 
             return SqlAccess.SaveData<Class>(sql, @class);
