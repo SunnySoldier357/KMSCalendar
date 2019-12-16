@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using KMSCalendar.Models.Data;
 
@@ -7,12 +8,12 @@ namespace KMSCalendar.Services.Data
     public static class PeriodManager
     {
         //* Public Methods
-        public static List<int> LoadPeriods(int classId)
+        public static List<int> LoadPeriods(Guid classId)
         {
             string sql = @"SELECT (Period) FROM dbo.Class_Periods
                 WHERE ClassId = (@Id)";
 
-            return SqlAccess.LoadDataWithId<int>(sql, classId.ToString());
+            return SqlAccess.LoadDataWithGuid<int>(sql, classId);
         }
 
         /// <summary>

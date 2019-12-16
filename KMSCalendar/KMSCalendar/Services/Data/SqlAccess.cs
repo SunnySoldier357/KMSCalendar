@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -31,6 +32,12 @@ namespace KMSCalendar.Services.Data
                 return cnn.Query<T>(sql, new { Id = id }).AsList();
         }
 
+        public static List<T> LoadDataWithGuid<T>(string sql, Guid id)
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))
+                return cnn.Query<T>(sql, new { Id = id }).AsList();
+        }
+
         public static List<T1> LoadDataWithParam<T1, T2>(string sql, T2 param)
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
@@ -51,10 +58,10 @@ namespace KMSCalendar.Services.Data
                 return cnn.Execute(sql, data);
         }
 
-        public static int SaveItemReturnId<T>(string sql, T data)
+        public static Guid SaveItemReturnId<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
-                return cnn.Query<int>(sql, data).Single();
+                return cnn.Query<Guid>(sql, data).Single();
         }
     }
 }

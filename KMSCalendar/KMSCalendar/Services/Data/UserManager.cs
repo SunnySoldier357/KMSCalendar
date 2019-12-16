@@ -17,7 +17,7 @@ namespace KMSCalendar.Services.Data
 
         public static User LoadUserFromEmail(string email)
         {
-            string sql = @"SELECT * FROM dbo.Users
+            string sql = @"SELECT Id, Email, Username, Password, SchoolId FROM dbo.Users
                 WHERE Email = @Id";
 
             var users = SqlAccess.LoadSingularData<User>(sql, email);

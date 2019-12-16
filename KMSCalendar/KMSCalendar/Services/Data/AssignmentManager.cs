@@ -17,8 +17,8 @@ namespace KMSCalendar.Services.Data
 
         public static int PutInAssignment(Assignment assignment)
         {
-            string sql = @"INSERT INTO dbo.Assignments (DueDate, Description, Name, ClassId, UserId, Period) 
-                VALUES (@DueDate, @Description, @Name, @ClassId, @UserId, @Period)";
+            string sql = @"INSERT INTO dbo.Assignments (Id, DueDate, Description, Name, ClassId, UserId, Period) 
+                VALUES (@Id, @DueDate, @Description, @Name, @ClassId, @UserId, @Period)";
 
             return SqlAccess.SaveData(sql, assignment);
         }

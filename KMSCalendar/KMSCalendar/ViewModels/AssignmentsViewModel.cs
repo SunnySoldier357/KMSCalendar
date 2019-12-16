@@ -60,6 +60,7 @@ namespace KMSCalendar.ViewModels
                 "AddAssignment", (page, a) =>
             {
                 assignments.Add(a);
+                a.Id = Guid.NewGuid();
                 a.UserId = app.SignedInUser.Id;
                 a.SetClassId();
                 a.SetPeriod();

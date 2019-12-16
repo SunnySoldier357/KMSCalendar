@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+using System;
 
 namespace KMSCalendar.ViewModels
 {
@@ -100,7 +101,7 @@ namespace KMSCalendar.ViewModels
 
         public void LoadPeriods()
         {
-            int classId = SelectedClass.Id;
+            Guid classId = SelectedClass.Id;
 
             // Sets the period list to all of the periods in the selected class from the db.
             Periods = PeriodManager.LoadPeriods(classId);

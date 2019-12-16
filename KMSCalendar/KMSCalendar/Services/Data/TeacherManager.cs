@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using KMSCalendar.Models.Data;
 
@@ -22,7 +23,7 @@ namespace KMSCalendar.Services.Data
             return SqlAccess.LoadData<int>(sql);
         }
 
-        public static string LoadTeacherNameFromId(int teacherId)
+        public static string LoadTeacherNameFromId(Guid teacherId)
         {
             string sql = @"SELECT Name FROM dbo.Teachers
                 WHERE Id = @Id";
@@ -32,11 +33,10 @@ namespace KMSCalendar.Services.Data
 
         public static int PutInTeacher(Teacher teacher)
         {
-            string sql = @"INSERT INTO dbo.Teachers (Name, SchoolId)
-                OUTPUT (Inserted.Id) 
-                VALUES (@Name, @SchoolId)";
+            string sql = @"INSERT INTO dbo.Teachers (Id, Name, SchoolId)
+                VALUES (@Id, @Name, @SchoolId)";
 
-            return SqlAccess.SaveItemReturnId(sql, teacher);
+            return SqlAccess.SaveData(sql, teacher);
         }
     }
 }

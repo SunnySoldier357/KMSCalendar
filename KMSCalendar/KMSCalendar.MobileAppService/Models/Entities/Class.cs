@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace KMSCalendar.MobileAppService.Models.Entities
@@ -10,7 +11,7 @@ namespace KMSCalendar.MobileAppService.Models.Entities
         public List<Assignment> Assignments { get; set; }
 
         public string Name { get; set; }
-        public string TeacherId { get; set; }
+        public Guid TeacherId { get; set; }
 
         public Teacher Teacher { get; set; }
 

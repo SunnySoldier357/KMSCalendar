@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using KMSCalendar.Models.Data;
 
@@ -23,7 +24,7 @@ namespace KMSCalendar.Services.Data
         /// The Id of the school the current user belongs to.
         /// </param>
         /// <returns>The list of classes.</returns>
-        public static List<Class> LoadClasses(int schoolId)
+        public static List<Class> LoadClasses(Guid schoolId)
         {
             string sql = @"SELECT * FROM dbo.Classes
                 WHERE SchoolId = @Id";
@@ -54,15 +55,11 @@ namespace KMSCalendar.Services.Data
         /// </returns>
         public static int PutInClass(Class @class)
         {
-            string sql = @"INSERT INTO dbo.Classes (Period, Name, TeacherId, UserId, SchoolId)
-                OUTPUT (Inserted.Id) 
-                VALUES (@Period, @Name, @TeacherId, @UserId, @SchoolId)";
+            string sql = @"INSERT INTO dbo.Classes (Id, Period, Name, TeacherId, UserId, SchoolId)
+                VALUES (@Id, @Period, @Name, @TeacherId, @UserId, @SchoolId)";
 
             // Saves the new class to the db
-            int id = SqlAccess.SaveItemReturnId(sql, @class);
-
-            // Sets the class id to what it is in the db
-            @class.Id = id;
+            var rowsAffected = SqlAccess.SaveData(sql, @class);
 
             return PeriodManager.PutInClassPeriod(@class);
         }

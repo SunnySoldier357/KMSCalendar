@@ -73,7 +73,7 @@ namespace KMSCalendar.ViewModels
                         Email = Email.Trim(),
                         UserName = UserName.Trim(),
                         Password = hashedPassword,
-                        SchoolId = 2
+                        SchoolId = new Guid("6e67224a - e398 - 430a - b7b6 - b3e0c0c8c4ae")
                     };
 
                     UserManager.PutInUser(user);

@@ -91,13 +91,14 @@ namespace KMSCalendar.Views
             {
                 Teacher t = new Teacher
                 {
+                    Id = Guid.NewGuid(),
                     Name = ViewModel.TeacherName,
                     SchoolId = app.SignedInUser.SchoolId
                 };
 
-                int teacherId = TeacherManager.PutInTeacher(t);
+                TeacherManager.PutInTeacher(t);
 
-                addClass(ViewModel.ClassName, ViewModel.Period, teacherId, t.SchoolId);
+                addClass(ViewModel.ClassName, ViewModel.Period, t.Id, t.SchoolId);
             }
 
             // Otherwise if a teacher is selected
@@ -114,10 +115,11 @@ namespace KMSCalendar.Views
         /// <summary>
         /// Adds new class to database and then goes back to the class search page
         /// </summary>
-        private async void addClass(string className, int period, int teacherId, int schoolId)
+        private async void addClass(string className, int period, Guid teacherId, Guid schoolId)
         {
             Class newClass = new Class
             {
+                Id = Guid.NewGuid(),
                 Name = className,
                 Period = period,
                 TeacherId = teacherId,
