@@ -27,7 +27,7 @@ namespace KMSCalendar.Views
         {
             InitializeComponent();
 
-            int schoolId = app.SignedInUser.SchoolId;
+            BindingContext = ViewModel = new ClassSearchViewModel();
 
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
             ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
@@ -85,7 +85,6 @@ namespace KMSCalendar.Views
         private void ClassesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             ViewModel.SelectedClass = ClassesListView.SelectedItem as Class;
-
             ViewModel.LoadPeriods();
             Swap();
         }
