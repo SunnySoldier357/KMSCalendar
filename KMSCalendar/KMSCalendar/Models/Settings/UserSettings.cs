@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-namespace KMSCalendar.Models
+namespace KMSCalendar.Models.Settings
 {
     /// <summary>
     /// A class that allows app settings to be saved between sessions.
     /// </summary>
-    public class Settings : INotifyPropertyChanged
+    public class UserSettings : INotifyPropertyChanged
     {
         //* Constants
 
         /// <summary>
-        /// The key for App Settings in the App's Properties Dictionary
+        /// The key for User Settings in the App's Properties Dictionary
         /// </summary>
         private const string DIC_KEY = "Settings";
 
         //* Static Properties
 
         /// <summary>Singleton Instance for Settings class</summary>
-        public static Settings DefaultInstance = initAsync().Result;
+        public static UserSettings DefaultInstance = initAsync().Result;
 
         //* Private Properties
         private bool showCalendarDays;
@@ -70,7 +70,7 @@ namespace KMSCalendar.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         //* Constructor
-        private Settings()
+        private UserSettings()
         {
             // Default Values
             showCalendarDays = false;
@@ -80,7 +80,7 @@ namespace KMSCalendar.Models
             theme = Theme.Light;
         }
 
-        private Settings(Settings settings)
+        private UserSettings(UserSettings settings)
         {
             if (settings != null)
             {
@@ -99,21 +99,21 @@ namespace KMSCalendar.Models
         /// from the App's Properties Dictionary or setting the default values
         /// </summary>
         /// <returns>The Settings object created.</returns>
-        private static async Task<Settings> initAsync()
+        private static async Task<UserSettings> initAsync()
         {
-            Settings settings = null;
+            UserSettings settings = null;
 
             App.Current.Properties.TryGetValue(DIC_KEY, out object settingsJson);
 
             if (settingsJson != null)
             {
-                Settings temp = JsonConvert.DeserializeObject<Settings>(settingsJson as string);
+                UserSettings temp = JsonConvert.DeserializeObject<UserSettings>(settingsJson as string);
 
-                settings = new Settings(temp);
+                settings = new UserSettings(temp);
             }
             else
             {
-                settings = new Settings();
+                settings = new UserSettings();
 
                 await settings.UpdateDictionaryAsync();
             }

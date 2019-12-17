@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
+using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 using System;
@@ -81,7 +82,7 @@ namespace KMSCalendar.ViewModels
                     App app = Application.Current as App;
 
                     app.SignedInUser = user;
-                    Settings.DefaultInstance.SignedInUserId = user.Id;
+                    UserSettings.DefaultInstance.SignedInUserId = user.Id;
 
                     app.MainPage = new MainPage();
                 }

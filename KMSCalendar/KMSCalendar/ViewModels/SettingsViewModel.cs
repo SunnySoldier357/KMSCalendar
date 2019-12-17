@@ -2,7 +2,7 @@
 
 using Xamarin.Forms;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Settings;
 using KMSCalendar.Views;
 using System;
 
@@ -13,7 +13,7 @@ namespace KMSCalendar.ViewModels
         //* Private Properties
         private App app = (Application.Current as App);
 
-        private Settings settings = Settings.DefaultInstance;
+        private UserSettings settings = UserSettings.DefaultInstance;
 
         //* Public Properties
         public bool IsDarkThemeEnabled

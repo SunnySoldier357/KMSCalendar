@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 using ModelValidation;
 
-using KMSCalendar.Models;
+using KMSCalendar.Models.Settings;
 
 namespace KMSCalendar.ViewModels
 {
@@ -23,7 +23,7 @@ namespace KMSCalendar.ViewModels
             set => setProperty(ref isBusy, value);
         }
 
-        public Settings Settings { get; }
+        public UserSettings Settings { get; }
 
         public string Title
         {
@@ -48,7 +48,7 @@ namespace KMSCalendar.ViewModels
 
         //* Constructors
         public BaseViewModel() => 
-            Settings = Settings.DefaultInstance;
+            Settings = UserSettings.DefaultInstance;
 
         //* Event Handlers
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "") =>

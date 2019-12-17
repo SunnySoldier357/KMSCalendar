@@ -4,8 +4,8 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
+using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
@@ -34,7 +34,7 @@ namespace KMSCalendar
 
             using (var scope = AppContainer.Container.BeginLifetimeScope())
             {
-                Settings settings = Settings.DefaultInstance;
+                UserSettings settings = UserSettings.DefaultInstance;
                 UpdateColorResources(settings.Theme);
                 settings.PropertyChanged += ThemeChanged;
 
@@ -129,8 +129,8 @@ namespace KMSCalendar
         //* Event Handlers
         private void ThemeChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Settings.Theme))
-                UpdateColorResources(Settings.DefaultInstance.Theme);
+            if (e.PropertyName == nameof(UserSettings.Theme))
+                UpdateColorResources(UserSettings.DefaultInstance.Theme);
         }
     }
 }
