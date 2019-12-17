@@ -28,7 +28,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT Name FROM dbo.Teachers
                 WHERE Id = @Id";
 
-            return SqlAccess.LoadSingularData<string>(sql, teacherId.ToString())[0];
+            return SqlAccess.LoadDataWithGuid<string>(sql, teacherId)[0];
         }
 
         public static int PutInTeacher(Teacher teacher)

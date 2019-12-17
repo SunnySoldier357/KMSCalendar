@@ -27,7 +27,7 @@ namespace KMSCalendar.Models.Data
         /// <summary>The name of the assignment.</summary>
         public string Name { get; set; }
         /// <summary>The user id of the assignment creator</summary>
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
 
         //* Public Methods
         public void SetClassId() => ClassId = Class.Id;

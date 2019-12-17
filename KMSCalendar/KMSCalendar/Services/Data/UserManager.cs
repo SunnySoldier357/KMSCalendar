@@ -1,4 +1,5 @@
 ﻿using KMSCalendar.Models.Data;
+using System;
 
 namespace KMSCalendar.Services.Data
 {
@@ -25,12 +26,12 @@ namespace KMSCalendar.Services.Data
             return (users.Count == 1) ? users[0] : null;
         }
 
-        public static User LoadUserFromId(string userId)
+        public static User LoadUserFromId(Guid userId)
         {
             string sql = @"SELECT * FROM dbo.Users
                 WHERE Id = @Id";
 
-            return SqlAccess.LoadSingularData<User>(sql, userId)[0];
+            return SqlAccess.LoadDataWithGuid<User>(sql, userId)[0];
         }
 
         public static int PutInUser(User user)

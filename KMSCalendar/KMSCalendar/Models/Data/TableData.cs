@@ -196,7 +196,7 @@ namespace KMSCalendar.Models.Data
             {
                 new User
                 {
-                    Id = "1",
+                    Id = Guid.NewGuid(),
                     Email = "singh@king.com",
                     UserName = "SinghIsKing",
                     Password = password,
@@ -204,7 +204,7 @@ namespace KMSCalendar.Models.Data
                 },
                 new User
                 {
-                    Id = "2",
+                    Id = Guid.NewGuid(),
                     Email = "test@king.com",
                     UserName = "No Class Test",
                     Password = password,
@@ -212,7 +212,7 @@ namespace KMSCalendar.Models.Data
                 },
                 new User
                 {
-                    Id = "3",
+                    Id = Guid.NewGuid(),
                     Email = "mattmorgan6@gmail.com",
                     UserName = "mattmorgan6",
                     Password = password,

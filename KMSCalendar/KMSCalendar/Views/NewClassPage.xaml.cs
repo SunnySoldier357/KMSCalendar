@@ -133,7 +133,7 @@ namespace KMSCalendar.Views
             await Navigation.PopModalAsync();
         }
 
-        private string getSchoolName(int schoolId)
+        private string getSchoolName(Guid schoolId)
         {
             return SchoolManager.GetSchoolName(schoolId)[0];
         }
