@@ -72,7 +72,7 @@ namespace KMSCalendar.ViewModels
             // This is so that when the class search page closes,
             // the assignment page will update it's assignment list
             MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments",
-                (sender) => ExecuteLoadAssignmentsCommand());
+                (sender) => LoadAssignmentsCommand.Execute(null));
 
             LoadAssignmentsCommand.Execute(null);
 

@@ -98,7 +98,7 @@ namespace KMSCalendar
             UpdateColorResources(settings.Theme);
             settings.PropertyChanged += ThemeChanged;
 
-            if (string.IsNullOrWhiteSpace(settings.SignedInUserId))
+            if (settings.SignedInUserId.Equals(Guid.Empty))
                 MainPage = new LoginPage();
             else
             {

@@ -58,7 +58,7 @@ namespace KMSCalendar.ViewModels
         public NewClassViewModel(string schoolName)
         {
             Period = 1;
-            Teachers = TeacherManager.LoadAllTeachers();
+            Teachers = TeacherManager.LoadAllTeachers((Application.Current as App).SignedInUser.SchoolId);
             SearchTerm = "";
         }
     }

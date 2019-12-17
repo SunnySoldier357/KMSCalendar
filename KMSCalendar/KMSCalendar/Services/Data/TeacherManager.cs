@@ -8,19 +8,11 @@ namespace KMSCalendar.Services.Data
     public static class TeacherManager
     {
         //* Public Methods
-        public static List<Teacher> LoadAllTeachers()
+        public static List<Teacher> LoadAllTeachers(Guid schoolId)
         {
-            string sql = @"SELECT * FROM dbo.Teachers";
+            string sql = @"SELECT * FROM dbo.Teachers WHERE SchoolId = @Id";     //Todo: only show teachers for the user's school
 
-            return SqlAccess.LoadData<Teacher>(sql);
-        }
-
-        public static List<int> LoadId()
-        {
-            string sql = @"SELECT * FROM dbo.Teachers
-                WHERE Id = SCOPE_IDENTITY()";
-
-            return SqlAccess.LoadData<int>(sql);
+            return SqlAccess.LoadDataWithGuid<Teacher>(sql, schoolId);
         }
 
         public static string LoadTeacherNameFromId(Guid teacherId)
@@ -28,7 +20,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT Name FROM dbo.Teachers
                 WHERE Id = @Id";
 
-            return SqlAccess.LoadSingularData<string>(sql, teacherId.ToString())[0];
+            return SqlAccess.LoadDataWithGuid<string>(sql, teacherId)[0];
         }
 
         public static int PutInTeacher(Teacher teacher)

@@ -29,10 +29,10 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT * FROM dbo.Classes
                 WHERE SchoolId = @Id";
 
-            return SqlAccess.LoadSingularData<Class>(sql, schoolId.ToString());
+            return SqlAccess.LoadDataWithGuid<Class>(sql, schoolId);
         }
 
-        public static List<Class> LoadEnrolledClasses(string userId)
+        public static List<Class> LoadEnrolledClasses(Guid userId)
         {
             // Get the ClassId's from db.Class_Users; then get all the classes
             // with those classes. HINT: USE INNER JOIN
@@ -42,7 +42,7 @@ namespace KMSCalendar.Services.Data
                 ON dbo.Classes.Id = dbo.Class_Users.ClassId 
                 WHERE dbo.Class_Users.UserId = @Id";
 
-            return SqlAccess.LoadDataWithId<Class>(sql, userId);
+            return SqlAccess.LoadDataWithGuid<Class>(sql, userId);
         }
 
         /// <summary>

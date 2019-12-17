@@ -33,7 +33,7 @@ namespace KMSCalendar.Views
 
         public void LoadTeachers()
         {
-            var teachers = TeacherManager.LoadAllTeachers();
+            var teachers = TeacherManager.LoadAllTeachers(app.SignedInUser.SchoolId);
 
             ViewModel.Teachers = teachers.ToList();
 
@@ -133,7 +133,7 @@ namespace KMSCalendar.Views
             await Navigation.PopModalAsync();
         }
 
-        private string getSchoolName(int schoolId)
+        private string getSchoolName(Guid schoolId)
         {
             return SchoolManager.GetSchoolName(schoolId)[0];
         }

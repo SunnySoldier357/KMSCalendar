@@ -39,7 +39,10 @@ namespace KMSCalendar.ViewModels
                 DueDate = dateTime
             };
 
-            SubscribedClasses = (Application.Current as App).SignedInUser.EnrolledClasses;
+            LoadSubscribedClasses();
         }
+
+        public void LoadSubscribedClasses() =>
+            SubscribedClasses = (Application.Current as App).SignedInUser.EnrolledClasses;
     }
 }

@@ -69,7 +69,7 @@ namespace KMSCalendar.ViewModels
 
                     User user = new User
                     {
-                        Id = Guid.NewGuid().ToString(),
+                        Id = Guid.NewGuid(),
                         Email = Email.Trim(),
                         UserName = UserName.Trim(),
                         Password = hashedPassword,

@@ -20,13 +20,14 @@ namespace KMSCalendar.Services.Data
                 return cnn.Execute(sql, data);
         }
 
+        //This function is currently unused.
         public static List<T> LoadData<T>(string sql)
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
                 return cnn.Query<T>(sql).AsList();
         }
 
-        public static List<T> LoadDataWithId<T>(string sql, string id)
+        public static List<T> LoadDataWithString<T>(string sql, string id)
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
                 return cnn.Query<T>(sql, new { Id = id }).AsList();
@@ -56,12 +57,6 @@ namespace KMSCalendar.Services.Data
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
                 return cnn.Execute(sql, data);
-        }
-
-        public static Guid SaveItemReturnId<T>(string sql, T data)
-        {
-            using (IDbConnection cnn = new SqlConnection(connectionString))
-                return cnn.Query<Guid>(sql, data).Single();
         }
     }
 }

@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 using KMSCalendar.Models;
 using KMSCalendar.Views;
+using System;
 
 namespace KMSCalendar.ViewModels
 {
@@ -52,7 +53,7 @@ namespace KMSCalendar.ViewModels
         {
             App app = Application.Current as App;
 
-            settings.SignedInUserId = null;
+            settings.SignedInUserId = Guid.Empty;
             app.SignedInUser = null;
 
             app.MainPage = new LoginPage();

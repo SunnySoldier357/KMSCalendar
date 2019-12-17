@@ -52,6 +52,8 @@ namespace KMSCalendar.Views
             app.PullEnrolledClasses();
 
             MessagingCenter.Send(this, "LoadClasses");
+            MessagingCenter.Send(this, "LoadAssignments");
+            MessagingCenter.Send(this, "LoadClassesForNewAssignmentPage");
 
             // Closes the page and goes to the last one on the stack
             await Navigation.PopModalAsync();

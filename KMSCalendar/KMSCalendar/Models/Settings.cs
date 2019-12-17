@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace KMSCalendar.Models
         //* Private Properties
         private bool showCalendarDays;
 
-        private string signedInUserId;
+        private Guid signedInUserId;
 
         private Theme theme;
 
@@ -46,7 +47,7 @@ namespace KMSCalendar.Models
         /// <summary>
         /// The ID of the User signed in.
         /// </summary>
-        public string SignedInUserId
+        public Guid SignedInUserId
         {
             get => signedInUserId;
             set => setProperty(ref signedInUserId, value);
@@ -74,7 +75,7 @@ namespace KMSCalendar.Models
             // Default Values
             showCalendarDays = false;
 
-            signedInUserId = null;
+            signedInUserId = Guid.Empty;
 
             theme = Theme.Light;
         }
