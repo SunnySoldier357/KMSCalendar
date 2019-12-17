@@ -33,7 +33,7 @@ namespace KMSCalendar.Views
 
         public void LoadTeachers()
         {
-            var teachers = TeacherManager.LoadAllTeachers();
+            var teachers = TeacherManager.LoadAllTeachers(app.SignedInUser.SchoolId);
 
             ViewModel.Teachers = teachers.ToList();
 

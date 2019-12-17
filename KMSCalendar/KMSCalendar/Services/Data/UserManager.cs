@@ -11,7 +11,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT 1 FROM dbo.Users
                 WHERE Email = @Id";
 
-            var result = SqlAccess.LoadDataWithId<User>(sql, email);
+            var result = SqlAccess.LoadDataWithString<User>(sql, email);
 
             return (result.Count > 0) ? true : false;
         }
