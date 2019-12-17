@@ -3,7 +3,7 @@
 namespace KMSCalendar.Models.Data
 {
     /// <summary>A class representing a particular assignment.</summary>
-    public class Assignment
+    public class Assignment : TableData
     {
         //* Public Properties
         public Class Class { get; set; }
@@ -16,7 +16,9 @@ namespace KMSCalendar.Models.Data
         /// repetitive so that Dapper can put it in the db
         /// </summary>
         public Guid ClassId { get; set; }
-        public Guid Id { get; set; }
+        /// <summary>The user id of the assignment creator</summary>
+        public Guid UserId { get; set; }
+
         /// <summary>The period of the class that the user belongs to.
         /// This is repetitive so that Dapper can put it in the db.
         /// </summary>
@@ -26,12 +28,10 @@ namespace KMSCalendar.Models.Data
         public string Description { get; set; }
         /// <summary>The name of the assignment.</summary>
         public string Name { get; set; }
-        /// <summary>The user id of the assignment creator</summary>
-        public Guid UserId { get; set; }
 
         //* Public Methods
         public void SetClassId() => ClassId = Class.Id;
-        
+
         public void SetPeriod() => Period = Class.Period;
     }
 }
