@@ -23,7 +23,42 @@ namespace KMSCalendar
         public User SignedInUser { get; set; }
 
         //* Constructors
-        public App() => InitializeComponent();
+        public App(AppSetup setup = null)
+        {
+            InitializeComponent();
+
+            if (setup == null)
+                setup = new AppSetup();
+
+            AppContainer.Container = setup.CreateContainer();
+
+            using (var scope = AppContainer.Container.BeginLifetimeScope())
+            {
+                Settings settings = Settings.DefaultInstance;
+                UpdateColorResources(settings.Theme);
+                settings.PropertyChanged += ThemeChanged;
+
+                if (settings.SignedInUserId.Equals(Guid.Empty))
+                    MainPage = new LoginPage();
+                else
+                {
+                    try
+                    {
+                        SignedInUser = UserManager.LoadUserFromId(settings.SignedInUserId);
+
+                    }
+                    catch (Exception)
+                    {
+                        // TODO: Toast a message as to why it didn't work
+                    }
+
+                    if (SignedInUser != null)
+                        MainPage = new MainPage();
+                    else
+                        MainPage = new LoginPage();
+                }
+            }
+        }
 
         //* Public Methods
         public void PullEnrolledClasses() =>
@@ -89,34 +124,6 @@ namespace KMSCalendar
 
             foreach (var item in items)
                 Resources[item.Name] = item.Color;
-        }
-
-        //* Overridden Methods
-        protected override void OnStart()
-        {
-            Settings settings = Settings.DefaultInstance;
-            UpdateColorResources(settings.Theme);
-            settings.PropertyChanged += ThemeChanged;
-
-            if (settings.SignedInUserId.Equals(Guid.Empty))
-                MainPage = new LoginPage();
-            else
-            {
-                try
-                {
-                    SignedInUser = UserManager.LoadUserFromId(settings.SignedInUserId);
-
-                }
-                catch (Exception)
-                {
-                    // TODO: Toast a message as to why it didn't work
-                }
-
-                if (SignedInUser != null)
-                    MainPage = new MainPage();
-                else
-                    MainPage = new LoginPage();
-            }
         }
 
         //* Event Handlers
