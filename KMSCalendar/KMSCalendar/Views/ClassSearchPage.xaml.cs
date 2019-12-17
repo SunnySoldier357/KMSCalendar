@@ -71,10 +71,16 @@ namespace KMSCalendar.Views
         //* Event Handlers
         private void AddNewPeriodButton_Clicked(object sender, EventArgs e)
         {
-            int newPeriod = int.Parse(NewPeriodLabel.Text);
-
-            if(ViewModel.AddNewPeriod(newPeriod));
-                ViewModel.LoadPeriods();
+            int result;
+            if(int.TryParse(NewPeriod.Text, out result))
+            {
+                if(result >= 0)
+                {
+                    bool valueInputted = ViewModel.AddNewPeriod(result);
+                    if (valueInputted)
+                        ViewModel.LoadPeriods();
+                }
+            }
         }
 
         private void BackButton_Clicked(object sender, EventArgs e) =>

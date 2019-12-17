@@ -24,6 +24,9 @@
                        BackgroundColor="{DynamicResource NavigationBackground}"
                        CornerRadius="10">
 
+                    
+                    <!-- This is for the periods view -->
+                    
                     <Grid>
                         <Grid x:Name="PopUpGrid"
                               IsVisible="False">
@@ -91,20 +94,12 @@
                                                Margin="0,0,0,5"
                                                Text="Period: " />
 
-                                        <Label x:Name="NewPeriodLabel"
+                                        <Entry x:Name="NewPeriod"
+                                               Placeholder="1"
+                                               HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               BindingContext="{x:Reference Name=PeriodStepper}"
-                                               Text="{Binding Value}" />
-
-                                        <Stepper x:Name="PeriodStepper"
-                                                 HeightRequest="100"
-                                                 WidthRequest="100"
-                                                 HorizontalOptions="Center"
-                                                 VerticalOptions="Center"
-                                                 Increment="1"
-                                                 Maximum="15"
-                                                 Minimum="0"
-                                                 Value="1" />
+                                               Keyboard="Numeric"
+                                               Text="{Binding Value}"/>
 
                                         <Button x:Name="AddNewPeriodButton"
                                                 VerticalOptions="Center"
@@ -121,6 +116,9 @@
                             </StackLayout>
                         </Grid>
 
+                        
+                        <!-- This is for the class search view: -->
+                        
                         <StackLayout x:Name="SearchAreaStackLayout">
 
                             <Grid HeightRequest="60"

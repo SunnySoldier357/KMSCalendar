@@ -62,8 +62,8 @@ namespace KMSCalendar.ViewModels
 
             //else add the period to the db
             selectedClass.Period = newPeriod;
-            PeriodManager.PutInClassPeriod(selectedClass);
-            return true;
+            var rowsAffected = PeriodManager.PutInClassPeriod(selectedClass);
+            return rowsAffected > 0 ? true : false;
         }
 
         public void FilterClasses(string userInput)
