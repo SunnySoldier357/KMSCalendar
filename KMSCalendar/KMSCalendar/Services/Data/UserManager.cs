@@ -1,5 +1,6 @@
-﻿using KMSCalendar.Models.Data;
-using System;
+﻿using System;
+
+using KMSCalendar.Models.Data;
 
 namespace KMSCalendar.Services.Data
 {
@@ -11,7 +12,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT 1 FROM dbo.Users
                 WHERE Email = @Id";
 
-            var result = SqlAccess.LoadDataWithString<User>(sql, email);
+            var result = AzureDataStore.LoadDataWithString<User>(sql, email);
 
             return (result.Count > 0) ? true : false;
         }
@@ -21,7 +22,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT Id, Email, Username, Password, SchoolId FROM dbo.Users
                 WHERE Email = @Id";
 
-            var users = SqlAccess.LoadSingularData<User>(sql, email);
+            var users = AzureDataStore.LoadSingularData<User>(sql, email);
 
             return (users.Count == 1) ? users[0] : null;
         }
@@ -31,7 +32,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT * FROM dbo.Users
                 WHERE Id = @Id";
 
-            return SqlAccess.LoadDataWithGuid<User>(sql, userId)[0];
+            return AzureDataStore.LoadDataWithGuid<User>(sql, userId)[0];
         }
 
         public static int PutInUser(User user)
@@ -39,7 +40,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"INSERT INTO dbo.Users (Id, Email, Username, Password, SchoolId)
                 VALUES (@Id, @Email, @Username, @Password, @SchoolId)";
 
-            return SqlAccess.SaveData(sql, user);
+            return AzureDataStore.SaveData(sql, user);
         }
     }
 }

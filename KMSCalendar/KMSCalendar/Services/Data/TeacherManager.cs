@@ -10,9 +10,11 @@ namespace KMSCalendar.Services.Data
         //* Public Methods
         public static List<Teacher> LoadAllTeachers(Guid schoolId)
         {
-            string sql = @"SELECT * FROM dbo.Teachers WHERE SchoolId = @Id";     //Todo: only show teachers for the user's school
+            // TODO: only show teachers for the user's school
+            string sql = @"SELECT * FROM dbo.Teachers
+                WHERE SchoolId = @Id";
 
-            return SqlAccess.LoadDataWithGuid<Teacher>(sql, schoolId);
+            return AzureDataStore.LoadDataWithGuid<Teacher>(sql, schoolId);
         }
 
         public static string LoadTeacherNameFromId(Guid teacherId)
@@ -20,7 +22,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT Name FROM dbo.Teachers
                 WHERE Id = @Id";
 
-            return SqlAccess.LoadDataWithGuid<string>(sql, teacherId)[0];
+            return AzureDataStore.LoadDataWithGuid<string>(sql, teacherId)[0];
         }
 
         public static int PutInTeacher(Teacher teacher)
@@ -28,7 +30,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"INSERT INTO dbo.Teachers (Id, Name, SchoolId)
                 VALUES (@Id, @Name, @SchoolId)";
 
-            return SqlAccess.SaveData(sql, teacher);
+            return AzureDataStore.SaveData(sql, teacher);
         }
     }
 }

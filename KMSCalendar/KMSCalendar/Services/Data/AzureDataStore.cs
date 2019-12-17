@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 using Dapper;
 
 namespace KMSCalendar.Services.Data
 {
-    public static class SqlAccess
+    public static class AzureDataStore
     {
         //* Static Properties
         private static string connectionString = Connections.GetConnectionString();

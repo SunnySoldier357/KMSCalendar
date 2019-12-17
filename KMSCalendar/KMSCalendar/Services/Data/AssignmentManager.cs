@@ -12,7 +12,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT * FROM dbo.Assignments
                 WHERE ClassID = @Id AND Period = @Period";
 
-            return SqlAccess.LoadDataWithParam<Assignment, Class>(sql, @class);
+            return AzureDataStore.LoadDataWithParam<Assignment, Class>(sql, @class);
         }
 
         public static int PutInAssignment(Assignment assignment)
@@ -20,7 +20,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"INSERT INTO dbo.Assignments (Id, DueDate, Description, Name, ClassId, UserId, Period) 
                 VALUES (@Id, @DueDate, @Description, @Name, @ClassId, @UserId, @Period)";
 
-            return SqlAccess.SaveData(sql, assignment);
+            return AzureDataStore.SaveData(sql, assignment);
         }
 
         public static int RemoveAssignment(Assignment assignment)
@@ -28,7 +28,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"DELETE FROM dbo.Assignments
                 WHERE Id = @Id";
 
-            return SqlAccess.DeleteData(sql, assignment);
+            return AzureDataStore.DeleteData(sql, assignment);
         }
     }
 }

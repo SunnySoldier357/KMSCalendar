@@ -10,7 +10,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT Name FROM dbo.Schools
                 WHERE Id = @Id";
 
-            return SqlAccess.LoadDataWithGuid<string>(sql, schoolId);
+            return AzureDataStore.LoadDataWithGuid<string>(sql, schoolId);
         }
     }
 }

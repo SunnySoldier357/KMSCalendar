@@ -14,7 +14,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"INSERT INTO dbo.Class_Users (ClassId, UserId, Period)
                 VALUES (@Id, @UserId, @Period)";
 
-            return SqlAccess.SaveData(sql, @class);
+            return AzureDataStore.SaveData(sql, @class);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT * FROM dbo.Classes
                 WHERE SchoolId = @Id";
 
-            return SqlAccess.LoadDataWithGuid<Class>(sql, schoolId);
+            return AzureDataStore.LoadDataWithGuid<Class>(sql, schoolId);
         }
 
         public static List<Class> LoadEnrolledClasses(Guid userId)
@@ -42,7 +42,7 @@ namespace KMSCalendar.Services.Data
                 ON dbo.Classes.Id = dbo.Class_Users.ClassId 
                 WHERE dbo.Class_Users.UserId = @Id";
 
-            return SqlAccess.LoadDataWithGuid<Class>(sql, userId);
+            return AzureDataStore.LoadDataWithGuid<Class>(sql, userId);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace KMSCalendar.Services.Data
                 VALUES (@Id, @Period, @Name, @TeacherId, @UserId, @SchoolId)";
 
             // Saves the new class to the db
-            var rowsAffected = SqlAccess.SaveData(sql, @class);
+            var rowsAffected = AzureDataStore.SaveData(sql, @class);
 
             return PeriodManager.PutInClassPeriod(@class);
         }
