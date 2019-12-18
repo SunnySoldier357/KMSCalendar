@@ -62,6 +62,7 @@ namespace KMSCalendar.ViewModels
 
             (Application.Current as App).PullEnrolledClasses();
             UpdateData();
+            MessagingCenter.Send(this, "LoadAssignments");
             //Todo: If there are no other users in the class, delete the class
         }
 

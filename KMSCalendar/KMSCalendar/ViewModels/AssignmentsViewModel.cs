@@ -74,6 +74,9 @@ namespace KMSCalendar.ViewModels
             MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments",
                 (sender) => LoadAssignmentsCommand.Execute(null));
 
+            MessagingCenter.Subscribe<EnrolledClassesViewModel>(this, "LoadAssignments",
+                (sender) => LoadAssignmentsCommand.Execute(null));
+
             LoadAssignmentsCommand.Execute(null);
 
             Settings.PropertyChanged += (sender, args) =>
