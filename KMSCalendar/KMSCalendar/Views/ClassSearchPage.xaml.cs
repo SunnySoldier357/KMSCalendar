@@ -66,7 +66,10 @@ namespace KMSCalendar.Views
         public void Swap()
         {
             SearchAreaStackLayout.IsVisible = !SearchAreaStackLayout.IsVisible;
+            PeriodButtons.IsVisible = !PeriodButtons.IsVisible;
+
             PopUpGrid.IsVisible = !PopUpGrid.IsVisible;
+            ClassButtons.IsVisible = !ClassButtons.IsVisible;
         }
 
         //* Event Handlers
