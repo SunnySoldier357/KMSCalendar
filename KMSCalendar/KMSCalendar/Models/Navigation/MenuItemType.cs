@@ -4,6 +4,7 @@
     {
         About,
         Calendar,
+        EnrolledClasses,
         Search,
         Settings
     }
