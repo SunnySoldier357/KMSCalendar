@@ -67,18 +67,13 @@
                                              Grid.Column="1"
                                              Orientation="Horizontal">
 
-                                    <Label x:Name="NewPeriodLabel"
+                                    <Entry x:Name="PeriodEntry"
                                            VerticalOptions="Center"
-                                           BindingContext="{x:Reference Name=PeriodStepper}"
-                                           Text="{Binding Value}" />
-
-                                    <Stepper x:Name="PeriodStepper"
-                                             HorizontalOptions="Center"
-                                             VerticalOptions="CenterAndExpand"
-                                             Increment="1"
-                                             Maximum="15"
-                                             Minimum="0"
-                                             Value="{Binding Period}" />
+                                           HorizontalOptions="Center"
+                                           Placeholder="1"
+                                           Keyboard="Numeric"
+                                           Text="{Binding Period}"/>
+                                    
                                 </StackLayout>
 
                                 <!--  Search for a Teacher  -->
