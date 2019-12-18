@@ -65,6 +65,5 @@
 
   <ItemGroup>
     <Folder Include="Services\Email\" />
-    <Folder Include="Services\Environment\" />
   </ItemGroup>
 </Project>

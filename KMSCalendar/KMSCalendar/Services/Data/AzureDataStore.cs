@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
+using Autofac;
+
 using Dapper;
+
+using KMSCalendar.Models.Settings;
 
 namespace KMSCalendar.Services.Data
 {
     public static class AzureDataStore
     {
         //* Static Properties
-        private static string connectionString = Connections.GetConnectionString();
+        private static string connectionString = AppContainer.Container
+            .Resolve<AppSettings>().ConnectionString;
 
         //* Public Methods
         public static int DeleteData<T>(string sql, T data)
