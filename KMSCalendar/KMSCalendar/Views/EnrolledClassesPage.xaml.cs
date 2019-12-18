@@ -18,5 +18,10 @@ namespace KMSCalendar.Views
 
 
         }
+
+        private void UnsubscribeButton_Clicked(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

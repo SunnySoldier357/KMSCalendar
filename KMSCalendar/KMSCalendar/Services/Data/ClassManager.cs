@@ -51,7 +51,7 @@ namespace KMSCalendar.Services.Data
         /// </summary>
         /// <param name="@class">The class to add to the db.</param>
         /// <returns>
-        /// Whether or not adding the period to the db was successful.
+        /// The number of rows affected in the db.
         /// </returns>
         public static int PutInClass(Class @class)
         {
@@ -62,6 +62,13 @@ namespace KMSCalendar.Services.Data
             var rowsAffected = AzureDataStore.SaveData(sql, @class);
 
             return PeriodManager.PutInClassPeriod(@class);
+        }
+
+        public static int RemoveClassUser(Class @class)
+        {
+            string sql = @"DELETE FROM dbo.Class_Users WHERE ClassId = @Id AND UserId = @UserId";
+
+            return AzureDataStore.DeleteData<Class>(sql, @class);
         }
     }
 }

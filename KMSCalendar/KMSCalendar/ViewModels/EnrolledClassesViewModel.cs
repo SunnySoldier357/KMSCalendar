@@ -1,4 +1,5 @@
 ﻿using KMSCalendar.Models.Data;
+using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace KMSCalendar.ViewModels
     {
 
        private List<Class> classes;
+       private Class c; 
 
        public List<Class> Classes
         {
@@ -21,13 +23,35 @@ namespace KMSCalendar.ViewModels
             set => setProperty(ref classes, value);
         }
 
+        public Class C
+        {
+            get => c;
+            set => setProperty(ref c, value);
+        }
+
         public ICommand UnsubscribeCommand { get; set; }
+        public ICommand ReloadButtonClicked { get; set; }
 
         public EnrolledClassesViewModel()
         {
             UpdateData();
 
-            UnsubscribeCommand = new Command(async () => await ExecuteUnsubscribeCommand());
+            ReloadButtonClicked = new Command((object item) =>
+            {
+                //Todo: fix this goofy way of getting the class Id
+                var label = item as Label;
+                Guid classId = new Guid(label.Text);
+                foreach(Class @class in Classes)
+                {
+                    if (@class.Id == classId)
+                    {
+                        @class.UserId = (Application.Current as App).SignedInUser.Id;
+                        ExecuteUnsubscribeCommand(@class);
+                    }
+                }
+            });
+
+                //UnsubscribeCommand = new Command(async () => await ExecuteUnsubscribeCommand());
 
             MessagingCenter.Subscribe<ClassSearchPage>(this, "UpdateClasses",
                 (sender) => UpdateData());
@@ -39,11 +63,16 @@ namespace KMSCalendar.ViewModels
             Classes = (Application.Current as App).SignedInUser.EnrolledClasses;
         }
 
-        public async Task ExecuteUnsubscribeCommand()
+        public void ExecuteUnsubscribeCommand(Class @class)
         {
-            //Todo: delete class from class_users
-            // If there are no other users in the class, delete the class
+            ClassManager.RemoveClassUser(@class);
+
+            (Application.Current as App).PullEnrolledClasses();
+            UpdateData();
+            //Todo: If there are no other users in the class, delete the class
         }
+
+        
     }
 
 }

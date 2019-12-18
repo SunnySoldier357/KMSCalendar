@@ -36,7 +36,13 @@
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
 
-                                        <Label Margin="12, 10, 0, -2"
+                                        <Label x:Name="ClassId"
+                                               TextColor="Transparent"
+                                               FontSize="0"
+                                               Text="{Binding Id}" />
+
+                                        <Label x:Name="ClassName"
+                                               Margin="12, 10, 0, -2"
                                                Text="{Binding Name}"
                                                FontSize="16"
                                                TextColor="{DynamicResource Text}" />
@@ -55,8 +61,10 @@
                                                 Grid.RowSpan="2"
                                                 Grid.Column="1"
                                                 HorizontalOptions="End"
-                                                Command="{Binding AuthenticateUserCommand}"/>
-                                    </Grid>
+                                                BindingContext="{Binding Source={x:Reference ClassListView}, Path=BindingContext}"   
+                                                Command="{Binding ReloadButtonClicked}"
+                                                CommandParameter="{Binding Source={x:Reference ClassId}}" />
+                                     </Grid>
 
                                 </Frame>
                             </StackLayout>
