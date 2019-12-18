@@ -86,28 +86,32 @@ namespace KMSCalendar.Views
         /// </summary>
         private async Task authenticateAsync()
         {
-            // If a new teacher is written into the box:
-            if (!string.IsNullOrEmpty(ViewModel.TeacherName) && ViewModel.ClassName != null)
+            int newPeriod = 0;
+            if (int.TryParse(ViewModel.Period, out newPeriod))
             {
-                Teacher t = new Teacher
+                // If a new teacher is written into the box:
+                if (!string.IsNullOrEmpty(ViewModel.TeacherName) && ViewModel.ClassName != null)
                 {
-                    Id = Guid.NewGuid(),
-                    Name = ViewModel.TeacherName,
-                    SchoolId = app.SignedInUser.SchoolId
-                };
+                    Teacher t = new Teacher
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = ViewModel.TeacherName,
+                        SchoolId = app.SignedInUser.SchoolId
+                    };
 
-                TeacherManager.PutInTeacher(t);
+                    TeacherManager.PutInTeacher(t);
 
-                addClass(ViewModel.ClassName, ViewModel.Period, t.Id, t.SchoolId);
+                    addClass(ViewModel.ClassName, newPeriod, t.Id, t.SchoolId);
+                }
+
+                // Otherwise if a teacher is selected
+                else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)
+                    addClass(ViewModel.ClassName, newPeriod, ViewModel.SelectedTeacher.Id, ViewModel.SelectedTeacher.SchoolId);
+
+                MessagingCenter.Send<NewClassPage>(this, "LoadClasses");
+
+                await Navigation.PopModalAsync();
             }
-
-            // Otherwise if a teacher is selected
-            else if (ViewModel.SelectedTeacher != null && ViewModel.ClassName != null)      
-                addClass(ViewModel.ClassName, ViewModel.Period, ViewModel.SelectedTeacher.Id, ViewModel.SelectedTeacher.SchoolId);
-
-            MessagingCenter.Send<NewClassPage>(this, "LoadClasses");
-
-            await Navigation.PopModalAsync();
         }
 
 

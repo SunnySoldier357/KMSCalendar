@@ -38,6 +38,12 @@ namespace KMSCalendar.Views
                 },
                 new HomeMenuItem
                 {
+                    Id = MenuItemType.EnrolledClasses,
+                    Title ="My Enrolled Classes",
+                    Icon = "file.png"
+                },
+                new HomeMenuItem
+                {
                     Id = MenuItemType.About,
                     Title ="About",
                     Icon = "file.png"

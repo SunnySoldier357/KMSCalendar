@@ -51,6 +51,10 @@ namespace KMSCalendar.Views
                         MenuPages.Add(id, new NavigationPage(new ClassSearchPage()));
                         break;
 
+                    case (int)MenuItemType.EnrolledClasses:
+                        MenuPages.Add(id, new NavigationPage(new EnrolledClassesPage()));
+                        break;
+
                     case (int) MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;

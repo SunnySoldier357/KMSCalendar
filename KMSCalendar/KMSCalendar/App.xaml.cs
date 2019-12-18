@@ -63,6 +63,16 @@ namespace KMSCalendar
         public void PullEnrolledClasses() =>
             SignedInUser.EnrolledClasses = ClassManager.LoadEnrolledClasses(SignedInUser.Id);
 
+        public void PullEnrolledTeachers()
+        {
+            foreach (Class @class in SignedInUser.EnrolledClasses)
+            {
+                string name = TeacherManager.LoadTeacherNameFromId(@class.TeacherId);
+                @class.Teacher = new Teacher(name);
+            }
+        }
+
+
         public void UpdateColorResources(Theme theme)
         {
             var items = new[]
