@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 
+using Autofac;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -34,6 +36,8 @@ namespace KMSCalendar
 
             using (var scope = AppContainer.Container.BeginLifetimeScope())
             {
+                scope.Resolve<AppSettings>().Initialize();
+
                 UserSettings settings = UserSettings.DefaultInstance;
                 UpdateColorResources(settings.Theme);
                 settings.PropertyChanged += ThemeChanged;

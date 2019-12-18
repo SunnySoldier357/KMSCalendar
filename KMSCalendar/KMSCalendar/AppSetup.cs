@@ -1,5 +1,7 @@
 ﻿using Autofac;
 
+using KMSCalendar.Models.Settings;
+
 namespace KMSCalendar
 {
     public class AppSetup
@@ -17,7 +19,9 @@ namespace KMSCalendar
         //* Protected Methods
         protected virtual void RegisterDependencies(ContainerBuilder builder)
         {
-
+            builder.RegisterType<AppSettings>()
+                .As<AppSettings>()
+                .SingleInstance();
         }
     }
 }
