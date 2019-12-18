@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              mc:Ignorable="d"
-             x:Class="KMSCalendar.Views.EnrolledClassesPage">
+             x:Class="KMSCalendar.Views.EnrolledClassesPage"
+             Title="My Enrolled Classes">
 
     <ContentPage.BindingContext>
         <vm:EnrolledClassesViewModel />
@@ -22,14 +23,15 @@
                             <StackLayout>
 
                                 <Frame CornerRadius="5"
-                                       BackgroundColor="#E8E8E8"
+                                       BackgroundColor="{DynamicResource NavigationBackgroundLight}"
                                        Margin="4"
                                        Padding="-4">
 
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition />
-                                            <RowDefinition />
+                                            <RowDefinition Height="28"/>
+                                            <RowDefinition Height="16"/>
+                                            <RowDefinition Height="16"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
@@ -42,23 +44,39 @@
                                                Text="{Binding Id}" />
 
                                         <Label x:Name="ClassName"
-                                               Margin="12, 10, 0, -2"
+                                               Margin="12, 6, 0, 0"
                                                Text="{Binding Name}"
                                                FontSize="16"
                                                TextColor="{DynamicResource Text}" />
+
+                                        <StackLayout Orientation="Horizontal"
+                                                     Grid.Row="1"
+                                                     Margin="12, -4, 0, 0">
+                                            
+                                            <Label Text="Period: "
+                                                   FontSize="12"
+                                                   TextColor="{DynamicResource Text}" />
+                                            
+                                            <Label Text="{Binding Period}"
+                                                   FontSize="12"
+                                                   TextColor="{DynamicResource Text}" />
+                                        </StackLayout>
                                         
-                                        <Label Margin="12, 0, 0, 0"
+
+
+                                        <Label Margin="12, -8, 0, 0"
                                                Text="{Binding Teacher.Name}"
                                                FontSize="12"
                                                TextColor="{DynamicResource Text}"
-                                               Grid.Row="1"/>
+                                               Grid.Row="2"/>
 
                                         <Button x:Name="UnsubscribeButton"
                                                 Text="Unsubscribe" 
                                                 Margin="0, 0, 8, 0"
                                                 BackgroundColor="Transparent"
                                                 BorderColor="Transparent"
-                                                Grid.RowSpan="2"
+                                                TextColor="{DynamicResource Text}"
+                                                Grid.RowSpan="3"
                                                 Grid.Column="1"
                                                 HorizontalOptions="End"
                                                 BindingContext="{Binding Source={x:Reference ClassListView}, Path=BindingContext}"   

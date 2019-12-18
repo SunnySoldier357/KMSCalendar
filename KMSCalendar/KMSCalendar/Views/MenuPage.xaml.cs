@@ -33,7 +33,7 @@ namespace KMSCalendar.Views
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Search,
-                    Title = "Classes",
+                    Title = "Add New Class",
                     Icon = "search.png"
                 },
                 new HomeMenuItem

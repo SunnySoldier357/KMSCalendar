@@ -15,18 +15,11 @@ namespace KMSCalendar.ViewModels
     {
 
        private List<Class> classes;
-       private Class c; 
 
        public List<Class> Classes
         {
             get => classes;
             set => setProperty(ref classes, value);
-        }
-
-        public Class C
-        {
-            get => c;
-            set => setProperty(ref c, value);
         }
 
         public ICommand UnsubscribeCommand { get; set; }
