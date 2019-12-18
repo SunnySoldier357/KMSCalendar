@@ -50,6 +50,10 @@ namespace KMSCalendar.Models.Settings
         {
             if (!isInitialized)
             {
+                if (!File.Exists(CONFIG_FILE))
+                    throw new FileNotFoundException("The appsettings.json file must be " +
+                        "created from the appsettings-TEMPLATE.json file!", CONFIG_FILE);
+
                 string json = File.ReadAllText(CONFIG_FILE);
 
                 AppSettings settings = JsonConvert.DeserializeObject<AppSettings>(json,
