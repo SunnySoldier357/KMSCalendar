@@ -112,7 +112,7 @@ namespace KMSCalendar.ViewModels
         public async Task ExecuteForgotPasswordCommand()
         {
             if (string.IsNullOrWhiteSpace(Email))
-                loginValidationMessage = "Please enter an email first.";
+                LoginValidationMessage = "Please enter an email first.";
             else
             {
                 // var emailService = new EmailService();
@@ -124,6 +124,7 @@ namespace KMSCalendar.ViewModels
                 else
                 {
                     // emailService.SendResetPasswordEmail(recipient);
+                    await (Application.Current as App).MainPage.Navigation.PushModalAsync(new ForgotPasswordPage());
                 }
             }
         }
