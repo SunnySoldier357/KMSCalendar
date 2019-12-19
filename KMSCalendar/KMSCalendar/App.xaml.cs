@@ -10,6 +10,7 @@ using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+using KMSCalendar.Services.Email;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KMSCalendar

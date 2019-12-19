@@ -115,14 +115,16 @@ namespace KMSCalendar.ViewModels
                 loginValidationMessage = "Please enter an email first.";
             else
             {
-                var emailService = new EmailService();
+                // var emailService = new EmailService();
 
                 User recipient = UserManager.LoadUserFromEmail(Email);
 
                 if (recipient == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";
                 else
-                    emailService.SendResetPasswordEmail(recipient);
+                {
+                    // emailService.SendResetPasswordEmail(recipient);
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 
 using KMSCalendar.Models.Settings;
+using KMSCalendar.Services.Email;
 
 namespace KMSCalendar
 {
@@ -22,6 +23,9 @@ namespace KMSCalendar
             builder.RegisterInstance(AppSettings.InitSingleton())
                 .AsSelf()
                 .SingleInstance();
+
+            builder.RegisterType<EmailService>()
+                .As<IEmailService>();
         }
     }
 }

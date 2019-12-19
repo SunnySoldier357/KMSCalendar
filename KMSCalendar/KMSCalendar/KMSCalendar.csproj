@@ -11,10 +11,14 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Services\Email\ResetPasswordPage.html" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Services\Email\ResetPasswordPage.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -22,6 +26,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Dapper" Version="2.0.30" />
+    <PackageReference Include="MailKit" Version="2.4.1" />
     <PackageReference Include="ModelValidation" Version="1.0.5" />
     <PackageReference Include="ModernXamarinCalendar" Version="1.0.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
@@ -64,9 +69,5 @@
     <EmbeddedResource Update="Views\SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Email\" />
   </ItemGroup>
 </Project>

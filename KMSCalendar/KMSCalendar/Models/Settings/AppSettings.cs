@@ -33,6 +33,8 @@ namespace KMSCalendar.Models.Settings
 
         public ConnectionStringInfo ConnectionStringInfo { get; private set; }
 
+        public EmailInfo EmailInfo { get; private set; }
+
         public string AzureBackendUrl { get; private set; }
         public string ConnectionString
         {
@@ -55,8 +57,10 @@ namespace KMSCalendar.Models.Settings
             {
                 UseMockDataStore = settings.UseMockDataStore;
 
-                AzureBackendUrl = settings.AzureBackendUrl;
                 ConnectionStringInfo = settings.ConnectionStringInfo;
+                EmailInfo = settings.EmailInfo;
+
+                AzureBackendUrl = settings.AzureBackendUrl;
             }
         }
 
