@@ -19,8 +19,8 @@ namespace KMSCalendar
         //* Protected Methods
         protected virtual void RegisterDependencies(ContainerBuilder builder)
         {
-            builder.RegisterType<AppSettings>()
-                .As<AppSettings>()
+            builder.RegisterInstance(AppSettings.InitSingleton())
+                .AsSelf()
                 .SingleInstance();
         }
     }

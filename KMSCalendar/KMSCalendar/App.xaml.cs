@@ -31,8 +31,6 @@ namespace KMSCalendar
 
             using (var scope = AppContainer.Container.BeginLifetimeScope())
             {
-                scope.Resolve<AppSettings>().Initialize();
-
                 UserSettings settings = UserSettings.DefaultInstance;
                 UpdateColorResources(settings.Theme);
                 settings.PropertyChanged += ThemeChanged;

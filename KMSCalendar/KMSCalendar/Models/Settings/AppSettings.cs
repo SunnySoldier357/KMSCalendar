@@ -15,6 +15,8 @@ namespace KMSCalendar.Models.Settings
         public const string CONFIG_FILE = "appsettings.json";
 
         //* Static Properties
+        private static bool isInitialized = false;
+
         private static readonly JsonSerializerSettings JsonSerializerSettings 
             = new JsonSerializerSettings
         {
@@ -24,8 +26,6 @@ namespace KMSCalendar.Models.Settings
         };
 
         //* Private Properties
-        private bool isInitialized = false;
-
         private string connectionString = null;
 
         //* Public Properties
@@ -45,8 +45,23 @@ namespace KMSCalendar.Models.Settings
             }
         }
 
+        //* Constructors
+        // [JsonConstructor]
+        private AppSettings() { }
+
+        private AppSettings(AppSettings settings)
+        {
+            if (settings != null)
+            {
+                UseMockDataStore = settings.UseMockDataStore;
+
+                AzureBackendUrl = settings.AzureBackendUrl;
+                ConnectionStringInfo = settings.ConnectionStringInfo;
+            }
+        }
+
         //* Public Methods
-        public void Initialize()
+        public static AppSettings InitSingleton()
         {
             if (!isInitialized)
             {
@@ -59,22 +74,12 @@ namespace KMSCalendar.Models.Settings
                 AppSettings settings = JsonConvert.DeserializeObject<AppSettings>(json,
                     JsonSerializerSettings);
 
-                updateInstance(settings);
-
                 isInitialized = true;
-            }
-        }
 
-        //* Private Methods
-        private void updateInstance(AppSettings settings)
-        {
-            if (settings != null)
-            {
-                UseMockDataStore = settings.UseMockDataStore;
-
-                AzureBackendUrl = settings.AzureBackendUrl;
-                ConnectionStringInfo = settings.ConnectionStringInfo;
+                return new AppSettings(settings);
             }
+
+            return null;
         }
 
         //* Private Class
