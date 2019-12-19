@@ -78,8 +78,17 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Margin="0,35,0,10"
-                       Text="Developed by KMS - Kenneth, Matthew, &amp; Sandeep" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Margin="0,35,0,10"
+                           Text="Developed by KMS - " />
+                    <Label Margin="0,35,0,10"
+                           Text="Kenneth, " 
+                           FontSize="7"
+                           VerticalOptions="Center"/>
+                    <Label Margin="0,35,0,10"
+                           Text="Matthew, &amp; Sandeep" />
+                </StackLayout>
+                
 
                 <Label Text="Icons made by Eleonor Wang from www.flaticon.com" />
 
