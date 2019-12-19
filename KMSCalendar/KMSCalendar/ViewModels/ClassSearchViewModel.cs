@@ -13,6 +13,7 @@ namespace KMSCalendar.ViewModels
     public class ClassSearchViewModel : BaseViewModel
     {
         //* Private Properties
+        private string searchInput;
         private Class selectedClass;
 
         private List<Class> classes;
@@ -23,12 +24,16 @@ namespace KMSCalendar.ViewModels
         private App app => (Application.Current as App);
 
         //* Public Properties
+        public string SearchInput
+        {
+            get => searchInput;
+            set => setProperty(ref searchInput, value);
+        }
         public Class SelectedClass
         {
             get => selectedClass;
             set => setProperty(ref selectedClass, value);
         }
-
         public List<Class> FilteredClasses
         {
             get => filteredClasses;
@@ -66,15 +71,15 @@ namespace KMSCalendar.ViewModels
             return rowsAffected > 0 ? true : false;
         }
 
-        public void FilterClasses(string userInput)
+        public void FilterClasses()
         {
-            if (string.IsNullOrWhiteSpace(userInput))
+            if (string.IsNullOrWhiteSpace(SearchInput))
                 FilteredClasses = new List<Class>(classes);
             else
             {
                 var result =
                     from @class in classes.AsParallel()
-                    where @class.Name.ToLower().Contains(userInput.ToLower())
+                    where @class.Name.ToLower().Contains(SearchInput.ToLower())
                     select @class;
 
                 FilteredClasses = result.ToList();

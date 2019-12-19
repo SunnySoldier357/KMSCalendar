@@ -3,8 +3,9 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
              Title="{Binding Title}"
-             BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+             BackgroundColor="{DynamicResource NavigationPrimary}">
 
     <ContentPage.BindingContext>
         <vm:ClassSearchViewModel />
@@ -12,47 +13,81 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <!--  TODO: MATEO Make this page look pretty  -->
 
             <StackLayout Orientation="Vertical"
                          VerticalOptions="CenterAndExpand"
-                         Margin="0,70,0,70"
+                         Margin="0,0,0,0"
                          Spacing="0">
 
-                <Frame VerticalOptions="CenterAndExpand"
-                       Margin="20,0,20,0"
-                       BackgroundColor="{DynamicResource NavigationBackground}"
-                       CornerRadius="10">
+                <Grid Margin="20">
+                    
+                    <Grid x:Name="PeriodButtons"
+                          HeightRequest="60"
+                          Padding="0"
+                          IsVisible="False">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="BackButton"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource ActionButtonStyle}"
+                                Text="Back"
+                                Clicked="BackButton_Clicked" />
+
+                        <Button x:Name="DoneButton"
+                                Grid.Column="1"
+                                HorizontalOptions="End"
+                                Style="{StaticResource ActionButtonStyle}"
+                                Text="Done"
+                                Clicked="DoneButton_Clicked" />
+                    </Grid>
 
                     
+                    <Grid x:Name="ClassButtons"
+                          HeightRequest="60"
+                          Padding="0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="ExitButton"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource ActionButtonStyle}"
+                                Text="Back"
+                                Clicked="ExitButton_Clicked" />
+
+                        <Button x:Name="NextButton"
+                                Grid.Column="1"
+                                HorizontalOptions="End"
+                                Style="{StaticResource ActionButtonStyle}"
+                                Text="Next"
+                                Clicked="NextButton_Clicked" />
+                    </Grid>
+                </Grid>
+                
+                
+                
+           
                     <!-- This is for the periods view -->
+
+
+                <Frame VerticalOptions="CenterAndExpand"
+                       Margin="16,0,16,0"
+                       BackgroundColor="Transparent"
+                       CornerRadius="10">
+
+         
                     
                     <Grid>
                         <Grid x:Name="PopUpGrid"
                               IsVisible="False">
                             <StackLayout>
-                                <Grid HeightRequest="60"
-                                      Margin="0"
-                                      Padding="0">
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Button x:Name="BackButton"
-                                            HorizontalOptions="Start"
-                                            Style="{StaticResource ActionButtonStyle}"
-                                            Text="Back"
-                                            Clicked="BackButton_Clicked" />
-
-                                    <Button x:Name="DoneButton"
-                                            Grid.Column="1"
-                                            HorizontalOptions="End"
-                                            Style="{StaticResource ActionButtonStyle}"
-                                            Text="Done"
-                                            Clicked="DoneButton_Clicked" />
-                                </Grid>
 
                                 <ScrollView>
                                     <ListView x:Name="PeriodsListView"
@@ -61,21 +96,29 @@
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <ViewCell Height="100">
-                                                    <Grid Padding="5">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*" />
-                                                            <ColumnDefinition Width="5*" />
-                                                        </Grid.ColumnDefinitions>
 
-                                                        <Label VerticalOptions="End"
+                                                    <Frame CornerRadius="3"
+                                                           BackgroundColor="{DynamicResource NavigationBackgroundLight}"
+                                                           Margin="1"
+                                                           Padding="2">
+
+                                                        <Grid Padding="5">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="5*" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label VerticalOptions="End"
                                                                Text="x"
                                                                FontSize="14" />
 
-                                                        <Label Grid.Column="1"
+                                                            <Label Grid.Column="1"
                                                                VerticalOptions="End"
                                                                Text="{Binding}"
                                                                FontSize="11" />
-                                                    </Grid>
+                                                        </Grid>
+                                                    </Frame>
+                                                    
                                                 </ViewCell>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
@@ -85,21 +128,23 @@
                                 <StackLayout>
 
                                     <Label HorizontalOptions="Center"
-                                           Text="Can't find your period? Add a new one here:" />
+                                           Text="Can't find your period? Add a new one here:" 
+                                           TextColor="#FFFFFF"/>
 
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="Center">
 
                                         <Label VerticalOptions="Center"
                                                Margin="0,0,0,5"
-                                               Text="Period: " />
+                                               Text="Period: " 
+                                               TextColor="#FFFFFF"/>
 
                                         <Entry x:Name="NewPeriod"
                                                Placeholder="1"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
                                                Keyboard="Numeric"
-                                               Text="{Binding Value}"/>
+                                               Text="{Binding Value}" />
 
                                         <Button x:Name="AddNewPeriodButton"
                                                 VerticalOptions="Center"
@@ -117,77 +162,91 @@
                         </Grid>
 
                         
+                        
+                        
+                        
                         <!-- This is for the class search view: -->
                         
                         <StackLayout x:Name="SearchAreaStackLayout">
 
-                            <Grid HeightRequest="60"
-                                  Margin="0"
-                                  Padding="0">
+                            <Frame CornerRadius="3"
+                                   BackgroundColor="{DynamicResource NavigationBackground}"
+                                   Margin="0.5"
+                                   Padding="2"
+                                   VerticalOptions="CenterAndExpand"
+                                   MinimumHeightRequest="42"
+                                   HasShadow="True">
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="StartAndExpand">
+                                    <Image Source="search.png"
+                                           HeightRequest="15"
+                                           WidthRequest="15"
+                                           Margin="18, 0, 10, 0"/>
 
-                                <Button x:Name="ExitButton"
-                                        HorizontalOptions="Start"
-                                        Style="{StaticResource ActionButtonStyle}"
-                                        Text="Back"
-                                        Clicked="ExitButton_Clicked" />
+                                    <control:TransparentEntry x:Name="SearchEntry"
+                                                              BackgroundColor="Transparent"
+                                                              Text="{Binding SearchInput}"
+                                                              Placeholder="Search for Your Class                               " 
+                                                              HorizontalOptions="StartAndExpand"/>
 
-                                <Button x:Name="NextButton"
-                                        Grid.Column="1"
-                                        HorizontalOptions="End"
-                                        Style="{StaticResource ActionButtonStyle}"
-                                        Text="Next"
-                                        Clicked="NextButton_Clicked" />
-                            </Grid>
+                                </StackLayout>
+                            </Frame>
 
-                            <SearchBar x:Name="ClassSearchBar"
-                                       Margin="0,0,0,10"
-                                       BackgroundColor="{DynamicResource LightText}"
-                                       Placeholder="Search"
-                                       TextColor="{DynamicResource Text}" />
 
                             <ListView x:Name="ClassesListView"
                                       ItemsSource="{Binding FilteredClasses}"
                                       IsPullToRefreshEnabled="true"
-                                      ItemSelected="ClassesListView_ItemSelected">
+                                      ItemSelected="ClassesListView_ItemSelected"
+                                      Margin="0, 16, 0, 0">
 
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell Height="100">
-                                            <Grid Padding="5">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
 
-                                                <Label VerticalOptions="End"
-                                                       Text="{Binding Name}"
-                                                       FontSize="14"
-                                                       TextColor="{DynamicResource Text}" />
+                                            <Frame CornerRadius="3"
+                                                   BackgroundColor="{DynamicResource NavigationBackground}"
+                                                   HasShadow="True"
+                                                   Padding="2"
+                                                   Margin="0,0,0,3">
 
-                                                <Label Grid.Column="1"
-                                                       VerticalOptions="End"
-                                                       Text="{Binding Teacher.Name}"
-                                                       FontSize="11"
-                                                       TextColor="{DynamicResource Text}"
-                                                       HorizontalTextAlignment="End" />
-                                            </Grid>
+                                                <Grid Padding="5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Label VerticalOptions="End"
+                                                           Text="{Binding Name}"
+                                                           FontSize="14"
+                                                           TextColor="{DynamicResource Text}"
+                                                           Margin="10, 0, 0, 0"/>
+
+                                                    <Label Grid.Column="1"
+                                                           HorizontalOptions="End"
+                                                           VerticalOptions="Center"
+                                                           Text="{Binding Teacher.Name}"
+                                                           FontSize="11"
+                                                           TextColor="{DynamicResource Text}"
+                                                           HorizontalTextAlignment="End"
+                                                           Margin="0, 0, 10, 0"/>
+                                                </Grid>
+                                            </Frame>
+
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
 
+
                             <Button x:Name="GoToNewClassButton"
                                     BackgroundColor="{DynamicResource NavigationTertiary}"
                                     BorderWidth="0"
-                                    CornerRadius="10"
+                                    CornerRadius="4"
                                     Text="Can't find your class? Add a new one to the cloud"
                                     TextColor="White"
                                     Clicked="GoToNewClassButton_Clicked" />
+
                         </StackLayout>
                     </Grid>
                 </Frame>
