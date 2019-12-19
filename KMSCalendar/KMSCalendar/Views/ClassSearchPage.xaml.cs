@@ -30,8 +30,9 @@ namespace KMSCalendar.Views
             BindingContext = ViewModel = new ClassSearchViewModel();
 
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
-            ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
-            ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
+            //ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
+            //ClassSearchBar.TextChanged += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);
+            SearchEntry.TextChanged += (sender, args) => ViewModel.FilterClasses();
         }
 
         //* Public Methods

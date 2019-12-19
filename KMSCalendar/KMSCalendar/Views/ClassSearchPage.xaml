@@ -3,15 +3,16 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
              Title="{Binding Title}"
-             BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+             BackgroundColor="{DynamicResource NavigationPrimary}">
 
     <ContentPage.BindingContext>
         <vm:ClassSearchViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
+        <StackLayout>
 
             <StackLayout Orientation="Vertical"
                          VerticalOptions="CenterAndExpand"
@@ -76,7 +77,7 @@
 
 
                 <Frame VerticalOptions="CenterAndExpand"
-                       Margin="20,0,20,0"
+                       Margin="16,0,16,0"
                        BackgroundColor="Transparent"
                        CornerRadius="10">
 
@@ -96,7 +97,7 @@
                                             <DataTemplate>
                                                 <ViewCell Height="100">
 
-                                                    <Frame CornerRadius="2"
+                                                    <Frame CornerRadius="3"
                                                            BackgroundColor="{DynamicResource NavigationBackgroundLight}"
                                                            Margin="1"
                                                            Padding="2">
@@ -127,21 +128,23 @@
                                 <StackLayout>
 
                                     <Label HorizontalOptions="Center"
-                                           Text="Can't find your period? Add a new one here:" />
+                                           Text="Can't find your period? Add a new one here:" 
+                                           TextColor="#FFFFFF"/>
 
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="Center">
 
                                         <Label VerticalOptions="Center"
                                                Margin="0,0,0,5"
-                                               Text="Period: " />
+                                               Text="Period: " 
+                                               TextColor="#FFFFFF"/>
 
                                         <Entry x:Name="NewPeriod"
                                                Placeholder="1"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
                                                Keyboard="Numeric"
-                                               Text="{Binding Value}"/>
+                                               Text="{Binding Value}" />
 
                                         <Button x:Name="AddNewPeriodButton"
                                                 VerticalOptions="Center"
@@ -160,38 +163,53 @@
 
                         
                         
+                        
+                        
                         <!-- This is for the class search view: -->
                         
                         <StackLayout x:Name="SearchAreaStackLayout">
 
-                            <Frame CornerRadius="2"
-                                       BackgroundColor="{DynamicResource NavigationBackgroundLight}"
-                                       Margin="4"
-                                       Padding="0">
+                            <Frame CornerRadius="3"
+                                   BackgroundColor="{DynamicResource NavigationBackground}"
+                                   Margin="0.5"
+                                   Padding="2"
+                                   VerticalOptions="CenterAndExpand"
+                                   MinimumHeightRequest="42"
+                                   HasShadow="True">
 
-                                <SearchBar x:Name="ClassSearchBar"
-                                       Margin="0,0,0,10"
-                                       BackgroundColor="Transparent"
-                                       Placeholder="Search"
-                                       TextColor="{DynamicResource Text}" />
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="StartAndExpand">
+                                    <Image Source="search.png"
+                                           HeightRequest="15"
+                                           WidthRequest="15"
+                                           Margin="18, 0, 10, 0"/>
 
+                                    <control:TransparentEntry x:Name="SearchEntry"
+                                                              BackgroundColor="Transparent"
+                                                              Text="{Binding SearchInput}"
+                                                              Placeholder="Search for Your Class                               " 
+                                                              HorizontalOptions="StartAndExpand"/>
+
+                                </StackLayout>
                             </Frame>
 
 
                             <ListView x:Name="ClassesListView"
                                       ItemsSource="{Binding FilteredClasses}"
                                       IsPullToRefreshEnabled="true"
-                                      ItemSelected="ClassesListView_ItemSelected">
+                                      ItemSelected="ClassesListView_ItemSelected"
+                                      Margin="0, 16, 0, 0">
 
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell Height="100">
 
-                                            <Frame CornerRadius="2"
-                                                   BackgroundColor="{DynamicResource NavigationBackgroundLight}"
-                                                   Margin="1"
-                                                   Padding="2">
-                                                
+                                            <Frame CornerRadius="3"
+                                                   BackgroundColor="{DynamicResource NavigationBackground}"
+                                                   HasShadow="True"
+                                                   Padding="2"
+                                                   Margin="0,0,0,3">
+
                                                 <Grid Padding="5">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition />
@@ -199,16 +217,19 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <Label VerticalOptions="End"
-                                                       Text="{Binding Name}"
-                                                       FontSize="14"
-                                                       TextColor="{DynamicResource Text}" />
+                                                           Text="{Binding Name}"
+                                                           FontSize="14"
+                                                           TextColor="{DynamicResource Text}"
+                                                           Margin="10, 0, 0, 0"/>
 
                                                     <Label Grid.Column="1"
-                                                       VerticalOptions="End"
-                                                       Text="{Binding Teacher.Name}"
-                                                       FontSize="11"
-                                                       TextColor="{DynamicResource Text}"
-                                                       HorizontalTextAlignment="End" />
+                                                           HorizontalOptions="End"
+                                                           VerticalOptions="Center"
+                                                           Text="{Binding Teacher.Name}"
+                                                           FontSize="11"
+                                                           TextColor="{DynamicResource Text}"
+                                                           HorizontalTextAlignment="End"
+                                                           Margin="0, 0, 10, 0"/>
                                                 </Grid>
                                             </Frame>
 
@@ -217,13 +238,15 @@
                                 </ListView.ItemTemplate>
                             </ListView>
 
+
                             <Button x:Name="GoToNewClassButton"
                                     BackgroundColor="{DynamicResource NavigationTertiary}"
                                     BorderWidth="0"
-                                    CornerRadius="10"
+                                    CornerRadius="4"
                                     Text="Can't find your class? Add a new one to the cloud"
                                     TextColor="White"
                                     Clicked="GoToNewClassButton_Clicked" />
+
                         </StackLayout>
                     </Grid>
                 </Frame>
