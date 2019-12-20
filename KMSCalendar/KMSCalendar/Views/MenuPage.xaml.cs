@@ -66,11 +66,8 @@ namespace KMSCalendar.Views
                     return;
 
                 int id = (int) ((HomeMenuItem) e.SelectedItem).Id;
-
-                if (((HomeMenuItem)e.SelectedItem).Id == MenuItemType.Search)
-                    await GoToClassSearchPage();
-                else
-                    await RootPage.NavigateFromMenu(id);
+            
+                await RootPage.NavigateFromMenu(id);
             };
 
             UserNameLabel.BindingContext = (Application.Current as App).SignedInUser.UserName;
