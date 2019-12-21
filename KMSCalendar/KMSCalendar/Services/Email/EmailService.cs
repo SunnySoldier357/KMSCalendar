@@ -1,12 +1,14 @@
-﻿using System.IO;
+﻿using System;
+using System.Globalization;
+using System.IO;
+
+using KMSCalendar.Models.Data;
+using KMSCalendar.Models.Settings;
 
 using MailKit.Net.Smtp;
 using MailKit.Security;
 
 using MimeKit;
-
-using KMSCalendar.Models.Data;
-using KMSCalendar.Models.Settings;
 
 namespace KMSCalendar.Services.Email
 {
@@ -32,6 +34,12 @@ namespace KMSCalendar.Services.Email
         public void SendResetPasswordEmail(User recipient, string token)
         {
             string html = File.ReadAllText(htmlFile);
+
+            // Replace variables in html with values
+            html = html.Replace("{{token}}", token)
+                .Replace("{{currentDate}}", DateTime.Today.ToString("d MMMM yyyy",
+                    DateTimeFormatInfo.InvariantInfo))
+                .Replace("{{currentYear}}", $"{DateTime.Today.Year}");
 
             var message = new MimeMessage()
             {

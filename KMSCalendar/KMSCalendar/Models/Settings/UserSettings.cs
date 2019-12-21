@@ -99,21 +99,26 @@ namespace KMSCalendar.Models.Settings
         /// <returns>The Settings object created.</returns>
         public static UserSettings InitSingleton()
         {
-            UserSettings settings = null;
-
-            App.Current.Properties.TryGetValue(DIC_KEY, out object settingsJson);
-
-            if (settingsJson != null)
+            if (!isInitialized)
             {
-                UserSettings temp = JsonConvert.DeserializeObject<UserSettings>(settingsJson as string);
+                UserSettings settings = null;
 
-                settings = new UserSettings(temp);
-            }
-            else
-            {
-                settings = new UserSettings();
+                App.Current.Properties.TryGetValue(DIC_KEY, out object settingsJson);
 
-                settings.UpdateDictionaryAsync();
+                if (settingsJson != null)
+                {
+                    UserSettings temp = JsonConvert.DeserializeObject<UserSettings>(settingsJson as string);
+
+                    settings = new UserSettings(temp);
+                }
+                else
+                {
+                    settings = new UserSettings();
+
+                    settings.UpdateDictionaryAsync();
+                }
+
+                return settings;
             }
 
             throw new Exception($"A Singleton Instance of {nameof(UserSettings)} has already " +
