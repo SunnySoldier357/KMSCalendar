@@ -85,7 +85,8 @@ namespace KMSCalendar.ViewModels
             };
 
             AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
-            ForgotPasswordCommand = new Command(async () => await ExecuteForgotPasswordCommand());
+            ForgotPasswordCommand = new Command(async () => await 
+                (Application.Current as App).MainPage.Navigation.PushModalAsync(new ForgotPasswordPage()));
             NewUserCommand = new Command(() => (Application.Current as App).MainPage = new SignUpPage());
         }
 
@@ -112,24 +113,6 @@ namespace KMSCalendar.ViewModels
                     }
                     else
                         LoginValidationMessage = "Invalid Password";
-                }
-            }
-        }
-
-        public async Task ExecuteForgotPasswordCommand()
-        {
-            if (string.IsNullOrWhiteSpace(Email))
-                LoginValidationMessage = "Please enter an email first.";
-            else
-            {
-                User recipient = UserManager.LoadUserFromEmail(Email);
-
-                if (recipient == null)
-                    LoginValidationMessage = "This email does not have an account, please sign up for an account";
-                else
-                {
-                    // emailService.SendResetPasswordEmail(recipient);
-                    await (Application.Current as App).MainPage.Navigation.PushModalAsync(new ForgotPasswordPage());
                 }
             }
         }

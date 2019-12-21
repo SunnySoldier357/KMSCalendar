@@ -1,31 +1,89 @@
-﻿using KMSCalendar.Models.Data;
-using KMSCalendar.Services.Data;
-using ModelValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Windows.Input;
+
+using Autofac;
+
+using KMSCalendar.Models;
+using KMSCalendar.Models.Data;
+using KMSCalendar.Services.Data;
+using KMSCalendar.Services.Email;
+
+using ModelValidation;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
-    class ForgotPasswordViewModel : BaseViewModel
+    public class ForgotPasswordViewModel : BaseViewModel
     {
-        private string email;
-        private bool emailVisibility;
+        //* Constants
 
-        private string code;
+        /// <summary>
+        /// Determines the length of the token sent to the user. Has
+        /// to be between 1 & 32.
+        /// </summary>
+        public const int TOKEN_SIZE = 6;
+
+        //* Private Properties
+        private bool emailVisibility;
+        private bool goBackVisibility;
+        private bool newPasswordVisibility;
+        private bool successVisibility;
         private bool verificationVisibility;
 
-        private string password;
-        private string confirmPassword;
-        private bool newPasswordVisibility;
+        private readonly IEmailService emailService;
 
-        private bool successVisibility;
-        private bool goBackVisibility;
+        private string code;
+        private string confirmPassword;
+        private string email;
+        private string password;
+        private string token;
         private string validationMessage;
 
+        //* Public Properties
+        public bool EmailVisibility
+        {
+            get => emailVisibility;
+            set => setProperty(ref emailVisibility, value);
+        }
+        public bool GoBackVisibility
+        {
+            get => goBackVisibility;
+            set => setProperty(ref goBackVisibility, value);
+        }
+        public bool NewPasswordVisibility
+        {
+            get => newPasswordVisibility;
+            set => setProperty(ref newPasswordVisibility, value);
+        }
+        public bool SuccessVisibility
+        {
+            get => successVisibility;
+            set => setProperty(ref successVisibility, value);
+        }
+        public bool VerificationVisibility
+        {
+            get => verificationVisibility;
+            set => setProperty(ref verificationVisibility, value);
+        }
 
+        public ICommand AuthenticateCodeCommand { get; }
+        public ICommand AuthenticateEmailCommand { get; }
+        public ICommand AuthenticateNewPasswordCommand { get; }
+        public ICommand GoBackCommand { get; }
+
+        public string Code
+        {
+            get => code;
+            set => setProperty(ref code, value);
+        }
+        [PropertyValueMatch(nameof(Password),
+            ErrorMessage = "The Passwords do not match!")]
+        public string ConfirmPassword
+        {
+            get => confirmPassword;
+            set => setProperty(ref confirmPassword, value);
+        }
         [ContainsCharacter('@')]
         [DoesNotContainCharacter(' ')]
         [MinimumLength(5)]
@@ -35,55 +93,12 @@ namespace KMSCalendar.ViewModels
             get => email;
             set => setProperty(ref email, value);
         }
-        public bool EmailVisibility
-        {
-            get => emailVisibility;
-            set => setProperty(ref emailVisibility, value);
-        }
-
-
-        public string Code
-        {
-            get => code;
-            set => setProperty(ref code, value);
-        }
-        public bool VerificationVisibility
-        {
-            get => verificationVisibility;
-            set => setProperty(ref verificationVisibility, value);
-        }
-
-
         [MinimumLength(8)]
         [MaximumLength(64)]
         public string Password
         {
             get => password;
             set => setProperty(ref password, value);
-        }
-        [PropertyValueMatch(nameof(Password),
-            ErrorMessage = "The Passwords do not match!")]
-        public string ConfirmPassword
-        {
-            get => confirmPassword;
-            set => setProperty(ref confirmPassword, value);
-        }
-        public bool NewPasswordVisibility
-        {
-            get => newPasswordVisibility;
-            set => setProperty(ref newPasswordVisibility, value);
-        }
-
-
-        public bool SuccessVisibility
-        {
-            get => successVisibility;
-            set => setProperty(ref successVisibility, value);
-        }
-        public bool GoBackVisibility
-        {
-            get => goBackVisibility;
-            set => setProperty(ref goBackVisibility, value);
         }
         public string ValidationMessage
         {
@@ -97,15 +112,19 @@ namespace KMSCalendar.ViewModels
             set => setProperty(ref validationMessage, value);
         }
 
-        public ICommand AuthenticateEmailCommand { get; }
-        public ICommand AuthenticateCodeCommand { get; }
-        public ICommand AuthenticateNewPasswordCommand { get; }
-        public ICommand GoBackCommand { get; }
+        //* Constructors
+        public ForgotPasswordViewModel() :
+            this(AppContainer.Container.Resolve<IEmailService>()) { }
 
-        public ForgotPasswordViewModel()
+        public ForgotPasswordViewModel(IEmailService emailService)
         {
             EmailVisibility = true;
             VerificationVisibility = false;
+
+            this.emailService = emailService;
+
+            token = Guid.NewGuid().ToString().Replace("-", "")
+                .Substring(0, TOKEN_SIZE).ToUpper();
 
             PropertyChanged += (sender, args) =>
             {
@@ -113,53 +132,51 @@ namespace KMSCalendar.ViewModels
                     OnNotifyPropertyChanged(nameof(ValidationMessage));
             };
 
-            AuthenticateEmailCommand = new Command(() => AuthenticateEmail());
-            AuthenticateCodeCommand = new Command(() => AuthenticateCode());
-            AuthenticateNewPasswordCommand = new Command(() => AuthenticateNewPassword());
-            GoBackCommand = new Command(() => (Application.Current as App).MainPage.Navigation.PopModalAsync());
+            AuthenticateCodeCommand = new Command(() => ExecuteAuthenticateCodeCommand());
+            AuthenticateEmailCommand = new Command(() => ExecuteAuthenticateEmailCommand());
+            AuthenticateNewPasswordCommand = new Command(() => ExecuteAuthenticateNewPasswordCommand());
+            GoBackCommand = new Command(() =>
+                (Application.Current as App).MainPage.Navigation.PopModalAsync());
         }
-        
-        private void AuthenticateEmail()
+
+        //* Private Methods
+        private void ExecuteAuthenticateCodeCommand()
         {
-            if (Validate())
+            if (Code?.ToUpper().Equals(token) ?? false)
+                SwapViews();
+            else
+                ValidationMessage = "Code invalid!";
+        }
+
+        private void ExecuteAuthenticateEmailCommand()
+        {
+            if (Validate() && Email != null)
             {
                 User user = UserManager.LoadUserFromEmail(Email);
                 if (user != null)
                 {
-                    //TODO: SUNNY send the token via email
+                    emailService.SendResetPasswordEmail(user, token);
                     SwapViews();
-
                 }
                 else
                     ValidationMessage = "Please enter the email address for your account.";
             }
-
         }
 
-        private void AuthenticateCode()
+        private void ExecuteAuthenticateNewPasswordCommand()
         {
-            if (Code.Length == 6)       //update to the correct length of the code
+            if (Validate() && Password != null)
             {
+                User user = UserManager.LoadUserFromEmail(Email);
+                user.Password = PasswordHasher.HashPassword(Password);
 
-                //TODO: SUNNY verify if the code the user entered is correct
-                bool verified = true;
-                if (verified)
-                    SwapViews();
-                else
-                    ValidationMessage = "Please enter a valid email address.";
-            }
-            else
-                ValidationMessage = "Please enter a valid email address.";
-        }
-
-        private void AuthenticateNewPassword()
-        {
-            if (Validate())      
-            {
-                //TODO: SUNNY update the db with the new password
+                // TODO: Mateo update the user in the DB
+                // UserManager.UpdateUser(user);
 
                 SwapViews();
             }
+            else
+                ValidationMessage = "Please enter a password.";
         }
 
         private void SwapViews()
