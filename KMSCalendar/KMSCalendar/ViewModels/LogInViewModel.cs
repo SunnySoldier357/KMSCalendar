@@ -1,17 +1,17 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 
-using ModelValidation;
-
-using Xamarin.Forms;
+using Autofac;
 
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
-using KMSCalendar.Views;
 using KMSCalendar.Services.Data;
-using KMSCalendar.Services.Email;
+using KMSCalendar.Views;
+
+using ModelValidation;
+
+using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
@@ -23,6 +23,9 @@ namespace KMSCalendar.ViewModels
         private string email;
         private string loginValidationMessage;
         private string password;
+
+        //* Protected Properties
+        protected readonly UserSettings userSettings;
 
         //* Public Properties
         public ICommand AuthenticateUserCommand { get; set; }
@@ -64,9 +67,13 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructor
-        public LoginViewModel()
+        public LoginViewModel() :
+            this(AppContainer.Container.Resolve<UserSettings>()) { }
+
+        public LoginViewModel(UserSettings userSettings)
         {
             Title = "Log In";
+            this.userSettings = userSettings;
 
             Email = string.Empty;
             Password = string.Empty;
@@ -88,7 +95,7 @@ namespace KMSCalendar.ViewModels
             if (Validate())
             {
                 User signedInUser = UserManager.LoadUserFromEmail(Email);
-                
+
                 if (signedInUser == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";
                 else
@@ -99,7 +106,7 @@ namespace KMSCalendar.ViewModels
 
                         app.SignedInUser = signedInUser;
 
-                        UserSettings.DefaultInstance.SignedInUserId = signedInUser.Id;
+                        userSettings.SignedInUserId = signedInUser.Id;
 
                         app.MainPage = new MainPage();
                     }
@@ -115,8 +122,6 @@ namespace KMSCalendar.ViewModels
                 LoginValidationMessage = "Please enter an email first.";
             else
             {
-                // var emailService = new EmailService();
-
                 User recipient = UserManager.LoadUserFromEmail(Email);
 
                 if (recipient == null)

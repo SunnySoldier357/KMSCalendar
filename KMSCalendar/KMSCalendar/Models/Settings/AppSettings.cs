@@ -17,7 +17,7 @@ namespace KMSCalendar.Models.Settings
         //* Static Properties
         private static bool isInitialized = false;
 
-        private static readonly JsonSerializerSettings JsonSerializerSettings 
+        private static readonly JsonSerializerSettings jsonSerializerSettings 
             = new JsonSerializerSettings
         {
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
@@ -76,7 +76,7 @@ namespace KMSCalendar.Models.Settings
                 string json = File.ReadAllText(CONFIG_FILE);
 
                 AppSettings settings = JsonConvert.DeserializeObject<AppSettings>(json,
-                    JsonSerializerSettings);
+                    jsonSerializerSettings);
 
                 isInitialized = true;
 

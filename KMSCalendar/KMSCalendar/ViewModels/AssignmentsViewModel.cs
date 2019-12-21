@@ -4,11 +4,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 
-using Xamarin.Forms;
+using Autofac;
 
 using KMSCalendar.Models.Data;
+using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+
+using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
@@ -21,8 +24,10 @@ namespace KMSCalendar.ViewModels
         private List<Assignment> assignments;
         private List<Assignment> filteredAssignments;
 
+        private readonly UserSettings userSettings;
+
         //* Public Properties
-        public bool ShowCalendarDays => Settings.ShowCalendarDays;
+        public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
         public DateTime DateChoosen { get; set; }
 
@@ -40,10 +45,15 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructors
-        public AssignmentsViewModel()
+        public AssignmentsViewModel() :
+            this(AppContainer.Container.Resolve<UserSettings>()) { }
+
+        public AssignmentsViewModel(UserSettings userSettings)
         {
             Title = "Assignments Calendar";
             DateChoosen = DateTime.Today;
+
+            this.userSettings = userSettings;
 
             app.PullEnrolledClasses();
 
@@ -79,9 +89,9 @@ namespace KMSCalendar.ViewModels
 
             LoadAssignmentsCommand.Execute(null);
 
-            Settings.PropertyChanged += (sender, args) =>
+            userSettings.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(Settings.ShowCalendarDays))
+                if (args.PropertyName == nameof(UserSettings.ShowCalendarDays))
                     OnNotifyPropertyChanged(nameof(ShowCalendarDays));
             };
         }

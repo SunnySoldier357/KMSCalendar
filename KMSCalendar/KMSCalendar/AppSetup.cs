@@ -20,10 +20,16 @@ namespace KMSCalendar
         //* Protected Methods
         protected virtual void RegisterDependencies(ContainerBuilder builder)
         {
+            // Models -> Settings
             builder.RegisterInstance(AppSettings.InitSingleton())
                 .AsSelf()
                 .SingleInstance();
 
+            builder.RegisterInstance(UserSettings.InitSingleton())
+                .AsSelf()
+                .SingleInstance();
+
+            // Services -> Email
             builder.RegisterType<EmailService>()
                 .As<IEmailService>();
         }

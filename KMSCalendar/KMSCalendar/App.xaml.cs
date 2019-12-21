@@ -10,13 +10,15 @@ using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
-using KMSCalendar.Services.Email;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KMSCalendar
 {
     public partial class App : Application
     {
+        //* Private Properties
+        private UserSettings userSettings;
+
         //* Public Properties
         public User SignedInUser { get; set; }
         public string SchoolName { get; set; }
@@ -33,18 +35,17 @@ namespace KMSCalendar
 
             using (var scope = AppContainer.Container.BeginLifetimeScope())
             {
-                UserSettings settings = UserSettings.DefaultInstance;
-                UpdateColorResources(settings.Theme);
-                settings.PropertyChanged += ThemeChanged;
+                userSettings = scope.Resolve<UserSettings>();
+                UpdateColorResources(userSettings.Theme);
+                userSettings.PropertyChanged += ThemeChanged;
 
-                if (settings.SignedInUserId.Equals(Guid.Empty))
+                if (userSettings.SignedInUserId.Equals(Guid.Empty))
                     MainPage = new LoginPage();
                 else
                 {
                     try
                     {
-                        SignedInUser = UserManager.LoadUserFromId(settings.SignedInUserId);
-
+                        SignedInUser = UserManager.LoadUserFromId(userSettings.SignedInUserId);
                     }
                     catch (Exception)
                     {
@@ -145,7 +146,7 @@ namespace KMSCalendar
         private void ThemeChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(UserSettings.Theme))
-                UpdateColorResources(UserSettings.DefaultInstance.Theme);
+                UpdateColorResources(userSettings.Theme);
         }
     }
 }

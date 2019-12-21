@@ -1,10 +1,12 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 
-using Xamarin.Forms;
+using Autofac;
 
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Views;
-using System;
+
+using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
@@ -13,24 +15,24 @@ namespace KMSCalendar.ViewModels
         //* Private Properties
         private App app = (Application.Current as App);
 
-        private UserSettings settings = UserSettings.DefaultInstance;
+        private readonly UserSettings userSettings;
 
         //* Public Properties
         public bool IsDarkThemeEnabled
         {
-            get => settings.Theme == Theme.Dark;
+            get => userSettings.Theme == Theme.Dark;
             set
             {
-                settings.Theme = value ? Theme.Dark : Theme.Light;
+                userSettings.Theme = value ? Theme.Dark : Theme.Light;
                 OnPropertyChanged();
             }
         }
         public bool ShowCalendarDays
         {
-            get => settings.ShowCalendarDays;
+            get => userSettings.ShowCalendarDays;
             set
             {
-                settings.ShowCalendarDays = value;
+                userSettings.ShowCalendarDays = value;
                 OnPropertyChanged();
             }
         }
@@ -41,9 +43,13 @@ namespace KMSCalendar.ViewModels
         public string UserName => app.SignedInUser?.UserName;
 
         //* Constructors
-        public SettingsViewModel()
+        public SettingsViewModel() :
+            this(AppContainer.Container.Resolve<UserSettings>()) { }
+
+        public SettingsViewModel(UserSettings userSettings)
         {
             Title = "Settings";
+            this.userSettings = userSettings;
 
             LogOutCommand = new Command(() => ExecuteLogOutCommand());
         }
@@ -53,7 +59,7 @@ namespace KMSCalendar.ViewModels
         {
             App app = Application.Current as App;
 
-            settings.SignedInUserId = Guid.Empty;
+            userSettings.SignedInUserId = Guid.Empty;
             app.SignedInUser = null;
 
             app.MainPage = new LoginPage();

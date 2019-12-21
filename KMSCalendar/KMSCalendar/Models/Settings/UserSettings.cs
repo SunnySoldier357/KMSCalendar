@@ -21,9 +21,7 @@ namespace KMSCalendar.Models.Settings
         private const string DIC_KEY = "Settings";
 
         //* Static Properties
-
-        /// <summary>Singleton Instance for Settings class</summary>
-        public static UserSettings DefaultInstance = initAsync().Result;
+        private static bool isInitialized = false;
 
         //* Private Properties
         private bool showCalendarDays;
@@ -99,7 +97,7 @@ namespace KMSCalendar.Models.Settings
         /// from the App's Properties Dictionary or setting the default values
         /// </summary>
         /// <returns>The Settings object created.</returns>
-        private static async Task<UserSettings> initAsync()
+        public static UserSettings InitSingleton()
         {
             UserSettings settings = null;
 
@@ -115,7 +113,7 @@ namespace KMSCalendar.Models.Settings
             {
                 settings = new UserSettings();
 
-                await settings.UpdateDictionaryAsync();
+                settings.UpdateDictionaryAsync();
             }
 
             return settings;
