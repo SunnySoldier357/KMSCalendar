@@ -24,11 +24,7 @@ namespace KMSCalendar.Views
 		{
             InitializeComponent();
 
-            string schoolName = "Skyline"; //todo change
-
-            BindingContext = ViewModel = new NewClassViewModel(schoolName);
-
-            LoadTeachers();
+            BindingContext = ViewModel = new NewClassViewModel();
         }
 
         public void LoadTeachers()

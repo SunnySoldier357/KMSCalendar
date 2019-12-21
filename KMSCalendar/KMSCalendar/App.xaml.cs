@@ -19,6 +19,7 @@ namespace KMSCalendar
     {
         //* Public Properties
         public User SignedInUser { get; set; }
+        public string SchoolName { get; set; }
 
         //* Constructors
         public App(AppSetup setup = null)
@@ -69,6 +70,12 @@ namespace KMSCalendar
                 string name = TeacherManager.LoadTeacherNameFromId(@class.TeacherId);
                 @class.Teacher = new Teacher(name);
             }
+        }
+
+        public void PullSchoolName()
+        {
+            if(SignedInUser != null)
+                SchoolName = SchoolManager.GetSchoolName(SignedInUser.SchoolId)[0];
         }
 
 

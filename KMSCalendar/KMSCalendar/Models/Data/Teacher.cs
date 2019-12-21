@@ -7,6 +7,7 @@ namespace KMSCalendar.Models.Data
     {
         //* Public Properties
         public Guid SchoolId { get; set; }
+        public string SchoolName { get; set; }
 
         public List<Class> Classes { get; set; }
 

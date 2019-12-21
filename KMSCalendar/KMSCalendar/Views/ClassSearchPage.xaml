@@ -70,17 +70,11 @@
                 </Grid>
                 
                 
-                
-           
                     <!-- This is for the periods view -->
-
-
                 <Frame VerticalOptions="CenterAndExpand"
                        Margin="16,0,16,0"
                        BackgroundColor="Transparent"
                        CornerRadius="10">
-
-         
                     
                     <Grid>
                         <Grid x:Name="PopUpGrid"
