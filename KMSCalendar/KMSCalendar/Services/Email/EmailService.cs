@@ -13,7 +13,7 @@ namespace KMSCalendar.Services.Email
     public interface IEmailService
     {
         //* Interface Methods
-        void SendResetPasswordEmail(User recipient);
+        void SendResetPasswordEmail(User recipient, string token);
     }
 
     public class EmailService : IEmailService
@@ -29,7 +29,7 @@ namespace KMSCalendar.Services.Email
         public EmailService(AppSettings appSettings) => emailInfo = appSettings.EmailInfo;
 
         //* Public Methods
-        public void SendResetPasswordEmail(User recipient)
+        public void SendResetPasswordEmail(User recipient, string token)
         {
             string html = File.ReadAllText(htmlFile);
 

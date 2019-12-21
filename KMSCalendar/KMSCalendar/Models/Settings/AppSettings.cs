@@ -83,7 +83,8 @@ namespace KMSCalendar.Models.Settings
                 return new AppSettings(settings);
             }
 
-            return null;
+            throw new Exception($"A Singleton Instance of {nameof(AppSettings)} has already " +
+                "been initialized.");
         }
 
         //* Private Class

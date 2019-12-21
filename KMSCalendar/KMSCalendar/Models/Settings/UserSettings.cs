@@ -116,7 +116,8 @@ namespace KMSCalendar.Models.Settings
                 settings.UpdateDictionaryAsync();
             }
 
-            return settings;
+            throw new Exception($"A Singleton Instance of {nameof(UserSettings)} has already " +
+                "been initialized.");
         }
 
         //* Public Methods
