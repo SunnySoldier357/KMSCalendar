@@ -23,28 +23,18 @@ namespace KMSCalendar.ViewModels
         }
 
         public ICommand UnsubscribeCommand { get; set; }
-        public ICommand ReloadButtonClicked { get; set; }
+        public ICommand UnsubscribeButtonClicked { get; set; }
 
         public EnrolledClassesViewModel()
         {
             UpdateData();
 
-            ReloadButtonClicked = new Command((object item) =>
+            UnsubscribeButtonClicked = new Command((object item) =>
             {
-                //Todo: fix this goofy way of getting the class Id
-                var label = item as Label;
-                Guid classId = new Guid(label.Text);
-                foreach(Class @class in Classes)
-                {
-                    if (@class.Id == classId)
-                    {
-                        @class.UserId = (Application.Current as App).SignedInUser.Id;
-                        ExecuteUnsubscribeCommand(@class);
-                    }
-                }
+                Class @class = item as Class;
+                @class.UserId = (Application.Current as App).SignedInUser.Id;
+                ExecuteUnsubscribeCommand(@class);
             });
-
-                //UnsubscribeCommand = new Command(async () => await ExecuteUnsubscribeCommand());
 
             MessagingCenter.Subscribe<ClassSearchPage>(this, "UpdateClasses",
                 (sender) => UpdateData());
@@ -65,8 +55,5 @@ namespace KMSCalendar.ViewModels
             MessagingCenter.Send(this, "LoadAssignments");
             //Todo: If there are no other users in the class, delete the class
         }
-
-        
     }
-
 }

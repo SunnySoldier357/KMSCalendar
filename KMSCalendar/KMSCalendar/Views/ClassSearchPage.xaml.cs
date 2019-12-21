@@ -44,9 +44,9 @@ namespace KMSCalendar.Views
         /// <param name="periodChosen">Period that the user is in</param>
         public async Task GoToCalendarAsync(int periodChosen)
         {
-            // TODO: periodChosen not used??? remove if not needed
             Class selectedClass = ViewModel.SelectedClass;
             selectedClass.UserId = app.SignedInUser.Id;
+            selectedClass.Period = periodChosen;
 
             ClassManager.EnrollUserInClass(selectedClass);
 
@@ -107,7 +107,6 @@ namespace KMSCalendar.Views
             if (PeriodsListView.SelectedItem != null)
             {
                 int periodChosen = (int)PeriodsListView.SelectedItem;
-
                 await GoToCalendarAsync(periodChosen);
             }
         }

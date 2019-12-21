@@ -29,7 +29,7 @@ namespace KMSCalendar.Services.Data
         {
             string sql = @"IF NOT EXISTS 
                 (
-                    SELECT 1 FROM dbo.CLass_Periods
+                    SELECT 1 FROM dbo.Class_Periods
                     WHERE ClassId = @Id AND Period = @Period
                 ) 
                 INSERT INTO dbo.Class_Periods (ClassId, Period)

@@ -12,16 +12,6 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EnrolledClassesPage : ContentPage
     {
-        public EnrolledClassesPage()
-        {
-            InitializeComponent();
-
-
-        }
-
-        private void UnsubscribeButton_Clicked(object sender, EventArgs e)
-        {
-            
-        }
+        public EnrolledClassesPage() => InitializeComponent();
     }
 }

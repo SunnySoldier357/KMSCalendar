@@ -27,7 +27,7 @@
                                        Margin="4"
                                        Padding="-4">
 
-                                    <Grid>
+                                    <Grid x:Name="Item">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="28"/>
                                             <RowDefinition Height="16"/>
@@ -37,11 +37,6 @@
                                             <ColumnDefinition />
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
-
-                                        <Label x:Name="ClassId"
-                                               TextColor="Transparent"
-                                               FontSize="0"
-                                               Text="{Binding Id}" />
 
                                         <Label x:Name="ClassName"
                                                Margin="12, 6, 0, 0"
@@ -62,8 +57,6 @@
                                                    TextColor="{DynamicResource Text}" />
                                         </StackLayout>
                                         
-
-
                                         <Label Margin="12, -8, 0, 0"
                                                Text="{Binding Teacher.Name}"
                                                FontSize="12"
@@ -80,8 +73,8 @@
                                                 Grid.Column="1"
                                                 HorizontalOptions="End"
                                                 BindingContext="{Binding Source={x:Reference ClassListView}, Path=BindingContext}"   
-                                                Command="{Binding ReloadButtonClicked}"
-                                                CommandParameter="{Binding Source={x:Reference ClassId}}" />
+                                                Command="{Binding UnsubscribeButtonClicked}"
+                                                CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" />
                                      </Grid>
 
                                 </Frame>

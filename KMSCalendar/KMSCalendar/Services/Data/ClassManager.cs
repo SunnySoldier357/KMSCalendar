@@ -8,10 +8,22 @@ namespace KMSCalendar.Services.Data
     public static class ClassManager
     {
         //* Public Methods
-
+        
+        /// <summary>
+        /// Enrolls a user into a class via inserting the class, user, and period into dbo.Class_Users
+        /// The user will not be enrolled into the same class and period, but can be enrolled into a different period.
+        /// </summary>
+        /// <param name="class">The class the user wants to join.
+        ///     Id, UserId, Period, cannot be null</param>
+        /// <returns> 1 if the user is enrolled, 0 if he is not enrolled.</returns>
         public static int EnrollUserInClass(Class @class)
         {
-            string sql = @"INSERT INTO dbo.Class_Users (ClassId, UserId, Period)
+            string sql = @"IF NOT EXISTS 
+                (
+                    SELECT 1 FROM dbo.Class_Users
+                    WHERE ClassId = @Id AND UserId = @UserId AND Period = @Period
+                ) 
+                INSERT INTO dbo.Class_Users (ClassId, UserId, Period)
                 VALUES (@Id, @UserId, @Period)";
 
             return AzureDataStore.SaveData(sql, @class);
@@ -66,7 +78,7 @@ namespace KMSCalendar.Services.Data
 
         public static int RemoveClassUser(Class @class)
         {
-            string sql = @"DELETE FROM dbo.Class_Users WHERE ClassId = @Id AND UserId = @UserId";
+            string sql = @"DELETE FROM dbo.Class_Users WHERE ClassId = @Id AND UserId = @UserId AND Period = @Period";
 
             return AzureDataStore.DeleteData<Class>(sql, @class);
         }
