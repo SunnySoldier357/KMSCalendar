@@ -39,6 +39,8 @@ namespace KMSCalendar.Services.Email
             html = html.Replace("{{token}}", token)
                 .Replace("{{currentDate}}", DateTime.Today.ToString("d MMMM yyyy",
                     DateTimeFormatInfo.InvariantInfo))
+                .Replace("{{currentTime}}", DateTime.Now.ToString("h:mm tt",
+                    DateTimeFormatInfo.InvariantInfo))
                 .Replace("{{currentYear}}", $"{DateTime.Today.Year}");
 
             var message = new MimeMessage()
