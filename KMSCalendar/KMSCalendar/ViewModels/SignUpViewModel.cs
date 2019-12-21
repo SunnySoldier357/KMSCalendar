@@ -15,7 +15,7 @@ using System;
 
 namespace KMSCalendar.ViewModels
 {
-    public class SignUpViewModel : LoginViewModel
+    public class SignUpViewModel : LogInViewModel
     {
         //* Private Properties
         private string confirmPassword;
@@ -54,7 +54,7 @@ namespace KMSCalendar.ViewModels
 
         //* Public Methods
         public void ExecuteAlreadyUserCommand() =>
-            (Application.Current as App).MainPage = new LoginPage();
+            (Application.Current as App).MainPage = new LogInPage();
 
         public new async Task ExecuteAuthenticateUserCommand()
         {
