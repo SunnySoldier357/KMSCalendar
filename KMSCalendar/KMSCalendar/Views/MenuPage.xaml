@@ -31,7 +31,7 @@
                             <StackLayout Orientation="Horizontal">
                                 <Image HeightRequest="20"
                                        WidthRequest="20"
-                                       Source="{Binding Icon}"
+                                       Source="{Binding Source}"
                                        Margin="20,5,0,-3" />
 
                                 <Label Margin="60,15,0,7"

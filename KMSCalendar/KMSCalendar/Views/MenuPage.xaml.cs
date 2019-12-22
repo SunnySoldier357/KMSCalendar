@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using KMSCalendar.Extensions;
+using KMSCalendar.Models.Navigation;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using KMSCalendar.Models.Navigation;
-using System.Threading.Tasks;
-
+ 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -28,31 +29,36 @@ namespace KMSCalendar.Views
                 {
                     Id = MenuItemType.Calendar,
                     Title = "Calendar",
-                    Icon = "calendar.png"
+                    Source = ImageResourceExtension.GetImageSource("calendar.png",
+                        nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Search,
                     Title = "Add New Class",
-                    Icon = "search.png"
+                    Source = ImageResourceExtension.GetImageSource("search.png",
+                        nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.EnrolledClasses,
                     Title ="My Enrolled Classes",
-                    Icon = "file.png"
+                    Source = ImageResourceExtension.GetImageSource("file.png",
+                        nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.About,
                     Title ="About",
-                    Icon = "file.png"
+                    Source = ImageResourceExtension.GetImageSource("file.png",
+                        nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Settings,
                     Title = "Settings",
-                    Icon = "gear.png"
+                    Source = ImageResourceExtension.GetImageSource("gear.png",
+                        nameof(MenuPage))
                 },
             };
 

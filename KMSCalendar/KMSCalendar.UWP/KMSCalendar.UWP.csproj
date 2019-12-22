@@ -105,11 +105,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="calendar.png" />
-    <Content Include="calendar_white.png" />
     <Content Include="delete-icon.png" />
-    <Content Include="file.png" />
-    <Content Include="gear.png" />
     <Content Include="leftArrow.png" />
     <Content Include="loupe.png" />
     <Content Include="next.png" />
@@ -145,7 +141,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <Content Include="search.png" />
     <Content Include="upload.png" />
     <Content Include="user.png" />
     <Content Include="userIcon.png" />
