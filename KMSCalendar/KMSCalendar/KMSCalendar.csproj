@@ -28,6 +28,7 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Assets\AboutPage\xamarin_logo.png" />
     <EmbeddedResource Include="Assets\SettingsPage\user.png" />
     <EmbeddedResource Include="Assets\MenuPage\calendar.png" />
     <EmbeddedResource Include="Assets\MenuPage\calendar_white.png" />
@@ -35,7 +36,6 @@
     <EmbeddedResource Include="Assets\MenuPage\gear.png" />
     <EmbeddedResource Include="Assets\MenuPage\search.png" />
     <EmbeddedResource Include="Assets\LogInPage\background.png" />
-    <EmbeddedResource Include="Assets\AboutPage\xamarin_logo.png" />
     <EmbeddedResource Include="Assets\MainPage\tab_feed.png" />
     <EmbeddedResource Include="Assets\SignUpPage\background.png" />
     <Content Include="Services\Email\ResetPasswordPage.html">
