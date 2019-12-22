@@ -120,6 +120,7 @@ namespace KMSCalendar.ViewModels
         {
             EmailVisibility = true;
             VerificationVisibility = false;
+            GoBackVisibility = true;
 
             this.emailService = emailService;
 
