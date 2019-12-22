@@ -6,7 +6,7 @@ using KMSCalendar.Models.Navigation;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
- 
+
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -29,36 +29,36 @@ namespace KMSCalendar.Views
                 {
                     Id = MenuItemType.Calendar,
                     Title = "Calendar",
-                    Source = ImageResourceExtension.GetImageSource("calendar.png",
+                    Source = new ThemeImageSource("calendar.png", "calendar_white.png",
                         nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Search,
                     Title = "Add New Class",
-                    Source = ImageResourceExtension.GetImageSource("search.png",
-                        nameof(MenuPage))
+                    Source = new ThemeImageSource("search.png",
+                        folderName: nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.EnrolledClasses,
                     Title ="My Enrolled Classes",
-                    Source = ImageResourceExtension.GetImageSource("file.png",
-                        nameof(MenuPage))
+                    Source = new ThemeImageSource("file.png",
+                        folderName: nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.About,
                     Title ="About",
-                    Source = ImageResourceExtension.GetImageSource("file.png",
-                        nameof(MenuPage))
+                    Source = new ThemeImageSource("file.png",
+                        folderName: nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Settings,
                     Title = "Settings",
-                    Source = ImageResourceExtension.GetImageSource("gear.png",
-                        nameof(MenuPage))
+                    Source = new ThemeImageSource("gear.png",
+                        folderName: nameof(MenuPage))
                 },
             };
 

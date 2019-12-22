@@ -1,15 +1,10 @@
-﻿using Xamarin.Forms;
+﻿using KMSCalendar.Extensions;
 
 namespace KMSCalendar.Models.Navigation
 {
     public class HomeMenuItem
     {
         //* Public Properties
-
-        /// <summary>
-        /// The image source of the icon for each navigation item.
-        /// </summary>
-        public ImageSource Source { get; set; }
 
         /// <summary>
         /// The page to open when this Menu Item is clicked.
@@ -20,5 +15,10 @@ namespace KMSCalendar.Models.Navigation
         /// The Title that is shown in the Hamburger Menu.
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// The image source of the icon for each navigation item.
+        /// </summary>
+        public ThemeImageSource Source { get; set; }
     }
 }
