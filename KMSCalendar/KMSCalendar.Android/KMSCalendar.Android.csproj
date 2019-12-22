@@ -108,7 +108,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\rightArrow.png" />
     <AndroidResource Include="Resources\drawable-hdpi\leftArrow.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\leftArrow.png" />
-    <AndroidResource Include="Resources\drawable\BackgroundForLogin.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\add.png" />
