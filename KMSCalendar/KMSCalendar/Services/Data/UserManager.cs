@@ -42,5 +42,17 @@ namespace KMSCalendar.Services.Data
 
             return AzureDataStore.SaveData(sql, user);
         }
+
+        /// <summary>
+        /// Updates the user's password hash with the new one
+        /// </summary>
+        /// <param name="user">Id and Password must not be null</param>
+        /// <returns> 1 if successful, 0 if failed.</returns>
+        public static int UpdateUser(User user)
+        {
+            string sql = "UPDATE dbo.Users SET Password = @Password WHERE Id = @Id";
+
+            return AzureDataStore.SaveData<User>(sql, user);
+        }
     }
 }

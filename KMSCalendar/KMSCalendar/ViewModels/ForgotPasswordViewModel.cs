@@ -170,8 +170,8 @@ namespace KMSCalendar.ViewModels
                 User user = UserManager.LoadUserFromEmail(Email);
                 user.Password = PasswordHasher.HashPassword(Password);
 
-                // TODO: Mateo update the user in the DB
-                // UserManager.UpdateUser(user);
+                //Resets the user's password in the DB
+                UserManager.UpdateUser(user);
 
                 SwapViews();
             }
