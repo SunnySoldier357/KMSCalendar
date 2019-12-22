@@ -11,6 +11,16 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Assets\AboutPage\xamarin_logo.png" />
+    <None Remove="Assets\LogInPage\background.png" />
+    <None Remove="Assets\MainPage\tab_feed.png" />
+    <None Remove="Assets\MenuPage\calendar.png" />
+    <None Remove="Assets\MenuPage\calendar_white.png" />
+    <None Remove="Assets\MenuPage\file.png" />
+    <None Remove="Assets\MenuPage\gear.png" />
+    <None Remove="Assets\MenuPage\search.png" />
+    <None Remove="Assets\SettingsPage\user.png" />
+    <None Remove="Assets\SignUpPage\background.png" />
     <None Remove="Services\Email\ResetPasswordPage.html" />
   </ItemGroup>
 
@@ -18,6 +28,16 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Assets\SettingsPage\user.png" />
+    <EmbeddedResource Include="Assets\MenuPage\calendar.png" />
+    <EmbeddedResource Include="Assets\MenuPage\calendar_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\file.png" />
+    <EmbeddedResource Include="Assets\MenuPage\gear.png" />
+    <EmbeddedResource Include="Assets\MenuPage\search.png" />
+    <EmbeddedResource Include="Assets\LogInPage\background.png" />
+    <EmbeddedResource Include="Assets\AboutPage\xamarin_logo.png" />
+    <EmbeddedResource Include="Assets\MainPage\tab_feed.png" />
+    <EmbeddedResource Include="Assets\SignUpPage\background.png" />
     <Content Include="Services\Email\ResetPasswordPage.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
