@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
+             mc:Ignorable="d"
+             x:Class="KMSCalendar.Views.SchoolEnrollmentView">
+    <ContentView.Content>
+        <StackLayout VerticalOptions="Fill">
+            <Grid>
+                <Grid.RowDefinitions>
+
+                    <!--  Spacing 0  -->
+                    <RowDefinition Height="40*" />
+
+                    <!--  Title 1  -->
+                    <RowDefinition Height="60" />
+
+                    <!--  SubTitle 2  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing 3  -->
+                    <RowDefinition Height="35*" />
+
+                    <!--  Username 4  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing 5  -->
+                    <RowDefinition Height="10*" />
+
+                    <!--  Email 6  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing 7  -->
+                    <RowDefinition Height="10*" />
+
+                    <!--  Password 8  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing 9  -->
+                    <RowDefinition Height="10*" />
+
+                    <!--  Confirm Password 10  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing 11  -->
+                    <RowDefinition Height="10*" />
+
+                    <!--  Button 12  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing 13  -->
+                    <RowDefinition Height="7*" />
+
+                    <!--  Error Message 14  -->
+                    <RowDefinition Height="14" />
+
+                    <!--  Spacing 15  -->
+                    <RowDefinition Height="50*" />
+
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="1"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Start"
+                       Text="HW Calendar"
+                       FontSize="Large"
+                       TextColor="White" />
+
+                <Label Grid.Row="2"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Start"
+                       Text="Search for your school:"
+                       FontSize="Medium"
+                       TextColor="{StaticResource NavigationTertiary}" />
+
+                <Frame Grid.Row="4"
+                       Style="{StaticResource LoginEntryFrame}">
+
+                    <control:TransparentEntry x:Name="UsernameEntry"
+                                              Style="{StaticResource LoginEntry}"
+                                              Text="{Binding .}"
+                                              Placeholder="Username" />
+                </Frame>
+
+
+
+                <Frame Grid.Row="10"
+                       Style="{StaticResource LoginEntryFrame}">
+
+                    <control:TransparentEntry x:Name="ConfirmPasswordEntry"
+                                              Style="{StaticResource LoginEntry}"
+                                              Text="{Binding .}"
+                                              IsPassword="True" />
+                </Frame>
+
+                <Button x:Name="AuthenticateSignUpButton"
+                        Grid.Row="12"
+                        WidthRequest="100"
+                        HorizontalOptions="Center"
+                        Padding="5"
+                        BackgroundColor="{StaticResource NavigationTertiary}"
+                        CornerRadius="20"
+                        BorderColor="Transparent"
+                        Text="SIGN UP"
+                        TextColor="White"
+                        Command="{Binding AuthenticateUserCommand}" />
+
+                <StackLayout Grid.Row="14"
+                             Orientation="Vertical">
+
+                    <Label x:Name="SignUpValidationLabel"
+                           HorizontalOptions="Center"
+                           Margin="0,10,10,0"
+                           BackgroundColor="Transparent"
+                           Text="{Binding LoginValidationMessage}"
+                           FontSize="Small"
+                           TextColor="{StaticResource NavigationTertiary}" />
+
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
