@@ -62,7 +62,7 @@ namespace KMSCalendar.ViewModels
             userSettings.SignedInUserId = Guid.Empty;
             app.SignedInUser = null;
 
-            app.MainPage = new LoginPage();
+            app.MainPage = new LogInPage();
         }
     }
 }

@@ -15,7 +15,7 @@ using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LogInViewModel : BaseViewModel
     {
         //* Private Properties
         private int logInAttempts;
@@ -67,10 +67,10 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructor
-        public LoginViewModel() :
+        public LogInViewModel() :
             this(AppContainer.Container.Resolve<UserSettings>()) { }
 
-        public LoginViewModel(UserSettings userSettings)
+        public LogInViewModel(UserSettings userSettings)
         {
             Title = "Log In";
             this.userSettings = userSettings;

@@ -40,7 +40,7 @@ namespace KMSCalendar
                 userSettings.PropertyChanged += ThemeChanged;
 
                 if (userSettings.SignedInUserId.Equals(Guid.Empty))
-                    MainPage = new LoginPage();
+                    MainPage = new LogInPage();
                 else
                 {
                     try
@@ -55,7 +55,7 @@ namespace KMSCalendar
                     if (SignedInUser != null)
                         MainPage = new MainPage();
                     else
-                        MainPage = new LoginPage();
+                        MainPage = new LogInPage();
                 }
             }
         }
