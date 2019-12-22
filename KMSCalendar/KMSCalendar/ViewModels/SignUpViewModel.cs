@@ -21,6 +21,8 @@ namespace KMSCalendar.ViewModels
         private string confirmPassword;
         private string userName;
 
+        private string zipCode;
+
         private bool signUpVisibility;
         private bool schoolEnrollmentVisibility;
 
@@ -41,6 +43,12 @@ namespace KMSCalendar.ViewModels
         {
             get => userName;
             set => setProperty(ref userName, value);
+        }
+
+        public string ZipCode
+        {
+            get => zipCode;
+            set => setProperty(ref zipCode, value);
         }
 
         public bool SchoolEnrollmentVisibility
