@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KMSCalendar.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,13 @@ namespace KMSCalendar.Services.Data
 {
     public static class SchoolManager
     {
+        public static List<School> LoadSchools()
+        {
+            string sql = @"SELECT * FROM dbo.Schools";
+
+            return AzureDataStore.LoadData<School>(sql);
+        }
+
         /// <summary>
         /// Returns the name of a school, given it's Id.
         /// </summary>
@@ -17,6 +25,13 @@ namespace KMSCalendar.Services.Data
                 WHERE Id = @Id";
 
             return AzureDataStore.LoadDataWithGuid<string>(sql, schoolId).FirstOrDefault();
+        }
+
+        public static int PutInSchool(School school)
+        {
+            string sql = @"INSERT INTO dbo.Schools (Id, Name, ZipCode) VALUES (@Id, @Name, @ZipCode)";
+
+            return AzureDataStore.SaveData(sql, school);
         }
     }
 }

@@ -21,7 +21,7 @@
                     <RowDefinition Height="40" />
 
                     <!--  Spacing 3  -->
-                    <RowDefinition Height="35*" />
+                    <RowDefinition Height="20*" />
 
                     <!--  Search 4  -->
                     <RowDefinition Height="40" />
@@ -45,8 +45,13 @@
                     <RowDefinition Height="14" />
 
                     <!--  Spacing 11  -->
-                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="5*" />
 
+                    <!--  Button 12  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing 13  -->
+                    <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="1"
@@ -82,7 +87,7 @@
                                                   Style="{StaticResource LoginEntry}"
                                                   Text="{Binding ZipCode}"
                                                   Placeholder="98027"
-                                                  HorizontalOptions="Center"/>
+                                                  HorizontalOptions="Center" />
                     </Frame>
 
                     <Button x:Name="ZipCodeSearchButton"
@@ -92,13 +97,14 @@
                             BackgroundColor="{StaticResource NavigationTertiary}"
                             BorderColor="Transparent"
                             TextColor="White"
-                            Command="{Binding FilterZipCodesCommand}"/>
+                            Command="{Binding FilterZipCodesCommand}" />
                 </StackLayout>
 
                 <ListView x:Name="SchoolListView"
                           Grid.Row="6"
                           ItemsSource="{Binding FilteredSchoolList}"
-                          Margin="20, 0, 20, 0">
+                          Margin="20, 0, 20, 0"
+                          SelectedItem="{Binding SelectedSchool}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -115,10 +121,12 @@
 
                                         <Label Text="{Binding Name}"
                                                FontSize="14"
-                                               LineBreakMode="NoWrap" />
+                                               LineBreakMode="NoWrap"
+                                               VerticalOptions="Center" />
 
                                         <Label Grid.Column="1"
                                                HorizontalOptions="End"
+                                               VerticalOptions="Center"
                                                Text="{Binding ZipCode}"
                                                FontSize="11"
                                                LineBreakMode="NoWrap" />
@@ -130,14 +138,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-
-
-
-
-
-
-
-                <Button x:Name="AuthenticateSignUpButton"
+                <Button x:Name="ChooseSchoolButton"
                         Grid.Row="8"
                         WidthRequest="200"
                         HorizontalOptions="Center"
@@ -147,11 +148,7 @@
                         BorderColor="Transparent"
                         Text="Choose This School"
                         TextColor="White"
-                        Command="{Binding AuthenticateUserCommand}" />
-
-
-
-                
+                        Command="{Binding CreateUserCommand}" />
 
                 <StackLayout Grid.Row="10"
                              Orientation="Vertical">
@@ -165,6 +162,17 @@
                            TextColor="{StaticResource NavigationTertiary}" />
 
                 </StackLayout>
+
+                <Button x:Name="NewSchoolViewButton"
+                        Grid.Row="12"
+                        HorizontalOptions="Center"
+                        Padding="5"
+                        BackgroundColor="{StaticResource NavigationTertiary}"
+                        CornerRadius="20"
+                        BorderColor="Transparent"
+                        Text="Add a New School"
+                        TextColor="White"
+                        Command="{Binding NewSchoolViewCommand}" />
             </Grid>
         </StackLayout>
     </ContentView.Content>

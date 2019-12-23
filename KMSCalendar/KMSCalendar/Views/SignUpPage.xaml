@@ -18,6 +18,9 @@
             <views:SchoolEnrollmentView x:Name="SchoolEnrollmentView"
                                         IsVisible="{Binding SchoolEnrollmentVisibility}"/>
 
+            <views:NewSchoolView x:Name="NewSchoolView"
+                                 IsVisible="{Binding NewSchoolVisibility}" />
+
             <ContentView IsVisible="{Binding SignUpVisibility}">
                 <StackLayout VerticalOptions="Fill">
                     <Grid>

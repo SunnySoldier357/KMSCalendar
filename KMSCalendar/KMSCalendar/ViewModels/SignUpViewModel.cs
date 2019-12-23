@@ -24,15 +24,23 @@ namespace KMSCalendar.ViewModels
 
         private string zipCode;
         private List<School> filteredSchoolList;
+        private School selectedSchool;
+
+        private string name;
 
         private bool signUpVisibility;
         private bool schoolEnrollmentVisibility;
+        private bool newSchoolVisibility;
 
         //* Public Properties
         public ICommand AlreadyUserCommand { get; set; }
         public new ICommand AuthenticateUserCommand { get; set; }
-        public new ICommand FilterZipCodesCommand { get; set; }
-
+        public ICommand CreateUserCommand { get; set; }
+        public ICommand FilterZipCodesCommand { get; set; }
+        public ICommand NewSchoolViewCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
+        public ICommand AddNewSchoolCommand { get; set; }
+        
         [PropertyValueMatch(nameof(Password), 
             ErrorMessage = "The Passwords do not match!")]
         public string ConfirmPassword
@@ -59,16 +67,31 @@ namespace KMSCalendar.ViewModels
             get => filteredSchoolList;
             set => setProperty(ref filteredSchoolList, value);
         }
+        public string Name
+        {
+            get => name;
+            set => setProperty(ref name, value);
+        }
+        public School SelectedSchool
+        {
+            get => selectedSchool;
+            set => setProperty(ref selectedSchool, value);
+        }
 
+        public bool SignUpVisibility
+        {
+            get => signUpVisibility;
+            set => setProperty(ref signUpVisibility, value);
+        }
         public bool SchoolEnrollmentVisibility
         {
             get => schoolEnrollmentVisibility;
             set => setProperty(ref schoolEnrollmentVisibility, value);
         }
-        public bool SignUpVisibility
+        public bool NewSchoolVisibility
         {
-            get => signUpVisibility;
-            set => setProperty(ref signUpVisibility, value);
+            get => newSchoolVisibility;
+            set => setProperty(ref newSchoolVisibility, value);
         }
 
 
@@ -77,28 +100,7 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Sign Up";
 
-            SchoolList = new List<School>
-            {
-                new School
-                {
-                    Name = "Issaquah High School",
-                    State = "WA",
-                    ZipCode = "98027"
-                },
-                new School
-                {
-                    Name = "Skyline High School",
-                    State = "WA",
-                    ZipCode = "98075"
-                },
-                new School
-                {
-                    Name = "Eastside Catholic High School",
-                    State = "WA",
-                    ZipCode = "98074"
-                }
-            };
-
+            SchoolList = SchoolManager.LoadSchools();
             FilteredSchoolList = SchoolList;
 
             SignUpVisibility = true;
@@ -108,15 +110,19 @@ namespace KMSCalendar.ViewModels
             UserName = string.Empty;
 
             AlreadyUserCommand = new Command(() => ExecuteAlreadyUserCommand());
-            AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
+            AuthenticateUserCommand = new Command(() => ExecuteAuthenticateUserCommand());
+            CreateUserCommand = new Command(() => SignUpUser());
             FilterZipCodesCommand = new Command(() => FilterData(ZipCode));
-;        }
+            NewSchoolViewCommand = new Command(() => GoToNewSchoolView());
+            GoBackCommand = new Command(() => GoBack());
+            AddNewSchoolCommand = new Command(() => AddNewSchool());
+        }
 
         //* Public Methods
         public void ExecuteAlreadyUserCommand() =>
             (Application.Current as App).MainPage = new LogInPage();
 
-        public new async Task ExecuteAuthenticateUserCommand()
+        public new void ExecuteAuthenticateUserCommand()
         {
             if (Validate())
             {
@@ -130,10 +136,7 @@ namespace KMSCalendar.ViewModels
                 }
             }
         }
-
-
-
-
+               
         /// <summary>
         /// filters the list of teachers only if the teachers name contains the searchbar term entered
         /// </summary>
@@ -146,30 +149,45 @@ namespace KMSCalendar.ViewModels
                 FilteredSchoolList = SchoolList.Where(x => x.ZipCode.ToLower().Contains(filter.ToLower())).ToList();
         }
 
+        private void AddNewSchool()
+        {
+            School school = new School
+            {
+                Name = this.Name,
+                ZipCode = this.ZipCode,
+            };
 
+            SchoolManager.PutInSchool(school);
+            SchoolList.Add(school);
+            FilterData(ZipCode);
+            GoBack();
+        }
 
 
         private void SignUpUser()
         {
-            string hashedPassword = PasswordHasher.HashPassword(Password);
-
-            User user = new User
+            if(SelectedSchool != null)
             {
-                Id = Guid.NewGuid(),
-                Email = Email.Trim(),
-                UserName = UserName.Trim(),
-                Password = hashedPassword,
-                SchoolId = new Guid("6e67224a - e398 - 430a - b7b6 - b3e0c0c8c4ae")
-            };
+                string hashedPassword = PasswordHasher.HashPassword(Password);
 
-            UserManager.PutInUser(user);
+                User user = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Email = Email.Trim(),
+                    UserName = UserName.Trim(),
+                    Password = hashedPassword,
+                    SchoolId = SelectedSchool.Id
+                };
 
-            App app = Application.Current as App;
+                UserManager.PutInUser(user);
 
-            app.SignedInUser = user;
-            userSettings.SignedInUserId = user.Id;
+                App app = Application.Current as App;
 
-            app.MainPage = new MainPage();
+                app.SignedInUser = user;
+                userSettings.SignedInUserId = user.Id;
+
+                app.MainPage = new MainPage();
+            }
         }
 
         private void SwapViews()
@@ -184,6 +202,16 @@ namespace KMSCalendar.ViewModels
                 SchoolEnrollmentVisibility = false;
                 SignUpVisibility = true;
             }
+        }
+        private void GoToNewSchoolView()
+        {
+            SchoolEnrollmentVisibility = false;
+            NewSchoolVisibility = true;
+        }
+        private void GoBack()
+        {
+            NewSchoolVisibility = false;
+            SchoolEnrollmentVisibility = true;
         }
     }
 }

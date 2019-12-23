@@ -19,6 +19,18 @@ namespace KMSCalendar.Services.Data
 
         //* Public Methods
         /// <summary>
+        /// Loads a list of data from the db given an sql statement.
+        /// </summary>
+        /// <typeparam name="T">The return type of which the list should be.</typeparam>
+        /// <param name="sql">The sql query command string.</param>
+        /// <returns>List of Objcets of type T from the db.</returns>
+        public static List<T> LoadData<T>(string sql)
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))
+                return cnn.Query<T>(sql).AsList();
+        }
+
+        /// <summary>
         /// Loads a list of data from the db given an sql statement and a Guid.
         /// </summary>
         /// <typeparam name="T">The return type of which the list should be.</typeparam>
