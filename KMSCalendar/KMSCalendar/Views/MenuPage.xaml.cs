@@ -36,28 +36,28 @@ namespace KMSCalendar.Views
                 {
                     Id = MenuItemType.Search,
                     Title = "Add New Class",
-                    Source = new ThemeImageSource("search.png",
-                        folderName: nameof(MenuPage))
+                    Source = new ThemeImageSource("plus_blue.png", "plus_white.png",
+                        nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.EnrolledClasses,
                     Title ="My Enrolled Classes",
-                    Source = new ThemeImageSource("file.png",
+                    Source = new ThemeImageSource("edit_blue.png", "edit_white.png",
                         folderName: nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.About,
                     Title ="About",
-                    Source = new ThemeImageSource("file.png",
+                    Source = new ThemeImageSource("book_blue.png", "book_white.png",
                         folderName: nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Settings,
                     Title = "Settings",
-                    Source = new ThemeImageSource("gear.png",
+                    Source = new ThemeImageSource("settings_blue.png", "settings_white.png",
                         folderName: nameof(MenuPage))
                 },
             };
