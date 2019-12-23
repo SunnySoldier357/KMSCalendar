@@ -44,10 +44,13 @@ namespace KMSCalendar.Services.Data
             return AzureDataStore.LoadDataWithGuid<Class>(sql, schoolId);
         }
 
+        /// <summary>
+        /// Returns a list of classes that a user is enrolled in, given the user's Id.
+        /// </summary>
+        /// <param name="userId">The user's Id (Guid)</param>
+        /// <returns>List of classes that the user is enrolled in.</returns>
         public static List<Class> LoadEnrolledClasses(Guid userId)
         {
-            // Get the ClassId's from db.Class_Users; then get all the classes
-            // with those classes. HINT: USE INNER JOIN
             string sql = @"SELECT dbo.Classes.Id, dbo.Class_Users.Period, dbo.Classes.Name, dbo.Classes.TeacherId
                 FROM dbo.Classes
                 JOIN dbo.Class_Users
@@ -62,9 +65,7 @@ namespace KMSCalendar.Services.Data
         /// its period to db.Class_Periods.
         /// </summary>
         /// <param name="@class">The class to add to the db.</param>
-        /// <returns>
-        /// The number of rows affected in the db.
-        /// </returns>
+        /// <returns>The number of rows affected in the db.</returns>
         public static int PutInClass(Class @class)
         {
             string sql = @"INSERT INTO dbo.Classes (Id, Period, Name, TeacherId, UserId, SchoolId)
@@ -76,6 +77,14 @@ namespace KMSCalendar.Services.Data
             return PeriodManager.PutInClassPeriod(@class);
         }
 
+        /// <summary>
+        /// Removes a user from enrollment in a class.
+        /// </summary>
+        /// <param name="class">
+        /// The class you wich the user to unenroll from.
+        /// Id, UserID, and Period must be non-null.
+        /// </param>
+        /// <returns>The number of rows deleted from the db.</returns>
         public static int RemoveClassUser(Class @class)
         {
             string sql = @"DELETE FROM dbo.Class_Users WHERE ClassId = @Id AND UserId = @UserId AND Period = @Period";

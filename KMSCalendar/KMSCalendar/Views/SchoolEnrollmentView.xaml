@@ -23,40 +23,28 @@
                     <!--  Spacing 3  -->
                     <RowDefinition Height="35*" />
 
-                    <!--  Username 4  -->
+                    <!--  Search 4  -->
                     <RowDefinition Height="40" />
 
                     <!--  Spacing 5  -->
-                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="4*" />
 
-                    <!--  Email 6  -->
-                    <RowDefinition Height="40" />
+                    <!--  ListView 6  -->
+                    <RowDefinition Height="100*" />
 
                     <!--  Spacing 7  -->
-                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="7*" />
 
-                    <!--  Password 8  -->
+                    <!--  Button 8  -->
                     <RowDefinition Height="40" />
 
                     <!--  Spacing 9  -->
-                    <RowDefinition Height="10*" />
-
-                    <!--  Confirm Password 10  -->
-                    <RowDefinition Height="40" />
-
-                    <!--  Spacing 11  -->
-                    <RowDefinition Height="10*" />
-
-                    <!--  Button 12  -->
-                    <RowDefinition Height="40" />
-
-                    <!--  Spacing 13  -->
                     <RowDefinition Height="7*" />
 
-                    <!--  Error Message 14  -->
+                    <!--  Error Message 10  -->
                     <RowDefinition Height="14" />
 
-                    <!--  Spacing 15  -->
+                    <!--  Spacing 11  -->
                     <RowDefinition Height="50*" />
 
                 </Grid.RowDefinitions>
@@ -75,39 +63,97 @@
                        FontSize="Medium"
                        TextColor="{StaticResource NavigationTertiary}" />
 
-                <Frame Grid.Row="4"
-                       Style="{StaticResource LoginEntryFrame}">
+                <StackLayout Orientation="Horizontal" 
+                             Grid.Row="4"
+                             Margin="15, 0, 15, 0"
+                             HorizontalOptions="Center"
+                             HeightRequest="30">
+                    
+                    <Label Text="Search for your school via zip code: " 
+                           TextColor="White"
+                           VerticalOptions="Center"/>
 
-                    <control:TransparentEntry x:Name="UsernameEntry"
-                                              Style="{StaticResource LoginEntry}"
-                                              Text="{Binding .}"
-                                              Placeholder="Username" />
-                </Frame>
+                    <Frame Style="{StaticResource LoginEntryFrame}"
+                           Margin="5, 0, 5, 0"
+                           VerticalOptions="Center"
+                           CornerRadius="16">
+
+                        <control:TransparentEntry x:Name="ZipCodeEntry"
+                                                  Style="{StaticResource LoginEntry}"
+                                                  Text="{Binding ZipCode}"
+                                                  Placeholder="98027"
+                                                  HorizontalOptions="Center"/>
+                    </Frame>
+
+                    <Button x:Name="ZipCodeSearchButton"
+                            Text="Search"
+                            VerticalOptions="Center"
+                            CornerRadius="16"
+                            BackgroundColor="{StaticResource NavigationTertiary}"
+                            BorderColor="Transparent"
+                            TextColor="White"
+                            Command="{Binding FilterZipCodesCommand}"/>
+                </StackLayout>
+
+                <ListView x:Name="SchoolListView"
+                          Grid.Row="6"
+                          ItemsSource="{Binding FilteredSchoolList}"
+                          Margin="20, 0, 20, 0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="5"
+                                       BackgroundColor="{DynamicResource NavigationBackgroundLight}"
+                                       Margin="4"
+                                       Padding="0">
+
+                                    <Grid Padding="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="{Binding Name}"
+                                               FontSize="14"
+                                               LineBreakMode="NoWrap" />
+
+                                        <Label Grid.Column="1"
+                                               HorizontalOptions="End"
+                                               Text="{Binding ZipCode}"
+                                               FontSize="11"
+                                               LineBreakMode="NoWrap" />
+                                    </Grid>
+
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
 
 
-                <Frame Grid.Row="10"
-                       Style="{StaticResource LoginEntryFrame}">
 
-                    <control:TransparentEntry x:Name="ConfirmPasswordEntry"
-                                              Style="{StaticResource LoginEntry}"
-                                              Text="{Binding .}"
-                                              IsPassword="True" />
-                </Frame>
+
+
+
 
                 <Button x:Name="AuthenticateSignUpButton"
-                        Grid.Row="12"
-                        WidthRequest="100"
+                        Grid.Row="8"
+                        WidthRequest="200"
                         HorizontalOptions="Center"
                         Padding="5"
                         BackgroundColor="{StaticResource NavigationTertiary}"
                         CornerRadius="20"
                         BorderColor="Transparent"
-                        Text="SIGN UP"
+                        Text="Choose This School"
                         TextColor="White"
                         Command="{Binding AuthenticateUserCommand}" />
 
-                <StackLayout Grid.Row="14"
+
+
+                
+
+                <StackLayout Grid.Row="10"
                              Orientation="Vertical">
 
                     <Label x:Name="SignUpValidationLabel"

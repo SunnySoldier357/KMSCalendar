@@ -7,6 +7,11 @@ namespace KMSCalendar.Services.Data
     public static class AssignmentManager
     {
         //* Public Methods
+        /// <summary>
+        /// Returns a list of all assignments of a given class and period.
+        /// </summary>
+        /// <param name="class">The class you want the assignments from. Must have non-null Id and Period.</param>
+        /// <returns>List of all assignments of a given class and period.</returns>
         public static List<Assignment> LoadAssignments(Class @class)
         {
             string sql = @"SELECT * FROM dbo.Assignments
@@ -15,6 +20,14 @@ namespace KMSCalendar.Services.Data
             return AzureDataStore.LoadDataWithParam<Assignment, Class>(sql, @class);
         }
 
+        /// <summary>
+        /// Inserts an assignment into the db.
+        /// </summary>
+        /// <param name="assignment">
+        /// The assignment you want to put into the db.
+        /// Must have a non-null Id, DueDate, Description, UserId, and Period
+        /// </param>
+        /// <returns></returns>
         public static int PutInAssignment(Assignment assignment)
         {
             string sql = @"INSERT INTO dbo.Assignments (Id, DueDate, Description, Name, ClassId, UserId, Period) 
@@ -23,6 +36,11 @@ namespace KMSCalendar.Services.Data
             return AzureDataStore.SaveData(sql, assignment);
         }
 
+        /// <summary>
+        /// Deletes an assignment from the db.
+        /// </summary>
+        /// <param name="assignment">The assignment you want to delete. Must have non-null Id.</param>
+        /// <returns>The number of rows deleted from the db.</returns>
         public static int RemoveAssignment(Assignment assignment)
         {
             string sql = @"DELETE FROM dbo.Assignments

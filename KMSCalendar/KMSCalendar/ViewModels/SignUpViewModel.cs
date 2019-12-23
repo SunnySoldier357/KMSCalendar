@@ -12,6 +12,7 @@ using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 using System;
+using System.Collections.Generic;
 
 namespace KMSCalendar.ViewModels
 {
@@ -21,12 +22,16 @@ namespace KMSCalendar.ViewModels
         private string confirmPassword;
         private string userName;
 
+        private string zipCode;
+        private List<School> filteredSchoolList;
+
         private bool signUpVisibility;
         private bool schoolEnrollmentVisibility;
 
         //* Public Properties
         public ICommand AlreadyUserCommand { get; set; }
         public new ICommand AuthenticateUserCommand { get; set; }
+        public new ICommand FilterZipCodesCommand { get; set; }
 
         [PropertyValueMatch(nameof(Password), 
             ErrorMessage = "The Passwords do not match!")]
@@ -41,6 +46,18 @@ namespace KMSCalendar.ViewModels
         {
             get => userName;
             set => setProperty(ref userName, value);
+        }
+
+        public string ZipCode
+        {
+            get => zipCode;
+            set => setProperty(ref zipCode, value);
+        }
+        public List<School> SchoolList { get; set; }
+        public List<School> FilteredSchoolList
+        {
+            get => filteredSchoolList;
+            set => setProperty(ref filteredSchoolList, value);
         }
 
         public bool SchoolEnrollmentVisibility
@@ -60,6 +77,30 @@ namespace KMSCalendar.ViewModels
         {
             Title = "Sign Up";
 
+            SchoolList = new List<School>
+            {
+                new School
+                {
+                    Name = "Issaquah High School",
+                    State = "WA",
+                    ZipCode = "98027"
+                },
+                new School
+                {
+                    Name = "Skyline High School",
+                    State = "WA",
+                    ZipCode = "98075"
+                },
+                new School
+                {
+                    Name = "Eastside Catholic High School",
+                    State = "WA",
+                    ZipCode = "98074"
+                }
+            };
+
+            FilteredSchoolList = SchoolList;
+
             SignUpVisibility = true;
             SchoolEnrollmentVisibility = false;
 
@@ -68,7 +109,8 @@ namespace KMSCalendar.ViewModels
 
             AlreadyUserCommand = new Command(() => ExecuteAlreadyUserCommand());
             AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
-        }
+            FilterZipCodesCommand = new Command(() => FilterData(ZipCode));
+;        }
 
         //* Public Methods
         public void ExecuteAlreadyUserCommand() =>
@@ -88,6 +130,24 @@ namespace KMSCalendar.ViewModels
                 }
             }
         }
+
+
+
+
+        /// <summary>
+        /// filters the list of teachers only if the teachers name contains the searchbar term entered
+        /// </summary>
+        /// <param name="filter">The searchbar term entered</param>
+        private void FilterData(string filter)
+        {
+            if (string.IsNullOrWhiteSpace(filter))
+                FilteredSchoolList = SchoolList;
+            else
+                FilteredSchoolList = SchoolList.Where(x => x.ZipCode.ToLower().Contains(filter.ToLower())).ToList();
+        }
+
+
+
 
         private void SignUpUser()
         {
