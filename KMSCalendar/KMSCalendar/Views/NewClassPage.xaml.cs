@@ -135,7 +135,7 @@ namespace KMSCalendar.Views
 
         private string getSchoolName(Guid schoolId)
         {
-            return SchoolManager.GetSchoolName(schoolId)[0];
+            return SchoolManager.GetSchoolName(schoolId);
         }
     }
 }

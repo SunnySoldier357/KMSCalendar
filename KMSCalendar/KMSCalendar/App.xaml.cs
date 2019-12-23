@@ -76,7 +76,7 @@ namespace KMSCalendar
         public void PullSchoolName()
         {
             if(SignedInUser != null)
-                SchoolName = SchoolManager.GetSchoolName(SignedInUser.SchoolId)[0];
+                SchoolName = SchoolManager.GetSchoolName(SignedInUser.SchoolId);
         }
 
 
