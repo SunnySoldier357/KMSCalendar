@@ -29,7 +29,7 @@ namespace KMSCalendar.Views
                 {
                     Id = MenuItemType.Calendar,
                     Title = "Calendar",
-                    Source = new ThemeImageSource("calendar.png", "calendar_white.png",
+                    Source = new ThemeImageSource("calendar_blue.png", "calendar_white.png",
                         nameof(MenuPage))
                 },
                 new HomeMenuItem
