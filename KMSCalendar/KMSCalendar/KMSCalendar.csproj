@@ -12,6 +12,8 @@
   <ItemGroup>
     <None Remove="appsettings.json" />
     <None Remove="Assets\AboutPage\xamarin_logo.png" />
+    <None Remove="Assets\ClassSearchPage\search_blue.png" />
+    <None Remove="Assets\ClassSearchPage\search_white.png" />
     <None Remove="Assets\LogInPage\background.png" />
     <None Remove="Assets\MainPage\tab_feed.png" />
     <None Remove="Assets\MenuPage\book_blue.png" />
@@ -38,6 +40,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Assets\AboutPage\xamarin_logo.png" />
+    <EmbeddedResource Include="Assets\ClassSearchPage\search_blue.png" />
+    <EmbeddedResource Include="Assets\ClassSearchPage\search_white.png" />
     <EmbeddedResource Include="Assets\MenuPage\book_blue.png" />
     <EmbeddedResource Include="Assets\MenuPage\book_white.png" />
     <EmbeddedResource Include="Assets\MenuPage\edit_blue.png" />
