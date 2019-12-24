@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 
 using Autofac;
 
-using KMSCalendar.Extensions;
 using KMSCalendar.Models.Settings;
 
 using Xamarin.Forms;
