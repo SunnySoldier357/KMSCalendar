@@ -121,11 +121,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\next.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\upload.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\user.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\wrench.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\next.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\upload.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\user.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\wrench.png" />
     <Content Include="Resources\drawable\delete-icon.png" />
   </ItemGroup>

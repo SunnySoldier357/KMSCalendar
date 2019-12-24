@@ -141,8 +141,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="upload.png" />
-    <Content Include="user.png" />
-    <Content Include="userIcon.png" />
     <Content Include="add.png" />
     <Content Include="save.png" />
     <Content Include="cancel.png" />
