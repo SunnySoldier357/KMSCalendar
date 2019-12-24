@@ -59,7 +59,7 @@ namespace KMSCalendar.Services.Email
             {
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                client.Connect(emailInfo.SmtpServer, emailInfo.Port, SecureSocketOptions.StartTls);
+                client.Connect(emailInfo.SmtpServer, (int) emailInfo.Port, SecureSocketOptions.StartTls);
 
                 client.Authenticate(emailInfo.UserName, emailInfo.Password);
 
