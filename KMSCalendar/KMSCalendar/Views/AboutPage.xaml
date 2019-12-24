@@ -2,6 +2,7 @@
 <ContentPage x:Class="KMSCalendar.Views.AboutPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              Title="{Binding Title}">
 
@@ -25,7 +26,8 @@
                              Padding="0,40,0,40">
                     <Image HeightRequest="64"
                            VerticalOptions="Center"
-                           Source="xamarin_logo.png" />
+                           Source="{ext:ImageResource xamarin_logo.png,
+                                                      FolderName=AboutPage}" />
                 </ContentView>
             </StackLayout>
         </StackLayout>
@@ -81,14 +83,14 @@
                 <StackLayout Orientation="Horizontal">
                     <Label Margin="0,35,0,10"
                            Text="Developed by KMS - " />
-                    <Label Margin="0,35,0,10"
-                           Text="Kenneth, " 
-                           FontSize="7"
-                           VerticalOptions="Center"/>
+                    <Label VerticalOptions="Center"
+                           Margin="0,35,0,10"
+                           Text="Kenneth, "
+                           FontSize="7" />
                     <Label Margin="0,35,0,10"
                            Text="Matthew, &amp; Sandeep" />
                 </StackLayout>
-                
+
 
                 <Label Text="Icons made by Eleonor Wang from www.flaticon.com" />
 

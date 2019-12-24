@@ -3,6 +3,7 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:ModernXamarinCalendar;assembly=ModernXamarinCalendar"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              x:Name="BrowseAssignmentsPage"
              Title="{Binding Title}">
@@ -12,7 +13,8 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="add.png"
+        <ToolbarItem Icon="{ext:ImageResource add.png,
+                                              FolderName=AssignmentsPage}"
                      Text="Add"
                      Clicked="AddAssignment_Clicked" />
     </ContentPage.ToolbarItems>
@@ -64,10 +66,10 @@
 
                                         <Label Text="{Binding Name}"
                                                FontSize="16"
-                                               LineBreakMode="TailTruncation"/>
+                                               LineBreakMode="TailTruncation" />
 
-                                        <Label Grid.Column="1"
-                                               Grid.RowSpan="2"
+                                        <Label Grid.RowSpan="2"
+                                               Grid.Column="1"
                                                HorizontalOptions="End"
                                                VerticalOptions="Center"
                                                Text="{Binding Class.Name}"

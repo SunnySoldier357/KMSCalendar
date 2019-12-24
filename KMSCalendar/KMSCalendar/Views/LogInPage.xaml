@@ -3,9 +3,11 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:KMSCalendar.Controls"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              Title="{Binding Title}"
-             BackgroundImage="BackgroundForLogin.png">
+             BackgroundImage="{ext:ImageResource background.png,
+                                                 FolderName=Shared}">
 
     <ContentPage.BindingContext>
         <vm:LogInViewModel />

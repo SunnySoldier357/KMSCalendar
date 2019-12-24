@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -68,13 +68,13 @@
                        FontSize="Medium"
                        TextColor="{StaticResource NavigationTertiary}" />
 
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                              Grid.Row="4"
                              Margin="15, 0, 15, 0"
                              HorizontalOptions="Center"
                              HeightRequest="30">
                     
-                    <Label Text="Search for your school via zip code: " 
+                    <Label Text="Search for your school via zip code: "
                            TextColor="White"
                            VerticalOptions="Center"/>
 

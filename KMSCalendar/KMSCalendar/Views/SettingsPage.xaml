@@ -13,10 +13,11 @@
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
-                <Image HeightRequest="50"
+                <Image x:Name="UserIconImage"
+                       HeightRequest="50"
                        WidthRequest="50"
                        HorizontalOptions="Center"
-                       Source="userIcon.png"
+                       Source="{Binding UserImageSource.Source}"
                        Margin="20" />
 
                 <Frame Margin="50,0,50,0"

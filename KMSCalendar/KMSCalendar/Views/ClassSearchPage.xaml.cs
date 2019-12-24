@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.ViewModels;
-
+using KMSCalendar.Extensions;
 
 namespace KMSCalendar.Views
 {
@@ -22,12 +22,18 @@ namespace KMSCalendar.Views
 
         public MainPage RootPage => Application.Current.MainPage as MainPage;
 
+        public ThemeImageSource SearchImageSource { get; }
+
         //* Constructors
         public ClassSearchPage()
         {
             InitializeComponent();
 
+            SearchImageSource = new ThemeImageSource("search_blue.png", "search_white.png",
+                nameof(ClassSearchPage));
+
             BindingContext = ViewModel = new ClassSearchViewModel();
+            SearchIconImage.BindingContext = this;
 
             // Event Handlers for the SearchBar text changing or for the SearchButton pressing.
             //ClassSearchBar.SearchButtonPressed += (sender, args) => ViewModel.FilterClasses(ClassSearchBar.Text);

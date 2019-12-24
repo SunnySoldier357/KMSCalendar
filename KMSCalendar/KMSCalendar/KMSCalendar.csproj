@@ -11,6 +11,29 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Assets\AboutPage\xamarin_logo.png" />
+    <None Remove="Assets\AssignmentDetailPage\delete.png" />
+    <None Remove="Assets\AssignmentsPage\add.png" />
+    <None Remove="Assets\ClassSearchPage\search_blue.png" />
+    <None Remove="Assets\ClassSearchPage\search_white.png" />
+    <None Remove="Assets\MainPage\tab_feed.png" />
+    <None Remove="Assets\MenuPage\book_blue.png" />
+    <None Remove="Assets\MenuPage\book_white.png" />
+    <None Remove="Assets\MenuPage\calendar_blue.png" />
+    <None Remove="Assets\MenuPage\calendar_white.png" />
+    <None Remove="Assets\MenuPage\edit_blue.png" />
+    <None Remove="Assets\MenuPage\edit_white.png" />
+    <None Remove="Assets\MenuPage\file.png" />
+    <None Remove="Assets\MenuPage\gear.png" />
+    <None Remove="Assets\MenuPage\plus_blue.png" />
+    <None Remove="Assets\MenuPage\plus_white.png" />
+    <None Remove="Assets\MenuPage\search.png" />
+    <None Remove="Assets\MenuPage\settings_blue.png" />
+    <None Remove="Assets\MenuPage\settings_white.png" />
+    <None Remove="Assets\NewAssignmentPage\cancel.png" />
+    <None Remove="Assets\NewAssignmentPage\save.png" />
+    <None Remove="Assets\SettingsPage\user_blue.png" />
+    <None Remove="Assets\SettingsPage\user_white.png" />
     <None Remove="Services\Email\ResetPasswordPage.html" />
   </ItemGroup>
 
@@ -18,6 +41,27 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Assets\AssignmentsPage\add.png" />
+    <EmbeddedResource Include="Assets\AssignmentDetailPage\delete.png" />
+    <EmbeddedResource Include="Assets\AboutPage\xamarin_logo.png" />
+    <EmbeddedResource Include="Assets\ClassSearchPage\search_blue.png" />
+    <EmbeddedResource Include="Assets\ClassSearchPage\search_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\book_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\book_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\edit_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\edit_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\plus_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\plus_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\settings_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\settings_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\calendar_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\calendar_white.png" />
+    <EmbeddedResource Include="Assets\MainPage\tab_feed.png" />
+    <EmbeddedResource Include="Assets\NewAssignmentPage\cancel.png" />
+    <EmbeddedResource Include="Assets\NewAssignmentPage\save.png" />
+    <EmbeddedResource Include="Assets\SettingsPage\user_blue.png" />
+    <EmbeddedResource Include="Assets\SettingsPage\user_white.png" />
+    <EmbeddedResource Include="Assets\Shared\background.png" />
     <Content Include="Services\Email\ResetPasswordPage.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -31,7 +75,7 @@
     <PackageReference Include="ModernXamarinCalendar" Version="1.0.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

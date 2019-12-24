@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using KMSCalendar.Extensions;
+using KMSCalendar.Models.Navigation;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using KMSCalendar.Models.Navigation;
-using System.Threading.Tasks;
 
 namespace KMSCalendar.Views
 {
@@ -28,31 +29,36 @@ namespace KMSCalendar.Views
                 {
                     Id = MenuItemType.Calendar,
                     Title = "Calendar",
-                    Icon = "calendar.png"
+                    Source = new ThemeImageSource("calendar_blue.png", "calendar_white.png",
+                        nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Search,
                     Title = "Add New Class",
-                    Icon = "search.png"
+                    Source = new ThemeImageSource("plus_blue.png", "plus_white.png",
+                        nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.EnrolledClasses,
                     Title ="My Enrolled Classes",
-                    Icon = "file.png"
+                    Source = new ThemeImageSource("edit_blue.png", "edit_white.png",
+                        folderName: nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.About,
                     Title ="About",
-                    Icon = "file.png"
+                    Source = new ThemeImageSource("book_blue.png", "book_white.png",
+                        folderName: nameof(MenuPage))
                 },
                 new HomeMenuItem
                 {
                     Id = MenuItemType.Settings,
                     Title = "Settings",
-                    Icon = "gear.png"
+                    Source = new ThemeImageSource("settings_blue.png", "settings_white.png",
+                        folderName: nameof(MenuPage))
                 },
             };
 
