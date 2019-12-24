@@ -35,7 +35,6 @@ namespace KMSCalendar.Models.Settings
 
         public EmailInfo EmailInfo { get; private set; }
 
-        public string AzureBackendUrl { get; private set; }
         public string ConnectionString
         {
             get
@@ -59,8 +58,6 @@ namespace KMSCalendar.Models.Settings
 
                 ConnectionStringInfo = settings.ConnectionStringInfo;
                 EmailInfo = settings.EmailInfo;
-
-                AzureBackendUrl = settings.AzureBackendUrl;
             }
         }
 
