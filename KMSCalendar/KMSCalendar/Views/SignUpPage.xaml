@@ -3,8 +3,9 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:KMSCalendar.Controls"
-             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:views="clr-namespace:KMSCalendar.Views"
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              Title="{Binding Title}"
              BackgroundImage="{ext:ImageResource background.png,
                                                  FolderName=Shared}">
@@ -17,7 +18,7 @@
 
         <Grid>
             <views:SchoolEnrollmentView x:Name="SchoolEnrollmentView"
-                                        IsVisible="{Binding SchoolEnrollmentVisibility}"/>
+                                        IsVisible="{Binding SchoolEnrollmentVisibility}" />
 
             <views:NewSchoolView x:Name="NewSchoolView"
                                  IsVisible="{Binding NewSchoolVisibility}" />
@@ -78,86 +79,86 @@
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="1"
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Start"
-                       Text="HW Calendar"
-                       FontSize="Large"
-                       TextColor="White" />
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="Start"
+                               Text="HW Calendar"
+                               FontSize="Large"
+                               TextColor="White" />
 
                         <Label Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Start"
-                       Text="Sign Up"
-                       FontSize="Medium"
-                       TextColor="{StaticResource NavigationTertiary}" />
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="Start"
+                               Text="Sign Up"
+                               FontSize="Medium"
+                               TextColor="{StaticResource NavigationTertiary}" />
 
                         <Frame Grid.Row="4"
-                       Style="{StaticResource LoginEntryFrame}">
+                               Style="{StaticResource LoginEntryFrame}">
 
                             <control:TransparentEntry x:Name="UsernameEntry"
-                                              Style="{StaticResource LoginEntry}"
-                                              Text="{Binding UserName}"
-                                              Placeholder="Username" />
+                                                      Style="{StaticResource LoginEntry}"
+                                                      Text="{Binding UserName}"
+                                                      Placeholder="Username" />
                         </Frame>
 
                         <Frame Grid.Row="6"
-                       Style="{StaticResource LoginEntryFrame}">
+                               Style="{StaticResource LoginEntryFrame}">
 
                             <control:TransparentEntry x:Name="EmailEntry"
-                                              Style="{StaticResource LoginEntry}"
-                                              Text="{Binding Email}"
-                                              Placeholder="Email" />
+                                                      Style="{StaticResource LoginEntry}"
+                                                      Text="{Binding Email}"
+                                                      Placeholder="Email" />
                         </Frame>
 
                         <Frame Grid.Row="8"
-                       Style="{StaticResource LoginEntryFrame}">
+                               Style="{StaticResource LoginEntryFrame}">
 
                             <control:TransparentEntry x:Name="PasswordEntry"
-                                              Style="{StaticResource LoginEntry}"
-                                              Text="{Binding Password}"
-                                              Placeholder="Password"
-                                              IsPassword="True" />
+                                                      Style="{StaticResource LoginEntry}"
+                                                      Text="{Binding Password}"
+                                                      Placeholder="Password"
+                                                      IsPassword="True" />
                         </Frame>
 
                         <Frame Grid.Row="10"
-                       Style="{StaticResource LoginEntryFrame}">
+                               Style="{StaticResource LoginEntryFrame}">
 
                             <control:TransparentEntry x:Name="ConfirmPasswordEntry"
-                                              Style="{StaticResource LoginEntry}"
-                                              Text="{Binding ConfirmPassword}"
-                                              Placeholder="Confirm Password"
-                                              IsPassword="True" />
+                                                      Style="{StaticResource LoginEntry}"
+                                                      Text="{Binding ConfirmPassword}"
+                                                      Placeholder="Confirm Password"
+                                                      IsPassword="True" />
                         </Frame>
 
                         <Button x:Name="AuthenticateSignUpButton"
-                        Grid.Row="12"
-                        WidthRequest="100"
-                        HorizontalOptions="Center"
-                        Padding="5"
-                        BackgroundColor="{StaticResource NavigationTertiary}"
-                        CornerRadius="20"
-                        BorderColor="Transparent"
-                        Text="SIGN UP"
-                        TextColor="White"
-                        Command="{Binding AuthenticateUserCommand}" />
+                                Grid.Row="12"
+                                WidthRequest="100"
+                                HorizontalOptions="Center"
+                                Padding="5"
+                                BackgroundColor="{StaticResource NavigationTertiary}"
+                                CornerRadius="20"
+                                BorderColor="Transparent"
+                                Text="SIGN UP"
+                                TextColor="White"
+                                Command="{Binding AuthenticateUserCommand}" />
 
                         <StackLayout Grid.Row="14"
-                             Orientation="Vertical">
+                                     Orientation="Vertical">
 
                             <Label x:Name="SignUpValidationLabel"
-                           HorizontalOptions="Center"
-                           Margin="0,10,10,0"
-                           BackgroundColor="Transparent"
-                           Text="{Binding LoginValidationMessage}"
-                           FontSize="Small"
-                           TextColor="{StaticResource NavigationTertiary}" />
+                                   HorizontalOptions="Center"
+                                   Margin="0,10,10,0"
+                                   BackgroundColor="Transparent"
+                                   Text="{Binding LoginValidationMessage}"
+                                   FontSize="Small"
+                                   TextColor="{StaticResource NavigationTertiary}" />
 
                         </StackLayout>
                     </Grid>
 
                     <Grid HorizontalOptions="Center"
-                  VerticalOptions="EndAndExpand"
-                  Margin="0,0,0,50">
+                          VerticalOptions="EndAndExpand"
+                          Margin="0,0,0,50">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -169,23 +170,23 @@
                         </Grid.RowDefinitions>
 
                         <Label VerticalOptions="Center"
-                       Text="Already a user?"
-                       TextColor="White" />
+                               Text="Already a user?"
+                               TextColor="White" />
 
                         <Button x:Name="AlreadyUserButton"
-                        Grid.Column="1"
-                        VerticalOptions="Center"
-                        BackgroundColor="Transparent"
-                        BorderColor="Transparent"
-                        Text="LOG IN"
-                        TextColor="{StaticResource NavigationTertiary}"
-                        Command="{Binding AlreadyUserCommand}" />
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent"
+                                Text="LOG IN"
+                                TextColor="{StaticResource NavigationTertiary}"
+                                Command="{Binding AlreadyUserCommand}" />
 
                     </Grid>
                 </StackLayout>
             </ContentView>
         </Grid>
-        
-        
+
+
     </ContentPage.Content>
 </ContentPage>
