@@ -97,7 +97,7 @@ namespace KMSCalendar
                 new
                 {
                     Name = "NavigationBackgroundLight",
-                    Color = Color.FromHex(theme == Theme.Light ? "#E6E7E8" : "#191817")
+                    Color = Color.FromHex(theme == Theme.Light ? "#E6E7E8" : "#333231")
                 },
 
                 // Dark Blue

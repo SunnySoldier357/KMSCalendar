@@ -5,7 +5,7 @@
              xmlns:control="clr-namespace:KMSCalendar.Controls"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              Title="{Binding Title}"
-             BackgroundColor="{DynamicResource NavigationPrimary}">
+             BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
     <ContentPage.BindingContext>
         <vm:ClassSearchViewModel />
@@ -92,7 +92,7 @@
 
                                                     <Frame Margin="1"
                                                            Padding="2"
-                                                           BackgroundColor="{DynamicResource NavigationBackgroundLight}"
+                                                           BackgroundColor="{DynamicResource NavigationBackground}"
                                                            CornerRadius="3">
 
                                                         <Grid Padding="5">
