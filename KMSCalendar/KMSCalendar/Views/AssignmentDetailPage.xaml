@@ -2,10 +2,12 @@
 <ContentPage x:Class="KMSCalendar.Views.AssignmentDetailPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="delete-icon.png"
+        <ToolbarItem Icon="{ext:ImageResource delete.png,
+                                              FolderName=AssignmentDetailPage}"
                      Text="Delete"
                      Command="{Binding DeleteAssignmentCommand}"
                      Clicked="Delete_Clicked" />

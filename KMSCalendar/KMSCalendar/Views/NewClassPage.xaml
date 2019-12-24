@@ -13,8 +13,8 @@
 
                 <Grid x:Name="PeriodButtons"
                       HeightRequest="30"
-                      Padding="0"
-                      Margin="10,0,10,0">
+                      Margin="10,0,10,0"
+                      Padding="0">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -57,52 +57,52 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
-                        <!--  Enter a name  -->
-                        <Label Grid.Row="0"
-                                    Text="Class Name:" />
+                            <!--  Enter a name  -->
+                            <Label Grid.Row="0"
+                                   Text="Class Name:" />
 
                             <Entry x:Name="ClassNameEntry"
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    Text="{Binding ClassName}"
-                                    Placeholder="Class Name" />
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding ClassName}"
+                                   Placeholder="Class Name" />
 
                             <!--  Select a period  -->
                             <Label Grid.Row="1"
-                                    Text="Period: " />
+                                   Text="Period: " />
 
                             <StackLayout Grid.Row="1"
-                                            Grid.Column="1"
-                                            Orientation="Horizontal">
+                                         Grid.Column="1"
+                                         Orientation="Horizontal">
 
                                 <Entry x:Name="PeriodEntry"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="Center"
-                                        Placeholder="1"
-                                        Keyboard="Numeric"
-                                        Text="{Binding Period}"/>
-                                    
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Text="{Binding Period}"
+                                       Placeholder="1"
+                                       Keyboard="Numeric" />
+
                             </StackLayout>
 
                             <!--  Search for a Teacher  -->
                             <StackLayout x:Name="SearchAreaStackLayout"
-                                            Grid.Row="2"
-                                            Grid.ColumnSpan="2"
-                                            HorizontalOptions="Center">
+                                         Grid.Row="2"
+                                         Grid.ColumnSpan="2"
+                                         HorizontalOptions="Center">
 
                                 <Label Text="Search for your Teacher" />
 
                                 <SearchBar x:Name="TeacherSearchBar"
-                                            Margin="0,0,0,4"
-                                            Text="{Binding SearchTerm}"
-                                            Placeholder="Search"
-                                            TextChanged="TeacherSearchBar_TextChanged" />
+                                           Margin="0,0,0,4"
+                                           Text="{Binding SearchTerm}"
+                                           Placeholder="Search"
+                                           TextChanged="TeacherSearchBar_TextChanged" />
 
                                 <ScrollView>
                                     <ListView x:Name="TeachersListView"
-                                            ItemsSource="{Binding Teachers}"
-                                            IsPullToRefreshEnabled="true"
-                                            ItemSelected="TeachersListView_ItemSelected">
+                                              ItemsSource="{Binding Teachers}"
+                                              IsPullToRefreshEnabled="true"
+                                              ItemSelected="TeachersListView_ItemSelected">
 
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
@@ -114,14 +114,14 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Label Text="{Binding Name}"
-                                                            FontSize="14"
-                                                            LineBreakMode="NoWrap" />
+                                                               FontSize="14"
+                                                               LineBreakMode="NoWrap" />
 
                                                         <Label Grid.Column="1"
-                                                            HorizontalOptions="End"
-                                                            Text="{Binding SchoolName}"
-                                                            FontSize="11"
-                                                            LineBreakMode="NoWrap" />
+                                                               HorizontalOptions="End"
+                                                               Text="{Binding SchoolName}"
+                                                               FontSize="11"
+                                                               LineBreakMode="NoWrap" />
                                                     </Grid>
                                                 </ViewCell>
                                             </DataTemplate>
@@ -131,15 +131,15 @@
                             </StackLayout>
 
                             <Label Grid.Row="3"
-                                    Grid.Column="0"
-                                    VerticalOptions="Center"
-                                    Text="Add a new teacher (if not on the list):" />
+                                   Grid.Column="0"
+                                   VerticalOptions="Center"
+                                   Text="Add a new teacher (if not on the list):" />
                             <Entry x:Name="newTeacherNameEntry"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    VerticalOptions="Center"
-                                    Text="{Binding TeacherName}"
-                                    Placeholder="Teacher's Name" />
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   Text="{Binding TeacherName}"
+                                   Placeholder="Teacher's Name" />
 
                             <Button x:Name="DoneButton"
                                     Grid.Row="4"
@@ -152,7 +152,7 @@
                                     TextColor="White"
                                     Clicked="DoneButton_Clicked" />
                         </Grid>
-                        
+
                     </ScrollView>
                 </Frame>
             </StackLayout>

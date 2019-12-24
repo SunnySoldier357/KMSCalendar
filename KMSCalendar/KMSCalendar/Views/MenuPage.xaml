@@ -2,6 +2,7 @@
 <ContentPage x:Class="KMSCalendar.Views.MenuPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              Title="Menu">
 
     <!--  This view is the hamburger menu  -->
@@ -11,7 +12,8 @@
         <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
             <Image HeightRequest="30"
                    WidthRequest="30"
-                   Source="calendar_white.png"
+                   Source="{ext:ImageResource calendar_white.png,
+                                              FolderName=MenuPage}"
                    Margin="0,10,0,0" />
 
             <Label x:Name="UserNameLabel"

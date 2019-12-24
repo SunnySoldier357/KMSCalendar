@@ -2,14 +2,17 @@
 <ContentPage x:Class="KMSCalendar.Views.NewAssignmentPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="cancel.png"
+        <ToolbarItem Icon="{ext:ImageResource cancel.png,
+                                              FolderName=NewAssignmentPage}"
                      Text="Cancel"
                      Clicked="Cancel_Clicked" />
 
-        <ToolbarItem Icon="save.png"
+        <ToolbarItem Icon="{ext:ImageResource save.png,
+                                              FolderName=NewAssignmentPage}"
                      Text="Save"
                      Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>

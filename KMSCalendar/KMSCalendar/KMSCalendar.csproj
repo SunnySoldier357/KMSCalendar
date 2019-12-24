@@ -12,9 +12,10 @@
   <ItemGroup>
     <None Remove="appsettings.json" />
     <None Remove="Assets\AboutPage\xamarin_logo.png" />
+    <None Remove="Assets\AssignmentDetailPage\delete.png" />
+    <None Remove="Assets\AssignmentsPage\add.png" />
     <None Remove="Assets\ClassSearchPage\search_blue.png" />
     <None Remove="Assets\ClassSearchPage\search_white.png" />
-    <None Remove="Assets\LogInPage\background.png" />
     <None Remove="Assets\MainPage\tab_feed.png" />
     <None Remove="Assets\MenuPage\book_blue.png" />
     <None Remove="Assets\MenuPage\book_white.png" />
@@ -29,9 +30,10 @@
     <None Remove="Assets\MenuPage\search.png" />
     <None Remove="Assets\MenuPage\settings_blue.png" />
     <None Remove="Assets\MenuPage\settings_white.png" />
+    <None Remove="Assets\NewAssignmentPage\cancel.png" />
+    <None Remove="Assets\NewAssignmentPage\save.png" />
     <None Remove="Assets\SettingsPage\user_blue.png" />
     <None Remove="Assets\SettingsPage\user_white.png" />
-    <None Remove="Assets\SignUpPage\background.png" />
     <None Remove="Services\Email\ResetPasswordPage.html" />
   </ItemGroup>
 
@@ -39,6 +41,8 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Assets\AssignmentsPage\add.png" />
+    <EmbeddedResource Include="Assets\AssignmentDetailPage\delete.png" />
     <EmbeddedResource Include="Assets\AboutPage\xamarin_logo.png" />
     <EmbeddedResource Include="Assets\ClassSearchPage\search_blue.png" />
     <EmbeddedResource Include="Assets\ClassSearchPage\search_white.png" />
@@ -52,11 +56,12 @@
     <EmbeddedResource Include="Assets\MenuPage\settings_white.png" />
     <EmbeddedResource Include="Assets\MenuPage\calendar_blue.png" />
     <EmbeddedResource Include="Assets\MenuPage\calendar_white.png" />
-    <EmbeddedResource Include="Assets\LogInPage\background.png" />
     <EmbeddedResource Include="Assets\MainPage\tab_feed.png" />
+    <EmbeddedResource Include="Assets\NewAssignmentPage\cancel.png" />
+    <EmbeddedResource Include="Assets\NewAssignmentPage\save.png" />
     <EmbeddedResource Include="Assets\SettingsPage\user_blue.png" />
     <EmbeddedResource Include="Assets\SettingsPage\user_white.png" />
-    <EmbeddedResource Include="Assets\SignUpPage\background.png" />
+    <EmbeddedResource Include="Assets\Shared\background.png" />
     <Content Include="Services\Email\ResetPasswordPage.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

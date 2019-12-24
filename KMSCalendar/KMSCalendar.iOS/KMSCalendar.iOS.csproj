@@ -118,9 +118,6 @@
     <BundleResource Include="Resources\tab_about.png" />
     <BundleResource Include="Resources\tab_about%402x.png" />
     <BundleResource Include="Resources\tab_about%403x.png" />
-    <BundleResource Include="Resources\tab_feed.png" />
-    <BundleResource Include="Resources\tab_feed%402x.png" />
-    <BundleResource Include="Resources\tab_feed%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
@@ -145,11 +142,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\add.png" />
-    <BundleResource Include="Resources\cancel.png" />
     <Content Include="Resources\delete-icon.png" />
     <Content Include="Resources\leftArrow.png" />
     <Content Include="Resources\rightArrow.png" />
-    <BundleResource Include="Resources\save.png" />
   </ItemGroup>
 </Project>

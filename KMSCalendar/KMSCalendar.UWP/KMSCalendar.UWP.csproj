@@ -105,7 +105,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="delete-icon.png" />
     <Content Include="leftArrow.png" />
     <Content Include="loupe.png" />
     <Content Include="next.png" />
@@ -141,9 +140,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="upload.png" />
-    <Content Include="add.png" />
-    <Content Include="save.png" />
-    <Content Include="cancel.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
