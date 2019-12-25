@@ -4,13 +4,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
-             Title="{Binding Title}">
+             Title="About">
 
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
 
-    <Grid BackgroundColor="{DynamicResource NavigationBackground}">
+    <Grid BackgroundColor="{DynamicResource NavigationBackgroundLight}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -19,17 +19,12 @@
         <StackLayout HorizontalOptions="Fill"
                      VerticalOptions="FillAndExpand"
                      BackgroundColor="{DynamicResource NavigationPrimary}">
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center">
-                <ContentView VerticalOptions="FillAndExpand"
-                             Padding="0,40,0,40">
-                    <Image HeightRequest="64"
-                           VerticalOptions="Center"
-                           Source="{ext:ImageResource xamarin_logo.png,
-                                                      FolderName=AboutPage}" />
-                </ContentView>
-            </StackLayout>
+            <Image HeightRequest="64"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Source="{ext:ImageResource xamarin_logo.png,
+                                              FolderName=AboutPage}"
+                   Margin="0,40,0,40" />
         </StackLayout>
 
         <ScrollView Grid.Row="1">
@@ -90,7 +85,6 @@
                     <Label Margin="0,35,0,10"
                            Text="Matthew, &amp; Sandeep" />
                 </StackLayout>
-
 
                 <Label Text="Icons made by Eleonor Wang from www.flaticon.com" />
 
