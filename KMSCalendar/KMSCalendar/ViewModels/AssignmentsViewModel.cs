@@ -31,8 +31,8 @@ namespace KMSCalendar.ViewModels
 
         public DateTime DateSelected { get; set; }
 
-        public ICommand FilterAssignmentsCommand { get; set; }
-        public ICommand LoadAssignmentsCommand { get; set; }
+        public ICommand FilterAssignmentsCommand { get; }
+        public ICommand LoadAssignmentsCommand { get; }
 
         /// <summary>
         /// A filtered set of all the Assignments that are only for the
@@ -71,7 +71,7 @@ namespace KMSCalendar.ViewModels
 
             // This is so that when the class search page closes,
             // the assignment page will update it's assignment list
-            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments",
+            MessagingCenter.Subscribe<ClassSearchViewModel>(this, "LoadAssignments",
                 (sender) => loadAssignments());
 
             MessagingCenter.Subscribe<EnrolledClassesViewModel>(this, "LoadAssignments",

@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-
-using Xamarin.Forms;
+using System.Windows.Input;
 
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
-using System;
+
+using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
     public class ClassSearchViewModel : BaseViewModel
     {
         //* Private Properties
-        private string searchInput;
+        private App app => (Application.Current as App);
+
         private Class selectedClass;
 
         private List<Class> classes;
@@ -21,24 +23,40 @@ namespace KMSCalendar.ViewModels
 
         private List<int> periods;
 
-        private App app => (Application.Current as App);
+        private UIState uiState = UIState.ClassSearchView;
+        private UIState currentUIState
+        {
+            get => uiState;
+            set
+            {
+                uiState = value;
+                OnNotifyPropertyChanged(nameof(ClassSearchViewVisibility));
+                OnNotifyPropertyChanged(nameof(PeriodSelectViewVisiblity));
+            }
+        }
 
         //* Public Properties
-        public string SearchInput
-        {
-            get => searchInput;
-            set => setProperty(ref searchInput, value);
-        }
+        public bool ClassSearchViewVisibility => currentUIState == UIState.ClassSearchView;
+        public bool PeriodSelectViewVisiblity => currentUIState == UIState.PeriodSelectView;
+
         public Class SelectedClass
         {
             get => selectedClass;
             set => setProperty(ref selectedClass, value);
         }
+
+        public ICommand AddPeriodCommand { get; }
+        public ICommand FilterClassesCommand { get; }
+        public ICommand GoBackwardCommand { get; }
+        public ICommand ShowPeriodsCommand { get; }
+        public ICommand SubscribeUserToClassCommand { get; }
+
         public List<Class> FilteredClasses
         {
             get => filteredClasses;
             set => setProperty(ref filteredClasses, value);
         }
+
         public List<int> Periods
         {
             get => periods;
@@ -48,50 +66,62 @@ namespace KMSCalendar.ViewModels
         //* Constructors
         public ClassSearchViewModel()
         {
-            Title = "Search For Class";
+            AddPeriodCommand = new Command<int?>(period => addPeriod(period));
+            FilterClassesCommand = new Command<string>(searchInput =>
+                filterClasses(searchInput));
+            GoBackwardCommand = new Command(() => goBackward());
+            ShowPeriodsCommand = new Command<Class>(@class => showPeriods(@class));
+            SubscribeUserToClassCommand = new Command<int>(period =>
+                subscribeUserToClass(period));
 
             // This is so that when the new class page closes,
             // the class list will update
             MessagingCenter.Subscribe<NewClassPage>(this, "LoadClasses",
-                (sender) => LoadClassesAsync());
+                (sender) => loadClasses());
 
-            LoadClassesAsync();
+            loadClasses();
         }
 
-        //* Public Methods
-        public bool AddNewPeriod(int newPeriod)
+        //* Private Methods
+        private void addPeriod(int? newPeriod)
         {
-            //checks if the period already exists
-            if (periods.Contains(newPeriod))
-                return false;
-
-            //else add the period to the db
-            selectedClass.Period = newPeriod;
-            return PeriodManager.AddPeriod(selectedClass);
+            if (newPeriod is int period && !periods.Contains(period))
+            {
+                // Add the period to the db
+                selectedClass.Period = period;
+                if (PeriodManager.AddPeriod(selectedClass))
+                    loadPeriods();
+            }
         }
 
-        public void FilterClasses()
+        private void filterClasses(string searchInput)
         {
-            if (string.IsNullOrWhiteSpace(SearchInput))
+            if (string.IsNullOrWhiteSpace(searchInput))
                 FilteredClasses = new List<Class>(classes);
             else
             {
                 var result =
                     from @class in classes.AsParallel()
-                    where @class.Name.ToLower().Contains(SearchInput.ToLower())
+                    where @class.Name.ToLower().Contains(searchInput.ToLower())
                     select @class;
 
                 FilteredClasses = result.ToList();
             }
         }
 
+        private void goBackward()
+        {
+            if (--currentUIState < 0)
+                MessagingCenter.Send(this, "GoToCalendarAsync");
+        }
+
         /// <summary>
         /// Loads a list of classes from the DB so the user can add one to their account.
         /// </summary>
-        public void LoadClassesAsync()
+        private void loadClasses()
         {
             // TODO: MATEO get this to work so a user doesn't have duplicate classes.
-            List<Class> classList = ClassManager.LoadClasses(app.SignedInUser.SchoolId);
+            var classList = ClassManager.LoadClasses(app.SignedInUser.SchoolId);
 
             foreach (Class @class in classList)
             {
@@ -103,27 +133,42 @@ namespace KMSCalendar.ViewModels
             FilteredClasses = classes;
         }
 
-        public void LoadPeriods()
+        private void loadPeriods()
         {
             Guid classId = SelectedClass.Id;
 
-            // Sets the period list to all of the periods in the selected class from the db.
             Periods = PeriodManager.LoadPeriods(classId);
         }
 
-        /// <summary>
-        /// For some reason I need this method and cannot just add a new int to the periods list
-        /// </summary>
-        public void LoadPeriods(int newPeriod)
+        private void showPeriods(Class @class)
         {
-            var periods =
-                from _class in classes.AsParallel()
-                where _class.Name == SelectedClass.Name &&
-                    _class.Teacher.Equals(SelectedClass.Teacher)
-                select _class.Period;
+            SelectedClass = @class;
+            loadPeriods();
 
-            Periods = periods.ToList();
-            Periods.Add(newPeriod);
+            currentUIState++;
+        }
+
+        private void subscribeUserToClass(int period)
+        {
+            SelectedClass.UserId = app.SignedInUser.Id;
+            SelectedClass.Period = period;
+
+            ClassManager.EnrollUserInClass(selectedClass);
+
+            app.PullEnrolledClasses();
+
+            MessagingCenter.Send(this, "LoadAssignments");
+            MessagingCenter.Send(this, "LoadClassesForNewAssignmentPage");
+            MessagingCenter.Send(this, "UpdateClasses");
+
+            MessagingCenter.Send(this, "GoToCalendarAsync");
+        }
+
+        //* Private Enumerations
+        private enum UIState
+        {
+            ClassSearchView,
+            PeriodSelectView
         }
     }
 }

@@ -27,7 +27,7 @@ namespace KMSCalendar.Views
 
             BindingContext = viewModel = new NewAssignmentViewModel(dateSelected);
 
-            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadClassesForNewAssignmentPage",
+            MessagingCenter.Subscribe<ClassSearchViewModel>(this, "LoadClassesForNewAssignmentPage",
                 (sender) => viewModel.LoadSubscribedClasses());
         }
 

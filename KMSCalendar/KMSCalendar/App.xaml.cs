@@ -3,13 +3,13 @@ using System.ComponentModel;
 
 using Autofac;
 
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KMSCalendar
@@ -78,7 +78,7 @@ namespace KMSCalendar
 
         public void PullSchoolName()
         {
-            if(SignedInUser != null)
+            if (SignedInUser != null)
                 SchoolName = SchoolManager.GetSchoolName(SignedInUser.SchoolId);
         }
 

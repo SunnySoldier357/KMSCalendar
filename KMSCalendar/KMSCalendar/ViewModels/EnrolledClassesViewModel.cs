@@ -36,7 +36,7 @@ namespace KMSCalendar.ViewModels
                 ExecuteUnsubscribeCommand(@class);
             });
 
-            MessagingCenter.Subscribe<ClassSearchPage>(this, "UpdateClasses",
+            MessagingCenter.Subscribe<ClassSearchViewModel>(this, "UpdateClasses",
                 (sender) => UpdateData());
         }
 
