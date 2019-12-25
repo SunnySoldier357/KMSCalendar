@@ -184,7 +184,7 @@ namespace KMSCalendar.ViewModels
                 App app = Application.Current as App;
 
                 app.SignedInUser = user;
-                userSettings.SignedInUserId = user.Id;
+                UserSettings.SignedInUserId = user.Id;
 
                 app.MainPage = new MainPage();
             }

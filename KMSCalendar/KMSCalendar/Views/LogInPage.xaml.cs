@@ -6,7 +6,7 @@ namespace KMSCalendar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LogInPage : ContentPage
     {
-        //* Constructor
+        //* Constructors
         public LogInPage() => InitializeComponent();
     }
 }

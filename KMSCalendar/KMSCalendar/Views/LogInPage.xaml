@@ -5,7 +5,7 @@
              xmlns:control="clr-namespace:KMSCalendar.Controls"
              xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
-             Title="{Binding Title}"
+             Title="Log In"
              BackgroundImage="{ext:ImageResource background.png,
                                                  FolderName=Shared}">
 
@@ -14,7 +14,6 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-
         <StackLayout VerticalOptions="Fill">
             <Grid>
                 <Grid.RowDefinitions>
@@ -51,7 +50,6 @@
 
                     <!--  Spacing  -->
                     <RowDefinition Height="30*" />
-
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="1"
@@ -64,8 +62,7 @@
                 <Frame Grid.Row="3"
                        Style="{StaticResource LoginEntryFrame}">
 
-                    <control:TransparentEntry x:Name="EmailEntry"
-                                              Style="{StaticResource LoginEntry}"
+                    <control:TransparentEntry Style="{StaticResource LoginEntry}"
                                               Text="{Binding Email}"
                                               Placeholder="Email" />
                 </Frame>
@@ -73,8 +70,7 @@
                 <Frame Grid.Row="5"
                        Style="{StaticResource LoginEntryFrame}">
 
-                    <control:TransparentEntry x:Name="PasswordEntry"
-                                              Style="{StaticResource LoginEntry}"
+                    <control:TransparentEntry Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
                                               Placeholder="Password"
                                               IsPassword="True" />
@@ -140,7 +136,6 @@
                         Text="SignUp"
                         TextColor="{StaticResource NavigationTertiary}"
                         Command="{Binding NewUserCommand}" />
-
             </Grid>
         </StackLayout>
     </ContentPage.Content>

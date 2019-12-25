@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 using Autofac;
 
@@ -25,7 +24,9 @@ namespace KMSCalendar.ViewModels
         private string password;
 
         //* Protected Properties
-        protected readonly UserSettings userSettings;
+        protected App App => Application.Current as App;
+
+        protected readonly UserSettings UserSettings;
 
         //* Public Properties
         public ICommand AuthenticateUserCommand { get; set; }
@@ -72,8 +73,7 @@ namespace KMSCalendar.ViewModels
 
         public LogInViewModel(UserSettings userSettings)
         {
-            Title = "Log In";
-            this.userSettings = userSettings;
+            UserSettings = userSettings;
 
             Email = string.Empty;
             Password = string.Empty;
@@ -84,14 +84,14 @@ namespace KMSCalendar.ViewModels
                     OnNotifyPropertyChanged(nameof(LoginValidationMessage));
             };
 
-            AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
-            ForgotPasswordCommand = new Command(async () => await 
-                (Application.Current as App).MainPage.Navigation.PushModalAsync(new ForgotPasswordPage()));
-            NewUserCommand = new Command(() => (Application.Current as App).MainPage = new SignUpPage());
+            AuthenticateUserCommand = new Command(() => authenticateUser());
+            ForgotPasswordCommand = new Command(async () => await
+                App.MainPage.Navigation.PushModalAsync(new ForgotPasswordPage()));
+            NewUserCommand = new Command(() => App.MainPage = new SignUpPage());
         }
 
-        //* Public Methods
-        public async Task ExecuteAuthenticateUserCommand()
+        //* Private Methods
+        private void authenticateUser()
         {
             if (Validate())
             {
@@ -103,13 +103,11 @@ namespace KMSCalendar.ViewModels
                 {
                     if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
                     {
-                        App app = Application.Current as App;
+                        App.SignedInUser = signedInUser;
 
-                        app.SignedInUser = signedInUser;
+                        UserSettings.SignedInUserId = signedInUser.Id;
 
-                        userSettings.SignedInUserId = signedInUser.Id;
-
-                        app.MainPage = new MainPage();
+                        App.MainPage = new MainPage();
                     }
                     else
                         LoginValidationMessage = "Invalid Password";
