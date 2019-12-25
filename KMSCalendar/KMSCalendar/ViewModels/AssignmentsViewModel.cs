@@ -18,7 +18,7 @@ namespace KMSCalendar.ViewModels
     public class AssignmentsViewModel : BaseViewModel
     {
         //* Private Properties
-        private App app = (Application.Current as App);
+        private App app = Application.Current as App;
 
         /// <summary>A List of all the Assignments to display.</summary>
         private List<Assignment> assignments;
@@ -29,7 +29,7 @@ namespace KMSCalendar.ViewModels
         //* Public Properties
         public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
-        public DateTime DateChoosen { get; set; }
+        public DateTime DateSelected { get; set; }
 
         public ICommand FilterAssignmentsCommand { get; set; }
         public ICommand LoadAssignmentsCommand { get; set; }
@@ -50,44 +50,35 @@ namespace KMSCalendar.ViewModels
 
         public AssignmentsViewModel(UserSettings userSettings)
         {
-            Title = "Assignments Calendar";
-            DateChoosen = DateTime.Today;
-
             this.userSettings = userSettings;
 
-            app.PullEnrolledClasses();
+            DateSelected = DateTime.Today;
 
             assignments = new List<Assignment>();
             FilteredAssignments = new List<Assignment>();
 
-            LoadAssignmentsCommand = new Command(() =>
-                ExecuteLoadAssignmentsCommand());
-
             FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
-                ExecuteFilterAssignmentsCommand(selectedDate));
+                filterAssignments(selectedDate));
+            LoadAssignmentsCommand = new Command(() => loadAssignments());
 
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
                 "AddAssignment", (page, a) =>
             {
-                assignments.Add(a);
-                a.Id = Guid.NewGuid();
-                a.UserId = app.SignedInUser.Id;
-                a.SetClassId();
-                a.SetPeriod();
-                AssignmentManager.AddAssignment(a);
+                assignments.Add(AssignmentManager.AddAssignment(a));
 
-                ExecuteFilterAssignmentsCommand(DateChoosen);
+                filterAssignments(DateSelected);
             });
 
             // This is so that when the class search page closes,
             // the assignment page will update it's assignment list
             MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments",
-                (sender) => LoadAssignmentsCommand.Execute(null));
+                (sender) => loadAssignments());
 
             MessagingCenter.Subscribe<EnrolledClassesViewModel>(this, "LoadAssignments",
-                (sender) => LoadAssignmentsCommand.Execute(null));
+                (sender) => loadAssignments());
 
-            LoadAssignmentsCommand.Execute(null);
+            app.PullEnrolledClasses();
+            loadAssignments();
 
             userSettings.PropertyChanged += (sender, args) =>
             {
@@ -96,9 +87,11 @@ namespace KMSCalendar.ViewModels
             };
         }
 
-        //* Public Methods
-        public void ExecuteFilterAssignmentsCommand(DateTime date)
+        //* Private Methods
+        private void filterAssignments(DateTime date)
         {
+            DateSelected = date;
+
             var result =
                 from assignment in assignments.AsParallel()
                 where assignment.DueDate.Date.Equals(date.Date)
@@ -111,7 +104,7 @@ namespace KMSCalendar.ViewModels
         /// <summary>
         /// Loads Assignments from the db.
         /// </summary>
-        public void ExecuteLoadAssignmentsCommand()
+        private void loadAssignments()
         {
             if (IsBusy)
                 return;
@@ -144,7 +137,7 @@ namespace KMSCalendar.ViewModels
                 IsBusy = false;
             }
 
-            ExecuteFilterAssignmentsCommand(DateChoosen);
+            filterAssignments(DateSelected);
         }
     }
 }

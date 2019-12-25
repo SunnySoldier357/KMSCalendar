@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using KMSCalendar.Models.Data;
+using Xamarin.Forms;
 
 namespace KMSCalendar.Services.Data
 {
@@ -15,13 +16,19 @@ namespace KMSCalendar.Services.Data
         /// The assignment you want to put into the db.
         /// Must have a non-null Id, DueDate, Description, UserId, and Period
         /// </param>
-        public static int AddAssignment(Assignment assignment)
+        public static Assignment AddAssignment(Assignment assignment)
         {
+            assignment.UserId = (Application.Current as App).SignedInUser.Id;
+            assignment.SetClassId();
+            assignment.SetPeriod();
+
             string sql = @"
                 INSERT INTO dbo.Assignments (Id, DueDate, Description, Name, ClassId, UserId, Period) 
                 VALUES (@Id, @DueDate, @Description, @Name, @ClassId, @UserId, @Period)";
 
-            return AzureDataStore.SaveData(sql, assignment);
+            int result = AzureDataStore.SaveData(sql, assignment);
+
+            return result == 1 ? assignment : null;
         }
 
         /// <summary>
