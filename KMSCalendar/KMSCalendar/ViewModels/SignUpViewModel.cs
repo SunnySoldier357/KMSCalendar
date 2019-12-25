@@ -157,7 +157,7 @@ namespace KMSCalendar.ViewModels
                 ZipCode = this.ZipCode,
             };
 
-            SchoolManager.PutInSchool(school);
+            SchoolManager.AddSchool(school);
             SchoolList.Add(school);
             FilterData(ZipCode);
             GoBack();
@@ -179,7 +179,7 @@ namespace KMSCalendar.ViewModels
                     SchoolId = SelectedSchool.Id
                 };
 
-                UserManager.PutInUser(user);
+                UserManager.AddUser(user);
 
                 App app = Application.Current as App;
 

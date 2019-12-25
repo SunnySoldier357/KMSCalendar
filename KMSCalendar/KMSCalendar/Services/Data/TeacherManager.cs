@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using KMSCalendar.Models.Data;
 
 namespace KMSCalendar.Services.Data
@@ -8,6 +9,25 @@ namespace KMSCalendar.Services.Data
     public static class TeacherManager
     {
         //* Public Methods
+
+        /// <summary>
+        /// Inserts a teacher into the db.
+        /// </summary>
+        /// <param name="teacher">
+        /// The teacher to insert into the db. 
+        /// Id, Name, and SchoolId must be non-null.
+        /// </param>
+        /// <returns>
+        /// true if the teacher was inserted, false if not.
+        /// </returns>
+        public static bool AddTeacher(Teacher teacher)
+        {
+            string sql = @"INSERT INTO dbo.Teachers (Id, Name, SchoolId)
+                VALUES (@Id, @Name, @SchoolId)";
+
+            return AzureDataStore.SaveData(sql, teacher) == 1;
+        }
+
         /// <summary>
         /// Returns a list of teachers from a given school.
         /// </summary>
@@ -31,23 +51,8 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT Name FROM dbo.Teachers
                 WHERE Id = @Id";
 
-            return AzureDataStore.LoadDataWithGuid<string>(sql, teacherId).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Inserts a teacher into the db.
-        /// </summary>
-        /// <param name="teacher">
-        /// The teacher to insert into the db. 
-        /// Id, Name, and SchoolId must be non-null.
-        /// </param>
-        /// <returns>1 if the teacher was inserted, 0 if not.</returns>
-        public static int PutInTeacher(Teacher teacher)
-        {
-            string sql = @"INSERT INTO dbo.Teachers (Id, Name, SchoolId)
-                VALUES (@Id, @Name, @SchoolId)";
-
-            return AzureDataStore.SaveData(sql, teacher);
+            return AzureDataStore.LoadDataWithGuid<string>(sql, teacherId)
+                .FirstOrDefault();
         }
     }
 }

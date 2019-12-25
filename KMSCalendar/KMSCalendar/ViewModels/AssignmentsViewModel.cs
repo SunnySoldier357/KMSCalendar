@@ -74,7 +74,7 @@ namespace KMSCalendar.ViewModels
                 a.UserId = app.SignedInUser.Id;
                 a.SetClassId();
                 a.SetPeriod();
-                AssignmentManager.PutInAssignment(a);
+                AssignmentManager.AddAssignment(a);
 
                 ExecuteFilterAssignmentsCommand(DateChoosen);
             });

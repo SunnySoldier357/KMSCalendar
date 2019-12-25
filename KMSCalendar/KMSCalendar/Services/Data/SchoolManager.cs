@@ -1,17 +1,20 @@
-﻿using KMSCalendar.Models.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using KMSCalendar.Models.Data;
 
 namespace KMSCalendar.Services.Data
 {
     public static class SchoolManager
     {
-        public static List<School> LoadSchools()
+        //* Public Methods
+        public static int AddSchool(School school)
         {
-            string sql = @"SELECT * FROM dbo.Schools";
+            string sql = @"INSERT INTO dbo.Schools (Id, Name, ZipCode)
+                VALUES (@Id, @Name, @ZipCode)";
 
-            return AzureDataStore.LoadData<School>(sql);
+            return AzureDataStore.SaveData(sql, school);
         }
 
         /// <summary>
@@ -24,14 +27,15 @@ namespace KMSCalendar.Services.Data
             string sql = @"SELECT Name FROM dbo.Schools
                 WHERE Id = @Id";
 
-            return AzureDataStore.LoadDataWithGuid<string>(sql, schoolId).FirstOrDefault();
+            return AzureDataStore.LoadDataWithGuid<string>(sql, schoolId)
+                .FirstOrDefault();
         }
 
-        public static int PutInSchool(School school)
+        public static List<School> LoadSchools()
         {
-            string sql = @"INSERT INTO dbo.Schools (Id, Name, ZipCode) VALUES (@Id, @Name, @ZipCode)";
+            string sql = @"SELECT * FROM dbo.Schools";
 
-            return AzureDataStore.SaveData(sql, school);
+            return AzureDataStore.LoadData<School>(sql);
         }
     }
 }

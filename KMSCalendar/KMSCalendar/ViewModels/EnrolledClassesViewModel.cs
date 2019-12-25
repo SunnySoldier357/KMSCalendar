@@ -48,7 +48,7 @@ namespace KMSCalendar.ViewModels
 
         public void ExecuteUnsubscribeCommand(Class @class)
         {
-            ClassManager.RemoveClassUser(@class);
+            ClassManager.UnenrollUserFromClass(@class);
 
             (Application.Current as App).PullEnrolledClasses();
             UpdateData();

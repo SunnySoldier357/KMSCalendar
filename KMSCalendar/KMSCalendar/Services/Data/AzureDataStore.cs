@@ -18,6 +18,20 @@ namespace KMSCalendar.Services.Data
             .Resolve<AppSettings>().ConnectionString;
 
         //* Public Methods
+
+        /// <summary>
+        /// Deletes data from the database.
+        /// </summary>
+        /// <typeparam name="T">The object type of the second parameter "data".</typeparam>
+        /// <param name="sql">The sql query command string.</param>
+        /// <param name="data">Data object used by the sql query.</param>
+        /// <returns>The number of rows affected in the db.</returns>
+        public static int DeleteData<T>(string sql, T data)
+        {
+            using (IDbConnection cnn = new SqlConnection(connectionString))
+                return cnn.Execute(sql, data);
+        }
+
         /// <summary>
         /// Loads a list of data from the db given an sql statement.
         /// </summary>
@@ -78,19 +92,6 @@ namespace KMSCalendar.Services.Data
         /// <param name="data">Data object used by the sql query.</param>
         /// <returns>The number of rows affected in the db.</returns>
         public static int SaveData<T>(string sql, T data)
-        {
-            using (IDbConnection cnn = new SqlConnection(connectionString))
-                return cnn.Execute(sql, data);
-        }
-
-        /// <summary>
-        /// Deletes data from the database.
-        /// </summary>
-        /// <typeparam name="T">The object type of the second parameter "data".</typeparam>
-        /// <param name="sql">The sql query command string.</param>
-        /// <param name="data">Data object used by the sql query.</param>
-        /// <returns>The number of rows affected in the db.</returns>
-        public static int DeleteData<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(connectionString))
                 return cnn.Execute(sql, data);
