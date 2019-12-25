@@ -27,6 +27,8 @@ namespace KMSCalendar.Views
             MasterBehavior = MasterBehavior.Popover;
 
             // The default page to load
+            Master = new MenuPage();
+            Detail = new NavigationPage(new AssignmentsPage());
             MenuPages.Add((int) MenuItemType.Calendar, (NavigationPage) Detail);
 
             Current = this;
