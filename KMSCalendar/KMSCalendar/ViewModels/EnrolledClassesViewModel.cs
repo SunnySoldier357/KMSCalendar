@@ -1,59 +1,59 @@
-﻿using KMSCalendar.Models.Data;
-using KMSCalendar.Services.Data;
-using KMSCalendar.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
+
+using KMSCalendar.Models.Data;
+using KMSCalendar.Services.Data;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
-    class EnrolledClassesViewModel : BaseViewModel
+    public class EnrolledClassesViewModel : BaseViewModel
     {
+        //* Private Properties
+        private App app => Application.Current as App;
 
-       private List<Class> classes;
+        private List<Class> classes;
 
-       public List<Class> Classes
+        //* Public Properties
+        public ICommand UnsubscribeClassCommand { get; set; }
+
+        public List<Class> Classes
         {
             get => classes;
             set => setProperty(ref classes, value);
         }
 
-        public ICommand UnsubscribeCommand { get; set; }
-        public ICommand UnsubscribeButtonClicked { get; set; }
-
+        //* Constructors
         public EnrolledClassesViewModel()
         {
-            UpdateData();
+            updateData();
 
-            UnsubscribeButtonClicked = new Command((object item) =>
-            {
-                Class @class = item as Class;
-                @class.UserId = (Application.Current as App).SignedInUser.Id;
-                ExecuteUnsubscribeCommand(@class);
-            });
+            UnsubscribeClassCommand = new Command<Class>(@class => unsubscribeClass(@class));
 
             MessagingCenter.Subscribe<ClassSearchViewModel>(this, "UpdateClasses",
-                (sender) => UpdateData());
+                (sender) => updateData());
         }
 
-        public void UpdateData()
+        //* Private Methods
+        public void updateData()
         {
-            (Application.Current as App).PullEnrolledTeachers();
-            Classes = (Application.Current as App).SignedInUser.EnrolledClasses;
+            app.PullEnrolledTeachers();
+
+            Classes = app.SignedInUser.EnrolledClasses;
         }
 
-        public void ExecuteUnsubscribeCommand(Class @class)
+        public void unsubscribeClass(Class @class)
         {
+            @class.UserId = app.SignedInUser.Id;
             ClassManager.UnenrollUserFromClass(@class);
 
-            (Application.Current as App).PullEnrolledClasses();
-            UpdateData();
+            app.PullEnrolledClasses();
+            updateData();
+
             MessagingCenter.Send(this, "LoadAssignments");
-            //Todo: If there are no other users in the class, delete the class
+
+            // TODO: If there are no other users in the class, delete the class
         }
     }
 }
