@@ -51,7 +51,7 @@
                         <ScrollView>
                             <ListView x:Name="PeriodsListView"
                                       VerticalOptions="Start"
-                                      ItemsSource="{Binding Periods}">
+                                      ItemsSource="{Binding FilteredPeriods}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell Height="100">

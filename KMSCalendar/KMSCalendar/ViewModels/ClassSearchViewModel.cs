@@ -21,7 +21,7 @@ namespace KMSCalendar.ViewModels
         private List<Class> classes;
         private List<Class> filteredClasses;
 
-        private List<int> periods;
+        private List<int> filteredPeriods;
 
         private UIState uiState = UIState.ClassSearchView;
         private UIState currentUIState
@@ -57,10 +57,10 @@ namespace KMSCalendar.ViewModels
             set => setProperty(ref filteredClasses, value);
         }
 
-        public List<int> Periods
+        public List<int> FilteredPeriods
         {
-            get => periods;
-            set => setProperty(ref periods, value);
+            get => filteredPeriods;
+            set => setProperty(ref filteredPeriods, value);
         }
 
         //* Constructors
@@ -85,7 +85,7 @@ namespace KMSCalendar.ViewModels
         //* Private Methods
         private void addPeriod(int? newPeriod)
         {
-            if (newPeriod is int period && !periods.Contains(period))
+            if (newPeriod is int period && !filteredPeriods.Contains(period))
             {
                 // Add the period to the db
                 selectedClass.Period = period;
@@ -107,6 +107,21 @@ namespace KMSCalendar.ViewModels
 
                 FilteredClasses = result.ToList();
             }
+        }
+
+        private void filterPeriods(List<int> periods)
+        {
+            var result =
+                from period in periods.AsParallel()
+                let userPeriods =
+                    from @class in app.SignedInUser.EnrolledClasses
+                    where @class.Id == SelectedClass.Id
+                    select @class.Period
+                where !userPeriods.Contains(period)
+                orderby period
+                select period;
+
+            FilteredPeriods = result.ToList();
         }
 
         private void goBackward()
@@ -137,7 +152,8 @@ namespace KMSCalendar.ViewModels
         {
             Guid classId = SelectedClass.Id;
 
-            Periods = PeriodManager.LoadPeriods(classId);
+            var periods = PeriodManager.LoadPeriods(classId);
+            filterPeriods(periods);
         }
 
         private void showPeriods(Class @class)
