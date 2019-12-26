@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 
 using Autofac;
 
@@ -17,6 +18,8 @@ namespace KMSCalendar.ViewModels
     public class LogInViewModel : BaseViewModel
     {
         //* Private Properties
+        private DataOperation dataOperation = new DataOperation();
+
         private int logInAttempts;
 
         private string email;
@@ -84,18 +87,18 @@ namespace KMSCalendar.ViewModels
                     OnNotifyPropertyChanged(nameof(LoginValidationMessage));
             };
 
-            AuthenticateUserCommand = new Command(() => authenticateUser());
+            AuthenticateUserCommand = new Command(async () => await authenticateUser());
             ForgotPasswordCommand = new Command(async () => await
                 App.MainPage.Navigation.PushModalAsync(new ForgotPasswordPage()));
             NewUserCommand = new Command(() => App.MainPage = new SignUpPage());
         }
 
         //* Private Methods
-        private void authenticateUser()
+        private async Task authenticateUser()
         {
             if (Validate())
             {
-                User signedInUser = UserManager.LoadUserFromEmail(Email);
+                User signedInUser = await dataOperation.ConnectToBackendAsync<string, User>(UserManager.LoadUserFromEmail, Email);
 
                 if (signedInUser == null)
                     LoginValidationMessage = "This email does not have an account, please sign up for an account";
