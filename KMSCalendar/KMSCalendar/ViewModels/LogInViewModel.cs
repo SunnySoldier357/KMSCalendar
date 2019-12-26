@@ -21,6 +21,7 @@ namespace KMSCalendar.ViewModels
         private DataOperation dataOperation = new DataOperation();
 
         private int logInAttempts;
+        private bool isLoadingData;
 
         private string email;
         private string loginValidationMessage;
@@ -69,6 +70,11 @@ namespace KMSCalendar.ViewModels
             get => password;
             set => setProperty(ref password, value);
         }
+        public bool IsLoadingData
+        {
+            get => isLoadingData;
+            set => setProperty(ref isLoadingData, value);
+        }
 
         //* Constructor
         public LogInViewModel() :
@@ -93,29 +99,39 @@ namespace KMSCalendar.ViewModels
             NewUserCommand = new Command(() => App.MainPage = new SignUpPage());
         }
 
-        //* Private Methods
+        //* Private Method
         private async Task authenticateUser()
         {
-            if (Validate())
+            IsLoadingData = true;
+
+            await Task.Run(() =>
             {
-                User signedInUser = await dataOperation.ConnectToBackendAsync<string, User>(UserManager.LoadUserFromEmail, Email);
-
-                if (signedInUser == null)
-                    LoginValidationMessage = "This email does not have an account, please sign up for an account";
-                else
+                if (Validate())
                 {
-                    if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
-                    {
-                        App.SignedInUser = signedInUser;
+                    User signedInUser = dataOperation.ConnectToBackendAsync<string, User>(UserManager.LoadUserFromEmail, Email);
 
-                        UserSettings.SignedInUserId = signedInUser.Id;
-
-                        App.MainPage = new MainPage();
-                    }
+                    if (signedInUser == null)
+                        LoginValidationMessage = "This email does not have an account, please sign up for an account";
                     else
-                        LoginValidationMessage = "Invalid Password";
+                    {
+                        if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
+                        {
+                            App.SignedInUser = signedInUser;
+
+                            UserSettings.SignedInUserId = signedInUser.Id;
+
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                App.MainPage = new MainPage();
+                            });
+                        }
+                        else
+                            LoginValidationMessage = "Invalid Password";
+                    }
                 }
-            }
+            });
+                       
+            IsLoadingData = false;
         }
     }
 }

@@ -49,7 +49,13 @@
                     <RowDefinition Height="60" />
 
                     <!--  Spacing  -->
-                    <RowDefinition Height="30*" />
+                    <RowDefinition Height="10*" />
+
+                    <!--  Animation  -->
+                    <RowDefinition Height="50" />
+
+                    <!--  Spacing  -->
+                    <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="1"
@@ -110,6 +116,11 @@
 
                 </StackLayout>
             </Grid>
+
+            <control:LoadingIndicator Grid.Row="11"
+                                      BackgroundColor="Transparent"
+                                      IsLoading="{Binding IsLoadingData, Mode=OneWay}"
+                                      LoadingIndicatorColor="#ffffff" />
 
             <Grid HorizontalOptions="Center"
                   VerticalOptions="EndAndExpand"
