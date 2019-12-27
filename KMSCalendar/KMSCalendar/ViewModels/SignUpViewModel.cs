@@ -19,6 +19,8 @@ namespace KMSCalendar.ViewModels
     public class SignUpViewModel : LogInViewModel
     {
         //* Private Properties
+        private DataOperation dataOperation;
+
         private string confirmPassword;
         private string userName;
 
@@ -99,9 +101,7 @@ namespace KMSCalendar.ViewModels
         public SignUpViewModel() : base()
         {
             Title = "Sign Up";
-
-            SchoolList = SchoolManager.LoadSchools();
-            FilteredSchoolList = SchoolList;
+            dataOperation = new DataOperation();
 
             SignUpVisibility = true;
             SchoolEnrollmentVisibility = false;
@@ -110,31 +110,34 @@ namespace KMSCalendar.ViewModels
             UserName = string.Empty;
 
             AlreadyUserCommand = new Command(() => ExecuteAlreadyUserCommand());
-            AuthenticateUserCommand = new Command(() => ExecuteAuthenticateUserCommand());
-            CreateUserCommand = new Command(() => SignUpUser());
+            AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommandAsync());
+            CreateUserCommand = new Command(async () => await SignUpUserAsync());
             FilterZipCodesCommand = new Command(() => FilterData(ZipCode));
             NewSchoolViewCommand = new Command(() => GoToNewSchoolView());
             GoBackCommand = new Command(() => GoBack());
-            AddNewSchoolCommand = new Command(() => AddNewSchool());
+            AddNewSchoolCommand = new Command(async () => await AddNewSchoolAsync());
         }
 
         //* Public Methods
         public void ExecuteAlreadyUserCommand() =>
             (Application.Current as App).MainPage = new LogInPage();
 
-        public new void ExecuteAuthenticateUserCommand()
+        public async Task ExecuteAuthenticateUserCommandAsync()
         {
-            if (Validate())
+            await Task.Run(() =>
             {
-                bool alreadyEmail = UserManager.CheckForUser(Email.Trim());
-
-                if (alreadyEmail)
-                    LoginValidationMessage = "User already exists! Please log in instead.";
-                else
+                if (Validate())
                 {
-                    SwapViews();   
+                    bool alreadyEmail = dataOperation.ConnectToBackend(UserManager.CheckForUser, Email.Trim());
+
+                    if (alreadyEmail)
+                        LoginValidationMessage = "User already exists! Please log in instead.";
+                    else
+                    {
+                        SwapViewsAsync();
+                    }
                 }
-            }
+            }); 
         }
                
         /// <summary>
@@ -149,7 +152,7 @@ namespace KMSCalendar.ViewModels
                 FilteredSchoolList = SchoolList.Where(x => x.ZipCode.ToLower().Contains(filter.ToLower())).ToList();
         }
 
-        private void AddNewSchool()
+        private async Task AddNewSchoolAsync()
         {
             School school = new School
             {
@@ -157,16 +160,17 @@ namespace KMSCalendar.ViewModels
                 ZipCode = this.ZipCode,
             };
 
-            SchoolManager.AddSchool(school);
+            await Task.Run(() => dataOperation.ConnectToBackend(SchoolManager.AddSchool, school));
+
             SchoolList.Add(school);
             FilterData(ZipCode);
             GoBack();
         }
 
 
-        private void SignUpUser()
+        private async Task SignUpUserAsync()
         {
-            if(SelectedSchool != null)
+            if (SelectedSchool != null)
             {
                 string hashedPassword = PasswordHasher.HashPassword(Password);
 
@@ -179,7 +183,7 @@ namespace KMSCalendar.ViewModels
                     SchoolId = SelectedSchool.Id
                 };
 
-                UserManager.AddUser(user);
+                await Task.Run(() => dataOperation.ConnectToBackend(UserManager.AddUser, user));
 
                 App app = Application.Current as App;
 
@@ -190,12 +194,14 @@ namespace KMSCalendar.ViewModels
             }
         }
 
-        private void SwapViews()
+        private async Task SwapViewsAsync()
         {
             if(SignUpVisibility)
             {
                 SignUpVisibility = false;
                 SchoolEnrollmentVisibility = true;
+                await Task.Run(() => SchoolList = dataOperation.ConnectToBackendWithoutParam(SchoolManager.LoadSchools));
+                FilteredSchoolList = SchoolList;
             }
             else
             {

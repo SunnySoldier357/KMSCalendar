@@ -108,7 +108,9 @@ namespace KMSCalendar.ViewModels
             {
                 if (Validate())
                 {
-                    User signedInUser = dataOperation.ConnectToBackendAsync<string, User>(UserManager.LoadUserFromEmail, Email);
+                    User signedInUser = dataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
+
+                    System.Diagnostics.Debug.WriteLine("Made it Here!");
 
                     if (signedInUser == null)
                         LoginValidationMessage = "This email does not have an account, please sign up for an account";

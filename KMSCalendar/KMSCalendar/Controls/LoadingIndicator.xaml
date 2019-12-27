@@ -26,14 +26,6 @@
                 <Setter Property="VerticalOptions"
                 Value="Center" />
             </Style>
-
-            <Style x:Key="LoadingIndicatorTextStyle"
-             TargetType="Label">
-                <Setter Property="IsVisible"
-                Value="False" />
-                <Setter Property="HorizontalTextAlignment"
-                Value="Center" />
-            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
     

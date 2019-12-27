@@ -17,6 +17,7 @@ namespace KMSCalendar
     public partial class App : Application
     {
         //* Private Properties
+        private DataOperation dataOperation = new DataOperation();
         private readonly AppSettings appSettings;
         private readonly UserSettings userSettings;
 
@@ -65,8 +66,8 @@ namespace KMSCalendar
 
         //* Public Methods
         public void PullEnrolledClasses() =>
-            SignedInUser.EnrolledClasses = ClassManager.LoadEnrolledClasses(SignedInUser.Id);
-
+            SignedInUser.EnrolledClasses = dataOperation.ConnectToBackend(ClassManager.LoadEnrolledClasses, SignedInUser.Id);
+        
         public void PullEnrolledTeachers()
         {
             foreach (Class @class in SignedInUser.EnrolledClasses)

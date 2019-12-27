@@ -26,6 +26,7 @@ namespace KMSCalendar.Views
         {
             if (operation.TryToGetData())
             {
+                operation.waitHandle.Set();
                 await Navigation.PopModalAsync();
             }
         }

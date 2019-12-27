@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using KMSCalendar.Models.Data;
@@ -11,6 +12,7 @@ namespace KMSCalendar.ViewModels
     public class EnrolledClassesViewModel : BaseViewModel
     {
         //* Private Properties
+        private DataOperation dataOperation = new DataOperation();
         private App app => Application.Current as App;
 
         private List<Class> classes;
@@ -29,24 +31,23 @@ namespace KMSCalendar.ViewModels
         {
             updateData();
 
-            UnsubscribeClassCommand = new Command<Class>(@class => unsubscribeClass(@class));
+            UnsubscribeClassCommand = new Command<Class>(async @class => await unsubscribeClassAsync(@class));
 
             MessagingCenter.Subscribe<ClassSearchViewModel>(this, "UpdateClasses",
                 (sender) => updateData());
         }
 
         //* Private Methods
-        public void updateData()
+        private void updateData()
         {
             app.PullEnrolledTeachers();
-
             Classes = app.SignedInUser.EnrolledClasses;
         }
 
-        public void unsubscribeClass(Class @class)
+        private async Task unsubscribeClassAsync(Class @class)
         {
             @class.UserId = app.SignedInUser.Id;
-            ClassManager.UnenrollUserFromClass(@class);
+            await Task.Run(() => dataOperation.ConnectToBackend(ClassManager.UnenrollUserFromClass, @class));
 
             app.PullEnrolledClasses();
             updateData();
