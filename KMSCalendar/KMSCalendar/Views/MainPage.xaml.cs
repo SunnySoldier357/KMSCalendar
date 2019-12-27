@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using KMSCalendar.Models.Navigation;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models.Navigation;
- 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -53,7 +53,7 @@ namespace KMSCalendar.Views
                         MenuPages.Add(id, new NavigationPage(new ClassSearchPage()));
                         break;
 
-                    case (int)MenuItemType.EnrolledClasses:
+                    case (int) MenuItemType.EnrolledClasses:
                         MenuPages.Add(id, new NavigationPage(new EnrolledClassesPage()));
                         break;
 

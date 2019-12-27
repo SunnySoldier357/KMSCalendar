@@ -18,10 +18,11 @@ namespace KMSCalendar.ViewModels
     public class LogInViewModel : BaseViewModel
     {
         //* Private Properties
+        private bool isLoadingData;
+
         private DataOperation dataOperation = new DataOperation();
 
         private int logInAttempts;
-        private bool isLoadingData;
 
         private string email;
         private string loginValidationMessage;
@@ -33,6 +34,12 @@ namespace KMSCalendar.ViewModels
         protected readonly UserSettings UserSettings;
 
         //* Public Properties
+        public bool IsLoadingData
+        {
+            get => isLoadingData;
+            set => setProperty(ref isLoadingData, value);
+        }
+
         public ICommand AuthenticateUserCommand { get; set; }
         public ICommand ForgotPasswordCommand { get; set; }
         public ICommand NewUserCommand { get; set; }
@@ -70,15 +77,11 @@ namespace KMSCalendar.ViewModels
             get => password;
             set => setProperty(ref password, value);
         }
-        public bool IsLoadingData
-        {
-            get => isLoadingData;
-            set => setProperty(ref isLoadingData, value);
-        }
 
         //* Constructor
         public LogInViewModel() :
-            this(AppContainer.Container.Resolve<UserSettings>()) { }
+            this(AppContainer.Container.Resolve<UserSettings>())
+        { }
 
         public LogInViewModel(UserSettings userSettings)
         {
@@ -122,17 +125,14 @@ namespace KMSCalendar.ViewModels
 
                             UserSettings.SignedInUserId = signedInUser.Id;
 
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
-                                App.MainPage = new MainPage();
-                            });
+                            Device.BeginInvokeOnMainThread(() => App.MainPage = new MainPage());
                         }
                         else
                             LoginValidationMessage = "Invalid Password";
                     }
                 }
             });
-                       
+
             IsLoadingData = false;
         }
     }

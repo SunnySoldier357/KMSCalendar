@@ -12,8 +12,9 @@ namespace KMSCalendar.ViewModels
     public class EnrolledClassesViewModel : BaseViewModel
     {
         //* Private Properties
-        private DataOperation dataOperation = new DataOperation();
         private App app => Application.Current as App;
+
+        private DataOperation dataOperation = new DataOperation();
 
         private List<Class> classes;
 
