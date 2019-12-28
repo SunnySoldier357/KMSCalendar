@@ -52,7 +52,7 @@ namespace KMSCalendar.Models.Data
         //* Public Properties
 
         /// <summary>The unique ID of the entity.</summary>
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         //* Public Static Methods
 
@@ -196,7 +196,6 @@ namespace KMSCalendar.Models.Data
             {
                 new User
                 {
-                    Id = Guid.NewGuid(),
                     Email = "singh@king.com",
                     UserName = "SinghIsKing",
                     Password = password,
@@ -204,7 +203,6 @@ namespace KMSCalendar.Models.Data
                 },
                 new User
                 {
-                    Id = Guid.NewGuid(),
                     Email = "test@king.com",
                     UserName = "No Class Test",
                     Password = password,
@@ -212,7 +210,6 @@ namespace KMSCalendar.Models.Data
                 },
                 new User
                 {
-                    Id = Guid.NewGuid(),
                     Email = "mattmorgan6@gmail.com",
                     UserName = "mattmorgan6",
                     Password = password,

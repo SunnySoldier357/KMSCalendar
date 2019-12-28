@@ -347,6 +347,6 @@ MigrationBackup/
 
 # Settings Configuration File contains database connection string (sensitive
 # information)
-KMSCalendar/KMSCalendar/appsettings.json
-appsettings.Development.json
+appsettings.*.json
+!appsettings.*-TEMPLATE.json
 Connections.cs

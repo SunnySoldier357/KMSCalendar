@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using KMSCalendar.Models.Navigation;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using KMSCalendar.Models.Navigation;
- 
 namespace KMSCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -27,6 +27,8 @@ namespace KMSCalendar.Views
             MasterBehavior = MasterBehavior.Popover;
 
             // The default page to load
+            Master = new MenuPage();
+            Detail = new NavigationPage(new AssignmentsPage());
             MenuPages.Add((int) MenuItemType.Calendar, (NavigationPage) Detail);
 
             Current = this;
@@ -49,6 +51,10 @@ namespace KMSCalendar.Views
 
                     case (int) MenuItemType.Search:
                         MenuPages.Add(id, new NavigationPage(new ClassSearchPage()));
+                        break;
+
+                    case (int) MenuItemType.EnrolledClasses:
+                        MenuPages.Add(id, new NavigationPage(new EnrolledClassesPage()));
                         break;
 
                     case (int) MenuItemType.Settings:

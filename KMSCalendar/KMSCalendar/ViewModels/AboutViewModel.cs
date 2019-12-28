@@ -14,8 +14,6 @@ namespace KMSCalendar.ViewModels
         //* Constructors
         public AboutViewModel()
         {
-            Title = "About";
-
             OpenWebCommand = new Command(async () =>
                 await Launcher.OpenAsync(new Uri("https://xamarin.com/platform")));
         }

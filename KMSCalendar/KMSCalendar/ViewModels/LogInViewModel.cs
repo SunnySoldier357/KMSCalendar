@@ -1,29 +1,45 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
+
+using Autofac;
+
+using KMSCalendar.Models;
+using KMSCalendar.Models.Data;
+using KMSCalendar.Models.Settings;
+using KMSCalendar.Services.Data;
+using KMSCalendar.Views;
 
 using ModelValidation;
 
 using Xamarin.Forms;
 
-using KMSCalendar.Models;
-using KMSCalendar.Models.Data;
-using KMSCalendar.Views;
-using KMSCalendar.Services.Data;
-using KMSCalendar.Services.Email;
-
 namespace KMSCalendar.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LogInViewModel : BaseViewModel
     {
         //* Private Properties
+        private bool isLoadingData;
+
+        private DataOperation dataOperation = new DataOperation();
+
         private int logInAttempts;
 
         private string email;
         private string loginValidationMessage;
         private string password;
 
+        //* Protected Properties
+        protected App App => Application.Current as App;
+
+        protected readonly UserSettings UserSettings;
+
         //* Public Properties
+        public bool IsLoadingData
+        {
+            get => isLoadingData;
+            set => setProperty(ref isLoadingData, value);
+        }
+
         public ICommand AuthenticateUserCommand { get; set; }
         public ICommand ForgotPasswordCommand { get; set; }
         public ICommand NewUserCommand { get; set; }
@@ -63,9 +79,13 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructor
-        public LoginViewModel()
+        public LogInViewModel() :
+            this(AppContainer.Container.Resolve<UserSettings>())
+        { }
+
+        public LogInViewModel(UserSettings userSettings)
         {
-            Title = "Log In";
+            UserSettings = userSettings;
 
             Email = string.Empty;
             Password = string.Empty;
@@ -76,53 +96,44 @@ namespace KMSCalendar.ViewModels
                     OnNotifyPropertyChanged(nameof(LoginValidationMessage));
             };
 
-            AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommand());
-            ForgotPasswordCommand = new Command(async () => await ExecuteForgotPasswordCommand());
-            NewUserCommand = new Command(() => (Application.Current as App).MainPage = new SignUpPage());
+            AuthenticateUserCommand = new Command(async () => await authenticateUser());
+            ForgotPasswordCommand = new Command(async () => await
+                App.MainPage.Navigation.PushModalAsync(new ForgotPasswordPage()));
+            NewUserCommand = new Command(() => App.MainPage = new SignUpPage());
         }
 
-        //* Public Methods
-        public async Task ExecuteAuthenticateUserCommand()
+        //* Private Method
+        private async Task authenticateUser()
         {
-            if (Validate())
+            IsLoadingData = true;
+
+            await Task.Run(() =>
             {
-                User signedInUser = UserManager.LoadUserFromEmail(Email);
-                
-                if (signedInUser == null)
-                    LoginValidationMessage = "This email does not have an account, please sign up for an account";
-                else
+                if (Validate())
                 {
-                    if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
-                    {
-                        App app = Application.Current as App;
+                    User signedInUser = dataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
 
-                        app.SignedInUser = signedInUser;
+                    System.Diagnostics.Debug.WriteLine("Made it Here!");
 
-                        Settings.DefaultInstance.SignedInUserId = signedInUser.Id;
-
-                        app.MainPage = new MainPage();
-                    }
+                    if (signedInUser == null)
+                        LoginValidationMessage = "This email does not have an account, please sign up for an account";
                     else
-                        LoginValidationMessage = "Invalid Password";
+                    {
+                        if (PasswordHasher.ValidatePassword(Password, signedInUser.Password))
+                        {
+                            App.SignedInUser = signedInUser;
+
+                            UserSettings.SignedInUserId = signedInUser.Id;
+
+                            Device.BeginInvokeOnMainThread(() => App.MainPage = new MainPage());
+                        }
+                        else
+                            LoginValidationMessage = "Invalid Password";
+                    }
                 }
-            }
-        }
+            });
 
-        public async Task ExecuteForgotPasswordCommand()
-        {
-            if (string.IsNullOrWhiteSpace(Email))
-                loginValidationMessage = "Please enter an email first.";
-            else
-            {
-                var emailService = new EmailService();
-
-                User recipient = UserManager.LoadUserFromEmail(Email);
-
-                if (recipient == null)
-                    LoginValidationMessage = "This email does not have an account, please sign up for an account";
-                else
-                    emailService.SendResetPasswordEmail(recipient);
-            }
+            IsLoadingData = false;
         }
     }
 }

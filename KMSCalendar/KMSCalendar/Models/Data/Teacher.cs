@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace KMSCalendar.Models.Data
 {
-    public class Teacher
+    public class Teacher : TableData
     {
         //* Public Properties
-        public Guid Id { get; set; }
         public Guid SchoolId { get; set; }
+        public string SchoolName { get; set; }
 
         public List<Class> Classes { get; set; }
 

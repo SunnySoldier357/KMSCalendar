@@ -3,98 +3,102 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Create a new class"
-             BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+             BackgroundColor="{DynamicResource NavigationPrimary}">
 
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Vertical"
-                         VerticalOptions="CenterAndExpand"
-                         Margin="0,50,0,50"
+                         Margin="10,10,10,0"
                          Spacing="0">
 
+                <Grid x:Name="PeriodButtons"
+                      HeightRequest="30"
+                      Margin="10,0,10,0"
+                      Padding="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="BackButton"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource ActionButtonStyle}"
+                            Text="Back"
+                            Clicked="BackButton_Clicked" />
+
+                    <Button x:Name="NextButton"
+                            Grid.Column="1"
+                            HorizontalOptions="End"
+                            Style="{StaticResource ActionButtonStyle}"
+                            Text="Next"
+                            Clicked="NextButton_Clicked" />
+                </Grid>
+
                 <Frame VerticalOptions="CenterAndExpand"
-                       Margin="20,0,20,0"
+                       Margin="20,30,20,0"
                        BackgroundColor="{DynamicResource NavigationBackground}"
                        CornerRadius="10">
 
                     <ScrollView BackgroundColor="Transparent">
                         <!--  contents go here  -->
-                        <!--  Enter a name  -->
-                        <Frame Grid.Row="5">
-                            <Grid>
+                        <Grid>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition Height="32" />
-                                    <RowDefinition Height="32" />
-                                    <RowDefinition Height="300" />
-                                    <RowDefinition Height="50" />
-                                    <RowDefinition Height="32" />
-                                </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32" />
+                                <RowDefinition Height="32" />
+                                <RowDefinition Height="250" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="32" />
+                            </Grid.RowDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
-                                <Button x:Name="BackButton"
-                                        HorizontalOptions="Start"
-                                        Style="{StaticResource ActionButtonStyle}"
-                                        Text="Back"
-                                        Clicked="BackButton_Clicked" />
+                            <!--  Enter a name  -->
+                            <Label Grid.Row="0"
+                                   Text="Class Name:" />
 
-                                <Button x:Name="NextButton"
-                                        Grid.Column="1"
-                                        HorizontalOptions="End"
-                                        Style="{StaticResource ActionButtonStyle}"
-                                        Text="Next"
-                                        Clicked="NextButton_Clicked" />
+                            <Entry x:Name="ClassNameEntry"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding ClassName}"
+                                   Placeholder="Class Name" />
 
-                                <Label Grid.Row="1"
-                                       Text="Class Name:" />
+                            <!--  Select a period  -->
+                            <Label Grid.Row="1"
+                                   Text="Period: " />
 
-                                <Entry x:Name="ClassNameEntry"
-                                       Grid.Row="1"
-                                       Grid.Column="1"
-                                       Text="{Binding ClassName}"
-                                       Placeholder="Class Name" />
+                            <StackLayout Grid.Row="1"
+                                         Grid.Column="1"
+                                         Orientation="Horizontal">
 
-                                <!--  Select a period  -->
-                                <Label Grid.Row="2"
-                                       Text="Period: " />
+                                <Entry x:Name="PeriodEntry"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Text="{Binding Period}"
+                                       Placeholder="1"
+                                       Keyboard="Numeric" />
 
-                                <StackLayout Grid.Row="2"
-                                             Grid.Column="1"
-                                             Orientation="Horizontal">
+                            </StackLayout>
 
-                                    <Label x:Name="NewPeriodLabel"
-                                           VerticalOptions="Center"
-                                           BindingContext="{x:Reference Name=PeriodStepper}"
-                                           Text="{Binding Value}" />
+                            <!--  Search for a Teacher  -->
+                            <StackLayout x:Name="SearchAreaStackLayout"
+                                         Grid.Row="2"
+                                         Grid.ColumnSpan="2"
+                                         HorizontalOptions="Center">
 
-                                    <Stepper x:Name="PeriodStepper"
-                                             HorizontalOptions="Center"
-                                             VerticalOptions="CenterAndExpand"
-                                             Increment="1"
-                                             Maximum="15"
-                                             Minimum="0"
-                                             Value="{Binding Period}" />
-                                </StackLayout>
+                                <Label Text="Search for your Teacher" />
 
-                                <!--  Search for a Teacher  -->
-                                <StackLayout x:Name="SearchAreaStackLayout"
-                                             Grid.Row="3"
-                                             Grid.ColumnSpan="2"
-                                             HorizontalOptions="Center">
+                                <SearchBar x:Name="TeacherSearchBar"
+                                           Margin="0,0,0,4"
+                                           Text="{Binding SearchTerm}"
+                                           Placeholder="Search"
+                                           TextChanged="TeacherSearchBar_TextChanged" />
 
-                                    <Label Text="Search for your Teacher" />
-
-                                    <SearchBar x:Name="TeacherSearchBar"
-                                               Margin="0,0,0,4"
-                                               Text="{Binding SearchTerm}"
-                                               Placeholder="Search"
-                                               TextChanged="TeacherSearchBar_TextChanged" />
-
+                                <ScrollView>
                                     <ListView x:Name="TeachersListView"
                                               ItemsSource="{Binding Teachers}"
                                               IsPullToRefreshEnabled="true"
@@ -115,7 +119,7 @@
 
                                                         <Label Grid.Column="1"
                                                                HorizontalOptions="End"
-                                                               Text="{Binding SchoolId}"
+                                                               Text="{Binding SchoolName}"
                                                                FontSize="11"
                                                                LineBreakMode="NoWrap" />
                                                     </Grid>
@@ -123,31 +127,32 @@
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
-                                </StackLayout>
+                                </ScrollView>
+                            </StackLayout>
 
-                                <Label Grid.Row="4"
-                                       Grid.Column="0"
-                                       VerticalOptions="Center"
-                                       Text="Add a new teacher (if not on the list):" />
-                                <Entry x:Name="newTeacherNameEntry"
-                                       Grid.Row="4"
-                                       Grid.Column="1"
-                                       VerticalOptions="Center"
-                                       Text="{Binding TeacherName}"
-                                       Placeholder="Teacher's Name" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   VerticalOptions="Center"
+                                   Text="Add a new teacher (if not on the list):" />
+                            <Entry x:Name="newTeacherNameEntry"
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   Text="{Binding TeacherName}"
+                                   Placeholder="Teacher's Name" />
 
-                                <Button x:Name="DoneButton"
-                                        Grid.Row="5"
-                                        Grid.ColumnSpan="2"
-                                        Margin="0,5,0,0"
-                                        BackgroundColor="{DynamicResource NavigationTertiary}"
-                                        BorderWidth="0"
-                                        CornerRadius="10"
-                                        Text="Add the class"
-                                        TextColor="White"
-                                        Clicked="DoneButton_Clicked" />
-                            </Grid>
-                        </Frame>
+                            <Button x:Name="DoneButton"
+                                    Grid.Row="4"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,5,0,0"
+                                    BackgroundColor="{DynamicResource NavigationTertiary}"
+                                    BorderWidth="0"
+                                    CornerRadius="10"
+                                    Text="Add the class"
+                                    TextColor="White"
+                                    Clicked="DoneButton_Clicked" />
+                        </Grid>
+
                     </ScrollView>
                 </Frame>
             </StackLayout>

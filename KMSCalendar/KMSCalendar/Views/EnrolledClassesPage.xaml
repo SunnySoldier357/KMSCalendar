@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="KMSCalendar.Views.EnrolledClassesPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             Title="My Enrolled Classes"
+             mc:Ignorable="d">
+
+    <ContentPage.BindingContext>
+        <vm:EnrolledClassesViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Padding="36"
+                     BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+            <ListView x:Name="ClassListView"
+                      ItemsSource="{Binding Classes}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="4"
+                                   Padding="-4"
+                                   BackgroundColor="{DynamicResource NavigationBackground}"
+                                   CornerRadius="5">
+
+                                <Grid x:Name="ClassGrid">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="28" />
+                                        <RowDefinition Height="16" />
+                                        <RowDefinition Height="16" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Margin="12,6,0,0"
+                                           Text="{Binding Name}"
+                                           FontSize="16"
+                                           TextColor="{DynamicResource Text}" />
+
+                                    <Button Grid.RowSpan="3"
+                                            Grid.Column="1"
+                                            HorizontalOptions="End"
+                                            BindingContext="{Binding Source={x:Reference ClassListView}, Path=BindingContext}"
+                                            Margin="0,0,8,0"
+                                            BackgroundColor="Transparent"
+                                            BorderColor="Transparent"
+                                            Text="Unsubscribe"
+                                            TextColor="{DynamicResource Text}"
+                                            Command="{Binding UnsubscribeClassCommand}"
+                                            CommandParameter="{Binding Source={x:Reference ClassGrid}, Path=BindingContext}" />
+
+                                    <Label Grid.Row="1"
+                                           Margin="12,-4,0,0"
+                                           Text="{Binding Period, StringFormat='Period: {0}'}"
+                                           FontSize="12"
+                                           TextColor="{DynamicResource Text}" />
+
+                                    <Label Grid.Row="2"
+                                           Margin="12,-8,0,0"
+                                           Text="{Binding Teacher.Name}"
+                                           FontSize="12"
+                                           TextColor="{DynamicResource Text}" />
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

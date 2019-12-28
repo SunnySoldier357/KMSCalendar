@@ -4,30 +4,35 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 
-using Xamarin.Forms;
+using Autofac;
 
 using KMSCalendar.Models.Data;
+using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+
+using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
     public class AssignmentsViewModel : BaseViewModel
     {
         //* Private Properties
-        private App app = (Application.Current as App);
+        private App app = Application.Current as App;
 
         /// <summary>A List of all the Assignments to display.</summary>
         private List<Assignment> assignments;
         private List<Assignment> filteredAssignments;
 
+        private readonly UserSettings userSettings;
+
         //* Public Properties
-        public bool ShowCalendarDays => Settings.ShowCalendarDays;
+        public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
-        public DateTime DateChoosen { get; set; }
+        public DateTime DateSelected { get; set; }
 
-        public ICommand FilterAssignmentsCommand { get; set; }
-        public ICommand LoadAssignmentsCommand { get; set; }
+        public ICommand FilterAssignmentsCommand { get; }
+        public ICommand LoadAssignmentsCommand { get; }
 
         /// <summary>
         /// A filtered set of all the Assignments that are only for the
@@ -40,52 +45,53 @@ namespace KMSCalendar.ViewModels
         }
 
         //* Constructors
-        public AssignmentsViewModel()
-        {
-            Title = "Assignments Calendar";
-            DateChoosen = DateTime.Today;
+        public AssignmentsViewModel() :
+            this(AppContainer.Container.Resolve<UserSettings>()) { }
 
-            app.PullEnrolledClasses();
+        public AssignmentsViewModel(UserSettings userSettings)
+        {
+            this.userSettings = userSettings;
+
+            DateSelected = DateTime.Today;
 
             assignments = new List<Assignment>();
             FilteredAssignments = new List<Assignment>();
 
-            LoadAssignmentsCommand = new Command(() =>
-                ExecuteLoadAssignmentsCommand());
-
             FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
-                ExecuteFilterAssignmentsCommand(selectedDate));
+                filterAssignments(selectedDate));
+            LoadAssignmentsCommand = new Command(() => loadAssignments());
 
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
                 "AddAssignment", (page, a) =>
             {
-                assignments.Add(a);
-                a.Id = Guid.NewGuid();
-                a.UserId = app.SignedInUser.Id;
-                a.SetClassId();
-                a.SetPeriod();
-                AssignmentManager.PutInAssignment(a);
+                assignments.Add(AssignmentManager.AddAssignment(a));
 
-                ExecuteFilterAssignmentsCommand(DateChoosen);
+                filterAssignments(DateSelected);
             });
 
             // This is so that when the class search page closes,
             // the assignment page will update it's assignment list
-            MessagingCenter.Subscribe<ClassSearchPage>(this, "LoadAssignments",
-                (sender) => LoadAssignmentsCommand.Execute(null));
+            MessagingCenter.Subscribe<ClassSearchViewModel>(this, "LoadAssignments",
+                (sender) => loadAssignments());
 
-            LoadAssignmentsCommand.Execute(null);
+            MessagingCenter.Subscribe<EnrolledClassesViewModel>(this, "LoadAssignments",
+                (sender) => loadAssignments());
 
-            Settings.PropertyChanged += (sender, args) =>
+            app.PullEnrolledClasses();
+            loadAssignments();
+
+            userSettings.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(Settings.ShowCalendarDays))
+                if (args.PropertyName == nameof(UserSettings.ShowCalendarDays))
                     OnNotifyPropertyChanged(nameof(ShowCalendarDays));
             };
         }
 
-        //* Public Methods
-        public void ExecuteFilterAssignmentsCommand(DateTime date)
+        //* Private Methods
+        private void filterAssignments(DateTime date)
         {
+            DateSelected = date;
+
             var result =
                 from assignment in assignments.AsParallel()
                 where assignment.DueDate.Date.Equals(date.Date)
@@ -98,7 +104,7 @@ namespace KMSCalendar.ViewModels
         /// <summary>
         /// Loads Assignments from the db.
         /// </summary>
-        public void ExecuteLoadAssignmentsCommand()
+        private void loadAssignments()
         {
             if (IsBusy)
                 return;
@@ -131,7 +137,7 @@ namespace KMSCalendar.ViewModels
                 IsBusy = false;
             }
 
-            ExecuteFilterAssignmentsCommand(DateChoosen);
+            filterAssignments(DateSelected);
         }
     }
 }

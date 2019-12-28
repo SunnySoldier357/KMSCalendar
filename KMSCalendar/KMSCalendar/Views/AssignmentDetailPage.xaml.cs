@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace KMSCalendar.Views
 {
@@ -20,7 +20,7 @@ namespace KMSCalendar.Views
         }
 
         //* Event Handlers
-        private async void Delete_Clicked(object sender, EventArgs e) => 
+        private async void Delete_Clicked(object sender, EventArgs e) =>
             await Navigation.PushAsync(new AssignmentsPage());
     }
 }

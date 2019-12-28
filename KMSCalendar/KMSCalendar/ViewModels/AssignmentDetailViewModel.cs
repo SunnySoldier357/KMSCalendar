@@ -1,9 +1,9 @@
 using System.Windows.Input;
 
-using Xamarin.Forms;
-
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
+
+using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
@@ -12,7 +12,7 @@ namespace KMSCalendar.ViewModels
         //* Public Properties
         public Assignment Assignment { get; set; }
 
-        public ICommand DeleteAssignmentCommand { get; set; }
+        public ICommand DeleteAssignmentCommand { get; }
 
         public string ClassDetail => string.Format("{0} (Per {1})",
             Assignment.Class.Name, Assignment.Class.Period);
@@ -24,11 +24,7 @@ namespace KMSCalendar.ViewModels
             Assignment = assignment;
 
             DeleteAssignmentCommand = new Command(() =>
-                ExecuteDeleteAssignmentCommandAssignment());
+                AssignmentManager.DeleteAssignment(Assignment));
         }
-
-        //* Private Methods
-        public void ExecuteDeleteAssignmentCommandAssignment() =>
-            AssignmentManager.RemoveAssignment(Assignment);
     }
 }

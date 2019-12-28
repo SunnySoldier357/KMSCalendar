@@ -2,17 +2,20 @@
 <ContentPage x:Class="KMSCalendar.Views.AssignmentsPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior="clr-namespace:KMSCalendar.Behaviors"
              xmlns:control="clr-namespace:ModernXamarinCalendar;assembly=ModernXamarinCalendar"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              x:Name="BrowseAssignmentsPage"
-             Title="{Binding Title}">
+             Title="Assignments Calendar">
 
     <ContentPage.BindingContext>
         <vm:AssignmentsViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="add.png"
+        <ToolbarItem Icon="{ext:ImageResource add.png,
+                                              FolderName=AssignmentsPage}"
                      Text="Add"
                      Clicked="AddAssignment_Clicked" />
     </ContentPage.ToolbarItems>
@@ -22,16 +25,20 @@
         <control:WeekControl x:Name="CalendarWeekControl"
                              HorizontalOptions="CenterAndExpand"
                              Margin="5,10,5,15"
-                             ShowDayName="{Binding ShowCalendarDays}" />
+                             ShowDayName="{Binding ShowCalendarDays}">
+            <control:WeekControl.Behaviors>
+                <behavior:EventToCommandBehavior EventName="DataSelectedChanged"
+                                                 Command="{Binding FilterAssignmentsCommand}"
+                                                 CommandParameter="{Binding Source={x:Reference CalendarWeekControl}, Path=DateSelected}" />
+            </control:WeekControl.Behaviors>
+        </control:WeekControl>
 
-        <Frame x:Name="BottomAreaFrame"
-               Margin="0,0,0,-20"
-               BackgroundColor="{DynamicResource NavigationBackground}"
+        <Frame Margin="0,0,0,-20"
+               BackgroundColor="{DynamicResource NavigationBackgroundLight}"
                CornerRadius="15">
 
             <StackLayout>
-                <Label x:Name="ListTitleDate"
-                       HorizontalOptions="CenterAndExpand"
+                <Label HorizontalOptions="CenterAndExpand"
                        BindingContext="{x:Reference CalendarWeekControl}"
                        Margin="0,-10,0,0"
                        Text="{Binding DateFormatted}"
@@ -64,10 +71,10 @@
 
                                         <Label Text="{Binding Name}"
                                                FontSize="16"
-                                               LineBreakMode="TailTruncation"/>
+                                               LineBreakMode="TailTruncation" />
 
-                                        <Label Grid.Column="1"
-                                               Grid.RowSpan="2"
+                                        <Label Grid.RowSpan="2"
+                                               Grid.Column="1"
                                                HorizontalOptions="End"
                                                VerticalOptions="Center"
                                                Text="{Binding Class.Name}"

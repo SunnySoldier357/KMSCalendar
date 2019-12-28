@@ -10,7 +10,8 @@ namespace KMSCalendar.ViewModels
     public class NewClassViewModel : BaseViewModel
     {
         //* Private Properties
-        private int period;
+        private string period;
+        App app = Application.Current as App;
 
         private List<Teacher> teachers;
 
@@ -21,7 +22,7 @@ namespace KMSCalendar.ViewModels
         private Teacher selectedTeacher;
 
         //* Public Properties
-        public int Period
+        public string Period
         {
             get => period;
             set => setProperty(ref period, value);
@@ -30,7 +31,12 @@ namespace KMSCalendar.ViewModels
         public List<Teacher> Teachers
         {
             get => teachers;
-            set => setProperty(ref teachers, value);
+            set
+            {
+                foreach (Teacher t in value)
+                    t.SchoolName = app.SchoolName;
+                setProperty(ref teachers, value);
+            }
         }
 
         public string ClassName
@@ -55,10 +61,11 @@ namespace KMSCalendar.ViewModels
         }
         
         //* Constructors
-        public NewClassViewModel(string schoolName)
+        public NewClassViewModel()
         {
-            Period = 1;
-            Teachers = TeacherManager.LoadAllTeachers((Application.Current as App).SignedInUser.SchoolId);
+            
+            app.PullSchoolName();
+            Teachers = TeacherManager.LoadAllTeachers(app.SignedInUser.SchoolId);
             SearchTerm = "";
         }
     }

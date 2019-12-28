@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="KMSCalendar.Views.LogInPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
+             xmlns:ext="clr-namespace:KMSCalendar.Extensions"
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             Title="Log In"
+             BackgroundImage="{ext:ImageResource background.png,
+                                                 FolderName=Shared}">
+
+    <ContentPage.BindingContext>
+        <vm:LogInViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Fill">
+            <Grid>
+                <Grid.RowDefinitions>
+
+                    <!--  Spacing  -->
+                    <RowDefinition Height="80*" />
+
+                    <!--  Title  -->
+                    <RowDefinition Height="60" />
+
+                    <!--  Spacing  -->
+                    <RowDefinition Height="45*" />
+
+                    <!--  Email  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing  -->
+                    <RowDefinition Height="10*" />
+
+                    <!--  Password  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing  -->
+                    <RowDefinition Height="10*" />
+
+                    <!--  Button  -->
+                    <RowDefinition Height="40" />
+
+                    <!--  Spacing  -->
+                    <RowDefinition Height="7*" />
+
+                    <!--  Forgot Password Button  -->
+                    <RowDefinition Height="60" />
+
+                    <!--  Spacing  -->
+                    <RowDefinition Height="10*" />
+
+                    <!--  Animation  -->
+                    <RowDefinition Height="50" />
+
+                    <!--  Spacing  -->
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="1"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Start"
+                       Text="HW Calendar"
+                       FontSize="Large"
+                       TextColor="White" />
+
+                <Frame Grid.Row="3"
+                       Style="{StaticResource LoginEntryFrame}">
+
+                    <control:TransparentEntry Style="{StaticResource LoginEntry}"
+                                              Text="{Binding Email}"
+                                              Placeholder="Email" />
+                </Frame>
+
+                <Frame Grid.Row="5"
+                       Style="{StaticResource LoginEntryFrame}">
+
+                    <control:TransparentEntry Style="{StaticResource LoginEntry}"
+                                              Text="{Binding Password}"
+                                              Placeholder="Password"
+                                              IsPassword="True" />
+                </Frame>
+
+                <Button x:Name="AuthenticateLoginButton"
+                        Grid.Row="7"
+                        WidthRequest="100"
+                        HorizontalOptions="Center"
+                        Padding="5"
+                        BackgroundColor="{StaticResource NavigationTertiary}"
+                        CornerRadius="20"
+                        BorderColor="Transparent"
+                        Text="LOG IN"
+                        TextColor="White"
+                        Command="{Binding AuthenticateUserCommand}" />
+
+                <StackLayout Grid.Row="9"
+                             Orientation="Vertical">
+
+                    <Button x:Name="ForgotPasswordButton"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            Text="Forgot Password?"
+                            FontSize="Small"
+                            TextColor="White"
+                            Command="{Binding ForgotPasswordCommand}" />
+
+                    <Label x:Name="LoginValidationLabel"
+                           HorizontalOptions="Center"
+                           Margin="50,10,50,20"
+                           BackgroundColor="Transparent"
+                           Text="{Binding LoginValidationMessage}"
+                           FontSize="Small"
+                           TextColor="{StaticResource NavigationTertiary}" />
+
+                </StackLayout>
+            </Grid>
+
+            <control:LoadingIndicator Grid.Row="11"
+                                      BackgroundColor="Transparent"
+                                      IsLoading="{Binding IsLoadingData, Mode=OneWay}"
+                                      LoadingIndicatorColor="White" />
+
+            <Grid HorizontalOptions="Center"
+                  VerticalOptions="EndAndExpand"
+                  Margin="0,0,0,50">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+
+                <Label VerticalOptions="Center"
+                       Text="Don't have an account yet?"
+                       TextColor="White" />
+
+                <Button x:Name="NewUserButton"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"
+                        Text="SignUp"
+                        TextColor="{StaticResource NavigationTertiary}"
+                        Command="{Binding NewUserCommand}" />
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
+             mc:Ignorable="d"
+             x:Class="KMSCalendar.Views.NewSchoolView">
+  <ContentView.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="1"
+                         Orientation="Horizontal" 
+                         Margin="15, 0, 15, 0"
+                         HorizontalOptions="Center"
+                         HeightRequest="30">
+
+                <Label Text="Enter your school Name: " 
+                           TextColor="White"
+                           VerticalOptions="Center"/>
+
+                <Frame Style="{StaticResource LoginEntryFrame}"
+                           Margin="5, 0, 5, 0"
+                           VerticalOptions="Center"
+                           CornerRadius="16">
+
+                    <control:TransparentEntry x:Name="SchoolNameEntry"
+                                              Style="{StaticResource LoginEntry}"
+                                              Text="{Binding Name}"
+                                              Placeholder="Skyline High School"
+                                              HorizontalOptions="Center"/>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout Grid.Row="3"
+                         Orientation="Horizontal" 
+                         Margin="15, 0, 15, 0"
+                         HorizontalOptions="Center"
+                         HeightRequest="30">
+
+                <Label Text="Enter your school's Postal Code: " 
+                           TextColor="White"
+                           VerticalOptions="Center"/>
+
+                <Frame Style="{StaticResource LoginEntryFrame}"
+                           Margin="5, 0, 5, 0"
+                           VerticalOptions="Center"
+                           CornerRadius="16">
+
+                    <control:TransparentEntry x:Name="ZipCodeEntry"
+                                                  Style="{StaticResource LoginEntry}"
+                                                  Text="{Binding ZipCode}"
+                                                  Placeholder="98027"
+                                                  HorizontalOptions="Center"/>
+                </Frame>
+            </StackLayout>
+ 
+            <Button x:Name="AddSchoolButton"
+                        Grid.Row="5"
+                        HorizontalOptions="Center"
+                        Padding="5"
+                        BackgroundColor="{StaticResource NavigationTertiary}"
+                        CornerRadius="20"
+                        BorderColor="Transparent"
+                        Text="Add School"
+                        TextColor="White"
+                        Command="{Binding AddNewSchoolCommand}" />
+
+            <Button x:Name="GoBackButton"
+                    Grid.Row="7"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    Text="← Go Back"
+                    TextColor="#FFFFFF"
+                    Command="{Binding GoBackCommand}" />
+
+        </Grid>
+            
+  </ContentView.Content>
+</ContentView>

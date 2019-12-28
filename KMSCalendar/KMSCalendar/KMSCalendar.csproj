@@ -10,12 +10,81 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.Development.json" />
+    <None Remove="appsettings.json" />
+    <None Remove="appsettings.Production.json" />
+    <None Remove="Assets\AboutPage\xamarin_logo.png" />
+    <None Remove="Assets\AssignmentDetailPage\delete.png" />
+    <None Remove="Assets\AssignmentsPage\add.png" />
+    <None Remove="Assets\ClassSearchPage\search_blue.png" />
+    <None Remove="Assets\ClassSearchPage\search_white.png" />
+    <None Remove="Assets\MainPage\tab_feed.png" />
+    <None Remove="Assets\MenuPage\book_blue.png" />
+    <None Remove="Assets\MenuPage\book_white.png" />
+    <None Remove="Assets\MenuPage\calendar_blue.png" />
+    <None Remove="Assets\MenuPage\calendar_white.png" />
+    <None Remove="Assets\MenuPage\edit_blue.png" />
+    <None Remove="Assets\MenuPage\edit_white.png" />
+    <None Remove="Assets\MenuPage\file.png" />
+    <None Remove="Assets\MenuPage\gear.png" />
+    <None Remove="Assets\MenuPage\plus_blue.png" />
+    <None Remove="Assets\MenuPage\plus_white.png" />
+    <None Remove="Assets\MenuPage\search.png" />
+    <None Remove="Assets\MenuPage\settings_blue.png" />
+    <None Remove="Assets\MenuPage\settings_white.png" />
+    <None Remove="Assets\NewAssignmentPage\cancel.png" />
+    <None Remove="Assets\NewAssignmentPage\save.png" />
+    <None Remove="Assets\SettingsPage\user_blue.png" />
+    <None Remove="Assets\SettingsPage\user_white.png" />
+    <None Remove="Services\Email\ResetPasswordPage.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.Production.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Assets\AssignmentsPage\add.png" />
+    <EmbeddedResource Include="Assets\AssignmentDetailPage\delete.png" />
+    <EmbeddedResource Include="Assets\AboutPage\xamarin_logo.png" />
+    <EmbeddedResource Include="Assets\ClassSearchPage\search_blue.png" />
+    <EmbeddedResource Include="Assets\ClassSearchPage\search_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\book_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\book_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\edit_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\edit_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\plus_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\plus_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\settings_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\settings_white.png" />
+    <EmbeddedResource Include="Assets\MenuPage\calendar_blue.png" />
+    <EmbeddedResource Include="Assets\MenuPage\calendar_white.png" />
+    <EmbeddedResource Include="Assets\MainPage\tab_feed.png" />
+    <EmbeddedResource Include="Assets\NewAssignmentPage\cancel.png" />
+    <EmbeddedResource Include="Assets\NewAssignmentPage\save.png" />
+    <EmbeddedResource Include="Assets\SettingsPage\user_blue.png" />
+    <EmbeddedResource Include="Assets\SettingsPage\user_white.png" />
+    <EmbeddedResource Include="Assets\Shared\background.png" />
+    <Content Include="Services\Email\ResetPasswordPage.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Dapper" Version="2.0.30" />
+    <PackageReference Include="MailKit" Version="2.4.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="ModelValidation" Version="1.0.5" />
     <PackageReference Include="ModernXamarinCalendar" Version="1.0.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
@@ -26,6 +95,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Controls\LoadingIndicator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\AssignmentDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -35,7 +107,19 @@
     <EmbeddedResource Update="Views\ClassSearchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LoginPage.xaml">
+    <EmbeddedResource Update="Views\EnrolledClassesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ForgotPasswordPage\ForgotPasswordCodeView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ForgotPasswordPage\ForgotPasswordPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LogInPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NetworkFailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NewAssignmentPage.xaml">
@@ -44,15 +128,20 @@
     <EmbeddedResource Update="Views\NewClassPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\ForgotPasswordPage\NewPasswordView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NewSchoolView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SchoolEnrollmentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Email\" />
   </ItemGroup>
 </Project>
