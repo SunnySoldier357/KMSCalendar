@@ -1,7 +1,7 @@
 ﻿using System;
 
 using KMSCalendar.Services.Data;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +12,11 @@ namespace KMSCalendar.Views
     {
         //* Private Properties
         private DataOperation operation;
+
+        public NetworkFailPage()
+        {
+            InitializeComponent();
+        }
 
         //* Constructors
         public NetworkFailPage(DataOperation operation)
@@ -24,9 +29,17 @@ namespace KMSCalendar.Views
         //* Event Handlers
         private async void RetryButton_Clicked(object sender, EventArgs e)
         {
-            if (operation.TryToGetData())
+            if (operation != null)
             {
-                operation.waitHandle.Set();
+                if (operation.TryToGetData())
+                {
+                    operation.waitHandle.Set();
+                }
+            }
+
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                // Connection to internet is available
                 await Navigation.PopModalAsync();
             }
         }
