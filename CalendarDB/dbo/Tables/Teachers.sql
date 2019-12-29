@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Teachers]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL,
+    [Name] NVARCHAR(256) NOT NULL,
+    [SchoolId] UNIQUEIDENTIFIER NOT NULL,
+    PRIMARY KEY CLUSTERED (Id ASC), 
+    CONSTRAINT [FK_Teachers_ToSchools] FOREIGN KEY (SchoolId) REFERENCES Schools(Id)
+)

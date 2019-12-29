@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Schools]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL,
+	[Name] NVARCHAR(50) NOT NULL, 
+    [State] NCHAR(2) NULL, 
+    [ZipCode] NCHAR(5) NULL,
+	PRIMARY KEY CLUSTERED (Id ASC)
+)

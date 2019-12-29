@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Users]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL,
+    [Email] NVARCHAR(MAX) NULL,
+    [UserName] NVARCHAR(MAX) NULL,
+    [Password] NVARCHAR(MAX) NULL,
+    [SchoolId] UNIQUEIDENTIFIER NULL, 
+    CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED (Id ASC),
+    CONSTRAINT [FK_Users_ToSchools] FOREIGN KEY (SchoolId) REFERENCES Schools(Id)
+)
