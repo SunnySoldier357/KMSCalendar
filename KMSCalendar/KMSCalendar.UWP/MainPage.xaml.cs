@@ -1,12 +1,12 @@
 ﻿namespace KMSCalendar.UWP
 {
-    public sealed partial class MainPage
-    {
-        public MainPage()
-        {
-            InitializeComponent();
+	public sealed partial class MainPage
+	{
+		public MainPage()
+		{
+			InitializeComponent();
 
-            LoadApplication(new KMSCalendar.App());
-        }
-    }
+			LoadApplication(new KMSCalendar.App());
+		}
+	}
 }

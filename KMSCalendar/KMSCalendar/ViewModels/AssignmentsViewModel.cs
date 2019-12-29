@@ -15,147 +15,147 @@ using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
-    public class AssignmentsViewModel : BaseViewModel
-    {
-        //* Private Properties
-        private App app = Application.Current as App;
+	public class AssignmentsViewModel : BaseViewModel
+	{
+		//* Private Properties
+		private App app = Application.Current as App;
 
-        /// <summary>A List of all the Assignments to display.</summary>
-        private List<Assignment> assignments;
-        private List<Assignment> filteredAssignments;
+		/// <summary>A List of all the Assignments to display.</summary>
+		private List<Assignment> assignments;
+		private List<Assignment> filteredAssignments;
 
-        private readonly UserSettings userSettings;
+		private readonly UserSettings userSettings;
 
-        //* Public Properties
-        public bool ShowCalendarDays => userSettings.ShowCalendarDays;
+		//* Public Properties
+		public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
-        public DateTime DateSelected { get; set; }
+		public DateTime DateSelected { get; set; }
 
-        public ICommand FilterAssignmentsCommand { get; }
-        public ICommand LoadAssignmentsCommand { get; }
-        public ICommand GoToTodayCommand { get; }
-        public ICommand GoToTomorrowCommand { get; }
-        
+		public ICommand FilterAssignmentsCommand { get; }
+		public ICommand LoadAssignmentsCommand { get; }
+		public ICommand GoToTodayCommand { get; }
+		public ICommand GoToTomorrowCommand { get; }
 
-        /// <summary>
-        /// A filtered set of all the Assignments that are only for the
-        /// current day selected
-        /// </summary>
-        public List<Assignment> FilteredAssignments
-        {
-            get => filteredAssignments;
-            set => setProperty(ref filteredAssignments, value);
-        }
 
-        //* Constructors
-        public AssignmentsViewModel() :
-            this(AppContainer.Container.Resolve<UserSettings>()) { }
+		/// <summary>
+		/// A filtered set of all the Assignments that are only for the
+		/// current day selected
+		/// </summary>
+		public List<Assignment> FilteredAssignments
+		{
+			get => filteredAssignments;
+			set => setProperty(ref filteredAssignments, value);
+		}
 
-        public AssignmentsViewModel(UserSettings userSettings)
-        {
-            this.userSettings = userSettings;
+		//* Constructors
+		public AssignmentsViewModel() :
+			this(AppContainer.Container.Resolve<UserSettings>()) { }
 
-            DateSelected = DateTime.Today;
+		public AssignmentsViewModel(UserSettings userSettings)
+		{
+			this.userSettings = userSettings;
 
-            assignments = new List<Assignment>();
-            FilteredAssignments = new List<Assignment>();
+			DateSelected = DateTime.Today;
 
-            FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
-                filterAssignments(selectedDate));
-            LoadAssignmentsCommand = new Command(() => loadAssignments());
-            GoToTodayCommand = new Command(() => ExecuteGoToTodayCommand());
-            GoToTomorrowCommand = new Command(() => ExecuteGoToTomorrowCommand());
+			assignments = new List<Assignment>();
+			FilteredAssignments = new List<Assignment>();
 
-            MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
-                "AddAssignment", (page, a) =>
-            {
-                assignments.Add(AssignmentManager.AddAssignment(a));
+			FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
+				filterAssignments(selectedDate));
+			LoadAssignmentsCommand = new Command(() => loadAssignments());
+			GoToTodayCommand = new Command(() => ExecuteGoToTodayCommand());
+			GoToTomorrowCommand = new Command(() => ExecuteGoToTomorrowCommand());
 
-                filterAssignments(DateSelected);
-            });
+			MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
+				"AddAssignment", (page, a) =>
+			{
+				assignments.Add(AssignmentManager.AddAssignment(a));
 
-            // This is so that when the class search page closes,
-            // the assignment page will update it's assignment list
-            MessagingCenter.Subscribe<ClassSearchViewModel>(this, "LoadAssignments",
-                (sender) => loadAssignments());
+				filterAssignments(DateSelected);
+			});
 
-            MessagingCenter.Subscribe<EnrolledClassesViewModel>(this, "LoadAssignments",
-                (sender) => loadAssignments());
+			// This is so that when the class search page closes,
+			// the assignment page will update it's assignment list
+			MessagingCenter.Subscribe<ClassSearchViewModel>(this, "LoadAssignments",
+				(sender) => loadAssignments());
 
-            app.PullEnrolledClasses();
-            loadAssignments();
+			MessagingCenter.Subscribe<EnrolledClassesViewModel>(this, "LoadAssignments",
+				(sender) => loadAssignments());
 
-            userSettings.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(UserSettings.ShowCalendarDays))
-                    OnNotifyPropertyChanged(nameof(ShowCalendarDays));
-            };
-                      
-        }
+			app.PullEnrolledClasses();
+			loadAssignments();
 
-        //* Private Methods
-        private void filterAssignments(DateTime date)
-        {
-            DateSelected = date;
+			userSettings.PropertyChanged += (sender, args) =>
+			{
+				if (args.PropertyName == nameof(UserSettings.ShowCalendarDays))
+					OnNotifyPropertyChanged(nameof(ShowCalendarDays));
+			};
 
-            var result =
-                from assignment in assignments.AsParallel()
-                where assignment.DueDate.Date.Equals(date.Date)
-                orderby assignment.Name
-                select assignment;
+		}
 
-            FilteredAssignments = result.ToList();
-        }
+		//* Private Methods
+		private void filterAssignments(DateTime date)
+		{
+			DateSelected = date;
 
-        /// <summary>
-        /// Loads Assignments from the db.
-        /// </summary>
-        private void loadAssignments()
-        {
-            if (IsBusy)
-                return;
+			var result =
+				from assignment in assignments.AsParallel()
+				where assignment.DueDate.Date.Equals(date.Date)
+				orderby assignment.Name
+				select assignment;
 
-            IsBusy = true;
+			FilteredAssignments = result.ToList();
+		}
 
-            try
-            {
-                // Loads assignments from the db for each class that the user is in.
-                var userAssignments = new List<Assignment>();
-                if (app.SignedInUser.EnrolledClasses != null)
-                {
-                    foreach (Class @class in app.SignedInUser.EnrolledClasses)
-                    {
-                        @class.Assignments = AssignmentManager.LoadAssignments(@class);
-                        foreach (Assignment assignment in @class.Assignments)
-                            assignment.Class = @class;
+		/// <summary>
+		/// Loads Assignments from the db.
+		/// </summary>
+		private void loadAssignments()
+		{
+			if (IsBusy)
+				return;
 
-                        userAssignments.AddRange(@class.Assignments);
-                    }
-                }
-                assignments = userAssignments;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+			IsBusy = true;
 
-            filterAssignments(DateSelected);
-        }
+			try
+			{
+				// Loads assignments from the db for each class that the user is in.
+				var userAssignments = new List<Assignment>();
+				if (app.SignedInUser.EnrolledClasses != null)
+				{
+					foreach (Class @class in app.SignedInUser.EnrolledClasses)
+					{
+						@class.Assignments = AssignmentManager.LoadAssignments(@class);
+						foreach (Assignment assignment in @class.Assignments)
+							assignment.Class = @class;
 
-        public void ExecuteGoToTodayCommand()
-        {
-            DateSelected = DateTime.Today;
-            filterAssignments(DateSelected);
-        }
+						userAssignments.AddRange(@class.Assignments);
+					}
+				}
+				assignments = userAssignments;
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
 
-        public void ExecuteGoToTomorrowCommand()
-        {
-            DateSelected = DateTime.Today.AddDays(1);
-            filterAssignments(DateSelected);
-        }
-    }
+			filterAssignments(DateSelected);
+		}
+
+		public void ExecuteGoToTodayCommand()
+		{
+			DateSelected = DateTime.Today;
+			filterAssignments(DateSelected);
+		}
+
+		public void ExecuteGoToTomorrowCommand()
+		{
+			DateSelected = DateTime.Today.AddDays(1);
+			filterAssignments(DateSelected);
+		}
+	}
 }

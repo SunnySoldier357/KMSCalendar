@@ -1,4 +1,4 @@
 ﻿namespace KMSCalendar.ViewModels
 {
-    public class MainViewModel : BaseViewModel { }
+	public class MainViewModel : BaseViewModel { }
 }

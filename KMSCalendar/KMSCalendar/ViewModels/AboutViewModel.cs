@@ -6,16 +6,16 @@ using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
-    {
-        //* Public Properties
-        public ICommand OpenWebCommand { get; }
+	public class AboutViewModel : BaseViewModel
+	{
+		//* Public Properties
+		public ICommand OpenWebCommand { get; }
 
-        //* Constructors
-        public AboutViewModel()
-        {
-            OpenWebCommand = new Command(async () =>
-                await Launcher.OpenAsync(new Uri("https://xamarin.com/platform")));
-        }
-    }
+		//* Constructors
+		public AboutViewModel()
+		{
+			OpenWebCommand = new Command(async () =>
+				await Launcher.OpenAsync(new Uri("https://xamarin.com/platform")));
+		}
+	}
 }

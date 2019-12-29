@@ -1,8 +1,8 @@
 ﻿namespace KMSCalendar.Models.Settings
 {
-    public enum Theme
-    {
-        Dark,
-        Light
-    }
+	public enum Theme
+	{
+		Dark,
+		Light
+	}
 }

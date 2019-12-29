@@ -5,33 +5,33 @@ using KMSCalendar.Services.Email;
 
 namespace KMSCalendar
 {
-    public class AppSetup
-    {
-        //* Public Methods
-        public IContainer CreateContainer()
-        {
-            var containerBuilder = new ContainerBuilder();
+	public class AppSetup
+	{
+		//* Public Methods
+		public IContainer CreateContainer()
+		{
+			var containerBuilder = new ContainerBuilder();
 
-            RegisterDependencies(containerBuilder);
+			RegisterDependencies(containerBuilder);
 
-            return containerBuilder.Build();
-        }
+			return containerBuilder.Build();
+		}
 
-        //* Protected Methods
-        protected virtual void RegisterDependencies(ContainerBuilder builder)
-        {
-            // Models -> Settings
-            builder.RegisterInstance(AppSettings.InitSingleton())
-                .AsSelf()
-                .SingleInstance();
+		//* Protected Methods
+		protected virtual void RegisterDependencies(ContainerBuilder builder)
+		{
+			// Models -> Settings
+			builder.RegisterInstance(AppSettings.InitSingleton())
+				.AsSelf()
+				.SingleInstance();
 
-            builder.RegisterInstance(UserSettings.InitSingleton())
-                .AsSelf()
-                .SingleInstance();
+			builder.RegisterInstance(UserSettings.InitSingleton())
+				.AsSelf()
+				.SingleInstance();
 
-            // Services -> Email
-            builder.RegisterType<EmailService>()
-                .As<IEmailService>();
-        }
-    }
+			// Services -> Email
+			builder.RegisterType<EmailService>()
+				.As<IEmailService>();
+		}
+	}
 }
