@@ -19,8 +19,6 @@ namespace KMSCalendar.ViewModels
 	public class SignUpViewModel : LogInViewModel
 	{
 		//* Private Properties
-		private DataOperation dataOperation;
-
 		private string confirmPassword;
 		private string userName;
 
@@ -101,7 +99,6 @@ namespace KMSCalendar.ViewModels
 		public SignUpViewModel() : base()
 		{
 			Title = "Sign Up";
-			dataOperation = new DataOperation();
 
 			SignUpVisibility = true;
 			SchoolEnrollmentVisibility = false;
@@ -120,20 +117,21 @@ namespace KMSCalendar.ViewModels
 
 		//* Public Methods
 		public void ExecuteAlreadyUserCommand() =>
-			(Application.Current as App).MainPage = new LogInPage();
+			App.MainPage = new LogInPage();
 
 		public async Task ExecuteAuthenticateUserCommandAsync()
 		{
-			await Task.Run(() =>
+			await Task.Run(async () =>
 			{
 				if (Validate())
 				{
-					bool alreadyEmail = dataOperation.ConnectToBackend(UserManager.CheckForUser, Email.Trim());
+					//True if the user may use this email to sign up
+					bool newEmail = !DataOperation.ConnectToBackend(UserManager.CheckForUser, Email.Trim());
 
-					if (alreadyEmail)
+					if (!newEmail)
 						LoginValidationMessage = "User already exists! Please log in instead.";
 					else
-						SwapViewsAsync();
+						await SwapViewsAsync();
 				}
 			});
 		}
@@ -158,7 +156,7 @@ namespace KMSCalendar.ViewModels
 				ZipCode = ZipCode,
 			};
 
-			await Task.Run(() => dataOperation.ConnectToBackend(SchoolManager.AddSchool, school));
+			await Task.Run(() => DataOperation.ConnectToBackend(SchoolManager.AddSchool, school));
 
 			SchoolList.Add(school);
 			FilterData(ZipCode);
@@ -181,14 +179,12 @@ namespace KMSCalendar.ViewModels
 					SchoolId = SelectedSchool.Id
 				};
 
-				await Task.Run(() => dataOperation.ConnectToBackend(UserManager.AddUser, user));
+				await Task.Run(() => DataOperation.ConnectToBackend(UserManager.AddUser, user));
 
-				var app = Application.Current as App;
-
-				app.SignedInUser = user;
+				App.SignedInUser = user;
 				UserSettings.SignedInUserId = user.Id;
 
-				app.MainPage = new MainPage();
+				App.MainPage = new MainPage();
 			}
 		}
 
@@ -198,7 +194,7 @@ namespace KMSCalendar.ViewModels
 			{
 				SignUpVisibility = false;
 				SchoolEnrollmentVisibility = true;
-				await Task.Run(() => SchoolList = dataOperation.ConnectToBackendWithoutParam(SchoolManager.LoadSchools));
+				await Task.Run(() => SchoolList = DataOperation.ConnectToBackendWithoutParam(SchoolManager.LoadSchools));
 				FilteredSchoolList = SchoolList;
 			}
 			else

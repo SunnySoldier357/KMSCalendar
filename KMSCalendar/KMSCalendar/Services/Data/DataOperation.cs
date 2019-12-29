@@ -32,19 +32,7 @@ namespace KMSCalendar.Services.Data
 			if (TryToGetData())
 				return data;
 
-
-			//Waits until the Network FailPage is closed before continuing
-			//Note: this only works if called within a task
-			waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-
-			Device.BeginInvokeOnMainThread(() =>
-			{
-				(Application.Current as App).MainPage.Navigation.PushModalAsync(new NetworkFailPage(this));
-			});
-
-			System.Diagnostics.Debug.WriteLine("The modal page is now on screen, hit back button");
-			waitHandle.WaitOne();
-			System.Diagnostics.Debug.WriteLine("The modal page is dismissed, do something now");
+			//SwitchToNetworkFailPage();
 
 			return default;
 		}
@@ -87,6 +75,17 @@ namespace KMSCalendar.Services.Data
 			if (TryToGetData())
 				return data;
 
+			//SwitchToNetworkFailPage();
+
+			return data;
+		}
+
+
+		/// <summary>
+		/// Pauses the current task and switches to the network fail page until the network connects.
+		/// </summary>
+		/* public void SwitchToNetworkFailPage()
+		{
 			//Waits until the Network FailPage is closed before continuing
 			//Note: this only works if called within a task
 			waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
@@ -99,8 +98,6 @@ namespace KMSCalendar.Services.Data
 			System.Diagnostics.Debug.WriteLine("The modal page is now on screen, hit back button");
 			waitHandle.WaitOne();
 			System.Diagnostics.Debug.WriteLine("The modal page is dismissed, do something now");
-
-			return data;
-		}
+		} */
 	}
 }

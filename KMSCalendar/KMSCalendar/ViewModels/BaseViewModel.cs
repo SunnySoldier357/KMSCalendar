@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
 using ModelValidation;
@@ -16,6 +16,7 @@ namespace KMSCalendar.ViewModels
 	{
 		//* Public Properties
 		public App App => Application.Current as App;
+		public DataOperation DataOperation = new DataOperation();
 
 		//* Private Properties
 		private bool isBusy = false;
@@ -37,7 +38,6 @@ namespace KMSCalendar.ViewModels
 			get => title;
 			set => setProperty(ref title, value);
 		}
-
 
 		//* Protected Methods
 		protected bool setProperty<T>(ref T backingStore, T value,

@@ -14,8 +14,6 @@ namespace KMSCalendar.ViewModels
 	public class ClassSearchViewModel : BaseViewModel
 	{
 		//* Private Properties
-		private App app => (Application.Current as App);
-
 		private Class selectedClass;
 
 		private List<Class> classes;
@@ -114,7 +112,7 @@ namespace KMSCalendar.ViewModels
 			var result =
 				from period in periods.AsParallel()
 				let userPeriods =
-					from @class in app.SignedInUser.EnrolledClasses
+					from @class in App.SignedInUser.EnrolledClasses
 					where @class.Id == SelectedClass.Id
 					select @class.Period
 				where !userPeriods.Contains(period)
@@ -136,7 +134,7 @@ namespace KMSCalendar.ViewModels
 		private void loadClasses()
 		{
 			// TODO: MATEO get this to work so a user doesn't have duplicate classes.
-			List<Class> classList = ClassManager.LoadClasses(app.SignedInUser.SchoolId);
+			List<Class> classList = ClassManager.LoadClasses(App.SignedInUser.SchoolId);
 
 			foreach (Class @class in classList)
 			{
@@ -166,12 +164,12 @@ namespace KMSCalendar.ViewModels
 
 		private void subscribeUserToClass(int period)
 		{
-			SelectedClass.UserId = app.SignedInUser.Id;
+			SelectedClass.UserId = App.SignedInUser.Id;
 			SelectedClass.Period = period;
 
 			ClassManager.EnrollUserInClass(selectedClass);
 
-			app.PullEnrolledClasses();
+			App.PullEnrolledClasses();
 
 			MessagingCenter.Send(this, "LoadAssignments");
 			MessagingCenter.Send(this, "LoadClassesForNewAssignmentPage");

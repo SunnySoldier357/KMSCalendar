@@ -12,10 +12,6 @@ namespace KMSCalendar.ViewModels
 	public class EnrolledClassesViewModel : BaseViewModel
 	{
 		//* Private Properties
-		private App app => Application.Current as App;
-
-		private DataOperation dataOperation = new DataOperation();
-
 		private List<Class> classes;
 
 		//* Public Properties
@@ -41,16 +37,16 @@ namespace KMSCalendar.ViewModels
 		//* Private Methods
 		private void updateData()
 		{
-			app.PullEnrolledTeachers();
-			Classes = app.SignedInUser.EnrolledClasses;
+			App.PullEnrolledTeachers();
+			Classes = App.SignedInUser.EnrolledClasses;
 		}
 
 		private async Task unsubscribeClassAsync(Class @class)
 		{
-			@class.UserId = app.SignedInUser.Id;
-			await Task.Run(() => dataOperation.ConnectToBackend(ClassManager.UnenrollUserFromClass, @class));
+			@class.UserId = App.SignedInUser.Id;
+			await Task.Run(() => DataOperation.ConnectToBackend(ClassManager.UnenrollUserFromClass, @class));
 
-			app.PullEnrolledClasses();
+			App.PullEnrolledClasses();
 			updateData();
 
 			MessagingCenter.Send(this, "LoadAssignments");
