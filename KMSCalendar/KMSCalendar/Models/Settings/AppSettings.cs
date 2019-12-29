@@ -75,31 +75,12 @@ namespace KMSCalendar.Models.Settings
         {
             if (!IsInitialized)
             {
-                if (!File.Exists(MAIN_FILE))
+                if (!readFileAsJson(MAIN_FILE, out AppSettings mainSettings))
                     throw new FileNotFoundException("The appsettings.json file must be " +
                         "created from the appsettings-TEMPLATE.json file!", MAIN_FILE);
 
-#if DEBUG
-                if (!File.Exists(SECONDARY_FILE))
-                    throw new FileNotFoundException("The appsettings.Development.json file " +
-                        "must be created from the appsettings.Development-TEMPLATE.json file!", 
-                        SECONDARY_FILE);
-#else
-                if (!File.Exists(SECONDARY_FILE))
-                    throw new FileNotFoundException("The appsettings.Production.json file " +
-                        "must be created from the appsettings.Production-TEMPLATE.json file!", 
-                        SECONDARY_FILE);
-#endif
-
-                string mainJson = File.ReadAllText(MAIN_FILE);
-                AppSettings mainSettings = JsonConvert.DeserializeObject<AppSettings>(mainJson,
-                    jsonSerializerSettings);
-
-                string secJson = File.ReadAllText(SECONDARY_FILE);
-                AppSettings secSettings = JsonConvert.DeserializeObject<AppSettings>(secJson,
-                    jsonSerializerSettings);
-
-                mainSettings.updateSettings(secSettings);
+                if (readFileAsJson(SECONDARY_FILE, out AppSettings secSettings))
+                    mainSettings.updateSettings(secSettings);
 
                 IsInitialized = true;
 
@@ -111,6 +92,36 @@ namespace KMSCalendar.Models.Settings
         }
 
         //* Private Methods
+
+        /// <summary>
+        /// Reads the file name as it is an embedded resource, meaning
+        /// the file itself doesn't exist but is embedded into the current
+        /// assembly.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        /// <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/data/files?tabs=windows#loading-files-embedded-as-resources"/>
+        private static bool readFileAsJson(string fileName, out AppSettings settings)
+        {
+            settings = null;
+
+            var assembly = typeof(AppSettings).Assembly;
+            string resourceId = $"{ assembly.GetName().Name }.{ fileName }";
+            Stream stream = assembly.GetManifestResourceStream(resourceId);
+
+            if (stream == null)
+                return false;
+
+            string json = "";
+            using (var reader = new StreamReader(stream))
+                json = reader.ReadToEnd();
+
+            settings = JsonConvert.DeserializeObject<AppSettings>(json,
+                jsonSerializerSettings);
+
+            return true;
+        }
+
         private void updateSettings(AppSettings settings)
         {
             UseMockDataStore = settings.UseMockDataStore ?? UseMockDataStore;
