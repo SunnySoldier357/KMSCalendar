@@ -33,6 +33,9 @@ namespace KMSCalendar.ViewModels
 
         public ICommand FilterAssignmentsCommand { get; }
         public ICommand LoadAssignmentsCommand { get; }
+        public ICommand GoToTodayCommand { get; }
+        public ICommand GoToTomorrowCommand { get; }
+        
 
         /// <summary>
         /// A filtered set of all the Assignments that are only for the
@@ -60,6 +63,8 @@ namespace KMSCalendar.ViewModels
             FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
                 filterAssignments(selectedDate));
             LoadAssignmentsCommand = new Command(() => loadAssignments());
+            GoToTodayCommand = new Command(() => ExecuteGoToTodayCommand());
+            GoToTomorrowCommand = new Command(() => ExecuteGoToTomorrowCommand());
 
             MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
                 "AddAssignment", (page, a) =>
@@ -85,6 +90,7 @@ namespace KMSCalendar.ViewModels
                 if (args.PropertyName == nameof(UserSettings.ShowCalendarDays))
                     OnNotifyPropertyChanged(nameof(ShowCalendarDays));
             };
+                      
         }
 
         //* Private Methods
@@ -137,6 +143,18 @@ namespace KMSCalendar.ViewModels
                 IsBusy = false;
             }
 
+            filterAssignments(DateSelected);
+        }
+
+        public void ExecuteGoToTodayCommand()
+        {
+            DateSelected = DateTime.Today;
+            filterAssignments(DateSelected);
+        }
+
+        public void ExecuteGoToTomorrowCommand()
+        {
+            DateSelected = DateTime.Today.AddDays(1);
             filterAssignments(DateSelected);
         }
     }

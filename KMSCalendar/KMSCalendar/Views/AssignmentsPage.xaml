@@ -38,13 +38,43 @@
                CornerRadius="15">
 
             <StackLayout>
-                <Label HorizontalOptions="CenterAndExpand"
-                       BindingContext="{x:Reference CalendarWeekControl}"
-                       Margin="0,-10,0,0"
-                       Text="{Binding DateFormatted}"
-                       FontSize="Small"
-                       TextColor="Gray" />
+                
+                <!--Make this a stack layout with two buttons on the outside.-->
 
+                <StackLayout Orientation="Horizontal">
+
+                    <Button x:Name="TodayButton"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            Text="Due Today"
+                            TextColor="Gray"
+                            FontSize="12"
+                            Margin="0,-9,0,0"
+                            BorderColor="Transparent"
+                            BackgroundColor="Transparent"
+                            Command="{Binding GoToTodayCommand}" />
+
+                    <Label HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="Center"
+                           BindingContext="{x:Reference CalendarWeekControl}"
+                           Margin="0,-10,0,0"
+                           Text="{Binding DateFormatted}"
+                           FontSize="Small"
+                           TextColor="Gray" />
+
+                    <Button x:Name="TomorrowButton"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            Text="Due Tmr."
+                            TextColor="Gray"
+                            FontSize="12"
+                            Margin="0,-9,0,0"
+                            BorderColor="Transparent"
+                            BackgroundColor="Transparent"
+                            Command="{Binding GoToTomorrowCommand}" />
+
+                </StackLayout>
+                
                 <ScrollView>
                     <ListView x:Name="AssignmentsListView"
                               VerticalOptions="FillAndExpand"
