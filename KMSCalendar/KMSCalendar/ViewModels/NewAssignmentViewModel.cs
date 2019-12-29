@@ -43,6 +43,6 @@ namespace KMSCalendar.ViewModels
 		}
 
 		public void LoadSubscribedClasses() =>
-			SubscribedClasses = (Application.Current as App).SignedInUser.EnrolledClasses;
+			SubscribedClasses = App.SignedInUser.EnrolledClasses;
 	}
 }

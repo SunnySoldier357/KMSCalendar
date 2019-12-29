@@ -13,8 +13,6 @@ namespace KMSCalendar.ViewModels
 	public class SettingsViewModel : BaseViewModel
 	{
 		//* Private Properties
-		private App app = (Application.Current as App);
-
 		private readonly UserSettings userSettings;
 
 		//* Public Properties
@@ -39,8 +37,8 @@ namespace KMSCalendar.ViewModels
 
 		public ICommand LogOutCommand { get; set; }
 
-		public string Email => app.SignedInUser?.Email;
-		public string UserName => app.SignedInUser?.UserName;
+		public string Email => App.SignedInUser?.Email;
+		public string UserName => App.SignedInUser?.UserName;
 
 		//* Constructors
 		public SettingsViewModel() :
@@ -57,12 +55,10 @@ namespace KMSCalendar.ViewModels
 		//* Public Methods
 		public void ExecuteLogOutCommand()
 		{
-			var app = Application.Current as App;
-
 			userSettings.SignedInUserId = Guid.Empty;
-			app.SignedInUser = null;
+			App.SignedInUser = null;
 
-			app.MainPage = new LogInPage();
+			App.MainPage = new LogInPage();
 		}
 	}
 }

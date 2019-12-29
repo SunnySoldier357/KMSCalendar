@@ -19,9 +19,6 @@ namespace KMSCalendar.ViewModels
 	{
 		//* Private Properties
 		private bool isLoadingData;
-
-		private DataOperation dataOperation = new DataOperation();
-
 		private int logInAttempts;
 
 		private string email;
@@ -29,8 +26,6 @@ namespace KMSCalendar.ViewModels
 		private string password;
 
 		//* Protected Properties
-		protected App App => Application.Current as App;
-
 		protected readonly UserSettings UserSettings;
 
 		//* Public Properties
@@ -111,7 +106,7 @@ namespace KMSCalendar.ViewModels
 			{
 				if (Validate())
 				{
-					User signedInUser = dataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
+					User signedInUser = DataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
 
 					System.Diagnostics.Debug.WriteLine("Made it Here!");
 

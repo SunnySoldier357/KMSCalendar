@@ -137,7 +137,7 @@ namespace KMSCalendar.ViewModels
 			AuthenticateEmailCommand = new Command(() => ExecuteAuthenticateEmailCommand());
 			AuthenticateNewPasswordCommand = new Command(() => ExecuteAuthenticateNewPasswordCommand());
 			GoBackCommand = new Command(() =>
-				(Application.Current as App).MainPage.Navigation.PopModalAsync());
+				App.MainPage.Navigation.PopModalAsync());
 		}
 
 		//* Private Methods

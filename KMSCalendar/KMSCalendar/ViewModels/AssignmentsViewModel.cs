@@ -18,8 +18,6 @@ namespace KMSCalendar.ViewModels
 	public class AssignmentsViewModel : BaseViewModel
 	{
 		//* Private Properties
-		private App app = Application.Current as App;
-
 		/// <summary>A List of all the Assignments to display.</summary>
 		private List<Assignment> assignments;
 		private List<Assignment> filteredAssignments;
@@ -30,7 +28,7 @@ namespace KMSCalendar.ViewModels
 		public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
 		public DateTime DateSelected { get; set; }
-
+		
 		public ICommand FilterAssignmentsCommand { get; }
 		public ICommand LoadAssignmentsCommand { get; }
 		public ICommand GoToTodayCommand { get; }
@@ -69,7 +67,7 @@ namespace KMSCalendar.ViewModels
 			MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
 				"AddAssignment", (page, a) =>
 			{
-				assignments.Add(AssignmentManager.AddAssignment(a));
+				assignments.Add(DataOperation.ConnectToBackend(AssignmentManager.AddAssignment, a));
 
 				filterAssignments(DateSelected);
 			});
@@ -81,8 +79,8 @@ namespace KMSCalendar.ViewModels
 
 			MessagingCenter.Subscribe<EnrolledClassesViewModel>(this, "LoadAssignments",
 				(sender) => loadAssignments());
-
-			app.PullEnrolledClasses();
+			
+			App.PullEnrolledClasses();
 			loadAssignments();
 
 			userSettings.PropertyChanged += (sender, args) =>
@@ -121,11 +119,11 @@ namespace KMSCalendar.ViewModels
 			{
 				// Loads assignments from the db for each class that the user is in.
 				var userAssignments = new List<Assignment>();
-				if (app.SignedInUser.EnrolledClasses != null)
+				if (App.SignedInUser.EnrolledClasses != null)
 				{
-					foreach (Class @class in app.SignedInUser.EnrolledClasses)
+					foreach (Class @class in App.SignedInUser.EnrolledClasses)
 					{
-						@class.Assignments = AssignmentManager.LoadAssignments(@class);
+						@class.Assignments = DataOperation.ConnectToBackend(AssignmentManager.LoadAssignments, @class);
 						foreach (Assignment assignment in @class.Assignments)
 							assignment.Class = @class;
 
