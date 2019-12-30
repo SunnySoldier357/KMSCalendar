@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 using KMSCalendar.Services.Data;
 
 using Xamarin.Essentials;
@@ -27,19 +27,26 @@ namespace KMSCalendar.Views
 		//* Event Handlers
 		private async void RetryButton_Clicked(object sender, EventArgs e)
 		{
-			if (operation != null)
+			LoadingAnimation.IsLoading = true;
+			await Task.Run(async () =>
 			{
-				if (operation.TryToGetData())
+				if (operation != null)
 				{
-					operation.waitHandle.Set();
+					if (operation.TryToGetData())
+					{
+						operation.waitHandle.Set();
+					}
 				}
-			}
+				else
+					await Task.Delay(3000);
 
-			if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-			{
-				// Connection to internet is available
-				await Navigation.PopModalAsync();
-			}
+				if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+				{
+					// Connection to internet is available
+					await Navigation.PopModalAsync();
+				}
+			});
+			LoadingAnimation.IsLoading = false;
 		}
 	}
 }

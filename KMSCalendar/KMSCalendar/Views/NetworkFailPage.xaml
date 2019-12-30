@@ -5,6 +5,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
              BackgroundImage="{ext:ImageResource background.png,
                                                  FolderName=Shared}"
              mc:Ignorable="d">
@@ -13,15 +14,31 @@
         <Label HorizontalOptions="CenterAndExpand"
                Text="Network Connection Failed"
                FontSize="Large"
-               TextColor="White" />
+               TextColor="White"/>
+        
+        <Image HorizontalOptions="CenterAndExpand"
+               Margin="100,60,100,20"
+               Source="{ext:ImageResource wifi_fail.png,
+                                          FolderName=MenuPage}"/>
+
+        <Label Text="This app requires an internet connection."
+               TextColor="White"
+               HorizontalOptions="CenterAndExpand"/>
 
         <Button x:Name="RetryButton"
                 HorizontalOptions="Center"
-                Margin="0,30,0,0"
-                BackgroundColor="Transparent"
+                Margin="0,50,0,0"
+                BackgroundColor="{DynamicResource NavigationTertiary}"
                 BorderColor="Transparent"
                 Text="Retry"
-                TextColor="{DynamicResource NavigationTertiary}"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="12,4,12,4 "
                 Clicked="RetryButton_Clicked" />
+
+        <control:LoadingIndicator x:Name="LoadingAnimation"
+                                  Grid.Row="11"
+                                  BackgroundColor="Transparent"
+                                  LoadingIndicatorColor="White" />
     </StackLayout>
 </ContentPage>
