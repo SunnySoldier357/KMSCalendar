@@ -87,7 +87,7 @@ namespace KMSCalendar.ViewModels
 			{
 				// Add the period to the db
 				selectedClass.Period = period;
-				if (PeriodManager.AddPeriod(selectedClass))
+				if (DataOperation.ConnectToBackend(PeriodManager.AddPeriod, selectedClass))
 					loadPeriods();
 			}
 		}
@@ -134,11 +134,11 @@ namespace KMSCalendar.ViewModels
 		private void loadClasses()
 		{
 			// TODO: MATEO get this to work so a user doesn't have duplicate classes.
-			List<Class> classList = ClassManager.LoadClasses(App.SignedInUser.SchoolId);
+			List<Class> classList = DataOperation.ConnectToBackend(ClassManager.LoadClasses, App.SignedInUser.SchoolId);
 
 			foreach (Class @class in classList)
 			{
-				string name = TeacherManager.LoadTeacherNameFromId(@class.TeacherId);
+				string name = DataOperation.ConnectToBackend(TeacherManager.LoadTeacherNameFromId, @class.TeacherId);
 				@class.Teacher = new Teacher(name);
 			}
 
@@ -150,7 +150,7 @@ namespace KMSCalendar.ViewModels
 		{
 			Guid classId = SelectedClass.Id;
 
-			List<int> periods = PeriodManager.LoadPeriods(classId);
+			List<int> periods = DataOperation.ConnectToBackend(PeriodManager.LoadPeriods, classId);
 			filterPeriods(periods);
 		}
 
@@ -158,7 +158,7 @@ namespace KMSCalendar.ViewModels
 		{
 			SelectedClass = @class;
 			loadPeriods();
-
+			
 			currentUIState++;
 		}
 
@@ -167,7 +167,7 @@ namespace KMSCalendar.ViewModels
 			SelectedClass.UserId = App.SignedInUser.Id;
 			SelectedClass.Period = period;
 
-			ClassManager.EnrollUserInClass(selectedClass);
+			DataOperation.ConnectToBackend(ClassManager.EnrollUserInClass, selectedClass);
 
 			App.PullEnrolledClasses();
 

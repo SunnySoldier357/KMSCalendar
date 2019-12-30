@@ -28,14 +28,14 @@ namespace KMSCalendar.Views
 			BindingContext = ViewModel = new NewClassViewModel();
 		}
 
-		public void LoadTeachers()
-		{
-			List<Teacher> teachers = TeacherManager.LoadAllTeachers(app.SignedInUser.SchoolId);
+		//public void LoadTeachers()
+		//{
+		//	List<Teacher> teachers = TeacherManager.LoadAllTeachers(app.SignedInUser.SchoolId);
 
-			ViewModel.Teachers = teachers.ToList();
+		//	ViewModel.Teachers = teachers.ToList();
 
-			TeachersListView.ItemsSource = ViewModel.Teachers;
-		}
+		//	TeachersListView.ItemsSource = ViewModel.Teachers;
+		//}
 
 		//* Event Handlers
 		private void TeacherSearchBar_TextChanged(object sender, TextChangedEventArgs e) => FilterData(ViewModel.SearchTerm);
@@ -92,7 +92,7 @@ namespace KMSCalendar.Views
 						SchoolId = app.SignedInUser.SchoolId
 					};
 
-					TeacherManager.AddTeacher(t);
+					ViewModel.DataOperation.ConnectToBackend(TeacherManager.AddTeacher, t);
 
 					addClass(ViewModel.ClassName, newPeriod, t.Id, t.SchoolId);
 				}
@@ -124,12 +124,12 @@ namespace KMSCalendar.Views
 				SchoolId = schoolId
 			};
 
-			ClassManager.AddClass(newClass);  //Adds class and new period to the db
+			ViewModel.DataOperation.ConnectToBackend(ClassManager.AddClass, newClass);  //Adds class and new period to the db
 
 			//Navigates back to the class search page
 			await Navigation.PopModalAsync();
 		}
 
-		private string getSchoolName(Guid schoolId) => SchoolManager.GetSchoolName(schoolId);
+		private string getSchoolName(Guid schoolId) => ViewModel.DataOperation.ConnectToBackend(SchoolManager.GetSchoolName, schoolId);
 	}
 }

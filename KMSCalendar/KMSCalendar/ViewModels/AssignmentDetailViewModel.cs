@@ -24,7 +24,7 @@ namespace KMSCalendar.ViewModels
 			Assignment = assignment;
 
 			DeleteAssignmentCommand = new Command(() =>
-				AssignmentManager.DeleteAssignment(Assignment));
+				DataOperation.ConnectToBackend(AssignmentManager.DeleteAssignment, Assignment));
 		}
 	}
 }

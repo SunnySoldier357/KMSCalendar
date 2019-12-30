@@ -49,7 +49,7 @@ namespace KMSCalendar
 				{
 					try
 					{
-						SignedInUser = UserManager.LoadUserFromId(userSettings.SignedInUserId);
+						SignedInUser = dataOperation.ConnectToBackend(UserManager.LoadUserFromId, userSettings.SignedInUserId);
 					}
 					catch (Exception)
 					{
@@ -72,7 +72,7 @@ namespace KMSCalendar
 		{
 			foreach (Class @class in SignedInUser.EnrolledClasses)
 			{
-				string name = TeacherManager.LoadTeacherNameFromId(@class.TeacherId);
+				string name = dataOperation.ConnectToBackend(TeacherManager.LoadTeacherNameFromId, @class.TeacherId);
 				@class.Teacher = new Teacher(name);
 			}
 		}
@@ -80,7 +80,7 @@ namespace KMSCalendar
 		public void PullSchoolName()
 		{
 			if (SignedInUser != null)
-				SchoolName = SchoolManager.GetSchoolName(SignedInUser.SchoolId);
+				SchoolName = dataOperation.ConnectToBackend(SchoolManager.GetSchoolName, SignedInUser.SchoolId);
 		}
 
 		public void UpdateColorResources()

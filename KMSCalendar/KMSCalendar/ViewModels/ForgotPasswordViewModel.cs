@@ -153,7 +153,7 @@ namespace KMSCalendar.ViewModels
 		{
 			if (Validate() && Email != null)
 			{
-				User user = UserManager.LoadUserFromEmail(Email);
+				User user = DataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
 				if (user != null)
 				{
 					emailService.SendResetPasswordEmail(user, token);
@@ -168,11 +168,11 @@ namespace KMSCalendar.ViewModels
 		{
 			if (Validate() && Password != null)
 			{
-				User user = UserManager.LoadUserFromEmail(Email);
+				User user = DataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
 				user.Password = PasswordHasher.HashPassword(Password);
 
 				//Resets the user's password in the DB
-				UserManager.UpdateUser(user);
+				DataOperation.ConnectToBackend(UserManager.UpdateUser, user);
 
 				SwapViews();
 			}
