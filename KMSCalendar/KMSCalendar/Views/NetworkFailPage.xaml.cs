@@ -28,25 +28,29 @@ namespace KMSCalendar.Views
 		private async void RetryButton_Clicked(object sender, EventArgs e)
 		{
 			LoadingAnimation.IsLoading = true;
-			await Task.Run(async () =>
-			{
-				if (operation != null)
-				{
-					if (operation.TryToGetData())
-					{
-						operation.waitHandle.Set();
-					}
-				}
-				else
-					await Task.Delay(3000);
 
-				if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-				{
-					// Connection to internet is available
-					await Navigation.PopModalAsync();
-				}
-			});
+			await HandleConnection();
+
 			LoadingAnimation.IsLoading = false;
+		}
+
+		private async Task HandleConnection()
+		{
+			if (operation != null)
+			{
+				if (operation.TryToGetData())
+				{
+					operation.waitHandle.Set();
+				}
+			}
+			else
+				await Task.Delay(2000);
+
+			if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+			{
+				// Connection to internet is available
+				await Navigation.PopModalAsync();
+			}
 		}
 	}
 }

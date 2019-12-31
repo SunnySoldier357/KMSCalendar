@@ -10,24 +10,43 @@
                                                  FolderName=Shared}"
              mc:Ignorable="d">
 
-    <StackLayout VerticalOptions="Center">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition />
+            <RowDefinition Height="1*" />
+            <RowDefinition />
+            <RowDefinition Height="1*" />
+            <RowDefinition />
+            <RowDefinition Height="1*" />
+            <RowDefinition />
+            <RowDefinition Height="2*" />
+            <RowDefinition />
+            
+        </Grid.RowDefinitions>
+
         <Label HorizontalOptions="CenterAndExpand"
                Text="Network Connection Failed"
                FontSize="Large"
+               Grid.Row="1"
                TextColor="White"/>
-        
+
         <Image HorizontalOptions="CenterAndExpand"
-               Margin="100,60,100,20"
+               VerticalOptions="CenterAndExpand"
+               Grid.Row="3"
                Source="{ext:ImageResource wifi_fail.png,
-                                          FolderName=MenuPage}"/>
+                                          FolderName=NetworkFailPage}"/>
 
         <Label Text="This app requires an internet connection."
                TextColor="White"
-               HorizontalOptions="CenterAndExpand"/>
+               HorizontalOptions="CenterAndExpand"
+               Grid.Row="5"/>
 
         <Button x:Name="RetryButton"
+                Grid.Row="7"
                 HorizontalOptions="Center"
-                Margin="0,50,0,0"
+                
                 BackgroundColor="{DynamicResource NavigationTertiary}"
                 BorderColor="Transparent"
                 Text="Retry"
@@ -37,8 +56,12 @@
                 Clicked="RetryButton_Clicked" />
 
         <control:LoadingIndicator x:Name="LoadingAnimation"
-                                  Grid.Row="11"
+                                  Grid.Row="9"
+                                  VerticalOptions="End"
+                                  Margin="0,0,0,20"
                                   BackgroundColor="Transparent"
                                   LoadingIndicatorColor="White" />
-    </StackLayout>
+
+    </Grid>
+       
 </ContentPage>
