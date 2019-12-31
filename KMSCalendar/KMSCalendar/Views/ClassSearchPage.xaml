@@ -41,7 +41,7 @@
             </Grid>
 
             <!--  This is for the periods view  -->
-            <Frame VerticalOptions="CenterAndExpand"
+            <Frame VerticalOptions="Center"
                    Margin="16,0,16,0"
                    BackgroundColor="Transparent"
                    CornerRadius="10">
@@ -51,6 +51,7 @@
                         <ScrollView>
                             <ListView x:Name="PeriodsListView"
                                       VerticalOptions="Start"
+                                      HorizontalOptions="Center"
                                       ItemsSource="{Binding FilteredPeriods}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -61,20 +62,23 @@
                                                    BackgroundColor="{DynamicResource NavigationBackground}"
                                                    CornerRadius="3">
 
-                                                <Grid Padding="5">
+                                                <Grid Padding="5"
+                                                      HorizontalOptions="Center">
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="5*" />
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <Label VerticalOptions="End"
-                                                           Text="x"
+                                                    <Label HorizontalOptions="Start"
+                                                           VerticalOptions="End"
+                                                           Text="Period "
                                                            FontSize="14" />
 
                                                     <Label Grid.Column="1"
+                                                           HorizontalOptions="Start"
                                                            VerticalOptions="End"
                                                            Text="{Binding}"
-                                                           FontSize="11" />
+                                                           FontSize="14" />
                                                 </Grid>
                                             </Frame>
                                         </ViewCell>
