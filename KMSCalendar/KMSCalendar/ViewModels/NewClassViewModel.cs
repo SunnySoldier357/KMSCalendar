@@ -63,7 +63,8 @@ namespace KMSCalendar.ViewModels
 		public NewClassViewModel()
 		{
 			App.PullSchoolName();
-			Teachers = DataOperation.ConnectToBackend(TeacherManager.LoadAllTeachers, App.SignedInUser.SchoolId);
+			Teachers = DataOperation.ConnectToBackend(TeacherManager.LoadAllTeachers, App.SignedInUser.SchoolId) ??
+				new List<Teacher>();
 			SearchTerm = "";
 		}
 	}

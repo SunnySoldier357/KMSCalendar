@@ -134,7 +134,8 @@ namespace KMSCalendar.ViewModels
 		private void loadClasses()
 		{
 			// TODO: MATEO get this to work so a user doesn't have duplicate classes.
-			List<Class> classList = DataOperation.ConnectToBackend(ClassManager.LoadClasses, App.SignedInUser.SchoolId);
+			List<Class> classList = DataOperation.ConnectToBackend(ClassManager.LoadClasses, App.SignedInUser.SchoolId) ??
+				new List<Class>();
 
 			foreach (Class @class in classList)
 			{
@@ -150,7 +151,8 @@ namespace KMSCalendar.ViewModels
 		{
 			Guid classId = SelectedClass.Id;
 
-			List<int> periods = DataOperation.ConnectToBackend(PeriodManager.LoadPeriods, classId);
+			List<int> periods = DataOperation.ConnectToBackend(PeriodManager.LoadPeriods, classId) ??
+				new List<int>();
 			filterPeriods(periods);
 		}
 

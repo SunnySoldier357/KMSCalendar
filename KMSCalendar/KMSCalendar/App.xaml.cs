@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 using Autofac;
@@ -65,8 +66,12 @@ namespace KMSCalendar
 		}
 
 		//* Public Methods
-		public void PullEnrolledClasses() =>
-			SignedInUser.EnrolledClasses = dataOperation.ConnectToBackend(ClassManager.LoadEnrolledClasses, SignedInUser.Id);
+		public void PullEnrolledClasses()
+		{
+			SignedInUser.EnrolledClasses = dataOperation.ConnectToBackend(
+				ClassManager.LoadEnrolledClasses, SignedInUser.Id) ??
+				new List<Class>();
+		}
 
 		public void PullEnrolledTeachers()
 		{

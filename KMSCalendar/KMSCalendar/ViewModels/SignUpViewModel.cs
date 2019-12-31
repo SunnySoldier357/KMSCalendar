@@ -194,7 +194,8 @@ namespace KMSCalendar.ViewModels
 			{
 				SignUpVisibility = false;
 				SchoolEnrollmentVisibility = true;
-				await Task.Run(() => SchoolList = DataOperation.ConnectToBackendWithoutParam(SchoolManager.LoadSchools));
+				await Task.Run(() => SchoolList = DataOperation.ConnectToBackendWithoutParam(SchoolManager.LoadSchools) ??
+					new List<School>());
 				FilteredSchoolList = SchoolList;
 			}
 			else

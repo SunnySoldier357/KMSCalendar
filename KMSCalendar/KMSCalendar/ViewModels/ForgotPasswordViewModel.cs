@@ -114,7 +114,8 @@ namespace KMSCalendar.ViewModels
 
 		//* Constructors
 		public ForgotPasswordViewModel() :
-			this(AppContainer.Container.Resolve<IEmailService>()) { }
+			this(AppContainer.Container.Resolve<IEmailService>())
+		{ }
 
 		public ForgotPasswordViewModel(IEmailService emailService)
 		{
@@ -169,12 +170,16 @@ namespace KMSCalendar.ViewModels
 			if (Validate() && Password != null)
 			{
 				User user = DataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
-				user.Password = PasswordHasher.HashPassword(Password);
 
-				//Resets the user's password in the DB
-				DataOperation.ConnectToBackend(UserManager.UpdateUser, user);
+				if (user != null)
+				{
+					user.Password = PasswordHasher.HashPassword(Password);
 
-				SwapViews();
+					//Resets the user's password in the DB
+					DataOperation.ConnectToBackend(UserManager.UpdateUser, user);
+
+					SwapViews();
+				}
 			}
 			else
 				ValidationMessage = "Please enter a password.";
