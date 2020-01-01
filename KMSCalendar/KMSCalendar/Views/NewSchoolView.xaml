@@ -15,7 +15,7 @@
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="5*"/>
@@ -39,6 +39,7 @@
                            CornerRadius="16">
 
                     <control:TransparentEntry x:Name="SchoolNameEntry"
+                                              Margin="10,0,7,0"
                                               Style="{StaticResource LoginEntry}"
                                               Text="{Binding Name}"
                                               Placeholder="Skyline High School"
@@ -53,32 +54,33 @@
                          HeightRequest="30">
 
                 <Label Text="Enter your school's Postal Code: " 
-                           TextColor="White"
-                           VerticalOptions="Center"/>
+                       TextColor="White"
+                       VerticalOptions="Center" />
 
                 <Frame Style="{StaticResource LoginEntryFrame}"
-                           Margin="5, 0, 5, 0"
-                           VerticalOptions="Center"
-                           CornerRadius="16">
+                       Margin="5, 0, 5, 0"
+                       VerticalOptions="Center"
+                       CornerRadius="16">
 
                     <control:TransparentEntry x:Name="ZipCodeEntry"
-                                                  Style="{StaticResource LoginEntry}"
-                                                  Text="{Binding ZipCode}"
-                                                  Placeholder="98027"
-                                                  HorizontalOptions="Center"/>
+                                              Margin="10,0,10,0"
+                                              Style="{StaticResource LoginEntry}"
+                                              Text="{Binding ZipCode}"
+                                              Placeholder="98027"
+                                              HorizontalOptions="Center" />
                 </Frame>
             </StackLayout>
  
             <Button x:Name="AddSchoolButton"
-                        Grid.Row="5"
-                        HorizontalOptions="Center"
-                        Padding="5"
-                        BackgroundColor="{StaticResource NavigationTertiary}"
-                        CornerRadius="20"
-                        BorderColor="Transparent"
-                        Text="Add School"
-                        TextColor="White"
-                        Command="{Binding AddNewSchoolCommand}" />
+                    Grid.Row="5"
+                    HorizontalOptions="Center"
+                    Padding="15,0,15,0"
+                    BackgroundColor="{StaticResource NavigationTertiary}"
+                    CornerRadius="20"
+                    BorderColor="Transparent"
+                    Text="Add School"
+                    TextColor="White"
+                    Command="{Binding AddNewSchoolCommand}" />
 
             <Button x:Name="GoBackButton"
                     Grid.Row="7"

@@ -70,7 +70,7 @@
 
                 <StackLayout Orientation="Horizontal"
                              Grid.Row="4"
-                             Margin="15, 0, 15, 0"
+                             Margin="15,0,15,0"
                              HorizontalOptions="Center"
                              HeightRequest="30">
                     
@@ -79,13 +79,14 @@
                            VerticalOptions="Center"/>
 
                     <Frame Style="{StaticResource LoginEntryFrame}"
-                           Margin="5, 0, 5, 0"
+                           Margin="5,0,5,0"
                            VerticalOptions="Center"
                            CornerRadius="16">
 
                         <control:TransparentEntry x:Name="ZipCodeEntry"
                                                   Style="{StaticResource LoginEntry}"
                                                   Text="{Binding ZipCode}"
+                                                  Margin="0,0,1,0"
                                                   Placeholder="98027"
                                                   HorizontalOptions="Center" />
                     </Frame>
@@ -103,7 +104,7 @@
                 <ListView x:Name="SchoolListView"
                           Grid.Row="6"
                           ItemsSource="{Binding FilteredSchoolList}"
-                          Margin="20, 0, 20, 0"
+                          Margin="20,0,20,0"
                           SelectedItem="{Binding SelectedSchool}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -166,11 +167,11 @@
                 <Button x:Name="NewSchoolViewButton"
                         Grid.Row="12"
                         HorizontalOptions="Center"
-                        Padding="5"
+                        Padding="20,0,20,0"
                         BackgroundColor="{StaticResource NavigationTertiary}"
                         CornerRadius="20"
                         BorderColor="Transparent"
-                        Text="Add a New School"
+                        Text="Add a New School Instead"
                         TextColor="White"
                         Command="{Binding NewSchoolViewCommand}" />
             </Grid>
