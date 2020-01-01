@@ -61,14 +61,14 @@ namespace KMSCalendar.Controls
 				if (customActivityIndicator.IsLoading)
 				{
 					customActivityIndicator.LoadingIndicatorSpinner.IsRunning = true;
-					customActivityIndicator.IsVisible = true;
+					//customActivityIndicator.IsVisible = true;
 					await customActivityIndicator.FadeTo(FullyOpaque, TogglingVisibilityAnimationDuration);
 				}
 				else
 				{
 					await customActivityIndicator.FadeTo(FullyTransparent, TogglingVisibilityAnimationDuration);
 					customActivityIndicator.LoadingIndicatorSpinner.IsRunning = false;
-					customActivityIndicator.IsVisible = false;
+					//customActivityIndicator.IsVisible = false;
 				}
 			}
 			finally

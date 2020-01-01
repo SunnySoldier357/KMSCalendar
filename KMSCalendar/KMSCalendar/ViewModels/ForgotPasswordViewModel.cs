@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Autofac;
@@ -30,6 +31,7 @@ namespace KMSCalendar.ViewModels
 		private bool newPasswordVisibility;
 		private bool successVisibility;
 		private bool verificationVisibility;
+		private bool isLoadingData;
 
 		private readonly IEmailService emailService;
 
@@ -65,6 +67,11 @@ namespace KMSCalendar.ViewModels
 		{
 			get => verificationVisibility;
 			set => setProperty(ref verificationVisibility, value);
+		}
+		public bool IsLoadingData
+		{
+			get => isLoadingData;
+			set => setProperty(ref isLoadingData, value);
 		}
 
 		public ICommand AuthenticateCodeCommand { get; }
@@ -135,7 +142,7 @@ namespace KMSCalendar.ViewModels
 			};
 
 			AuthenticateCodeCommand = new Command(() => ExecuteAuthenticateCodeCommand());
-			AuthenticateEmailCommand = new Command(() => ExecuteAuthenticateEmailCommand());
+			AuthenticateEmailCommand = new Command(async () => await ExecuteAuthenticateEmailCommandAsync());
 			AuthenticateNewPasswordCommand = new Command(() => ExecuteAuthenticateNewPasswordCommand());
 			GoBackCommand = new Command(() =>
 				App.MainPage.Navigation.PopModalAsync());
@@ -150,19 +157,36 @@ namespace KMSCalendar.ViewModels
 				ValidationMessage = "Code invalid!";
 		}
 
-		private void ExecuteAuthenticateEmailCommand()
+		private async Task ExecuteAuthenticateEmailCommandAsync()
 		{
 			if (Validate() && Email != null)
 			{
-				User user = DataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
-				if (user != null)
+				IsLoadingData = true;
+				ValidationMessage = "";
+
+				await Task.Run(() =>
 				{
-					emailService.SendResetPasswordEmail(user, token);
-					SwapViews();
-				}
-				else
+					User user = DataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
+					if (user != null)
+					{
+						try
+						{
+							emailService.SendResetPasswordEmail(user, token);
+							SwapViews();
+						}
+						catch
+						{
+							validationMessage = "Email failed to send";
+						}
+					}
+					else
 					ValidationMessage = "Please enter the email address for your account.";
+				});
+
+				IsLoadingData = false;
 			}
+			else
+				ValidationMessage = "Please enter a valid email address.";
 		}
 
 		private void ExecuteAuthenticateNewPasswordCommand()
