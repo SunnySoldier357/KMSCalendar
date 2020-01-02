@@ -115,7 +115,10 @@ namespace KMSCalendar.Models.Settings
 				{
 					settings = new UserSettings();
 
-					settings.UpdateDictionaryAsync();
+					Task.Run(async () =>
+					{
+						await settings.UpdateDictionaryAsync();
+					});
 				}
 
 				return settings;
@@ -150,7 +153,10 @@ namespace KMSCalendar.Models.Settings
 				return false;
 
 			backingStore = value;
-			UpdateDictionaryAsync();
+			Task.Run(async () =>
+			{
+				await UpdateDictionaryAsync();
+			});
 			OnNotifyPropertyChanged(propertyName);
 
 			return true;

@@ -190,6 +190,7 @@ namespace KMSCalendar.ViewModels
 
 		private async Task SwapViewsAsync()
 		{
+			LoginValidationMessage = "";
 			if (SignUpVisibility)
 			{
 				SignUpVisibility = false;
