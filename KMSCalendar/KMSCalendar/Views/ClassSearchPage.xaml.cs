@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using KMSCalendar.Extensions;
+﻿using KMSCalendar.Models;
 using KMSCalendar.ViewModels;
 
 using Xamarin.Forms;
@@ -12,33 +9,19 @@ namespace KMSCalendar.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ClassSearchPage : ContentPage
 	{
-		//* Public Properties
-		public ThemeImageSource SearchImageSource { get; }
-
 		//* Constructors
 		public ClassSearchPage()
 		{
 			InitializeComponent();
 
-			SearchImageSource = new ThemeImageSource("search_blue.png", "search_white.png",
-				nameof(ClassSearchPage));
+			MessagingCenter.Subscribe<ClassSearchViewModel>(this, MessagingEvent.GoBackToCalendar,
+				async sender => await Navigation.PopModalAsync());
 
-			BindingContext = new ClassSearchViewModel();
-			SearchIconImage.BindingContext = this;
+			MessagingCenter.Subscribe<ClassSearchViewModel>(this, MessagingEvent.ClassesListViewDeselectItem,
+				sender => ClassesListView.SelectedItem = null);
 
-			MessagingCenter.Subscribe<ClassSearchViewModel>(this, "GoToCalendarAsync",
-				async sender => await GoToCalendarAsync());
+			MessagingCenter.Subscribe<ClassSearchViewModel>(this, MessagingEvent.GoToNewClassPage,
+				async sender => await Navigation.PushModalAsync(new NewClassPage(this)));
 		}
-
-		//* Public Methods
-		public async Task GoToCalendarAsync() =>
-			await Navigation.PopModalAsync();
-
-		//* Event Handlers
-		private void ClassesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) =>
-			ClassesListView.SelectedItem = null;
-
-		private void GoToNewClassButton_Clicked(object sender, EventArgs e) =>
-			Navigation.PushModalAsync(new NewClassPage(this));
 	}
 }

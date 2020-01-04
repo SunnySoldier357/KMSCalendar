@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 
 using Autofac;
+
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
@@ -29,7 +30,7 @@ namespace KMSCalendar.ViewModels
 		public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
 		public DateTime DateSelected { get; set; }
-		
+
 		public ICommand AddAssignmentCommand { get; }
 		public ICommand FilterAssignmentsCommand { get; }
 		public ICommand GoToTodayCommand { get; }
@@ -60,7 +61,7 @@ namespace KMSCalendar.ViewModels
 			assignments = new List<Assignment>();
 			FilteredAssignments = new List<Assignment>();
 
-			AddAssignmentCommand = new Command(() => MessagingCenter.Send(this, 
+			AddAssignmentCommand = new Command(() => MessagingCenter.Send(this,
 				MessagingEvent.AddAssignment, DateSelected));
 			FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
 				filterAssignments(selectedDate));
@@ -84,7 +85,7 @@ namespace KMSCalendar.ViewModels
 
 			MessagingCenter.Subscribe<EnrolledClassesViewModel>(this, "LoadAssignments",
 				(sender) => loadAssignments());
-			
+
 			App.PullEnrolledClasses();
 			loadAssignments();
 
@@ -112,8 +113,10 @@ namespace KMSCalendar.ViewModels
 		private void itemSelected(object selectedItem)
 		{
 			if (selectedItem is Assignment assignment)
+			{
 				MessagingCenter.Send(this, MessagingEvent.CalendarWeekControlItemSelected,
 					assignment);
+			}
 		}
 
 		/// <summary>

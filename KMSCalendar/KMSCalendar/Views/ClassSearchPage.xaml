@@ -157,12 +157,10 @@
                             </StackLayout>
                         </Frame>
 
-
                         <ListView x:Name="ClassesListView"
                                   ItemsSource="{Binding FilteredClasses}"
                                   Margin="0,16,0,0"
-                                  IsPullToRefreshEnabled="true"
-                                  ItemSelected="ClassesListView_ItemSelected">
+                                  IsPullToRefreshEnabled="true">
 
                             <ListView.Behaviors>
                                 <behavior:EventToCommandBehavior EventName="ItemSelected"
@@ -212,7 +210,7 @@
                                 CornerRadius="4"
                                 Text="Can't find your class? Add a new one to the cloud"
                                 TextColor="White"
-                                Clicked="GoToNewClassButton_Clicked" />
+                                Command="{Binding GoToNewClassCommand}" />
 
                     </StackLayout>
                 </Grid>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
+using KMSCalendar.Extensions;
+using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
@@ -46,6 +48,7 @@ namespace KMSCalendar.ViewModels
 		public ICommand AddPeriodCommand { get; }
 		public ICommand FilterClassesCommand { get; }
 		public ICommand GoBackwardCommand { get; }
+		public ICommand GoToNewClassCommand { get; }
 		public ICommand ShowPeriodsCommand { get; }
 		public ICommand SubscribeUserToClassCommand { get; }
 
@@ -61,6 +64,8 @@ namespace KMSCalendar.ViewModels
 			set => setProperty(ref filteredPeriods, value);
 		}
 
+		public ThemeImageSource SearchImageSource { get; }
+
 		//* Constructors
 		public ClassSearchViewModel()
 		{
@@ -68,9 +73,14 @@ namespace KMSCalendar.ViewModels
 			FilterClassesCommand = new Command<string>(searchInput =>
 				filterClasses(searchInput));
 			GoBackwardCommand = new Command(() => goBackward());
+			GoToNewClassCommand = new Command(() =>
+				MessagingCenter.Send(this, MessagingEvent.GoToNewClassPage));
 			ShowPeriodsCommand = new Command<Class>(@class => showPeriods(@class));
 			SubscribeUserToClassCommand = new Command<int>(period =>
 				subscribeUserToClass(period));
+
+			SearchImageSource = new ThemeImageSource("search_blue.png", "search_white.png",
+				nameof(ClassSearchPage));
 
 			// This is so that when the new class page closes,
 			// the class list will update
@@ -125,7 +135,7 @@ namespace KMSCalendar.ViewModels
 		private void goBackward()
 		{
 			if (--currentUIState < 0)
-				MessagingCenter.Send(this, "GoToCalendarAsync");
+				MessagingCenter.Send(this, MessagingEvent.GoBackToCalendar);
 		}
 
 		/// <summary>
@@ -160,8 +170,10 @@ namespace KMSCalendar.ViewModels
 		{
 			SelectedClass = @class;
 			loadPeriods();
-			
+
 			currentUIState++;
+
+			MessagingCenter.Send(this, MessagingEvent.ClassesListViewDeselectItem);
 		}
 
 		private void subscribeUserToClass(int period)
@@ -177,7 +189,7 @@ namespace KMSCalendar.ViewModels
 			MessagingCenter.Send(this, "LoadClassesForNewAssignmentPage");
 			MessagingCenter.Send(this, "UpdateClasses");
 
-			MessagingCenter.Send(this, "GoToCalendarAsync");
+			MessagingCenter.Send(this, MessagingEvent.GoBackToCalendar);
 		}
 
 		//* Private Enumerations
