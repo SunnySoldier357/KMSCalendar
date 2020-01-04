@@ -17,7 +17,7 @@
         <ToolbarItem Icon="{ext:ImageResource add.png,
                                               FolderName=AssignmentsPage}"
                      Text="Add"
-                     Clicked="AddAssignment_Clicked" />
+                     Command="{Binding AddAssignmentCommand}" />
     </ContentPage.ToolbarItems>
 
     <!--  This is the list page that appears when the app is loaded  -->
@@ -38,20 +38,20 @@
                CornerRadius="15">
 
             <StackLayout>
-                
-                <!--Make this a stack layout with two buttons on the outside.-->
+
+                <!--  Make this a stack layout with two buttons on the outside.  -->
 
                 <StackLayout Orientation="Horizontal">
 
                     <Button x:Name="TodayButton"
                             HorizontalOptions="Start"
                             VerticalOptions="Center"
-                            Text="Due Today"
-                            TextColor="Gray"
-                            FontSize="12"
                             Margin="0,-9,0,0"
-                            BorderColor="Transparent"
                             BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            Text="Due Today"
+                            FontSize="12"
+                            TextColor="Gray"
                             Command="{Binding GoToTodayCommand}" />
 
                     <Label HorizontalOptions="CenterAndExpand"
@@ -65,16 +65,16 @@
                     <Button x:Name="TomorrowButton"
                             HorizontalOptions="End"
                             VerticalOptions="Center"
-                            Text="Due Tmr."
-                            TextColor="Gray"
-                            FontSize="12"
                             Margin="0,-9,0,0"
-                            BorderColor="Transparent"
                             BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            Text="Due Tmr."
+                            FontSize="12"
+                            TextColor="Gray"
                             Command="{Binding GoToTomorrowCommand}" />
 
                 </StackLayout>
-                
+
                 <ScrollView>
                     <ListView x:Name="AssignmentsListView"
                               VerticalOptions="FillAndExpand"
@@ -83,8 +83,13 @@
                               HasUnevenRows="true"
                               IsPullToRefreshEnabled="true"
                               IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                              RefreshCommand="{Binding LoadAssignmentsCommand}"
-                              ItemSelected="OnItemSelected">
+                              RefreshCommand="{Binding LoadAssignmentsCommand}">
+
+                        <ListView.Behaviors>
+                            <behavior:EventToCommandBehavior EventName="ItemSelected"
+                                                             Command="{Binding ItemSelectedCommand}"
+                                                             CommandParameter="{Binding Source={x:Reference AssignmentsListView}, Path=SelectedItem}" />
+                        </ListView.Behaviors>
 
                         <ListView.ItemTemplate>
                             <DataTemplate>

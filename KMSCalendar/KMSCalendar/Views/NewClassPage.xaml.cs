@@ -28,15 +28,6 @@ namespace KMSCalendar.Views
 			BindingContext = ViewModel = new NewClassViewModel();
 		}
 
-		//public void LoadTeachers()
-		//{
-		//	List<Teacher> teachers = TeacherManager.LoadAllTeachers(app.SignedInUser.SchoolId);
-
-		//	ViewModel.Teachers = teachers.ToList();
-
-		//	TeachersListView.ItemsSource = ViewModel.Teachers;
-		//}
-
 		//* Event Handlers
 		private void TeacherSearchBar_TextChanged(object sender, TextChangedEventArgs e) => FilterData(ViewModel.SearchTerm);
 		/// <summary>

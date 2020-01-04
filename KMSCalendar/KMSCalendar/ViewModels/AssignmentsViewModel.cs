@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 
 using Autofac;
-
+using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
@@ -18,6 +18,7 @@ namespace KMSCalendar.ViewModels
 	public class AssignmentsViewModel : BaseViewModel
 	{
 		//* Private Properties
+
 		/// <summary>A List of all the Assignments to display.</summary>
 		private List<Assignment> assignments;
 		private List<Assignment> filteredAssignments;
@@ -29,11 +30,12 @@ namespace KMSCalendar.ViewModels
 
 		public DateTime DateSelected { get; set; }
 		
+		public ICommand AddAssignmentCommand { get; }
 		public ICommand FilterAssignmentsCommand { get; }
-		public ICommand LoadAssignmentsCommand { get; }
 		public ICommand GoToTodayCommand { get; }
 		public ICommand GoToTomorrowCommand { get; }
-
+		public ICommand ItemSelectedCommand { get; }
+		public ICommand LoadAssignmentsCommand { get; }
 
 		/// <summary>
 		/// A filtered set of all the Assignments that are only for the
@@ -58,11 +60,14 @@ namespace KMSCalendar.ViewModels
 			assignments = new List<Assignment>();
 			FilteredAssignments = new List<Assignment>();
 
+			AddAssignmentCommand = new Command(() => MessagingCenter.Send(this, 
+				MessagingEvent.AddAssignment, DateSelected));
 			FilterAssignmentsCommand = new Command<DateTime>(selectedDate =>
 				filterAssignments(selectedDate));
+			ItemSelectedCommand = new Command<object>(selectedItem => itemSelected(selectedItem));
 			LoadAssignmentsCommand = new Command(() => loadAssignments());
-			GoToTodayCommand = new Command(() => ExecuteGoToTodayCommand());
-			GoToTomorrowCommand = new Command(() => ExecuteGoToTomorrowCommand());
+			GoToTodayCommand = new Command(() => goToToday());
+			GoToTomorrowCommand = new Command(() => goToTomorrow());
 
 			MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
 				"AddAssignment", (page, a) =>
@@ -88,7 +93,6 @@ namespace KMSCalendar.ViewModels
 				if (args.PropertyName == nameof(UserSettings.ShowCalendarDays))
 					OnNotifyPropertyChanged(nameof(ShowCalendarDays));
 			};
-
 		}
 
 		//* Private Methods
@@ -103,6 +107,13 @@ namespace KMSCalendar.ViewModels
 				select assignment;
 
 			FilteredAssignments = result.ToList();
+		}
+
+		private void itemSelected(object selectedItem)
+		{
+			if (selectedItem is Assignment assignment)
+				MessagingCenter.Send(this, MessagingEvent.CalendarWeekControlItemSelected,
+					assignment);
 		}
 
 		/// <summary>
@@ -144,13 +155,13 @@ namespace KMSCalendar.ViewModels
 			filterAssignments(DateSelected);
 		}
 
-		public void ExecuteGoToTodayCommand()
+		public void goToToday()
 		{
 			DateSelected = DateTime.Today;
 			filterAssignments(DateSelected);
 		}
 
-		public void ExecuteGoToTomorrowCommand()
+		public void goToTomorrow()
 		{
 			DateSelected = DateTime.Today.AddDays(1);
 			filterAssignments(DateSelected);

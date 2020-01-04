@@ -1,6 +1,8 @@
 ﻿using System;
 
+using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
+using KMSCalendar.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,22 +13,24 @@ namespace KMSCalendar.Views
 	public partial class AssignmentsPage : ContentPage
 	{
 		//* Constructors
-		public AssignmentsPage() => InitializeComponent();
-
-		//* Event Handlers
-		public async void AddAssignment_Clicked(object sender, EventArgs e) =>
-			await Navigation.PushModalAsync(new NavigationPage(
-				new NewAssignmentPage(CalendarWeekControl.DateSelected)));
-
-		public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+		public AssignmentsPage()
 		{
-			if (e.SelectedItem is Assignment assignment)
-			{
-				await Navigation.PushAsync(new AssignmentDetailPage(assignment));
+			InitializeComponent();
 
-				// Manually deselect item.
-				AssignmentsListView.SelectedItem = null;
-			}
+			MessagingCenter.Subscribe<AssignmentsViewModel, DateTime>(this,
+				MessagingEvent.AddAssignment,
+				async (sender, dateSelected) => await Navigation.PushModalAsync(new NavigationPage(
+					new NewAssignmentPage(dateSelected))));
+
+			MessagingCenter.Subscribe<AssignmentsViewModel, Assignment>(this,
+				MessagingEvent.CalendarWeekControlItemSelected,
+				async (sender, assignment) =>
+				{
+					await Navigation.PushAsync(new AssignmentDetailPage(assignment));
+
+					// Manually deselect item.
+					AssignmentsListView.SelectedItem = null;
+				});
 		}
 	}
 }
