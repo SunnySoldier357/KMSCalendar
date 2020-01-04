@@ -6,11 +6,17 @@ namespace KMSCalendar.Models
 	{
 		//* Public Properties
 		public static string AddAssignment => autoName();
+
 		public static string CalendarWeekControlItemSelected => autoName();
+
 		public static string ClassesListViewDeselectItem => autoName();
+
 		public static string GoBack => autoName();
+
 		public static string GoBackToAssignmentsPage => autoName();
 		public static string GoBackToCalendar => autoName();
+
+		public static string GoToClassSearchPage => autoName();
 		public static string GoToNewClassPage => autoName();
 
 		//* Private Methods
