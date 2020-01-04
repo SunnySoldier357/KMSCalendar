@@ -103,8 +103,10 @@
                                 <Entry x:Name="NewPeriod"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"
+                                       BackgroundColor="{DynamicResource NavigationBackground}"
                                        Placeholder="1"
                                        Keyboard="Numeric"
+                                       PlaceholderColor="{DynamicResource PlaceholderText}"
                                        ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
                                        ReturnCommand="{Binding AddPeriodCommand}" />
 
