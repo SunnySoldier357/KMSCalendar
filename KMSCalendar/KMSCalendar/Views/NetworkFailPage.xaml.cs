@@ -40,7 +40,7 @@ namespace KMSCalendar.Views
 			{
 				if (operation.TryToGetData())
 				{
-					operation.waitHandle.Set();
+					operation.WaitHandle.Set();
 				}
 			}
 			else
