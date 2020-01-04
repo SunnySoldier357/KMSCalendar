@@ -3,7 +3,7 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ext="clr-namespace:KMSCalendar.Extensions"
-             Title="{Binding Title}">
+             Title="New Assignment">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="{ext:ImageResource cancel.png,
@@ -20,7 +20,7 @@
     <ContentPage.Content>
         <StackLayout Padding="15"
                      Spacing="20"
-                     BackgroundColor="{DynamicResource NavigationBackground}">
+                     BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
             <Label Text="Name"
                    FontSize="Medium" />
@@ -31,7 +31,8 @@
                    Placeholder="Assignment name"
                    FontSize="Small"
                    TextColor="{DynamicResource Text}"
-                   Keyboard="Text" />
+                   Keyboard="Text"
+                   PlaceholderColor="{DynamicResource PlaceholderText}" />
 
             <Label Text="Description"
                    FontSize="Medium" />
@@ -43,7 +44,8 @@
                     Placeholder="This is an item description"
                     FontSize="Small"
                     TextColor="{DynamicResource Text}"
-                    Keyboard="Text" />
+                    Keyboard="Text"
+                    PlaceholderColor="{DynamicResource PlaceholderText}" />
 
             <Label Text="Due Date"
                    FontSize="Medium" />

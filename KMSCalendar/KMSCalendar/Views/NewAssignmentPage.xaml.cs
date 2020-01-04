@@ -25,9 +25,6 @@ namespace KMSCalendar.Views
 			InitializeComponent();
 
 			BindingContext = viewModel = new NewAssignmentViewModel(dateSelected);
-
-			MessagingCenter.Subscribe<ClassSearchViewModel>(this, "LoadClassesForNewAssignmentPage",
-				(sender) => viewModel.LoadSubscribedClasses());
 		}
 
 		//* Event Handlers
@@ -36,10 +33,13 @@ namespace KMSCalendar.Views
 
 		public async void Save_Clicked(object sender, EventArgs e)
 		{
-			if (ClassPicker.SelectedItem != null && viewModel.Assignment.Name != "" && viewModel.Assignment.Description != null)
+			if (ClassPicker.SelectedItem != null && viewModel.Assignment.Name != "" &&
+				viewModel.Assignment.Description != null)
 			{
 				object selectedClass = ClassPicker.SelectedItem;
-				viewModel.Assignment.Class = selectedClass as Models.Data.Class;    //sets the viewModel's assignment to the class selected from the picker
+
+				// Sets the viewModel's assignment to the class selected from the picker
+				viewModel.Assignment.Class = selectedClass as Models.Data.Class;
 
 				MessagingCenter.Send(this, "AddAssignment", viewModel.Assignment);
 

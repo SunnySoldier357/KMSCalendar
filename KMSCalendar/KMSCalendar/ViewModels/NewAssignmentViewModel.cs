@@ -30,8 +30,6 @@ namespace KMSCalendar.ViewModels
 		//* Constructors
 		public NewAssignmentViewModel(DateTime dateTime)
 		{
-			Title = "New Assignment";
-
 			Assignment = new Assignment
 			{
 				Name = "",
@@ -39,10 +37,14 @@ namespace KMSCalendar.ViewModels
 				DueDate = dateTime
 			};
 
-			LoadSubscribedClasses();
+			MessagingCenter.Subscribe<ClassSearchViewModel>(this, "LoadClassesForNewAssignmentPage",
+				(sender) => loadSubscribedClasses());
+
+			loadSubscribedClasses();
 		}
 
-		public void LoadSubscribedClasses() =>
+		//* Private Properties
+		private void loadSubscribedClasses() =>
 			SubscribedClasses = App.SignedInUser.EnrolledClasses;
 	}
 }
