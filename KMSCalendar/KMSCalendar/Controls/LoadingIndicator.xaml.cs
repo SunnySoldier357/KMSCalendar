@@ -10,21 +10,21 @@ namespace KMSCalendar.Controls
 	public partial class LoadingIndicator : ContentView
 	{
 		//* Static Properties
-		private static readonly SemaphoreSlim ToggleVisibilityAnimationSemaphoreSlim = 
+		private static readonly SemaphoreSlim ToggleVisibilityAnimationSemaphoreSlim =
 			new SemaphoreSlim(1);
 
 		public static readonly BindableProperty IsLoadingProperty = BindableProperty.Create(
-			propertyName: nameof(IsLoading), 
-			returnType: typeof(bool), 
-			declaringType: typeof(LoadingIndicator), 
-			defaultValue: default(bool), 
+			propertyName: nameof(IsLoading),
+			returnType: typeof(bool),
+			declaringType: typeof(LoadingIndicator),
+			defaultValue: default(bool),
 			propertyChanged: HandleIsRunningPropertyChanged);
 
 		public static readonly BindableProperty LoadingIndicatorColorProperty = BindableProperty.Create(
-			propertyName: nameof(LoadingIndicatorColor), 
-			returnType: typeof(Color), 
-			declaringType: typeof(LoadingIndicator), 
-			defaultValue: default(Color), 
+			propertyName: nameof(LoadingIndicatorColor),
+			returnType: typeof(Color),
+			declaringType: typeof(LoadingIndicator),
+			defaultValue: default(Color),
 			propertyChanged: HandleSpinnerColorPropertyChanged);
 
 		//* Constants
@@ -50,7 +50,7 @@ namespace KMSCalendar.Controls
 		}
 
 		//* Event Handlers
-		private static async void HandleIsRunningPropertyChanged(BindableObject bindable, 
+		private static async void HandleIsRunningPropertyChanged(BindableObject bindable,
 			object oldValue, object newValue)
 		{
 			if (bindable is LoadingIndicator customActivityIndicator && newValue is bool isRunning)
@@ -72,7 +72,7 @@ namespace KMSCalendar.Controls
 
 				await ToggleVisibilityAnimationSemaphoreSlim.WaitAsync();
 
-				customActivityIndicator.LoadingIndicatorSpinner.IsRunning = 
+				customActivityIndicator.LoadingIndicatorSpinner.IsRunning =
 					customActivityIndicator.IsLoading;
 
 				if (customActivityIndicator.IsLoading)

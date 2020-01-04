@@ -31,7 +31,6 @@ namespace KMSCalendar.ViewModels
 		private bool newPasswordVisibility;
 		private bool successVisibility;
 		private bool verificationVisibility;
-		private bool isLoadingData;
 
 		private readonly IEmailService emailService;
 
@@ -67,11 +66,6 @@ namespace KMSCalendar.ViewModels
 		{
 			get => verificationVisibility;
 			set => setProperty(ref verificationVisibility, value);
-		}
-		public bool IsLoadingData
-		{
-			get => isLoadingData;
-			set => setProperty(ref isLoadingData, value);
 		}
 
 		public ICommand AuthenticateCodeCommand { get; }
@@ -121,8 +115,7 @@ namespace KMSCalendar.ViewModels
 
 		//* Constructors
 		public ForgotPasswordViewModel() :
-			this(AppContainer.Container.Resolve<IEmailService>())
-		{ }
+			this(AppContainer.Container.Resolve<IEmailService>()) { }
 
 		public ForgotPasswordViewModel(IEmailService emailService)
 		{
@@ -161,7 +154,7 @@ namespace KMSCalendar.ViewModels
 		{
 			if (Validate() && Email != null)
 			{
-				IsLoadingData = true;
+				IsBusy = true;
 				ValidationMessage = "";
 
 				await Task.Run(() =>
@@ -180,10 +173,10 @@ namespace KMSCalendar.ViewModels
 						}
 					}
 					else
-					ValidationMessage = "Please enter the email address for your account.";
+						ValidationMessage = "Please enter the email address for your account.";
 				});
 
-				IsLoadingData = false;
+				IsBusy = false;
 			}
 			else
 				ValidationMessage = "Please enter a valid email address.";

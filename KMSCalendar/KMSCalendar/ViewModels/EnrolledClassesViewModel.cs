@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+
 using KMSCalendar.Extensions;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
@@ -13,28 +15,29 @@ namespace KMSCalendar.ViewModels
 	{
 		//* Private Properties
 		private List<Class> classes;
-		private bool imageVisibility;
-		public ThemeImageSource MissingImageSource { get; }
 
 		//* Public Properties
+		public bool ImageVisibility => Classes?.Count == 0;
+
 		public ICommand UnsubscribeClassCommand { get; set; }
 
 		public List<Class> Classes
 		{
 			get => classes;
-			set => setProperty(ref classes, value);
+			set
+			{
+				setProperty(ref classes, value);
+				OnNotifyPropertyChanged(nameof(ImageVisibility));
+			}
 		}
-		public bool ImageVisibility
-		{
-			get => imageVisibility;
-			set => setProperty(ref imageVisibility, value);
-		}
+
+		public ThemeImageSource MissingImageSource { get; }
 
 		//* Constructors
 		public EnrolledClassesViewModel()
 		{
-			MissingImageSource = new ThemeImageSource("missing_bag_blue.png", "missing_bag_white.png",
-				nameof(EnrolledClassesPage));
+			MissingImageSource = new ThemeImageSource("missing_bag_blue.png", 
+				"missing_bag_white.png", nameof(EnrolledClassesPage));
 
 			updateData();
 
@@ -49,8 +52,6 @@ namespace KMSCalendar.ViewModels
 		{
 			App.PullEnrolledTeachers();
 			Classes = App.SignedInUser.EnrolledClasses;
-								
-			ImageVisibility = (Classes.Count == 0) ? true : false;
 		}
 
 		private async Task unsubscribeClassAsync(Class @class)

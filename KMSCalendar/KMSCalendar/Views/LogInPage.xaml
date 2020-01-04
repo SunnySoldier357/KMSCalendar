@@ -119,7 +119,7 @@
 
             <control:LoadingIndicator Grid.Row="11"
                                       BackgroundColor="Transparent"
-                                      IsLoading="{Binding IsLoadingData, Mode=OneWay}"
+                                      IsLoading="{Binding IsBusy, Mode=OneWay}"
                                       LoadingIndicatorColor="White" />
 
             <Grid HorizontalOptions="Center"

@@ -2,10 +2,10 @@
 <ContentPage x:Class="KMSCalendar.Views.NetworkFailPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:control="clr-namespace:KMSCalendar.Controls"
              BackgroundImage="{ext:ImageResource background.png,
                                                  FolderName=Shared}"
              mc:Ignorable="d">
@@ -23,36 +23,35 @@
             <RowDefinition />
             <RowDefinition Height="2*" />
             <RowDefinition />
-            
+
         </Grid.RowDefinitions>
 
-        <Label HorizontalOptions="CenterAndExpand"
+        <Label Grid.Row="1"
+               HorizontalOptions="CenterAndExpand"
                Text="Network Connection Failed"
                FontSize="Large"
-               Grid.Row="1"
-               TextColor="White"/>
+               TextColor="White" />
 
-        <Image HorizontalOptions="CenterAndExpand"
-               VerticalOptions="CenterAndExpand"
-               Grid.Row="3"
-               Source="{ext:ImageResource wifi_fail.png,
-                                          FolderName=NetworkFailPage}"/>
-
-        <Label Text="This app requires an internet connection."
-               TextColor="White"
+        <Image Grid.Row="3"
                HorizontalOptions="CenterAndExpand"
-               Grid.Row="5"/>
+               VerticalOptions="CenterAndExpand"
+               Source="{ext:ImageResource wifi_fail.png,
+                                          FolderName=NetworkFailPage}" />
+
+        <Label Grid.Row="5"
+               HorizontalOptions="CenterAndExpand"
+               Text="This app requires an internet connection."
+               TextColor="White" />
 
         <Button x:Name="RetryButton"
                 Grid.Row="7"
                 HorizontalOptions="Center"
-                
+                Padding="12,4,12,4"
                 BackgroundColor="{DynamicResource NavigationTertiary}"
+                CornerRadius="10"
                 BorderColor="Transparent"
                 Text="Retry"
                 TextColor="White"
-                CornerRadius="10"
-                Padding="12,4,12,4 "
                 Clicked="RetryButton_Clicked" />
 
         <control:LoadingIndicator x:Name="LoadingAnimation"
@@ -63,5 +62,5 @@
                                   LoadingIndicatorColor="White" />
 
     </Grid>
-       
+
 </ContentPage>

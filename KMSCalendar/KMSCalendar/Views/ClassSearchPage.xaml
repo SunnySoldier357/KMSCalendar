@@ -50,8 +50,8 @@
                     <StackLayout IsVisible="{Binding PeriodSelectViewVisiblity}">
                         <ScrollView>
                             <ListView x:Name="PeriodsListView"
-                                      VerticalOptions="Start"
                                       HorizontalOptions="Center"
+                                      VerticalOptions="Start"
                                       ItemsSource="{Binding FilteredPeriods}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -62,8 +62,8 @@
                                                    BackgroundColor="{DynamicResource NavigationBackground}"
                                                    CornerRadius="3">
 
-                                                <Grid Padding="5"
-                                                      HorizontalOptions="Center">
+                                                <Grid HorizontalOptions="Center"
+                                                      Padding="5">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition />
                                                         <ColumnDefinition />

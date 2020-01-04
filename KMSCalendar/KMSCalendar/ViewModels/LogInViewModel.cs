@@ -18,7 +18,6 @@ namespace KMSCalendar.ViewModels
 	public class LogInViewModel : BaseViewModel
 	{
 		//* Private Properties
-		private bool isLoadingData;
 		private int logInAttempts;
 
 		private string email;
@@ -29,12 +28,6 @@ namespace KMSCalendar.ViewModels
 		protected readonly UserSettings UserSettings;
 
 		//* Public Properties
-		public bool IsLoadingData
-		{
-			get => isLoadingData;
-			set => setProperty(ref isLoadingData, value);
-		}
-
 		public ICommand AuthenticateUserCommand { get; set; }
 		public ICommand ForgotPasswordCommand { get; set; }
 		public ICommand NewUserCommand { get; set; }
@@ -100,7 +93,7 @@ namespace KMSCalendar.ViewModels
 		//* Private Method
 		private async Task authenticateUser()
 		{
-			IsLoadingData = true;
+			IsBusy = true;
 
 			await Task.Run(() =>
 			{
@@ -128,7 +121,7 @@ namespace KMSCalendar.ViewModels
 				}
 			});
 
-			IsLoadingData = false;
+			IsBusy = false;
 		}
 	}
 }

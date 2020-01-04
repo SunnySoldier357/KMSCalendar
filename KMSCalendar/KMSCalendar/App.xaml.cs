@@ -19,12 +19,13 @@ namespace KMSCalendar
 	{
 		//* Private Properties
 		private readonly AppSettings appSettings;
-		private DataOperation dataOperation = new DataOperation();
+		private readonly DataOperation dataOperation = new DataOperation();
 		private readonly UserSettings userSettings;
 
 		//* Public Properties
-		public User SignedInUser { get; set; }
 		public string SchoolName { get; set; }
+
+		public User SignedInUser { get; set; }
 
 		//* Constructors
 		public App(AppSetup setup = null)
