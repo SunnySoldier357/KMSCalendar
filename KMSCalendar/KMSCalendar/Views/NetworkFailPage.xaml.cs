@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using KMSCalendar.Services.Data;
 
 using Xamarin.Essentials;
@@ -14,9 +15,9 @@ namespace KMSCalendar.Views
 		//* Private Properties
 		private DataOperation operation;
 
-		public NetworkFailPage() => InitializeComponent();
-
 		//* Constructors
+		public NetworkFailPage() : this(null) { }
+
 		public NetworkFailPage(DataOperation operation)
 		{
 			InitializeComponent();
@@ -29,22 +30,16 @@ namespace KMSCalendar.Views
 		{
 			LoadingAnimation.IsLoading = true;
 
-			await HandleConnection();
+			await handleConnectionAsync();
 
 			LoadingAnimation.IsLoading = false;
 		}
 
-		private async Task HandleConnection()
+		//* Private Methods
+		private async Task handleConnectionAsync()
 		{
-			if (operation != null)
-			{
-				if (operation.TryToGetData())
-				{
-					operation.WaitHandle.Set();
-				}
-			}
-			else
-				await Task.Delay(2000);
+			if (operation?.TryToGetData() ?? false)
+				operation.WaitHandle.Set();
 
 			if (Connectivity.NetworkAccess == NetworkAccess.Internet)
 			{
