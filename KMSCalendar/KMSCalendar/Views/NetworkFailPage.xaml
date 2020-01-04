@@ -43,8 +43,7 @@
                Text="This app requires an internet connection."
                TextColor="White" />
 
-        <Button x:Name="RetryButton"
-                Grid.Row="7"
+        <Button Grid.Row="7"
                 HorizontalOptions="Center"
                 Padding="12,4,12,4"
                 BackgroundColor="{DynamicResource NavigationTertiary}"
@@ -52,13 +51,13 @@
                 BorderColor="Transparent"
                 Text="Retry"
                 TextColor="White"
-                Clicked="RetryButton_Clicked" />
+                Command="{Binding RetryConnectionCommand}" />
 
-        <control:LoadingIndicator x:Name="LoadingAnimation"
-                                  Grid.Row="9"
+        <control:LoadingIndicator Grid.Row="9"
                                   VerticalOptions="End"
                                   Margin="0,0,0,20"
                                   BackgroundColor="Transparent"
+                                  IsLoading="{Binding IsBusy}"
                                   LoadingIndicatorColor="White" />
 
     </Grid>

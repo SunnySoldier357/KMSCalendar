@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-
+﻿using KMSCalendar.Models;
 using KMSCalendar.Services.Data;
+using KMSCalendar.ViewModels;
 
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,9 +10,6 @@ namespace KMSCalendar.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NetworkFailPage : ContentPage
 	{
-		//* Private Properties
-		private DataOperation operation;
-
 		//* Constructors
 		public NetworkFailPage() : this(null) { }
 
@@ -22,30 +17,10 @@ namespace KMSCalendar.Views
 		{
 			InitializeComponent();
 
-			this.operation = operation;
-		}
+			BindingContext = new NetworkFailViewModel(operation);
 
-		//* Event Handlers
-		private async void RetryButton_Clicked(object sender, EventArgs e)
-		{
-			LoadingAnimation.IsLoading = true;
-
-			await handleConnectionAsync();
-
-			LoadingAnimation.IsLoading = false;
-		}
-
-		//* Private Methods
-		private async Task handleConnectionAsync()
-		{
-			if (operation?.TryToGetData() ?? false)
-				operation.WaitHandle.Set();
-
-			if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-			{
-				// Connection to internet is available
-				await Navigation.PopModalAsync();
-			}
+			MessagingCenter.Subscribe<NetworkFailViewModel>(this, MessagingEvent.GoBack,
+				async sender => await Navigation.PopModalAsync());
 		}
 	}
 }
