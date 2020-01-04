@@ -1,5 +1,6 @@
 using System.Windows.Input;
 
+using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 
@@ -23,8 +24,15 @@ namespace KMSCalendar.ViewModels
 			Title = assignment?.Name;
 			Assignment = assignment;
 
-			DeleteAssignmentCommand = new Command(() =>
-				DataOperation.ConnectToBackend(AssignmentManager.DeleteAssignment, Assignment));
+			DeleteAssignmentCommand = new Command(() => deleteAssignment());
+		}
+
+		//* Private Properties
+		private void deleteAssignment()
+		{
+			DataOperation.ConnectToBackend(AssignmentManager.DeleteAssignment, Assignment);
+
+			MessagingCenter.Send(this, MessagingEvent.GoBackToAssignmentsPage);
 		}
 	}
 }

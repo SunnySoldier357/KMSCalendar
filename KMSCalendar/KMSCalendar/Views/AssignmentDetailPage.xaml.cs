@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.ViewModels;
 
@@ -17,10 +16,10 @@ namespace KMSCalendar.Views
 			InitializeComponent();
 
 			BindingContext = new AssignmentDetailViewModel(assignment);
-		}
 
-		//* Event Handlers
-		private async void Delete_Clicked(object sender, EventArgs e) =>
-			await Navigation.PushAsync(new AssignmentsPage());
+			MessagingCenter.Subscribe<AssignmentDetailViewModel>(this,
+				MessagingEvent.GoBackToAssignmentsPage,
+				async sender => await Navigation.PushAsync(new AssignmentsPage()));
+		}
 	}
 }

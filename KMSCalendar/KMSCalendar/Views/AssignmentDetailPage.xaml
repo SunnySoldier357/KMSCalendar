@@ -9,8 +9,7 @@
         <ToolbarItem Icon="{ext:ImageResource delete.png,
                                               FolderName=AssignmentDetailPage}"
                      Text="Delete"
-                     Command="{Binding DeleteAssignmentCommand}"
-                     Clicked="Delete_Clicked" />
+                     Command="{Binding DeleteAssignmentCommand}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
