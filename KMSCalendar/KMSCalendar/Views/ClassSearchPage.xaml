@@ -103,6 +103,7 @@
                                 <Entry x:Name="NewPeriod"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"
+                                       Style="{StaticResource ThemeEntry}"
                                        Placeholder="1"
                                        Keyboard="Numeric"
                                        ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
@@ -143,10 +144,9 @@
 
                                 <control:TransparentEntry x:Name="SearchEntry"
                                                           HorizontalOptions="StartAndExpand"
+                                                          Style="{StaticResource ThemeEntry}"
                                                           BackgroundColor="Transparent"
-                                                          Placeholder="Search for Your Class"
-                                                          TextColor="{DynamicResource Text}"
-                                                          PlaceholderColor="{DynamicResource PlaceholderText}">
+                                                          Placeholder="Search for Your Class">
                                     <control:TransparentEntry.Behaviors>
                                         <behavior:EventToCommandBehavior EventName="TextChanged"
                                                                          Command="{Binding FilterClassesCommand}"
