@@ -97,6 +97,7 @@ namespace KMSCalendar.ViewModels
 
 			await Task.Run(() =>
 			{
+				Email = Email.Trim();
 				if (Validate())
 				{
 					User signedInUser = DataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
