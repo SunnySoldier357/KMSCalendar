@@ -17,7 +17,6 @@
         <StackLayout VerticalOptions="Fill">
             <Grid>
                 <Grid.RowDefinitions>
-
                     <!--  Spacing  -->
                     <RowDefinition Height="80*" />
 

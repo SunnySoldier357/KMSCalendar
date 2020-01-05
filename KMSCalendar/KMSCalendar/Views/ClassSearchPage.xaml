@@ -100,13 +100,18 @@
                                        Text="Period: "
                                        TextColor="{DynamicResource Text}" />
 
-                                <Entry x:Name="NewPeriod"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center"
-                                       Placeholder="1"
-                                       Keyboard="Numeric"
-                                       ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
-                                       ReturnCommand="{Binding AddPeriodCommand}" />
+                                <Frame CornerRadius="10"
+                                       Padding="-10"
+                                       BackgroundColor="White">
+                                    <control:TransparentEntry x:Name="NewPeriod"
+                                                              VerticalOptions="Center"
+                                                              HorizontalOptions="Center"
+                                                              Margin="10,0,-20,0"
+                                                              Placeholder="1"
+                                                              Keyboard="Numeric" 
+                                                              ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
+                                                              ReturnCommand="{Binding AddPeriodCommand}"/>
+                                </Frame>
 
                                 <Button VerticalOptions="Center"
                                         Margin="5,0,0,0"
