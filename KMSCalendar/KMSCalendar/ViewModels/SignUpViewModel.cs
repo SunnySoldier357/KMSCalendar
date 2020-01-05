@@ -19,27 +19,45 @@ namespace KMSCalendar.ViewModels
 	public class SignUpViewModel : LogInViewModel
 	{
 		//* Private Properties
+		private List<School> schools;
+		private List<School> filteredSchools;
+
 		private string confirmPassword;
+		private string schoolName;
 		private string userName;
-
 		private string zipCode;
-		private List<School> filteredSchoolList;
-		private School selectedSchool;
 
-		private string name;
-
-		private bool signUpVisibility;
-		private bool schoolEnrollmentVisibility;
-		private bool newSchoolVisibility;
+		private UIState uiState = UIState.SignUpView;
+		private UIState currentUIState
+		{
+			get => uiState;
+			set
+			{
+				uiState = value;
+				OnNotifyPropertyChanged(nameof(NewSchoolVisibility));
+				OnNotifyPropertyChanged(nameof(SchoolEnrollmentVisibility));
+				OnNotifyPropertyChanged(nameof(SignUpVisibility));
+			}
+		}
 
 		//* Public Properties
-		public ICommand AlreadyUserCommand { get; set; }
-		public new ICommand AuthenticateUserCommand { get; set; }
-		public ICommand CreateUserCommand { get; set; }
-		public ICommand FilterZipCodesCommand { get; set; }
-		public ICommand NewSchoolViewCommand { get; set; }
-		public ICommand GoBackCommand { get; set; }
-		public ICommand AddNewSchoolCommand { get; set; }
+		public bool NewSchoolVisibility => currentUIState == UIState.NewSchoolView;
+		public bool SchoolEnrollmentVisibility => currentUIState == UIState.SchoolEnrollmentView;
+		public bool SignUpVisibility => currentUIState == UIState.SignUpView;
+
+		public ICommand AddNewSchoolCommand { get; }
+		public new ICommand AuthenticateUserCommand { get; }
+		public ICommand CreateUserCommand { get; }
+		public ICommand FilterZipCodesCommand { get; }
+		public ICommand GoBackCommand { get; }
+		public ICommand GoToLogInPageCommand { get; }
+		public ICommand NewSchoolViewCommand { get; }
+
+		public List<School> FilteredSchools
+		{
+			get => filteredSchools;
+			set => setProperty(ref filteredSchools, value);
+		}
 
 		[PropertyValueMatch(nameof(Password),
 			ErrorMessage = "The Passwords do not match!")]
@@ -48,6 +66,11 @@ namespace KMSCalendar.ViewModels
 			get => confirmPassword;
 			set => setProperty(ref confirmPassword, value);
 		}
+		public string SchoolName
+		{
+			get => schoolName;
+			set => setProperty(ref schoolName, value);
+		}
 		[MinimumLength(2)]
 		[MaximumLength(64)]
 		public string UserName
@@ -55,118 +78,68 @@ namespace KMSCalendar.ViewModels
 			get => userName;
 			set => setProperty(ref userName, value);
 		}
-
 		public string ZipCode
 		{
 			get => zipCode;
 			set => setProperty(ref zipCode, value);
 		}
-		public List<School> SchoolList { get; set; }
-		public List<School> FilteredSchoolList
-		{
-			get => filteredSchoolList;
-			set => setProperty(ref filteredSchoolList, value);
-		}
-		public string Name
-		{
-			get => name;
-			set => setProperty(ref name, value);
-		}
-		public School SelectedSchool
-		{
-			get => selectedSchool;
-			set => setProperty(ref selectedSchool, value);
-		}
-
-		public bool SignUpVisibility
-		{
-			get => signUpVisibility;
-			set => setProperty(ref signUpVisibility, value);
-		}
-		public bool SchoolEnrollmentVisibility
-		{
-			get => schoolEnrollmentVisibility;
-			set => setProperty(ref schoolEnrollmentVisibility, value);
-		}
-		public bool NewSchoolVisibility
-		{
-			get => newSchoolVisibility;
-			set => setProperty(ref newSchoolVisibility, value);
-		}
-
 
 		//* Constructors
 		public SignUpViewModel() : base()
 		{
-			Title = "Sign Up";
-
-			SignUpVisibility = true;
-			SchoolEnrollmentVisibility = false;
-
 			ConfirmPassword = string.Empty;
 			UserName = string.Empty;
 
-			AlreadyUserCommand = new Command(() => ExecuteAlreadyUserCommand());
-			AuthenticateUserCommand = new Command(async () => await ExecuteAuthenticateUserCommandAsync());
-			CreateUserCommand = new Command(async () => await SignUpUserAsync());
-			FilterZipCodesCommand = new Command(() => FilterData(ZipCode));
-			NewSchoolViewCommand = new Command(() => GoToNewSchoolView());
-			GoBackCommand = new Command(() => GoBack());
-			AddNewSchoolCommand = new Command(async () => await AddNewSchoolAsync());
+			AddNewSchoolCommand = new Command(async () => await addNewSchoolAsync());
+			AuthenticateUserCommand = new Command(async () => await authenticateUserAsync());
+			CreateUserCommand = new Command<object>(async selectedSchool =>
+				await createUserAsync(selectedSchool));
+			FilterZipCodesCommand = new Command(() => filterZipCodes(ZipCode));
+			GoBackCommand = new Command(() => currentUIState = UIState.SchoolEnrollmentView);
+			GoToLogInPageCommand = new Command(() => goToLogInPage());
+			NewSchoolViewCommand = new Command(() => currentUIState = UIState.NewSchoolView);
+
+			_ = loadSchoolsAsync();
 		}
 
-		//* Public Methods
-		public void ExecuteAlreadyUserCommand() =>
-			App.MainPage = new LogInPage();
-
-		public async Task ExecuteAuthenticateUserCommandAsync()
-		{
-			await Task.Run(async () =>
-			{
-				if (Validate())
-				{
-					//True if the user may use this email to sign up
-					bool newEmail = !DataOperation.ConnectToBackend(UserManager.CheckForUser, Email.Trim());
-
-					if (!newEmail)
-						LoginValidationMessage = "User already exists! Please log in instead.";
-					else
-						await SwapViewsAsync();
-				}
-			});
-		}
-
-		/// <summary>
-		/// filters the list of teachers only if the teachers name contains the searchbar term entered
-		/// </summary>
-		/// <param name="filter">The searchbar term entered</param>
-		private void FilterData(string filter)
-		{
-			if (string.IsNullOrWhiteSpace(filter))
-				FilteredSchoolList = SchoolList;
-			else
-				FilteredSchoolList = SchoolList.Where(x => x.ZipCode.ToLower().Contains(filter.ToLower())).ToList();
-		}
-
-		private async Task AddNewSchoolAsync()
+		//* Private Methods
+		private async Task addNewSchoolAsync()
 		{
 			var school = new School
 			{
-				Name = Name,
+				Name = SchoolName,
 				ZipCode = ZipCode,
 			};
 
 			await Task.Run(() => DataOperation.ConnectToBackend(SchoolManager.AddSchool, school));
 
-			SchoolList.Add(school);
-			FilterData(ZipCode);
-			GoBack();
+			schools.Add(school);
+			filterZipCodes(ZipCode);
+
+			currentUIState = UIState.SchoolEnrollmentView;
 		}
 
-
-		private async Task SignUpUserAsync()
+		private async Task authenticateUserAsync()
 		{
-			if (SelectedSchool != null)
+			await Task.Run(() =>
+			{
+				if (Validate())
+				{
+					// True if the user may use this email to sign up
+					bool newEmail = !DataOperation.ConnectToBackend(UserManager.CheckForUser,
+						Email.Trim());
+
+					if (!newEmail)
+						LoginValidationMessage = "User already exists! Please log in instead.";
+					else
+						currentUIState = UIState.SchoolEnrollmentView;
+				}
+			});
+		}
+
+		private async Task createUserAsync(object selectedSchool)
+		{
+			if (selectedSchool is School school)
 			{
 				string hashedPassword = PasswordHasher.HashPassword(Password);
 
@@ -176,7 +149,7 @@ namespace KMSCalendar.ViewModels
 					Email = Email.Trim(),
 					UserName = UserName.Trim(),
 					Password = hashedPassword,
-					SchoolId = SelectedSchool.Id
+					SchoolId = school.Id
 				};
 
 				await Task.Run(() => DataOperation.ConnectToBackend(UserManager.AddUser, user));
@@ -188,32 +161,38 @@ namespace KMSCalendar.ViewModels
 			}
 		}
 
-		private async Task SwapViewsAsync()
+		private void filterZipCodes(string searchInput)
 		{
-			LoginValidationMessage = "";
-			if (SignUpVisibility)
-			{
-				SignUpVisibility = false;
-				SchoolEnrollmentVisibility = true;
-				await Task.Run(() => SchoolList = DataOperation.ConnectToBackendWithoutParam(SchoolManager.LoadSchools) ??
-					new List<School>());
-				FilteredSchoolList = SchoolList;
-			}
+			if (string.IsNullOrWhiteSpace(searchInput))
+				FilteredSchools = new List<School>(schools);
 			else
 			{
-				SchoolEnrollmentVisibility = false;
-				SignUpVisibility = true;
+				var result =
+					from school in schools.AsParallel()
+					where school.ZipCode.ToLower().Contains(searchInput.ToLower())
+					select school;
+
+				FilteredSchools = result.ToList();
 			}
 		}
-		private void GoToNewSchoolView()
+
+		private void goToLogInPage() =>
+			App.MainPage = new LogInPage();
+
+		private async Task loadSchoolsAsync()
 		{
-			SchoolEnrollmentVisibility = false;
-			NewSchoolVisibility = true;
+			await Task.Run(() =>
+				schools = DataOperation.ConnectToBackendWithoutParam(SchoolManager.LoadSchools) ??
+					new List<School>());
+			FilteredSchools = schools;
 		}
-		private void GoBack()
+
+		//* Private Enumerations
+		private enum UIState
 		{
-			NewSchoolVisibility = false;
-			SchoolEnrollmentVisibility = true;
+			SignUpView,
+			SchoolEnrollmentView,
+			NewSchoolView
 		}
 	}
 }

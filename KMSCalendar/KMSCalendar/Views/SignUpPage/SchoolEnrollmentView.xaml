@@ -1,180 +1,172 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView x:Class="KMSCalendar.Views.SchoolEnrollmentView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:control="clr-namespace:KMSCalendar.Controls"
-             mc:Ignorable="d"
-             x:Class="KMSCalendar.Views.SchoolEnrollmentView">
-    <ContentView.Content>
-        <StackLayout VerticalOptions="Fill">
-            <Grid>
-                <Grid.RowDefinitions>
+             mc:Ignorable="d">
 
-                    <!--  Spacing 0  -->
-                    <RowDefinition Height="40*" />
+    <Grid VerticalOptions="Fill">
+        <Grid.RowDefinitions>
 
-                    <!--  Title 1  -->
-                    <RowDefinition Height="60" />
+            <!--  Spacing 0  -->
+            <RowDefinition Height="40*" />
 
-                    <!--  SubTitle 2  -->
-                    <RowDefinition Height="40" />
+            <!--  Title 1  -->
+            <RowDefinition Height="60" />
 
-                    <!--  Spacing 3  -->
-                    <RowDefinition Height="20*" />
+            <!--  SubTitle 2  -->
+            <RowDefinition Height="40" />
 
-                    <!--  Search 4  -->
-                    <RowDefinition Height="40" />
+            <!--  Spacing 3  -->
+            <RowDefinition Height="20*" />
 
-                    <!--  Spacing 5  -->
-                    <RowDefinition Height="4*" />
+            <!--  Search 4  -->
+            <RowDefinition Height="40" />
 
-                    <!--  ListView 6  -->
-                    <RowDefinition Height="100*" />
+            <!--  Spacing 5  -->
+            <RowDefinition Height="4*" />
 
-                    <!--  Spacing 7  -->
-                    <RowDefinition Height="7*" />
+            <!--  ListView 6  -->
+            <RowDefinition Height="100*" />
 
-                    <!--  Button 8  -->
-                    <RowDefinition Height="40" />
+            <!--  Spacing 7  -->
+            <RowDefinition Height="7*" />
 
-                    <!--  Spacing 9  -->
-                    <RowDefinition Height="7*" />
+            <!--  Button 8  -->
+            <RowDefinition Height="40" />
 
-                    <!--  Error Message 10  -->
-                    <RowDefinition Height="14" />
+            <!--  Spacing 9  -->
+            <RowDefinition Height="7*" />
 
-                    <!--  Spacing 11  -->
-                    <RowDefinition Height="5*" />
+            <!--  Error Message 10  -->
+            <RowDefinition Height="14" />
 
-                    <!--  Button 12  -->
-                    <RowDefinition Height="40" />
+            <!--  Spacing 11  -->
+            <RowDefinition Height="5*" />
 
-                    <!--  Spacing 13  -->
-                    <RowDefinition Height="5*" />
-                </Grid.RowDefinitions>
+            <!--  Button 12  -->
+            <RowDefinition Height="40" />
 
-                <Label Grid.Row="1"
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Start"
-                       Text="HW Calendar"
-                       FontSize="Large"
-                       TextColor="White" />
+            <!--  Spacing 13  -->
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
 
-                <Label Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Start"
-                       Text="Search for your school:"
-                       FontSize="Medium"
-                       TextColor="{StaticResource NavigationTertiary}" />
+        <Label Grid.Row="1"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Start"
+               Text="HW Calendar"
+               FontSize="Large"
+               TextColor="White" />
 
-                <StackLayout Orientation="Horizontal"
-                             Grid.Row="4"
-                             Margin="15,0,15,0"
-                             HorizontalOptions="Center"
-                             HeightRequest="30">
-                    
-                    <Label Text="Search for your school via zip code: "
-                           TextColor="White"
-                           VerticalOptions="Center"/>
+        <Label Grid.Row="2"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Start"
+               Text="Search for your school:"
+               FontSize="Medium"
+               TextColor="{StaticResource NavigationTertiary}" />
 
-                    <Frame Style="{StaticResource LoginEntryFrame}"
-                           Margin="5,0,5,0"
-                           VerticalOptions="Center"
-                           CornerRadius="16">
+        <StackLayout Grid.Row="4"
+                     HeightRequest="30"
+                     Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     Margin="15,0,15,0">
 
-                        <control:TransparentEntry x:Name="ZipCodeEntry"
-                                                  Style="{StaticResource LoginEntry}"
-                                                  Text="{Binding ZipCode}"
-                                                  Margin="0,0,1,0"
-                                                  Placeholder="98027"
-                                                  HorizontalOptions="Center" />
-                    </Frame>
+            <Label VerticalOptions="Center"
+                   Text="Search for your school via zip code: "
+                   TextColor="White" />
 
-                    <Button x:Name="ZipCodeSearchButton"
-                            Text="Search"
-                            VerticalOptions="Center"
-                            CornerRadius="16"
-                            BackgroundColor="{StaticResource NavigationTertiary}"
-                            BorderColor="Transparent"
-                            TextColor="White"
-                            Command="{Binding FilterZipCodesCommand}" />
-                </StackLayout>
+            <Frame VerticalOptions="Center"
+                   Style="{StaticResource LoginEntryFrame}"
+                   Margin="5,0,5,0"
+                   CornerRadius="16">
 
-                <ListView x:Name="SchoolListView"
-                          Grid.Row="6"
-                          ItemsSource="{Binding FilteredSchoolList}"
-                          Margin="20,0,20,0"
-                          SelectedItem="{Binding SelectedSchool}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Frame CornerRadius="5"
-                                       BackgroundColor="{DynamicResource NavigationBackgroundLight}"
-                                       Margin="4"
-                                       Padding="0">
+                <control:TransparentEntry HorizontalOptions="Center"
+                                          Style="{StaticResource LoginEntry}"
+                                          Margin="0,0,1,0"
+                                          Text="{Binding ZipCode}"
+                                          Placeholder="98027" />
+            </Frame>
 
-                                    <Grid Padding="5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Label Text="{Binding Name}"
-                                               FontSize="14"
-                                               LineBreakMode="NoWrap"
-                                               VerticalOptions="Center" />
-
-                                        <Label Grid.Column="1"
-                                               HorizontalOptions="End"
-                                               VerticalOptions="Center"
-                                               Text="{Binding ZipCode}"
-                                               FontSize="11"
-                                               LineBreakMode="NoWrap" />
-                                    </Grid>
-
-                                </Frame>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-                <Button x:Name="ChooseSchoolButton"
-                        Grid.Row="8"
-                        WidthRequest="200"
-                        HorizontalOptions="Center"
-                        Padding="5"
-                        BackgroundColor="{StaticResource NavigationTertiary}"
-                        CornerRadius="20"
-                        BorderColor="Transparent"
-                        Text="Choose This School"
-                        TextColor="White"
-                        Command="{Binding CreateUserCommand}" />
-
-                <StackLayout Grid.Row="10"
-                             Orientation="Vertical">
-
-                    <Label x:Name="SignUpValidationLabel"
-                           HorizontalOptions="Center"
-                           Margin="0,10,10,0"
-                           BackgroundColor="Transparent"
-                           Text="{Binding LoginValidationMessage}"
-                           FontSize="Small"
-                           TextColor="{StaticResource NavigationTertiary}" />
-
-                </StackLayout>
-
-                <Button x:Name="NewSchoolViewButton"
-                        Grid.Row="12"
-                        HorizontalOptions="Center"
-                        Padding="20,0,20,0"
-                        BackgroundColor="{StaticResource NavigationTertiary}"
-                        CornerRadius="20"
-                        BorderColor="Transparent"
-                        Text="Add a New School Instead"
-                        TextColor="White"
-                        Command="{Binding NewSchoolViewCommand}" />
-            </Grid>
+            <Button VerticalOptions="Center"
+                    BackgroundColor="{StaticResource NavigationTertiary}"
+                    CornerRadius="16"
+                    BorderColor="Transparent"
+                    Text="Search"
+                    TextColor="White"
+                    Command="{Binding FilterZipCodesCommand}" />
         </StackLayout>
-    </ContentView.Content>
+
+        <ListView x:Name="SchoolsListView"
+                  Grid.Row="6"
+                  ItemsSource="{Binding FilteredSchools}"
+                  Margin="20,0,20,0">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Margin="4"
+                               Padding="0"
+                               BackgroundColor="{DynamicResource NavigationBackgroundLight}"
+                               CornerRadius="5">
+
+                            <Grid Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Label VerticalOptions="Center"
+                                       Text="{Binding Name}"
+                                       FontSize="14"
+                                       LineBreakMode="NoWrap" />
+
+                                <Label Grid.Column="1"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                       Text="{Binding ZipCode}"
+                                       FontSize="11"
+                                       LineBreakMode="NoWrap" />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Grid.Row="8"
+                WidthRequest="200"
+                HorizontalOptions="Center"
+                Padding="5"
+                BackgroundColor="{StaticResource NavigationTertiary}"
+                CornerRadius="20"
+                BorderColor="Transparent"
+                Text="Choose This School"
+                TextColor="White"
+                Command="{Binding CreateUserCommand}"
+                CommandParameter="{Binding Source={x:Reference SchoolsListView}, Path=SelectedItem}" />
+
+        <StackLayout Grid.Row="10"
+                     Orientation="Vertical">
+
+            <Label HorizontalOptions="Center"
+                   Margin="0,10,10,0"
+                   BackgroundColor="Transparent"
+                   Text="{Binding LoginValidationMessage}"
+                   FontSize="Small"
+                   TextColor="{StaticResource NavigationTertiary}" />
+
+        </StackLayout>
+
+        <Button Grid.Row="12"
+                HorizontalOptions="Center"
+                Padding="20,0,20,0"
+                BackgroundColor="{StaticResource NavigationTertiary}"
+                CornerRadius="20"
+                BorderColor="Transparent"
+                Text="Add a New School Instead"
+                TextColor="White"
+                Command="{Binding NewSchoolViewCommand}" />
+    </Grid>
 </ContentView>

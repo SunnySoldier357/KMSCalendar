@@ -1,98 +1,90 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView x:Class="KMSCalendar.Views.NewSchoolView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:control="clr-namespace:KMSCalendar.Controls"
-             mc:Ignorable="d"
-             x:Class="KMSCalendar.Views.NewSchoolView">
-  <ContentView.Content>
+             mc:Ignorable="d">
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="25*"/>
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="25*" />
+        </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="1"
-                         Orientation="Horizontal" 
-                         Margin="15, 0, 15, 0"
-                         HorizontalOptions="Center"
-                         HeightRequest="30">
+        <StackLayout Grid.Row="1"
+                     HeightRequest="30"
+                     Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     Margin="15,0,15,0">
 
-                <Label Text="Enter your school Name: " 
-                           TextColor="White"
-                           VerticalOptions="Center"/>
+            <Label VerticalOptions="Center"
+                   Text="Enter your school Name: "
+                   TextColor="White" />
 
-                <Frame Style="{StaticResource LoginEntryFrame}"
-                           Margin="5, 0, 5, 0"
-                           VerticalOptions="Center"
-                           CornerRadius="16">
+            <Frame VerticalOptions="Center"
+                   Style="{StaticResource LoginEntryFrame}"
+                   Margin="5,0,5,0"
+                   CornerRadius="16">
 
-                    <control:TransparentEntry x:Name="SchoolNameEntry"
-                                              Margin="10,0,7,0"
-                                              Style="{StaticResource LoginEntry}"
-                                              Text="{Binding Name}"
-                                              Placeholder="Skyline High School"
-                                              HorizontalOptions="Center"/>
-                </Frame>
-            </StackLayout>
+                <control:TransparentEntry HorizontalOptions="Center"
+                                          Style="{StaticResource LoginEntry}"
+                                          Margin="10,0,7,0"
+                                          Text="{Binding SchoolName}"
+                                          Placeholder="Skyline High School" />
+            </Frame>
+        </StackLayout>
 
-            <StackLayout Grid.Row="3"
-                         Orientation="Horizontal" 
-                         Margin="15, 0, 15, 0"
-                         HorizontalOptions="Center"
-                         HeightRequest="30">
+        <StackLayout Grid.Row="3"
+                     HeightRequest="30"
+                     Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     Margin="15,0,15,0">
 
-                <Label Text="Enter your school's Postal Code: " 
-                       TextColor="White"
-                       VerticalOptions="Center" />
+            <Label VerticalOptions="Center"
+                   Text="Enter your school's Postal Code: "
+                   TextColor="White" />
 
-                <Frame Style="{StaticResource LoginEntryFrame}"
-                       Margin="5, 0, 5, 0"
-                       VerticalOptions="Center"
-                       CornerRadius="16">
+            <Frame VerticalOptions="Center"
+                   Style="{StaticResource LoginEntryFrame}"
+                   Margin="5,0,5,0"
+                   CornerRadius="16">
 
-                    <control:TransparentEntry x:Name="ZipCodeEntry"
-                                              Margin="10,0,10,0"
-                                              Style="{StaticResource LoginEntry}"
-                                              Text="{Binding ZipCode}"
-                                              Placeholder="98027"
-                                              HorizontalOptions="Center" />
-                </Frame>
-            </StackLayout>
- 
-            <Button x:Name="AddSchoolButton"
-                    Grid.Row="5"
-                    HorizontalOptions="Center"
-                    Padding="15,0,15,0"
-                    BackgroundColor="{StaticResource NavigationTertiary}"
-                    CornerRadius="20"
-                    BorderColor="Transparent"
-                    Text="Add School"
-                    TextColor="White"
-                    Command="{Binding AddNewSchoolCommand}" />
+                <control:TransparentEntry HorizontalOptions="Center"
+                                          Style="{StaticResource LoginEntry}"
+                                          Margin="10,0,10,0"
+                                          Text="{Binding ZipCode}"
+                                          Placeholder="98027" />
+            </Frame>
+        </StackLayout>
 
-            <Button x:Name="GoBackButton"
-                    Grid.Row="7"
-                    HorizontalOptions="Center"
-                    VerticalOptions="End"
-                    BackgroundColor="Transparent"
-                    BorderColor="Transparent"
-                    Text="← Go Back"
-                    TextColor="#FFFFFF"
-                    Command="{Binding GoBackCommand}" />
+        <Button Grid.Row="5"
+                HorizontalOptions="Center"
+                Padding="15,0,15,0"
+                BackgroundColor="{StaticResource NavigationTertiary}"
+                CornerRadius="20"
+                BorderColor="Transparent"
+                Text="Add School"
+                TextColor="White"
+                Command="{Binding AddNewSchoolCommand}" />
 
-        </Grid>
-            
-  </ContentView.Content>
+        <Button Grid.Row="7"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                Text="← Go Back"
+                TextColor="White"
+                Command="{Binding GoBackCommand}" />
+    </Grid>
 </ContentView>
