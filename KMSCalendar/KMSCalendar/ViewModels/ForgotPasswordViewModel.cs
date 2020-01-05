@@ -26,12 +26,6 @@ namespace KMSCalendar.ViewModels
 		public const int TOKEN_SIZE = 6;
 
 		//* Private Properties
-		private bool emailVisibility;
-		private bool goBackVisibility;
-		private bool newPasswordVisibility;
-		private bool successVisibility;
-		private bool verificationVisibility;
-
 		private readonly IEmailService emailService;
 
 		private string code;
@@ -41,32 +35,27 @@ namespace KMSCalendar.ViewModels
 		private string token;
 		private string validationMessage;
 
+		private UIState uiState = UIState.EmailView;
+		private UIState currentUIState
+		{
+			get => uiState;
+			set
+			{
+				uiState = value;
+				OnNotifyPropertyChanged(nameof(EmailVisibility));
+				OnNotifyPropertyChanged(nameof(GoBackVisibility));
+				OnNotifyPropertyChanged(nameof(NewPasswordVisibility));
+				OnNotifyPropertyChanged(nameof(SuccessVisibility));
+				OnNotifyPropertyChanged(nameof(VerificationVisibility));
+			}
+		}
+
 		//* Public Properties
-		public bool EmailVisibility
-		{
-			get => emailVisibility;
-			set => setProperty(ref emailVisibility, value);
-		}
-		public bool GoBackVisibility
-		{
-			get => goBackVisibility;
-			set => setProperty(ref goBackVisibility, value);
-		}
-		public bool NewPasswordVisibility
-		{
-			get => newPasswordVisibility;
-			set => setProperty(ref newPasswordVisibility, value);
-		}
-		public bool SuccessVisibility
-		{
-			get => successVisibility;
-			set => setProperty(ref successVisibility, value);
-		}
-		public bool VerificationVisibility
-		{
-			get => verificationVisibility;
-			set => setProperty(ref verificationVisibility, value);
-		}
+		public bool EmailVisibility => currentUIState == UIState.EmailView;
+		public bool GoBackVisibility => EmailVisibility || VerificationVisibility;
+		public bool NewPasswordVisibility => currentUIState == UIState.NewPasswordView;
+		public bool SuccessVisibility => currentUIState == UIState.SuccessView;
+		public bool VerificationVisibility => currentUIState == UIState.CodeView;
 
 		public ICommand AuthenticateCodeCommand { get; }
 		public ICommand AuthenticateEmailCommand { get; }
@@ -119,10 +108,6 @@ namespace KMSCalendar.ViewModels
 
 		public ForgotPasswordViewModel(IEmailService emailService)
 		{
-			EmailVisibility = true;
-			VerificationVisibility = false;
-			GoBackVisibility = true;
-
 			this.emailService = emailService;
 
 			token = Guid.NewGuid().ToString().Replace("-", "")
@@ -134,23 +119,24 @@ namespace KMSCalendar.ViewModels
 					OnNotifyPropertyChanged(nameof(ValidationMessage));
 			};
 
-			AuthenticateCodeCommand = new Command(() => ExecuteAuthenticateCodeCommand());
-			AuthenticateEmailCommand = new Command(async () => await ExecuteAuthenticateEmailCommandAsync());
-			AuthenticateNewPasswordCommand = new Command(() => ExecuteAuthenticateNewPasswordCommand());
-			GoBackCommand = new Command(() =>
-				App.MainPage.Navigation.PopModalAsync());
+			AuthenticateCodeCommand = new Command(() => authenticateCode());
+			AuthenticateEmailCommand = new Command(async () => await authenticateEmailAsync());
+			AuthenticateNewPasswordCommand = new Command(() => authenticateNewPassword());
+			GoBackCommand = new Command(() => goBack());
 		}
 
 		//* Private Methods
-		private void ExecuteAuthenticateCodeCommand()
+		private void authenticateCode()
 		{
+			ValidationMessage = "";
+
 			if (Code?.ToUpper().Equals(token) ?? false)
-				SwapViews();
+				currentUIState++;
 			else
 				ValidationMessage = "Code invalid!";
 		}
 
-		private async Task ExecuteAuthenticateEmailCommandAsync()
+		private async Task authenticateEmailAsync()
 		{
 			if (Validate() && Email != null)
 			{
@@ -165,11 +151,11 @@ namespace KMSCalendar.ViewModels
 						try
 						{
 							emailService.SendResetPasswordEmail(user, token);
-							SwapViews();
+							currentUIState++;
 						}
 						catch
 						{
-							validationMessage = "Email failed to send";
+							ValidationMessage = "Email failed to send";
 						}
 					}
 					else
@@ -182,46 +168,41 @@ namespace KMSCalendar.ViewModels
 				ValidationMessage = "Please enter a valid email address.";
 		}
 
-		private void ExecuteAuthenticateNewPasswordCommand()
+		private void authenticateNewPassword()
 		{
 			if (Validate() && Password != null)
 			{
+				ValidationMessage = "";
+
 				User user = DataOperation.ConnectToBackend(UserManager.LoadUserFromEmail, Email);
 
 				if (user != null)
 				{
 					user.Password = PasswordHasher.HashPassword(Password);
 
-					//Resets the user's password in the DB
+					// Resets the user's password in the DB
 					DataOperation.ConnectToBackend(UserManager.UpdateUser, user);
 
-					SwapViews();
+					currentUIState++;
 				}
 			}
 			else
 				ValidationMessage = "Please enter a password.";
 		}
 
-		private void SwapViews()
+		private void goBack()
 		{
-			if (EmailVisibility)
-			{
-				EmailVisibility = false;
-				VerificationVisibility = true;
-			}
-			else if (VerificationVisibility)
-			{
-				VerificationVisibility = false;
-				NewPasswordVisibility = true;
-			}
-			else if (NewPasswordVisibility)
-			{
-				NewPasswordVisibility = false;
-				SuccessVisibility = true;
-				GoBackVisibility = false;
-			}
+			if (--currentUIState < 0)
+				App.MainPage.Navigation.PopModalAsync();
+		}
 
-			ValidationMessage = "";
+		//* Private Enumerations
+		private enum UIState
+		{
+			EmailView,
+			CodeView,
+			NewPasswordView,
+			SuccessView
 		}
 	}
 }
