@@ -101,8 +101,7 @@
                                        TextColor="{DynamicResource Text}" />
 
                                 <Frame CornerRadius="10"
-                                       Padding="-10"
-                                       BackgroundColor="White">
+                                       Padding="-10">
                                     <control:TransparentEntry x:Name="NewPeriod"
                                                               VerticalOptions="Center"
                                                               HorizontalOptions="Center"
@@ -110,6 +109,7 @@
                                                               Margin="10,0,-20,0"
                                                               Placeholder="1"
                                                               PlaceholderColor="{DynamicResource PlaceholderText}"
+                                                              TextColor="{DynamicResource Text}"
                                                               Keyboard="Numeric" 
                                                               ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
                                                               ReturnCommand="{Binding AddPeriodCommand}"/>
