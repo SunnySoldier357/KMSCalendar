@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 using Autofac;
 
+using KMSCalendar.Extensions;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Views;
 
@@ -35,10 +36,12 @@ namespace KMSCalendar.ViewModels
 			}
 		}
 
-		public ICommand LogOutCommand { get; set; }
+		public ICommand LogOutCommand { get; }
 
 		public string Email => App.SignedInUser?.Email;
 		public string UserName => App.SignedInUser?.UserName;
+
+		public ThemeImageSource UserImageSource { get; }
 
 		//* Constructors
 		public SettingsViewModel() :
@@ -46,14 +49,16 @@ namespace KMSCalendar.ViewModels
 
 		public SettingsViewModel(UserSettings userSettings)
 		{
-			Title = "Settings";
 			this.userSettings = userSettings;
 
-			LogOutCommand = new Command(() => ExecuteLogOutCommand());
+			LogOutCommand = new Command(() => logOut());
+
+			UserImageSource = new ThemeImageSource("user_blue.png", "user_white.png",
+				nameof(SettingsPage));
 		}
 
-		//* Public Methods
-		public void ExecuteLogOutCommand()
+		//* Private Methods
+		private void logOut()
 		{
 			userSettings.SignedInUserId = Guid.Empty;
 			App.SignedInUser = null;
