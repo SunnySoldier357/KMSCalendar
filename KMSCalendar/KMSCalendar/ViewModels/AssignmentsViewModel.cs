@@ -70,7 +70,7 @@ namespace KMSCalendar.ViewModels
 			GoToTodayCommand = new Command(() => goToToday());
 			GoToTomorrowCommand = new Command(() => goToTomorrow());
 
-			MessagingCenter.Subscribe<NewAssignmentPage, Assignment>(this,
+			MessagingCenter.Subscribe<NewAssignmentViewModel, Assignment>(this,
 				"AddAssignment", (page, a) =>
 			{
 				assignments.Add(DataOperation.ConnectToBackend(AssignmentManager.AddAssignment, a));

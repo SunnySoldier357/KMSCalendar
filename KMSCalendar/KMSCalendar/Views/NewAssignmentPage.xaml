@@ -9,12 +9,13 @@
         <ToolbarItem Icon="{ext:ImageResource cancel.png,
                                               FolderName=NewAssignmentPage}"
                      Text="Cancel"
-                     Clicked="Cancel_Clicked" />
+                     Command="{Binding CancelAssignmentCommand}" />
 
         <ToolbarItem Icon="{ext:ImageResource save.png,
                                               FolderName=NewAssignmentPage}"
                      Text="Save"
-                     Clicked="Save_Clicked" />
+                     Command="{Binding SaveAssignmentCommand}"
+                     CommandParameter="{Binding Source={x:Reference ClassPicker}, Path=SelectedItem}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -63,13 +64,12 @@
                     Margin="0,-10,0,20"
                     ItemDisplayBinding="{Binding DisplayName}" />
 
-            <Button x:Name="GoToSearchButton"
-                    BackgroundColor="{DynamicResource NavigationTertiary}"
+            <Button BackgroundColor="{DynamicResource NavigationTertiary}"
                     BorderWidth="0"
                     CornerRadius="10"
                     Text="Can't find your class? Add a new one here"
                     TextColor="White"
-                    Clicked="GoToSearchButton_Clicked" />
+                    Command="{Binding GoToClassSearchCommand}" />
 
         </StackLayout>
     </ContentPage.Content>

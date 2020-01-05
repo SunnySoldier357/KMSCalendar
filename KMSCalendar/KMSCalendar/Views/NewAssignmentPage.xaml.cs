@@ -1,5 +1,6 @@
 ﻿using System;
 
+using KMSCalendar.Models;
 using KMSCalendar.ViewModels;
 
 using Xamarin.Forms;
@@ -10,9 +11,6 @@ namespace KMSCalendar.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewAssignmentPage : ContentPage
 	{
-		//* Private Properties
-		private NewAssignmentViewModel viewModel;
-
 		//* Contructors
 		public NewAssignmentPage() : this(DateTime.Today) { }
 
@@ -24,30 +22,13 @@ namespace KMSCalendar.Views
 		{
 			InitializeComponent();
 
-			BindingContext = viewModel = new NewAssignmentViewModel(dateSelected);
+			BindingContext = new NewAssignmentViewModel(dateSelected);
+
+			MessagingCenter.Subscribe<NewAssignmentViewModel>(this, MessagingEvent.GoBack,
+				async sender => await Navigation.PopModalAsync());
+
+			MessagingCenter.Subscribe<NewAssignmentViewModel>(this, MessagingEvent.GoToClassSearchPage,
+				async sender => await Navigation.PushModalAsync(new ClassSearchPage()));
 		}
-
-		//* Event Handlers
-		public async void Cancel_Clicked(object sender, EventArgs e) =>
-			await Navigation.PopModalAsync();
-
-		public async void Save_Clicked(object sender, EventArgs e)
-		{
-			if (ClassPicker.SelectedItem != null && viewModel.Assignment.Name != "" &&
-				viewModel.Assignment.Description != null)
-			{
-				object selectedClass = ClassPicker.SelectedItem;
-
-				// Sets the viewModel's assignment to the class selected from the picker
-				viewModel.Assignment.Class = selectedClass as Models.Data.Class;
-
-				MessagingCenter.Send(this, "AddAssignment", viewModel.Assignment);
-
-				await Navigation.PopModalAsync();
-			}
-		}
-
-		private void GoToSearchButton_Clicked(object sender, EventArgs e) =>
-			Navigation.PushModalAsync(new ClassSearchPage());
 	}
 }
