@@ -106,8 +106,10 @@
                                     <control:TransparentEntry x:Name="NewPeriod"
                                                               VerticalOptions="Center"
                                                               HorizontalOptions="Center"
+                                                              BackgroundColor="{DynamicResource NavigationBackground}"
                                                               Margin="10,0,-20,0"
                                                               Placeholder="1"
+                                                              PlaceholderColor="{DynamicResource PlaceholderText}"
                                                               Keyboard="Numeric" 
                                                               ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
                                                               ReturnCommand="{Binding AddPeriodCommand}"/>
