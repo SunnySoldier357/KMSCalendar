@@ -28,6 +28,15 @@
                 <Setter Property="Margin" Value="10,0,0,-5" />
             </Style>
 
+            <Style x:Key="ThemeEntry"
+                   TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{DynamicResource NavigationBackground}" />
+
+                <Setter Property="TextColor" Value="{DynamicResource Text}" />
+
+                <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderText}" />
+            </Style>
+
             <Style x:Key="LoginEntryFrame"
                    TargetType="Frame">
                 <Setter Property="Margin" Value="60,0,60,0" />

@@ -100,20 +100,14 @@
                                        Text="Period: "
                                        TextColor="{DynamicResource Text}" />
 
-                                <Frame CornerRadius="10"
-                                       Padding="-10">
-                                    <control:TransparentEntry x:Name="NewPeriod"
-                                                              VerticalOptions="Center"
-                                                              HorizontalOptions="Center"
-                                                              BackgroundColor="{DynamicResource NavigationBackground}"
-                                                              Margin="10,0,-20,0"
-                                                              Placeholder="1"
-                                                              PlaceholderColor="{DynamicResource PlaceholderText}"
-                                                              TextColor="{DynamicResource Text}"
-                                                              Keyboard="Numeric" 
-                                                              ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
-                                                              ReturnCommand="{Binding AddPeriodCommand}"/>
-                                </Frame>
+                                <Entry x:Name="NewPeriod"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Style="{StaticResource ThemeEntry}"
+                                       Placeholder="1"
+                                       Keyboard="Numeric"
+                                       ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
+                                       ReturnCommand="{Binding AddPeriodCommand}" />
 
                                 <Button VerticalOptions="Center"
                                         Margin="5,0,0,0"
@@ -150,10 +144,9 @@
 
                                 <control:TransparentEntry x:Name="SearchEntry"
                                                           HorizontalOptions="StartAndExpand"
+                                                          Style="{StaticResource ThemeEntry}"
                                                           BackgroundColor="Transparent"
-                                                          Placeholder="Search for Your Class"
-                                                          TextColor="{DynamicResource Text}"
-                                                          PlaceholderColor="{DynamicResource PlaceholderText}">
+                                                          Placeholder="Search for Your Class">
                                     <control:TransparentEntry.Behaviors>
                                         <behavior:EventToCommandBehavior EventName="TextChanged"
                                                                          Command="{Binding FilterClassesCommand}"
