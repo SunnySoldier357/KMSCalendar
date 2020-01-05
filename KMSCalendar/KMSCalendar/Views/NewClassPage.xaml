@@ -2,16 +2,22 @@
 <ContentPage x:Class="KMSCalendar.Views.NewClassPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior="clr-namespace:KMSCalendar.Behaviors"
+             xmlns:control="clr-namespace:KMSCalendar.Controls"
+             xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
              Title="Create a new class"
-             BackgroundColor="{DynamicResource NavigationPrimary}">
+             BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+
+    <ContentPage.BindingContext>
+        <vm:NewClassViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <StackLayout Orientation="Vertical"
                      Margin="10,10,10,0"
                      Spacing="0">
 
-            <Grid x:Name="PeriodButtons"
-                  HeightRequest="30"
+            <Grid HeightRequest="30"
                   Margin="10,0,10,0"
                   Padding="0">
 
@@ -20,18 +26,17 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="BackButton"
-                        HorizontalOptions="Start"
+                <Button HorizontalOptions="Start"
                         Style="{StaticResource ActionButtonStyle}"
                         Text="Back"
-                        Clicked="BackButton_Clicked" />
+                        Command="{Binding GoBackCommand}" />
 
-                <Button x:Name="NextButton"
-                        Grid.Column="1"
+                <Button Grid.Column="1"
                         HorizontalOptions="End"
                         Style="{StaticResource ActionButtonStyle}"
                         Text="Next"
-                        Clicked="NextButton_Clicked" />
+                        Command="{Binding AddClassCommand}"
+                        CommandParameter="{Binding Source={x:Reference TeachersListView}, Path=SelectedItem}" />
             </Grid>
 
             <Frame VerticalOptions="CenterAndExpand"
@@ -40,9 +45,8 @@
                    CornerRadius="10">
 
                 <ScrollView BackgroundColor="Transparent">
-                    <!--  contents go here  -->
+                    <!--  Contents go here  -->
                     <Grid>
-
                         <Grid.RowDefinitions>
                             <RowDefinition Height="32" />
                             <RowDefinition Height="32" />
@@ -60,9 +64,9 @@
                         <Label Grid.Row="0"
                                Text="Class Name:" />
 
-                        <Entry x:Name="ClassNameEntry"
-                               Grid.Row="0"
+                        <Entry Grid.Row="0"
                                Grid.Column="1"
+                               Style="{StaticResource ThemeEntry}"
                                Text="{Binding ClassName}"
                                Placeholder="Class Name" />
 
@@ -74,9 +78,9 @@
                                      Grid.Column="1"
                                      Orientation="Horizontal">
 
-                            <Entry x:Name="PeriodEntry"
-                                   HorizontalOptions="Center"
+                            <Entry HorizontalOptions="Center"
                                    VerticalOptions="Center"
+                                   Style="{StaticResource ThemeEntry}"
                                    Text="{Binding Period}"
                                    Placeholder="1"
                                    Keyboard="Numeric" />
@@ -84,24 +88,46 @@
                         </StackLayout>
 
                         <!--  Search for a Teacher  -->
-                        <StackLayout x:Name="SearchAreaStackLayout"
-                                     Grid.Row="2"
+                        <StackLayout Grid.Row="2"
                                      Grid.ColumnSpan="2"
                                      HorizontalOptions="Center">
 
                             <Label Text="Search for your Teacher" />
 
-                            <SearchBar x:Name="TeacherSearchBar"
-                                       Margin="0,0,0,4"
-                                       Text="{Binding SearchTerm}"
-                                       Placeholder="Search"
-                                       TextChanged="TeacherSearchBar_TextChanged" />
+                            <Frame VerticalOptions="CenterAndExpand"
+                                   Margin="0.5"
+                                   Padding="2"
+                                   BackgroundColor="{DynamicResource NavigationBackgroundLight}"
+                                   CornerRadius="3"
+                                   HasShadow="True"
+                                   MinimumHeightRequest="42">
+
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="StartAndExpand">
+                                    <Image HeightRequest="15"
+                                           WidthRequest="15"
+                                           Source="{Binding SearchImageSource.Source}"
+                                           Margin="18,0,10,0" />
+
+                                    <control:TransparentEntry x:Name="SearchEntry"
+                                                              HorizontalOptions="StartAndExpand"
+                                                              Style="{StaticResource ThemeEntry}"
+                                                              BackgroundColor="Transparent"
+                                                              Placeholder="Search for Your Teacher">
+                                        <control:TransparentEntry.Behaviors>
+                                            <behavior:EventToCommandBehavior EventName="TextChanged"
+                                                                             Command="{Binding FilterTeachersCommand}"
+                                                                             CommandParameter="{Binding Source={x:Reference SearchEntry}, Path=Text}" />
+                                        </control:TransparentEntry.Behaviors>
+                                    </control:TransparentEntry>
+
+                                </StackLayout>
+                            </Frame>
 
                             <ScrollView>
                                 <ListView x:Name="TeachersListView"
-                                          ItemsSource="{Binding Teachers}"
-                                          IsPullToRefreshEnabled="true"
-                                          ItemSelected="TeachersListView_ItemSelected">
+                                          ItemsSource="{Binding FilteredTeachers}"
+                                          IsPullToRefreshEnabled="true">
 
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -133,15 +159,15 @@
                                Grid.Column="0"
                                VerticalOptions="Center"
                                Text="Add a new teacher (if not on the list):" />
-                        <Entry x:Name="newTeacherNameEntry"
-                               Grid.Row="3"
+
+                        <Entry Grid.Row="3"
                                Grid.Column="1"
                                VerticalOptions="Center"
+                               Style="{StaticResource ThemeEntry}"
                                Text="{Binding TeacherName}"
                                Placeholder="Teacher's Name" />
 
-                        <Button x:Name="DoneButton"
-                                Grid.Row="4"
+                        <Button Grid.Row="4"
                                 Grid.ColumnSpan="2"
                                 Margin="0,5,0,0"
                                 BackgroundColor="{DynamicResource NavigationTertiary}"
@@ -149,9 +175,9 @@
                                 CornerRadius="10"
                                 Text="Add the class"
                                 TextColor="White"
-                                Clicked="DoneButton_Clicked" />
+                                Command="{Binding AddClassCommand}"
+                                CommandParameter="{Binding Source={x:Reference TeachersListView}, Path=SelectedItem}" />
                     </Grid>
-
                 </ScrollView>
             </Frame>
         </StackLayout>

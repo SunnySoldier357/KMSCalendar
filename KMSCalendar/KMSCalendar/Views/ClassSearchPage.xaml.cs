@@ -21,7 +21,7 @@ namespace KMSCalendar.Views
 				sender => ClassesListView.SelectedItem = null);
 
 			MessagingCenter.Subscribe<ClassSearchViewModel>(this, MessagingEvent.GoToNewClassPage,
-				async sender => await Navigation.PushModalAsync(new NewClassPage(this)));
+				async sender => await Navigation.PushModalAsync(new NewClassPage()));
 		}
 	}
 }

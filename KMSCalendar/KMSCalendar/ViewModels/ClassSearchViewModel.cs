@@ -80,11 +80,11 @@ namespace KMSCalendar.ViewModels
 				subscribeUserToClass(period));
 
 			SearchImageSource = new ThemeImageSource("search_blue.png", "search_white.png",
-				nameof(ClassSearchPage));
+				"Shared");
 
 			// This is so that when the new class page closes,
 			// the class list will update
-			MessagingCenter.Subscribe<NewClassPage>(this, "LoadClasses",
+			MessagingCenter.Subscribe<NewClassViewModel>(this, "LoadClasses",
 				(sender) => loadClasses());
 
 			loadClasses();
