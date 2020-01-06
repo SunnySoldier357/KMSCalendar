@@ -32,5 +32,10 @@ namespace KMSCalendar.Views
 					AssignmentsListView.SelectedItem = null;
 				});
 		}
+
+		private void TodayButton_Clicked(object sender, EventArgs e)
+		{
+			CalendarWeekControl.OverrideSelectedDate(DateTime.Today);
+		}
 	}
 }

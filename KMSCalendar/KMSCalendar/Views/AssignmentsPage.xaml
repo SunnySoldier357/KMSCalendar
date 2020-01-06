@@ -25,11 +25,12 @@
         <control:WeekControl x:Name="CalendarWeekControl"
                              HorizontalOptions="CenterAndExpand"
                              Margin="5,10,5,15"
-                             ShowDayName="{Binding ShowCalendarDays}">
+                             ShowDayName="{Binding ShowCalendarDays}"
+                             ForegroundColor="White">
             <control:WeekControl.Behaviors>
-                <behavior:EventToCommandBehavior EventName="DataSelectedChanged"
+                <behavior:EventToCommandBehavior EventName="SelectedDateChanged"
                                                  Command="{Binding FilterAssignmentsCommand}"
-                                                 CommandParameter="{Binding Source={x:Reference CalendarWeekControl}, Path=DateSelected}" />
+                                                 CommandParameter="{Binding Source={x:Reference CalendarWeekControl}, Path=SelectedDate}" />
             </control:WeekControl.Behaviors>
         </control:WeekControl>
 
@@ -52,7 +53,8 @@
                             Text="Due Today"
                             FontSize="12"
                             TextColor="Gray"
-                            Command="{Binding GoToTodayCommand}" />
+                            Command="{Binding GoToTodayCommand}"
+                            CommandParameter="{Binding Source={x:Reference CalendarWeekControl}}"/>
 
                     <Label HorizontalOptions="CenterAndExpand"
                            VerticalOptions="Center"

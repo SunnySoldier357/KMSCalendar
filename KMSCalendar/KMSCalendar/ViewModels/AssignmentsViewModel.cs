@@ -10,7 +10,7 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
-
+using ModernXamarinCalendar;
 using PropertyChanged;
 
 using Xamarin.Forms;
@@ -65,7 +65,7 @@ namespace KMSCalendar.ViewModels
 				filterAssignments(selectedDate));
 			ItemSelectedCommand = new Command<object>(selectedItem => itemSelected(selectedItem));
 			LoadAssignmentsCommand = new Command(() => loadAssignments());
-			GoToTodayCommand = new Command(() => goToToday());
+			GoToTodayCommand = new Command<WeekControl>(weekControl => goToToday(weekControl));
 			GoToTomorrowCommand = new Command(() => goToTomorrow());
 
 			MessagingCenter.Subscribe<NewAssignmentViewModel, Assignment>(this,
@@ -156,8 +156,9 @@ namespace KMSCalendar.ViewModels
 			filterAssignments(DateSelected);
 		}
 
-		public void goToToday()
+		public void goToToday(WeekControl weekControl)
 		{
+			weekControl.OverrideSelectedDate(DateTime.Today);
 			DateSelected = DateTime.Today;
 			filterAssignments(DateSelected);
 		}
