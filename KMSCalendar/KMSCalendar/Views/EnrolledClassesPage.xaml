@@ -49,7 +49,7 @@
                                             Margin="0,0,8,0"
                                             BackgroundColor="Transparent"
                                             BorderColor="Transparent"
-                                            Text="Unsubscribe"
+                                            Text="Unenroll"
                                             TextColor="{DynamicResource Text}"
                                             Command="{Binding UnsubscribeClassCommand}"
                                             CommandParameter="{Binding Source={x:Reference ClassGrid}, Path=BindingContext}" />
@@ -72,11 +72,21 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Image HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   Source="{Binding MissingImageSource.Source}"
-                   Margin="100"
-                   IsVisible="{Binding ImageVisibility}" />
+            <StackLayout IsVisible="{Binding ImageVisibility}"
+                         Orientation="Vertical"
+                         VerticalOptions="Center"
+                         Margin="30,0,30,0">
+                <Image HorizontalOptions="Center"
+                       Source="{Binding MissingImageSource.Source}"
+                       Margin="100,40,100,30"/>
+                <Label Text="Uh-Oh. You aren't enrolled in any classes." 
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,16"
+                       TextColor="{DynamicResource Text}"/>
+                <Label Text="Click &quot;Add New Class&quot; in the menu to enroll in a class."
+                       HorizontalOptions="Center"
+                       TextColor="{DynamicResource Text}"/>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

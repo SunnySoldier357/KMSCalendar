@@ -53,10 +53,10 @@
     <EmbeddedResource Include="Assets\AssignmentsPage\add.png" />
     <EmbeddedResource Include="Assets\AssignmentDetailPage\delete.png" />
     <EmbeddedResource Include="Assets\AboutPage\xamarin_logo.png" />
-    <EmbeddedResource Include="Assets\Shared\search_blue.png" />
-    <EmbeddedResource Include="Assets\Shared\search_white.png" />
     <EmbeddedResource Include="Assets\EnrolledClassesPage\missing_bag_blue.png" />
     <EmbeddedResource Include="Assets\EnrolledClassesPage\missing_bag_white.png" />
+    <EmbeddedResource Include="Assets\Shared\search_blue.png" />
+    <EmbeddedResource Include="Assets\Shared\search_white.png" />
     <EmbeddedResource Include="Assets\MenuPage\book_blue.png" />
     <EmbeddedResource Include="Assets\MenuPage\book_white.png" />
     <EmbeddedResource Include="Assets\MenuPage\edit_blue.png" />
