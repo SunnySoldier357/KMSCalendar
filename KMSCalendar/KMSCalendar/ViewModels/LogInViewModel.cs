@@ -11,18 +11,17 @@ using KMSCalendar.Views;
 
 using ModelValidation;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class LogInViewModel : BaseViewModel
 	{
 		//* Private Properties
-		private int logInAttempts;
-
-		private string email;
 		private string loginValidationMessage;
-		private string password;
 
 		//* Protected Properties
 		protected readonly UserSettings UserSettings;
@@ -32,21 +31,13 @@ namespace KMSCalendar.ViewModels
 		public ICommand ForgotPasswordCommand { get; set; }
 		public ICommand NewUserCommand { get; set; }
 
-		public int LogInAttempts
-		{
-			get => logInAttempts;
-			set => setProperty(ref logInAttempts, value);
-		}
+		public int LogInAttempts { get; set; }
 
 		[ContainsCharacter('@')]
 		[DoesNotContainCharacter(' ')]
 		[MinimumLength(5)]
 		[MaximumLength(254)]
-		public string Email
-		{
-			get => email;
-			set => setProperty(ref email, value);
-		}
+		public string Email { get; set; }
 		public string LoginValidationMessage
 		{
 			get
@@ -60,16 +51,11 @@ namespace KMSCalendar.ViewModels
 		}
 		[MinimumLength(8)]
 		[MaximumLength(64)]
-		public string Password
-		{
-			get => password;
-			set => setProperty(ref password, value);
-		}
+		public string Password { get; set; }
 
 		//* Constructor
 		public LogInViewModel() :
-			this(AppContainer.Container.Resolve<UserSettings>())
-		{ }
+			this(AppContainer.Container.Resolve<UserSettings>()) { }
 
 		public LogInViewModel(UserSettings userSettings)
 		{

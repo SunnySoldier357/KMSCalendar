@@ -5,33 +5,23 @@ using System.Windows.Input;
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class NewAssignmentViewModel : BaseViewModel
 	{
-		//* Private Properties
-		private Assignment assignment;
-
-		private List<Class> subscribedClasses;
-
 		//* Public Properties
-		public Assignment Assignment
-		{
-			get => assignment;
-			set => setProperty(ref assignment, value);
-		}
+		public Assignment Assignment { get; set; }
 
 		public ICommand CancelAssignmentCommand { get; }
 		public ICommand GoToClassSearchCommand { get; }
 		public ICommand SaveAssignmentCommand { get; }
 
-		public List<Class> SubscribedClasses
-		{
-			get => subscribedClasses;
-			set => setProperty(ref subscribedClasses, value);
-		}
+		public List<Class> SubscribedClasses { get; set; }
 
 		//* Constructors
 		public NewAssignmentViewModel(DateTime dateTime)

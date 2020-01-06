@@ -2,42 +2,34 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
 using ModelValidation;
+
+using PropertyChanged;
 
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public abstract class BaseViewModel : ValidatableObject, INotifyPropertyChanged
 	{
 		//* Public Properties
 		public App App => Application.Current as App;
 		public DataOperation DataOperation = new DataOperation();
 
-		//* Private Properties
-		private bool isBusy = false;
-		private string title = string.Empty;
-
 		//* Constructor
 		public BaseViewModel() =>
 			Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
 		//* Public Properties
-		public bool IsBusy
-		{
-			get => isBusy;
-			set => setProperty(ref isBusy, value);
-		}
+		public bool IsBusy { get; set; } = false;
 
-		public string Title
-		{
-			get => title;
-			set => setProperty(ref title, value);
-		}
+		public string Title { get; set; }
 
 		//* Protected Methods
 		protected bool setProperty<T>(ref T backingStore, T value,

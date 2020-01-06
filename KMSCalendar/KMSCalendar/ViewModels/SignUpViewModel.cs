@@ -12,33 +12,19 @@ using KMSCalendar.Views;
 
 using ModelValidation;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class SignUpViewModel : LogInViewModel
 	{
 		//* Private Properties
 		private List<School> schools;
-		private List<School> filteredSchools;
 
-		private string confirmPassword;
-		private string schoolName;
-		private string userName;
-		private string zipCode;
-
-		private UIState uiState = UIState.SignUpView;
-		private UIState currentUIState
-		{
-			get => uiState;
-			set
-			{
-				uiState = value;
-				OnNotifyPropertyChanged(nameof(NewSchoolVisibility));
-				OnNotifyPropertyChanged(nameof(SchoolEnrollmentVisibility));
-				OnNotifyPropertyChanged(nameof(SignUpVisibility));
-			}
-		}
+		private UIState currentUIState { get; set; } = UIState.SignUpView;
 
 		//* Public Properties
 		public bool NewSchoolVisibility => currentUIState == UIState.NewSchoolView;
@@ -53,36 +39,16 @@ namespace KMSCalendar.ViewModels
 		public ICommand GoToLogInPageCommand { get; }
 		public ICommand NewSchoolViewCommand { get; }
 
-		public List<School> FilteredSchools
-		{
-			get => filteredSchools;
-			set => setProperty(ref filteredSchools, value);
-		}
+		public List<School> FilteredSchools { get; set; }
 
 		[PropertyValueMatch(nameof(Password),
 			ErrorMessage = "The Passwords do not match!")]
-		public string ConfirmPassword
-		{
-			get => confirmPassword;
-			set => setProperty(ref confirmPassword, value);
-		}
-		public string SchoolName
-		{
-			get => schoolName;
-			set => setProperty(ref schoolName, value);
-		}
+		public string ConfirmPassword { get; set; }
+		public string SchoolName { get; set; }
 		[MinimumLength(2)]
 		[MaximumLength(64)]
-		public string UserName
-		{
-			get => userName;
-			set => setProperty(ref userName, value);
-		}
-		public string ZipCode
-		{
-			get => zipCode;
-			set => setProperty(ref zipCode, value);
-		}
+		public string UserName { get; set; }
+		public string ZipCode { get; set; }
 
 		//* Constructors
 		public SignUpViewModel() : base()

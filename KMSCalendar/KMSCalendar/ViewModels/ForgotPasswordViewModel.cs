@@ -11,10 +11,13 @@ using KMSCalendar.Services.Email;
 
 using ModelValidation;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class ForgotPasswordViewModel : BaseViewModel
 	{
 		//* Constants
@@ -28,27 +31,10 @@ namespace KMSCalendar.ViewModels
 		//* Private Properties
 		private readonly IEmailService emailService;
 
-		private string code;
-		private string confirmPassword;
-		private string email;
-		private string password;
 		private string token;
 		private string validationMessage;
 
-		private UIState uiState = UIState.EmailView;
-		private UIState currentUIState
-		{
-			get => uiState;
-			set
-			{
-				uiState = value;
-				OnNotifyPropertyChanged(nameof(EmailVisibility));
-				OnNotifyPropertyChanged(nameof(GoBackVisibility));
-				OnNotifyPropertyChanged(nameof(NewPasswordVisibility));
-				OnNotifyPropertyChanged(nameof(SuccessVisibility));
-				OnNotifyPropertyChanged(nameof(VerificationVisibility));
-			}
-		}
+		private UIState currentUIState { get; set; } = UIState.EmailView;
 
 		//* Public Properties
 		public bool EmailVisibility => currentUIState == UIState.EmailView;
@@ -60,36 +46,21 @@ namespace KMSCalendar.ViewModels
 		public ICommand AuthenticateCodeCommand { get; }
 		public ICommand AuthenticateEmailCommand { get; }
 		public ICommand AuthenticateNewPasswordCommand { get; }
+		public ICommand ExitCommand { get; }
 		public ICommand GoBackCommand { get; }
 
-		public string Code
-		{
-			get => code;
-			set => setProperty(ref code, value);
-		}
+		public string Code { get; set; }
 		[PropertyValueMatch(nameof(Password),
 			ErrorMessage = "The Passwords do not match!")]
-		public string ConfirmPassword
-		{
-			get => confirmPassword;
-			set => setProperty(ref confirmPassword, value);
-		}
+		public string ConfirmPassword { get; set; }
 		[ContainsCharacter('@')]
 		[DoesNotContainCharacter(' ')]
 		[MinimumLength(5)]
 		[MaximumLength(254)]
-		public string Email
-		{
-			get => email;
-			set => setProperty(ref email, value);
-		}
+		public string Email { get; set; }
 		[MinimumLength(8)]
 		[MaximumLength(64)]
-		public string Password
-		{
-			get => password;
-			set => setProperty(ref password, value);
-		}
+		public string Password { get; set; }
 		public string ValidationMessage
 		{
 			get
@@ -122,6 +93,8 @@ namespace KMSCalendar.ViewModels
 			AuthenticateCodeCommand = new Command(() => authenticateCode());
 			AuthenticateEmailCommand = new Command(async () => await authenticateEmailAsync());
 			AuthenticateNewPasswordCommand = new Command(() => authenticateNewPassword());
+			ExitCommand = new Command(async () =>
+				await App.MainPage.Navigation.PopModalAsync());
 			GoBackCommand = new Command(() => goBack());
 		}
 

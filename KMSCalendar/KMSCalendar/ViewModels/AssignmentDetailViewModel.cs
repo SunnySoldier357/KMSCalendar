@@ -4,10 +4,13 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[DoNotNotify]
 	public class AssignmentDetailViewModel : BaseViewModel
 	{
 		//* Public Properties

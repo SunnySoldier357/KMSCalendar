@@ -10,23 +10,25 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
-using KMSCalendar.Views;
+
+using PropertyChanged;
 
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class AssignmentsViewModel : BaseViewModel
 	{
 		//* Private Properties
 
 		/// <summary>A List of all the Assignments to display.</summary>
 		private List<Assignment> assignments;
-		private List<Assignment> filteredAssignments;
 
 		private readonly UserSettings userSettings;
 
 		//* Public Properties
+		[DoNotNotify]
 		public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
 		public DateTime DateSelected { get; set; }
@@ -42,11 +44,7 @@ namespace KMSCalendar.ViewModels
 		/// A filtered set of all the Assignments that are only for the
 		/// current day selected
 		/// </summary>
-		public List<Assignment> FilteredAssignments
-		{
-			get => filteredAssignments;
-			set => setProperty(ref filteredAssignments, value);
-		}
+		public List<Assignment> FilteredAssignments { get; set; }
 
 		//* Constructors
 		public AssignmentsViewModel() :

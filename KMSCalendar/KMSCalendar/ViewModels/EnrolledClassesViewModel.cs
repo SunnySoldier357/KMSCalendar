@@ -7,36 +7,28 @@ using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Views;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class EnrolledClassesViewModel : BaseViewModel
 	{
-		//* Private Properties
-		private List<Class> classes;
-
 		//* Public Properties
 		public bool ImageVisibility => Classes?.Count == 0;
 
-		public ICommand UnsubscribeClassCommand { get; set; }
+		public ICommand UnsubscribeClassCommand { get; }
 
-		public List<Class> Classes
-		{
-			get => classes;
-			set
-			{
-				setProperty(ref classes, value);
-				OnNotifyPropertyChanged(nameof(ImageVisibility));
-			}
-		}
+		public List<Class> Classes { get; set; }
 
 		public ThemeImageSource MissingImageSource { get; }
 
 		//* Constructors
 		public EnrolledClassesViewModel()
 		{
-			MissingImageSource = new ThemeImageSource("missing_bag_blue.png", 
+			MissingImageSource = new ThemeImageSource("missing_bag_blue.png",
 				"missing_bag_white.png", nameof(EnrolledClassesPage));
 
 			updateData();

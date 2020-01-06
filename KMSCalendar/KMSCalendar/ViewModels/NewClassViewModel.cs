@@ -8,46 +8,28 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class NewClassViewModel : BaseViewModel
 	{
 		//* Private Properties
 		private List<Teacher> teachers;
-		private List<Teacher> filteredTeachers;
-
-		private string className;
-		private string period;
-		private string teacherName;
 
 		//* Public Properties
 		public ICommand AddClassCommand { get; }
 		public ICommand FilterTeachersCommand { get; }
 		public ICommand GoBackCommand { get; }
 
-		public List<Teacher> FilteredTeachers
-		{
-			get => filteredTeachers;
-			set => setProperty(ref filteredTeachers, value);
-		}
+		public List<Teacher> FilteredTeachers { get; set; }
 
-		public string ClassName
-		{
-			get => className;
-			set => setProperty(ref className, value);
-		}
-		public string Period
-		{
-			get => period;
-			set => setProperty(ref period, value);
-		}
-		public string TeacherName
-		{
-			get => teacherName;
-			set => setProperty(ref teacherName, value);
-		}
+		public string ClassName { get; set; }
+		public string Period { get; set; }
+		public string TeacherName { get; set; }
 
 		public ThemeImageSource SearchImageSource { get; }
 

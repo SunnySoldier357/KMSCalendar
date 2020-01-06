@@ -7,10 +7,13 @@ using KMSCalendar.Extensions;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Views;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class SettingsViewModel : BaseViewModel
 	{
 		//* Private Properties
@@ -20,20 +23,12 @@ namespace KMSCalendar.ViewModels
 		public bool IsDarkThemeEnabled
 		{
 			get => userSettings.Theme == Theme.Dark;
-			set
-			{
-				userSettings.Theme = value ? Theme.Dark : Theme.Light;
-				OnPropertyChanged();
-			}
+			set => userSettings.Theme = value ? Theme.Dark : Theme.Light;
 		}
 		public bool ShowCalendarDays
 		{
 			get => userSettings.ShowCalendarDays;
-			set
-			{
-				userSettings.ShowCalendarDays = value;
-				OnPropertyChanged();
-			}
+			set => userSettings.ShowCalendarDays = value;
 		}
 
 		public ICommand LogOutCommand { get; }

@@ -8,41 +8,25 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 
+using PropertyChanged;
+
 using Xamarin.Forms;
 
 namespace KMSCalendar.ViewModels
 {
+	[AddINotifyPropertyChangedInterface]
 	public class ClassSearchViewModel : BaseViewModel
 	{
 		//* Private Properties
-		private Class selectedClass;
-
 		private List<Class> classes;
-		private List<Class> filteredClasses;
 
-		private List<int> filteredPeriods;
-
-		private UIState uiState = UIState.ClassSearchView;
-		private UIState currentUIState
-		{
-			get => uiState;
-			set
-			{
-				uiState = value;
-				OnNotifyPropertyChanged(nameof(ClassSearchViewVisibility));
-				OnNotifyPropertyChanged(nameof(PeriodSelectViewVisiblity));
-			}
-		}
+		private UIState currentUIState { get; set; } = UIState.ClassSearchView;
 
 		//* Public Properties
 		public bool ClassSearchViewVisibility => currentUIState == UIState.ClassSearchView;
 		public bool PeriodSelectViewVisiblity => currentUIState == UIState.PeriodSelectView;
 
-		public Class SelectedClass
-		{
-			get => selectedClass;
-			set => setProperty(ref selectedClass, value);
-		}
+		public Class SelectedClass { get; set; }
 
 		public ICommand AddPeriodCommand { get; }
 		public ICommand FilterClassesCommand { get; }
@@ -51,17 +35,9 @@ namespace KMSCalendar.ViewModels
 		public ICommand ShowPeriodsCommand { get; }
 		public ICommand SubscribeUserToClassCommand { get; }
 
-		public List<Class> FilteredClasses
-		{
-			get => filteredClasses;
-			set => setProperty(ref filteredClasses, value);
-		}
+		public List<Class> FilteredClasses { get; set; }
 
-		public List<int> FilteredPeriods
-		{
-			get => filteredPeriods;
-			set => setProperty(ref filteredPeriods, value);
-		}
+		public List<int> FilteredPeriods { get; set; }
 
 		public ThemeImageSource SearchImageSource { get; }
 
@@ -92,11 +68,11 @@ namespace KMSCalendar.ViewModels
 		//* Private Methods
 		private void addPeriod(int? newPeriod)
 		{
-			if (newPeriod is int period && !filteredPeriods.Contains(period))
+			if (newPeriod is int period && !FilteredPeriods.Contains(period))
 			{
 				// Add the period to the db
-				selectedClass.Period = period;
-				if (DataOperation.ConnectToBackend(PeriodManager.AddPeriod, selectedClass))
+				SelectedClass.Period = period;
+				if (DataOperation.ConnectToBackend(PeriodManager.AddPeriod, SelectedClass))
 					loadPeriods();
 			}
 		}
@@ -180,7 +156,7 @@ namespace KMSCalendar.ViewModels
 			SelectedClass.UserId = App.SignedInUser.Id;
 			SelectedClass.Period = period;
 
-			DataOperation.ConnectToBackend(ClassManager.EnrollUserInClass, selectedClass);
+			DataOperation.ConnectToBackend(ClassManager.EnrollUserInClass, SelectedClass);
 
 			App.PullEnrolledClasses();
 
