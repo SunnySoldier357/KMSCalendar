@@ -24,22 +24,25 @@
                    TextColor="White" />
         </StackLayout>
 
-        <ListView x:Name="MenuListView"
-                  HasUnevenRows="False">
+        <ListView x:Name="MenuListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal"
+                                         VerticalOptions="Center"
+                                         Margin="0, 20, 0, 20">
                                 <Image HeightRequest="20"
                                        WidthRequest="20"
                                        Source="{Binding Source.Source}"
-                                       Margin="20,5,0,-3" />
+                                       Margin="20,5,0,-3" 
+                                       VerticalOptions="Center"/>
 
-                                <Label Margin="60,15,0,7"
+                                <Label Margin="60,0,0,0"
                                        Text="{Binding Title}"
                                        FontSize="20"
-                                       TextColor="{DynamicResource Text}" />
+                                       TextColor="{DynamicResource Text}"
+                                       VerticalOptions="Center"/>
 
                             </StackLayout>
 

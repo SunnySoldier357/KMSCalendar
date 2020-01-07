@@ -100,14 +100,17 @@
                                        Text="Period: "
                                        TextColor="{DynamicResource Text}" />
 
-                                <Entry x:Name="NewPeriod"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center"
-                                       Style="{StaticResource ThemeEntry}"
-                                       Placeholder="1"
-                                       Keyboard="Numeric"
-                                       ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
-                                       ReturnCommand="{Binding AddPeriodCommand}" />
+                                <Frame CornerRadius="4"
+                                       Padding="0">
+                                    <control:TransparentEntry x:Name="NewPeriod"
+                                                              HorizontalOptions="Center"
+                                                              VerticalOptions="Center"
+                                                              Style="{StaticResource ThemeEntry}"
+                                                              Placeholder="1"
+                                                              Keyboard="Numeric"
+                                                              ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
+                                                              ReturnCommand="{Binding AddPeriodCommand}" />
+                                </Frame>
 
                                 <Button VerticalOptions="Center"
                                         Margin="5,0,0,0"
@@ -175,7 +178,7 @@
                                         <Frame Margin="0,0,0,3"
                                                Padding="2"
                                                BackgroundColor="{DynamicResource NavigationBackground}"
-                                               CornerRadius="3"
+                                               CornerRadius="4"
                                                HasShadow="True">
 
                                             <Grid Padding="5">

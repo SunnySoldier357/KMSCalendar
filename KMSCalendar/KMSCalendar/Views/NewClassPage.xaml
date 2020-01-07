@@ -14,11 +14,10 @@
 
     <ContentPage.Content>
         <StackLayout Orientation="Vertical"
-                     Margin="10,10,10,0"
                      Spacing="0">
 
             <Grid HeightRequest="30"
-                  Margin="10,0,10,0"
+                  Margin="10,10,10,0"
                   Padding="0">
 
                 <Grid.ColumnDefinitions>
@@ -39,19 +38,20 @@
                         CommandParameter="{Binding Source={x:Reference TeachersListView}, Path=SelectedItem}" />
             </Grid>
 
-            <Frame VerticalOptions="CenterAndExpand"
-                   Margin="20,30,20,0"
+            <ScrollView BackgroundColor="Transparent">
+                <Frame VerticalOptions="CenterAndExpand"
+                   Margin="20,20,20,0"
                    BackgroundColor="{DynamicResource NavigationBackground}"
                    CornerRadius="10">
 
-                <ScrollView BackgroundColor="Transparent">
+
                     <!--  Contents go here  -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="32" />
-                            <RowDefinition Height="32" />
+                            <RowDefinition Height="36" />
+                            <RowDefinition Height="36" />
                             <RowDefinition Height="250" />
-                            <RowDefinition Height="50" />
+                            <RowDefinition Height="36" />
                             <RowDefinition Height="32" />
                         </Grid.RowDefinitions>
 
@@ -64,28 +64,31 @@
                         <Label Grid.Row="0"
                                Text="Class Name:" />
 
-                        <Entry Grid.Row="0"
+                        <Frame BorderColor="LightGray"
+                               CornerRadius="3"
+                               Grid.Row="0"
                                Grid.Column="1"
-                               Style="{StaticResource ThemeEntry}"
-                               Text="{Binding ClassName}"
-                               Placeholder="Class Name" />
+                               Padding="0">
+                            <control:TransparentEntry Style="{StaticResource ThemeEntry}"
+                                                      Text="{Binding ClassName}"
+                                                      Placeholder="Class Name" />
+                        </Frame>
 
                         <!--  Select a period  -->
                         <Label Grid.Row="1"
                                Text="Period: " />
 
-                        <StackLayout Grid.Row="1"
-                                     Grid.Column="1"
-                                     Orientation="Horizontal">
-
-                            <Entry HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   Style="{StaticResource ThemeEntry}"
-                                   Text="{Binding Period}"
-                                   Placeholder="1"
-                                   Keyboard="Numeric" />
-
-                        </StackLayout>
+                        <Frame BorderColor="LightGray"
+                                   CornerRadius="3"
+                                   Padding="0"
+                                   Grid.Row="1"
+                                   Grid.Column="1">
+                            <control:TransparentEntry VerticalOptions="Center"
+                                                      Style="{StaticResource ThemeEntry}"
+                                                      Text="{Binding Period}"
+                                                      Placeholder="1"
+                                                      Keyboard="Numeric" />
+                        </Frame>
 
                         <!--  Search for a Teacher  -->
                         <StackLayout Grid.Row="2"
@@ -160,12 +163,16 @@
                                VerticalOptions="Center"
                                Text="Add a new teacher (if not on the list):" />
 
-                        <Entry Grid.Row="3"
-                               Grid.Column="1"
-                               VerticalOptions="Center"
-                               Style="{StaticResource ThemeEntry}"
-                               Text="{Binding TeacherName}"
-                               Placeholder="Teacher's Name" />
+                        <Frame BorderColor="LightGray"
+                                            CornerRadius="3"
+                                            Padding="0"
+                                            Grid.Row="3"
+                                            Grid.Column="1">
+                            <control:TransparentEntry VerticalOptions="Center"
+                                                      Style="{StaticResource ThemeEntry}"
+                                                      Text="{Binding TeacherName}"
+                                                      Placeholder="Teacher's Name" />
+                        </Frame>
 
                         <Button Grid.Row="4"
                                 Grid.ColumnSpan="2"
@@ -178,8 +185,8 @@
                                 Command="{Binding AddClassCommand}"
                                 CommandParameter="{Binding Source={x:Reference TeachersListView}, Path=SelectedItem}" />
                     </Grid>
-                </ScrollView>
-            </Frame>
+                </Frame>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
