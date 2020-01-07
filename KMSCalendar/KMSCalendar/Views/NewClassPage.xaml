@@ -44,15 +44,14 @@
                    BackgroundColor="{DynamicResource NavigationBackground}"
                    CornerRadius="10">
 
-
                     <!--  Contents go here  -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="36" />
-                            <RowDefinition Height="36" />
+                            <RowDefinition Height="44" />
+                            <RowDefinition Height="44" />
                             <RowDefinition Height="250" />
-                            <RowDefinition Height="36" />
-                            <RowDefinition Height="32" />
+                            <RowDefinition Height="44" />
+                            <RowDefinition Height="48" />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -62,45 +61,57 @@
 
                         <!--  Enter a name  -->
                         <Label Grid.Row="0"
-                               Text="Class Name:" />
+                               Margin="0,8,0,0"
+                               Text="Class Name:"
+                               VerticalOptions="Center"/>
 
                         <Frame BorderColor="LightGray"
                                CornerRadius="3"
                                Grid.Row="0"
                                Grid.Column="1"
-                               Padding="0">
+                               Padding="0"
+                               Margin="0,8,0,0">
                             <control:TransparentEntry Style="{StaticResource ThemeEntry}"
                                                       Text="{Binding ClassName}"
-                                                      Placeholder="Class Name" />
+                                                      Placeholder="Class Name"
+                                                      FontSize="12"
+                                                      Margin="8,0,0,0"/>
                         </Frame>
 
                         <!--  Select a period  -->
                         <Label Grid.Row="1"
-                               Text="Period: " />
+                               Text="Period: " 
+                               VerticalOptions="Center"
+                               Margin="0,8,0,0"/>
 
                         <Frame BorderColor="LightGray"
-                                   CornerRadius="3"
-                                   Padding="0"
-                                   Grid.Row="1"
-                                   Grid.Column="1">
+                               CornerRadius="3"
+                               Padding="0"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               Margin="0,8,0,0">
                             <control:TransparentEntry VerticalOptions="Center"
                                                       Style="{StaticResource ThemeEntry}"
                                                       Text="{Binding Period}"
                                                       Placeholder="1"
-                                                      Keyboard="Numeric" />
+                                                      Keyboard="Numeric"
+                                                      FontSize="11"
+                                                      Margin="8,0,0,0"/>
                         </Frame>
 
                         <!--  Search for a Teacher  -->
                         <StackLayout Grid.Row="2"
                                      Grid.ColumnSpan="2"
-                                     HorizontalOptions="Center">
+                                     HorizontalOptions="Center"
+                                     Margin="0,8,0,0">
 
                             <Label Text="Search for your Teacher" />
 
                             <Frame VerticalOptions="CenterAndExpand"
                                    Margin="0.5"
                                    Padding="2"
-                                   BackgroundColor="{DynamicResource NavigationBackgroundLight}"
+                                   BackgroundColor="{DynamicResource NavigationBackground}"
+                                   BorderColor="LightGray"
                                    CornerRadius="3"
                                    HasShadow="True"
                                    MinimumHeightRequest="42">
@@ -116,7 +127,8 @@
                                                               HorizontalOptions="StartAndExpand"
                                                               Style="{StaticResource ThemeEntry}"
                                                               BackgroundColor="Transparent"
-                                                              Placeholder="Search for Your Teacher">
+                                                              Placeholder="Search for Your Teacher"
+                                                              FontSize="11">
                                         <control:TransparentEntry.Behaviors>
                                             <behavior:EventToCommandBehavior EventName="TextChanged"
                                                                              Command="{Binding FilterTeachersCommand}"
@@ -143,10 +155,12 @@
 
                                                     <Label Text="{Binding Name}"
                                                            FontSize="14"
-                                                           LineBreakMode="NoWrap" />
+                                                           LineBreakMode="NoWrap" 
+                                                           VerticalOptions="Center"/>
 
                                                     <Label Grid.Column="1"
                                                            HorizontalOptions="End"
+                                                           VerticalOptions="Center"
                                                            Text="{Binding SchoolName}"
                                                            FontSize="11"
                                                            LineBreakMode="NoWrap" />
@@ -161,22 +175,26 @@
                         <Label Grid.Row="3"
                                Grid.Column="0"
                                VerticalOptions="Center"
-                               Text="Add a new teacher (if not on the list):" />
+                               Text="Add a new teacher (if not on the list):" 
+                               Margin="0,8,0,0"/>
 
                         <Frame BorderColor="LightGray"
-                                            CornerRadius="3"
-                                            Padding="0"
-                                            Grid.Row="3"
-                                            Grid.Column="1">
+                               CornerRadius="3"
+                               Padding="0"
+                               Grid.Row="3"
+                               Grid.Column="1"
+                               Margin="0,8,0,0">
                             <control:TransparentEntry VerticalOptions="Center"
                                                       Style="{StaticResource ThemeEntry}"
                                                       Text="{Binding TeacherName}"
-                                                      Placeholder="Teacher's Name" />
+                                                      Placeholder="Teacher's Name"
+                                                      FontSize="Small"
+                                                      Margin="8,0,0,0"/>
                         </Frame>
 
                         <Button Grid.Row="4"
                                 Grid.ColumnSpan="2"
-                                Margin="0,5,0,0"
+                                Margin="0,8,0,0"
                                 BackgroundColor="{DynamicResource NavigationTertiary}"
                                 BorderWidth="0"
                                 CornerRadius="10"

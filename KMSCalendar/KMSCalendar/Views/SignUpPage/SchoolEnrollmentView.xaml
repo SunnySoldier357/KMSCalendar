@@ -83,8 +83,10 @@
                    CornerRadius="16">
 
                 <control:TransparentEntry HorizontalOptions="Center"
+                                          VerticalOptions="Center"
                                           Style="{StaticResource LoginEntry}"
-                                          Margin="0,0,1,0"
+                                          Margin="4,0,4,0"
+                                          FontSize="12"
                                           Text="{Binding ZipCode}"
                                           Placeholder="98027" />
             </Frame>
@@ -162,8 +164,7 @@
         <Button Grid.Row="12"
                 HorizontalOptions="Center"
                 Padding="20,0,20,0"
-                BackgroundColor="{StaticResource NavigationTertiary}"
-                CornerRadius="20"
+                BackgroundColor="Transparent"
                 BorderColor="Transparent"
                 Text="Add a New School Instead"
                 TextColor="White"

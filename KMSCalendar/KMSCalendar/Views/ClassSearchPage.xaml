@@ -109,7 +109,9 @@
                                                               Placeholder="1"
                                                               Keyboard="Numeric"
                                                               ReturnCommandParameter="{Binding Source={x:Reference NewPeriod}, Path=Text, Converter={StaticResource stringToNullableInt}}"
-                                                              ReturnCommand="{Binding AddPeriodCommand}" />
+                                                              ReturnCommand="{Binding AddPeriodCommand}" 
+                                                              Margin="8,0,8,0"
+                                                              MaxLength="1"/>
                                 </Frame>
 
                                 <Button VerticalOptions="Center"

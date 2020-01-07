@@ -69,7 +69,8 @@
 
                     <control:TransparentEntry Style="{StaticResource LoginEntry}"
                                               Text="{Binding Email}"
-                                              Placeholder="Email" />
+                                              Placeholder="Email"
+                                              VerticalOptions="Center"/>
                 </Frame>
 
                 <Frame Grid.Row="5"
@@ -78,7 +79,8 @@
                     <control:TransparentEntry Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
                                               Placeholder="Password"
-                                              IsPassword="True" />
+                                              IsPassword="True"
+                                              VerticalOptions="Center"/>
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"

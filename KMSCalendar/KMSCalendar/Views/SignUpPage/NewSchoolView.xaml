@@ -38,10 +38,12 @@
                    CornerRadius="16">
 
                 <control:TransparentEntry HorizontalOptions="Center"
+                                          VerticalOptions="Center"
                                           Style="{StaticResource LoginEntry}"
                                           Margin="10,0,7,0"
                                           Text="{Binding SchoolName}"
-                                          Placeholder="Skyline High School" />
+                                          Placeholder="Skyline High School" 
+                                          FontSize="12"/>
             </Frame>
         </StackLayout>
 
@@ -61,10 +63,12 @@
                    CornerRadius="16">
 
                 <control:TransparentEntry HorizontalOptions="Center"
+                                          VerticalOptions="Center"
                                           Style="{StaticResource LoginEntry}"
                                           Margin="10,0,10,0"
                                           Text="{Binding ZipCode}"
-                                          Placeholder="98027" />
+                                          Placeholder="98027" 
+                                          FontSize="12"/>
             </Frame>
         </StackLayout>
 
