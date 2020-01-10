@@ -10,8 +10,8 @@ namespace KMSCalendar.Droid
 	[Activity(Label = "KMSCalendar",
 		Icon = "@mipmap/icon",
 		Theme = "@style/MainTheme",
-		MainLauncher = true,
 		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	//[Activity(Label = "@string/ApplicationName")]
 	public class MainActivity : FormsAppCompatActivity
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
