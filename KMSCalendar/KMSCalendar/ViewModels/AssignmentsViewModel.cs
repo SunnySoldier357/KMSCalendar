@@ -31,7 +31,7 @@ namespace KMSCalendar.ViewModels
 		public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
 		public DateTime DateSelected { get; set; }
-		public string DateFormatted { get => DateSelected.ToString("dddd, MMM d"); }
+		public string DateFormatted => DateSelected.ToString("dddd, MMM d");
 
 		public ICommand AddAssignmentCommand { get; }
 		public ICommand FilterAssignmentsCommand { get; }
