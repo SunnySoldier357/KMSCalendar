@@ -1,22 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Util;
-using Android.Views;
-using Android.Widget;
 
 namespace KMSCalendar.Droid
 {
-	[Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
+	[Activity(Theme = "@style/MyTheme.Splash", 
+		MainLauncher = true, 
+		NoHistory = true)]
 	public class SplashActivity : Activity
 	{
-		static readonly string TAG = "X:" + typeof(SplashActivity).Name;
+		//* Static Properties
+		private static string TAG => "X:" + nameof(SplashActivity);
+
+		//* Overridden Methods
+
+		// Prevent the back button from canceling the startup process
+		public override void OnBackPressed() { }
 
 		public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
 		{
@@ -32,11 +34,10 @@ namespace KMSCalendar.Droid
 			startupWork.Start();
 		}
 
-		// Prevent the back button from canceling the startup process
-		public override void OnBackPressed() { }
+		//* Private Methods
 
 		// Simulates background work that happens behind the splash screen
-		async void SimulateStartup()
+		private async void SimulateStartup()
 		{
 			Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
 			await Task.Delay(8000); // Simulate a bit of startup work.

@@ -31,18 +31,18 @@
                         <StackLayout>
                             <StackLayout Orientation="Horizontal"
                                          VerticalOptions="CenterAndExpand">
+
                                 <Image HeightRequest="20"
                                        WidthRequest="20"
+                                       VerticalOptions="Center"
                                        Source="{Binding Source.Source}"
-                                       Margin="20,0,0,0" 
-                                       VerticalOptions="Center"/>
+                                       Margin="20,0,0,0" />
 
-                                <Label Margin="60,0,0,0"
+                                <Label VerticalOptions="Center"
+                                       Margin="60,0,0,0"
                                        Text="{Binding Title}"
                                        FontSize="Medium"
-                                       TextColor="{DynamicResource Text}"
-                                       VerticalOptions="Center"/>
-
+                                       TextColor="{DynamicResource Text}" />
                             </StackLayout>
 
                             <BoxView HeightRequest="0.5"

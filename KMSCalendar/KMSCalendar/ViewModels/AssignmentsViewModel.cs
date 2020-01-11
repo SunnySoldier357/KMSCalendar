@@ -10,7 +10,9 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
+
 using ModernXamarinCalendar;
+
 using PropertyChanged;
 
 using Xamarin.Forms;
@@ -31,7 +33,6 @@ namespace KMSCalendar.ViewModels
 		public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
 		public DateTime DateSelected { get; set; }
-		public string DateFormatted => DateSelected.ToString("dddd, MMM d");
 
 		public ICommand AddAssignmentCommand { get; }
 		public ICommand FilterAssignmentsCommand { get; }
@@ -45,6 +46,8 @@ namespace KMSCalendar.ViewModels
 		/// current day selected
 		/// </summary>
 		public List<Assignment> FilteredAssignments { get; set; }
+
+		public string DateFormatted => DateSelected.ToString("dddd, MMM d");
 
 		//* Constructors
 		public AssignmentsViewModel() :
@@ -158,15 +161,17 @@ namespace KMSCalendar.ViewModels
 
 		public void goToToday(WeekControl weekControl)
 		{
-			weekControl.OverrideSelectedDate(DateTime.Today);
 			DateSelected = DateTime.Today;
+			weekControl.OverrideSelectedDate(DateSelected);
+			
 			filterAssignments(DateSelected);
 		}
 
 		public void goToTomorrow(WeekControl weekControl)
 		{
-			weekControl.OverrideSelectedDate(DateTime.Today.AddDays(1));
 			DateSelected = DateTime.Today.AddDays(1);
+			weekControl.OverrideSelectedDate(DateSelected);
+			
 			filterAssignments(DateSelected);
 		}
 	}

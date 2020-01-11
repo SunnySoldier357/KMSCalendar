@@ -86,9 +86,9 @@
                                           VerticalOptions="Center"
                                           Style="{StaticResource LoginEntry}"
                                           Margin="4,0,4,0"
-                                          FontSize="12"
                                           Text="{Binding ZipCode}"
-                                          Placeholder="98027" />
+                                          Placeholder="98027"
+                                          FontSize="12" />
             </Frame>
 
             <Button VerticalOptions="Center"

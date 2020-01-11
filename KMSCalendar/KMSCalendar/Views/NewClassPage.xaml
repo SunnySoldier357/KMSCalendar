@@ -40,9 +40,9 @@
 
             <ScrollView BackgroundColor="Transparent">
                 <Frame VerticalOptions="CenterAndExpand"
-                   Margin="20,20,20,0"
-                   BackgroundColor="{DynamicResource NavigationBackground}"
-                   CornerRadius="10">
+                       Margin="20,20,20,0"
+                       BackgroundColor="{DynamicResource NavigationBackground}"
+                       CornerRadius="10">
 
                     <!--  Contents go here  -->
                     <Grid>
@@ -60,43 +60,43 @@
                         </Grid.ColumnDefinitions>
 
                         <!--  Enter a name  -->
-                        <Label Grid.Row="0"
+                        <Label VerticalOptions="Center"
                                Margin="0,8,0,0"
-                               Text="Class Name:"
-                               VerticalOptions="Center"/>
+                               Text="Class Name:" />
 
-                        <Frame BorderColor="LightGray"
-                               CornerRadius="3"
-                               Grid.Row="0"
-                               Grid.Column="1"
+                        <Frame Grid.Column="1"
+                               Margin="0,8,0,0"
                                Padding="0"
-                               Margin="0,8,0,0">
+                               CornerRadius="3"
+                               BorderColor="LightGray">
+
                             <control:TransparentEntry Style="{StaticResource ThemeEntry}"
+                                                      Margin="8,0,0,0"
                                                       Text="{Binding ClassName}"
                                                       Placeholder="Class Name"
-                                                      FontSize="12"
-                                                      Margin="8,0,0,0"/>
+                                                      FontSize="12" />
                         </Frame>
 
                         <!--  Select a period  -->
                         <Label Grid.Row="1"
-                               Text="Period: " 
                                VerticalOptions="Center"
-                               Margin="0,8,0,0"/>
+                               Margin="0,8,0,0"
+                               Text="Period: " />
 
-                        <Frame BorderColor="LightGray"
-                               CornerRadius="3"
-                               Padding="0"
-                               Grid.Row="1"
+                        <Frame Grid.Row="1"
                                Grid.Column="1"
-                               Margin="0,8,0,0">
+                               Margin="0,8,0,0"
+                               Padding="0"
+                               CornerRadius="3"
+                               BorderColor="LightGray">
+
                             <control:TransparentEntry VerticalOptions="Center"
                                                       Style="{StaticResource ThemeEntry}"
+                                                      Margin="8,0,0,0"
                                                       Text="{Binding Period}"
                                                       Placeholder="1"
-                                                      Keyboard="Numeric"
                                                       FontSize="11"
-                                                      Margin="8,0,0,0"/>
+                                                      Keyboard="Numeric" />
                         </Frame>
 
                         <!--  Search for a Teacher  -->
@@ -111,13 +111,14 @@
                                    Margin="0.5"
                                    Padding="2"
                                    BackgroundColor="{DynamicResource NavigationBackground}"
-                                   BorderColor="LightGray"
                                    CornerRadius="3"
+                                   BorderColor="LightGray"
                                    HasShadow="True"
                                    MinimumHeightRequest="42">
 
                                 <StackLayout Orientation="Horizontal"
                                              HorizontalOptions="StartAndExpand">
+
                                     <Image HeightRequest="15"
                                            WidthRequest="15"
                                            Source="{Binding SearchImageSource.Source}"
@@ -129,6 +130,7 @@
                                                               BackgroundColor="Transparent"
                                                               Placeholder="Search for Your Teacher"
                                                               FontSize="11">
+
                                         <control:TransparentEntry.Behaviors>
                                             <behavior:EventToCommandBehavior EventName="TextChanged"
                                                                              Command="{Binding FilterTeachersCommand}"
@@ -153,10 +155,10 @@
                                                         <ColumnDefinition />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <Label Text="{Binding Name}"
+                                                    <Label VerticalOptions="Center"
+                                                           Text="{Binding Name}"
                                                            FontSize="14"
-                                                           LineBreakMode="NoWrap" 
-                                                           VerticalOptions="Center"/>
+                                                           LineBreakMode="NoWrap" />
 
                                                     <Label Grid.Column="1"
                                                            HorizontalOptions="End"
@@ -175,21 +177,22 @@
                         <Label Grid.Row="3"
                                Grid.Column="0"
                                VerticalOptions="Center"
-                               Text="Add a new teacher (if not on the list):" 
-                               Margin="0,8,0,0"/>
+                               Margin="0,8,0,0"
+                               Text="Add a new teacher (if not on the list):" />
 
-                        <Frame BorderColor="LightGray"
-                               CornerRadius="3"
-                               Padding="0"
-                               Grid.Row="3"
+                        <Frame Grid.Row="3"
                                Grid.Column="1"
-                               Margin="0,8,0,0">
+                               Margin="0,8,0,0"
+                               Padding="0"
+                               CornerRadius="3"
+                               BorderColor="LightGray">
+
                             <control:TransparentEntry VerticalOptions="Center"
                                                       Style="{StaticResource ThemeEntry}"
+                                                      Margin="8,0,0,0"
                                                       Text="{Binding TeacherName}"
                                                       Placeholder="Teacher's Name"
-                                                      FontSize="Small"
-                                                      Margin="8,0,0,0"/>
+                                                      FontSize="Small" />
                         </Frame>
 
                         <Button Grid.Row="4"

@@ -67,20 +67,20 @@
                 <Frame Grid.Row="3"
                        Style="{StaticResource LoginEntryFrame}">
 
-                    <control:TransparentEntry Style="{StaticResource LoginEntry}"
+                    <control:TransparentEntry VerticalOptions="Center"
+                                              Style="{StaticResource LoginEntry}"
                                               Text="{Binding Email}"
-                                              Placeholder="Email"
-                                              VerticalOptions="Center"/>
+                                              Placeholder="Email" />
                 </Frame>
 
                 <Frame Grid.Row="5"
                        Style="{StaticResource LoginEntryFrame}">
 
-                    <control:TransparentEntry Style="{StaticResource LoginEntry}"
+                    <control:TransparentEntry VerticalOptions="Center"
+                                              Style="{StaticResource LoginEntry}"
                                               Text="{Binding Password}"
                                               Placeholder="Password"
-                                              IsPassword="True"
-                                              VerticalOptions="Center"/>
+                                              IsPassword="True" />
                 </Frame>
 
                 <Button x:Name="AuthenticateLoginButton"

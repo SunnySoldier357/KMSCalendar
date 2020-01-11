@@ -11,7 +11,6 @@ namespace KMSCalendar.Droid
 		Icon = "@mipmap/icon",
 		Theme = "@style/MainTheme",
 		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	//[Activity(Label = "@string/ApplicationName")]
 	public class MainActivity : FormsAppCompatActivity
 	{
 		protected override void OnCreate(Bundle savedInstanceState)

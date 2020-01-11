@@ -42,8 +42,8 @@
                                           Style="{StaticResource LoginEntry}"
                                           Margin="10,0,7,0"
                                           Text="{Binding SchoolName}"
-                                          Placeholder="Skyline High School" 
-                                          FontSize="12"/>
+                                          Placeholder="Skyline High School"
+                                          FontSize="12" />
             </Frame>
         </StackLayout>
 
@@ -67,8 +67,8 @@
                                           Style="{StaticResource LoginEntry}"
                                           Margin="10,0,10,0"
                                           Text="{Binding ZipCode}"
-                                          Placeholder="98027" 
-                                          FontSize="12"/>
+                                          Placeholder="98027"
+                                          FontSize="12" />
             </Frame>
         </StackLayout>
 

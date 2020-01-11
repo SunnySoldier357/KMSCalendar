@@ -72,20 +72,23 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <StackLayout IsVisible="{Binding ImageVisibility}"
-                         Orientation="Vertical"
+            <StackLayout Orientation="Vertical"
                          VerticalOptions="Center"
-                         Margin="30,0,30,0">
+                         Margin="30,0,30,0"
+                         IsVisible="{Binding ImageVisibility}">
+
                 <Image HorizontalOptions="Center"
                        Source="{Binding MissingImageSource.Source}"
-                       Margin="100,40,100,30"/>
-                <Label Text="Uh-Oh. You aren't enrolled in any classes." 
-                       HorizontalOptions="Center"
+                       Margin="100,40,100,30" />
+
+                <Label HorizontalOptions="Center"
                        Margin="0,0,0,16"
-                       TextColor="{DynamicResource Text}"/>
-                <Label Text="Click &quot;Add New Class&quot; in the menu to enroll in a class."
-                       HorizontalOptions="Center"
-                       TextColor="{DynamicResource Text}"/>
+                       Text="Uh-Oh. You aren't enrolled in any classes."
+                       TextColor="{DynamicResource Text}" />
+
+                <Label HorizontalOptions="Center"
+                       Text="Click &quot;Add New Class&quot; in the menu to enroll in a class."
+                       TextColor="{DynamicResource Text}" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
