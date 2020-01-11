@@ -60,6 +60,7 @@
             <Picker x:Name="ClassPicker"
                     ItemsSource="{Binding SubscribedClasses}"
                     Margin="0,-10,0,20"
+                    TextColor="{DynamicResource Text}"
                     ItemDisplayBinding="{Binding DisplayName}" />
 
             <Button BackgroundColor="{DynamicResource NavigationTertiary}"
