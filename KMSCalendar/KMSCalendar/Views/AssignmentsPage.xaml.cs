@@ -1,8 +1,14 @@
 ﻿using System;
+
+using Autofac;
+
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
+using KMSCalendar.Models.Settings;
 using KMSCalendar.ViewModels;
+
 using ModernXamarinCalendar;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,7 +18,10 @@ namespace KMSCalendar.Views
 	public partial class AssignmentsPage : ContentPage
 	{
 		//* Constructors
-		public AssignmentsPage()
+		public AssignmentsPage() :
+			this(AppContainer.Container.Resolve<UserSettings>()) { }
+
+		public AssignmentsPage(UserSettings userSettings)
 		{
 			InitializeComponent();
 
@@ -32,17 +41,19 @@ namespace KMSCalendar.Views
 					// Manually deselect item.
 					AssignmentsListView.SelectedItem = null;
 				});
+
+			CalendarWeekControl.ShowDayName = userSettings.ShowCalendarDays;
+			userSettings.PropertyChanged += (sender, args) =>
+			{
+				if (args.PropertyName == nameof(UserSettings.ShowCalendarDays))
+					CalendarWeekControl.ShowDayName = userSettings.ShowCalendarDays;
+			};
 		}
 		public void DateSelectedChanged(object sender, EventArgs e)
 		{
 			var calendar = sender as WeekControl;
 
 			ViewModel.FilterAssignmentsCommand.Execute(calendar.SelectedDate);
-		}
-
-		private void TodayButton_Clicked(object sender, EventArgs e)
-		{
-			CalendarWeekControl.OverrideSelectedDate(DateTime.Today);
 		}
 	}
 }

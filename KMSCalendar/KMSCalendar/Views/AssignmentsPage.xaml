@@ -10,7 +10,7 @@
              Title="Assignments Calendar">
 
     <ContentPage.BindingContext>
-        <vm:AssignmentsViewModel x:Name="ViewModel"/>
+        <vm:AssignmentsViewModel x:Name="ViewModel" />
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
@@ -25,9 +25,7 @@
         <control:WeekControl x:Name="CalendarWeekControl"
                              HorizontalOptions="CenterAndExpand"
                              Margin="5,10,5,15"
-                             ShowDayName="{Binding ShowCalendarDays}"
-                             ForegroundColor="White">
-        </control:WeekControl>
+                             ForegroundColor="White" />
 
         <Frame Margin="0,0,0,-20"
                BackgroundColor="{DynamicResource NavigationBackgroundLight}"
@@ -49,7 +47,7 @@
                             FontSize="12"
                             TextColor="Gray"
                             Command="{Binding GoToTodayCommand}"
-                            CommandParameter="{Binding Source={x:Reference CalendarWeekControl}}"/>
+                            CommandParameter="{Binding Source={x:Reference CalendarWeekControl}}" />
 
                     <Label HorizontalOptions="CenterAndExpand"
                            VerticalOptions="Center"
@@ -68,7 +66,7 @@
                             FontSize="12"
                             TextColor="Gray"
                             Command="{Binding GoToTomorrowCommand}"
-                            CommandParameter="{Binding Source={x:Reference CalendarWeekControl}}"/>
+                            CommandParameter="{Binding Source={x:Reference CalendarWeekControl}}" />
                 </StackLayout>
 
                 <ScrollView>
