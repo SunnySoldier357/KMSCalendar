@@ -21,7 +21,6 @@ namespace KMSCalendar.ViewModels
 	public class AssignmentsViewModel : BaseViewModel
 	{
 		//* Private Properties
-
 		/// <summary>A List of all the Assignments to display.</summary>
 		private List<Assignment> assignments;
 
@@ -32,6 +31,7 @@ namespace KMSCalendar.ViewModels
 		public bool ShowCalendarDays => userSettings.ShowCalendarDays;
 
 		public DateTime DateSelected { get; set; }
+		public string DateFormatted { get => DateSelected.ToString("dddd, MMM d"); }
 
 		public ICommand AddAssignmentCommand { get; }
 		public ICommand FilterAssignmentsCommand { get; }
@@ -66,7 +66,7 @@ namespace KMSCalendar.ViewModels
 			ItemSelectedCommand = new Command<object>(selectedItem => itemSelected(selectedItem));
 			LoadAssignmentsCommand = new Command(() => loadAssignments());
 			GoToTodayCommand = new Command<WeekControl>(weekControl => goToToday(weekControl));
-			GoToTomorrowCommand = new Command(() => goToTomorrow());
+			GoToTomorrowCommand = new Command<WeekControl>(weekControl => goToTomorrow(weekControl));
 
 			MessagingCenter.Subscribe<NewAssignmentViewModel, Assignment>(this,
 				"AddAssignment", (page, a) =>
@@ -163,8 +163,9 @@ namespace KMSCalendar.ViewModels
 			filterAssignments(DateSelected);
 		}
 
-		public void goToTomorrow()
+		public void goToTomorrow(WeekControl weekControl)
 		{
+			weekControl.OverrideSelectedDate(DateTime.Today.AddDays(1));
 			DateSelected = DateTime.Today.AddDays(1);
 			filterAssignments(DateSelected);
 		}

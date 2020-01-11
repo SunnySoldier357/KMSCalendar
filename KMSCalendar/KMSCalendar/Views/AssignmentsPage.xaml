@@ -10,7 +10,7 @@
              Title="Assignments Calendar">
 
     <ContentPage.BindingContext>
-        <vm:AssignmentsViewModel />
+        <vm:AssignmentsViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
@@ -27,11 +27,6 @@
                              Margin="5,10,5,15"
                              ShowDayName="{Binding ShowCalendarDays}"
                              ForegroundColor="White">
-            <control:WeekControl.Behaviors>
-                <behavior:EventToCommandBehavior EventName="SelectedDateChanged"
-                                                 Command="{Binding FilterAssignmentsCommand}"
-                                                 CommandParameter="{Binding Source={x:Reference CalendarWeekControl}, Path=SelectedDate}" />
-            </control:WeekControl.Behaviors>
         </control:WeekControl>
 
         <Frame Margin="0,0,0,-20"
@@ -58,7 +53,6 @@
 
                     <Label HorizontalOptions="CenterAndExpand"
                            VerticalOptions="Center"
-                           BindingContext="{x:Reference CalendarWeekControl}"
                            Margin="0,-10,0,0"
                            Text="{Binding DateFormatted}"
                            FontSize="Small"
@@ -73,8 +67,8 @@
                             Text="Due Tmr."
                             FontSize="12"
                             TextColor="Gray"
-                            Command="{Binding GoToTomorrowCommand}" />
-
+                            Command="{Binding GoToTomorrowCommand}"
+                            CommandParameter="{Binding Source={x:Reference CalendarWeekControl}}"/>
                 </StackLayout>
 
                 <ScrollView>
