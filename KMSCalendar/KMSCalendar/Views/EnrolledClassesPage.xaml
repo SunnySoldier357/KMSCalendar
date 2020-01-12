@@ -16,7 +16,8 @@
         <Grid Padding="36"
               BackgroundColor="{DynamicResource NavigationBackgroundLight}">
             <ListView x:Name="ClassListView"
-                      ItemsSource="{Binding Classes}">
+                      ItemsSource="{Binding Classes}"
+                      RowHeight="72">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
