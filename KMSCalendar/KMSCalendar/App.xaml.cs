@@ -4,6 +4,10 @@ using System.ComponentModel;
 
 using Autofac;
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
@@ -31,6 +35,11 @@ namespace KMSCalendar
 		public App(AppSetup setup = null)
 		{
 			InitializeComponent();
+
+			AppCenter.Start("android=91fe2ab3-cf09-49c4-a160-01fd698ca5dc;" +
+				  "uwp={Your UWP App secret here};" +
+				  "ios={Your iOS App secret here}",
+				  typeof(Analytics), typeof(Crashes));
 
 			if (setup == null)
 				setup = new AppSetup();
