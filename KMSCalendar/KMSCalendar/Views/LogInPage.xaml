@@ -60,7 +60,7 @@
                 <Label Grid.Row="1"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="Start"
-                       Text="HW Calendar"
+                       Text="Homework Buddy"
                        FontSize="Large"
                        TextColor="White" />
 

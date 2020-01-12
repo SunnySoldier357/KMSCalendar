@@ -35,7 +35,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="KMS Calendar"
+                                <Span Text="Homework Buddy"
                                       FontAttributes="Bold"
                                       FontSize="22" />
                                 <Span Text=" " />

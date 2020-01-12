@@ -5,4 +5,5 @@
     <color name="colorPrimaryDark">#154360</color>
     <color name="colorAccent">#C9682C</color>
     <color name="splashBackground">#154360</color>
+    <color name="trans">#00FFFFFF</color>
 </resources>
