@@ -2,10 +2,16 @@
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL,
     [Period] INT NOT NULL,
-    [Name] VARCHAR(MAX) NULL,
+    [Name] NVARCHAR(MAX) NULL,
     [TeacherId] UNIQUEIDENTIFIER NULL,
     [UserId] UNIQUEIDENTIFIER NULL,
     [SchoolId] UNIQUEIDENTIFIER NULL, 
     CONSTRAINT [PK_Classes] PRIMARY KEY CLUSTERED (Id ASC), 
     CONSTRAINT [FK_Classes_ToSchools] FOREIGN KEY (SchoolId) REFERENCES Schools(Id)
 )
+
+GO
+    CREATE NONCLUSTERED INDEX [IX_Classes_TeacherId] ON Classes(TeacherId ASC)
+
+GO
+    CREATE NONCLUSTERED INDEX [IX_Classes_UserId] ON Classes(UserId ASC)
