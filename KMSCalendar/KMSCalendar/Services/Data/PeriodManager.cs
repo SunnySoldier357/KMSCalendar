@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using KMSCalendar.Models.Data;
+
+using Microsoft.AppCenter.Analytics;
 
 namespace KMSCalendar.Services.Data
 {
@@ -20,6 +23,8 @@ namespace KMSCalendar.Services.Data
 		/// </returns>
 		public static bool AddPeriod(Class @class)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"
                 IF NOT EXISTS 
                 (
@@ -29,7 +34,15 @@ namespace KMSCalendar.Services.Data
                 INSERT INTO dbo.Class_Periods (ClassId, Period)
                 VALUES (@Id, @Period)";
 
-			return AzureDataStore.SaveData(sql, @class) == 1;
+			bool output = AzureDataStore.SaveData(sql, @class) == 1;
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(AddPeriod), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -39,10 +52,20 @@ namespace KMSCalendar.Services.Data
 		/// <returns>List of periods that a class has.</returns>
 		public static List<int> LoadPeriods(Guid classId)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT (Period) FROM dbo.Class_Periods
                 WHERE ClassId = (@Id)";
 
-			return AzureDataStore.LoadDataWithGuid<int>(sql, classId);
+			List<int> output = AzureDataStore.LoadDataWithGuid<int>(sql, classId);
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(LoadPeriods), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 	}
 }

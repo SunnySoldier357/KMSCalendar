@@ -1,8 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 using KMSCalendar.Models.Data;
+
+using Microsoft.AppCenter.Analytics;
 
 namespace KMSCalendar.Services.Data
 {
@@ -20,10 +23,20 @@ namespace KMSCalendar.Services.Data
 		/// <returns>true if the user was saved, false if failed.</returns>
 		public static bool AddUser(User user)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"INSERT INTO dbo.Users (Id, Email, Username, Password, SchoolId)
                 VALUES (@Id, @Email, @Username, @Password, @SchoolId)";
 
-			return AzureDataStore.SaveData(sql, user) == 1;
+			bool output = AzureDataStore.SaveData(sql, user) == 1;
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(AddUser), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -33,12 +46,22 @@ namespace KMSCalendar.Services.Data
 		/// <returns>Whether the email has an account. (bool)</returns>
 		public static bool CheckForUser(string email)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT 1 FROM dbo.Users
                 WHERE Email = @Id";
 
 			List<User> result = AzureDataStore.LoadDataWithString<User>(sql, email);
 
-			return result.Count > 0;
+			bool output = result.Count > 0;
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(CheckForUser), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -48,12 +71,22 @@ namespace KMSCalendar.Services.Data
 		/// <returns>The user.</returns>
 		public static User LoadUserFromEmail(string email)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT Id, Email, Username, Password, SchoolId FROM dbo.Users
                 WHERE Email = @Id";
 
 			List<User> users = AzureDataStore.LoadDataWithString<User>(sql, email);
 
-			return users.FirstOrDefault();
+			User output = users.FirstOrDefault();
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(LoadUserFromEmail), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -63,11 +96,21 @@ namespace KMSCalendar.Services.Data
 		/// <returns>The user.</returns>
 		public static User LoadUserFromId(Guid userId)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT * FROM dbo.Users
                 WHERE Id = @Id";
 
-			return AzureDataStore.LoadDataWithGuid<User>(sql, userId)
+			User output = AzureDataStore.LoadDataWithGuid<User>(sql, userId)
 				.FirstOrDefault();
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(LoadUserFromId), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -79,11 +122,21 @@ namespace KMSCalendar.Services.Data
 		/// <returns>true if successful, false if failed.</returns>
 		public static bool UpdateUser(User user)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"UPDATE dbo.Users
                 SET Password = @Password
                 WHERE Id = @Id";
 
-			return AzureDataStore.SaveData(sql, user) == 1;
+			bool output = AzureDataStore.SaveData(sql, user) == 1;
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(UpdateUser), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 	}
 }

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using KMSCalendar.Models.Data;
+
+using Microsoft.AppCenter.Analytics;
 
 namespace KMSCalendar.Services.Data
 {
@@ -22,10 +25,20 @@ namespace KMSCalendar.Services.Data
 		/// </returns>
 		public static bool AddTeacher(Teacher teacher)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"INSERT INTO dbo.Teachers (Id, Name, SchoolId)
                 VALUES (@Id, @Name, @SchoolId)";
 
-			return AzureDataStore.SaveData(sql, teacher) == 1;
+			bool output = AzureDataStore.SaveData(sql, teacher) == 1;
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(AddTeacher), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -35,10 +48,20 @@ namespace KMSCalendar.Services.Data
 		/// <returns>A list of teachers from a given school.</returns>
 		public static List<Teacher> LoadAllTeachers(Guid schoolId)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT * FROM dbo.Teachers
                 WHERE SchoolId = @Id";
 
-			return AzureDataStore.LoadDataWithGuid<Teacher>(sql, schoolId);
+			List<Teacher> output = AzureDataStore.LoadDataWithGuid<Teacher>(sql, schoolId);
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(LoadAllTeachers), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -48,11 +71,21 @@ namespace KMSCalendar.Services.Data
 		/// <returns>The name of the teacher. (string)</returns>
 		public static string LoadTeacherNameFromId(Guid teacherId)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT Name FROM dbo.Teachers
                 WHERE Id = @Id";
 
-			return AzureDataStore.LoadDataWithGuid<string>(sql, teacherId)
+			string output = AzureDataStore.LoadDataWithGuid<string>(sql, teacherId)
 				.FirstOrDefault();
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(LoadTeacherNameFromId), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 	}
 }

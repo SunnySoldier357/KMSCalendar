@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using KMSCalendar.Models.Data;
+
+using Microsoft.AppCenter.Analytics;
 
 namespace KMSCalendar.Services.Data
 {
@@ -16,14 +19,23 @@ namespace KMSCalendar.Services.Data
 		/// <param name="@class">The class to add to the db.</param>
 		public static bool AddClass(Class @class)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"
                 INSERT INTO dbo.Classes (Id, Period, Name, TeacherId, UserId, SchoolId)
                 VALUES (@Id, @Period, @Name, @TeacherId, @UserId, @SchoolId)";
 
 			// Saves the new class to the db
 			int rowsAffected = AzureDataStore.SaveData(sql, @class);
+			bool output = PeriodManager.AddPeriod(@class);
 
-			return PeriodManager.AddPeriod(@class);
+			watch.Stop();
+			Analytics.TrackEvent(nameof(AddClass), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -39,6 +51,8 @@ namespace KMSCalendar.Services.Data
 		/// </returns>
 		public static bool EnrollUserInClass(Class @class)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"
                 IF NOT EXISTS 
                 (
@@ -48,7 +62,15 @@ namespace KMSCalendar.Services.Data
                 INSERT INTO dbo.Class_Users (ClassId, UserId, Period)
                 VALUES (@Id, @UserId, @Period)";
 
-			return AzureDataStore.SaveData(sql, @class) == 1;
+			bool output = AzureDataStore.SaveData(sql, @class) == 1;
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(EnrollUserInClass), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -60,10 +82,20 @@ namespace KMSCalendar.Services.Data
 		/// <returns>The list of classes.</returns>
 		public static List<Class> LoadClasses(Guid schoolId)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT * FROM dbo.Classes
                 WHERE SchoolId = @Id";
 
-			return AzureDataStore.LoadDataWithGuid<Class>(sql, schoolId);
+			List<Class> output = AzureDataStore.LoadDataWithGuid<Class>(sql, schoolId);
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(LoadClasses), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -74,6 +106,8 @@ namespace KMSCalendar.Services.Data
 		/// <returns>List of classes that the user is enrolled in.</returns>
 		public static List<Class> LoadEnrolledClasses(Guid userId)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"
                 SELECT dbo.Classes.Id, dbo.Class_Users.Period, dbo.Classes.Name, dbo.Classes.TeacherId
                 FROM dbo.Classes
@@ -81,7 +115,15 @@ namespace KMSCalendar.Services.Data
                 ON dbo.Classes.Id = dbo.Class_Users.ClassId 
                 WHERE dbo.Class_Users.UserId = @Id";
 
-			return AzureDataStore.LoadDataWithGuid<Class>(sql, userId);
+			List<Class> output = AzureDataStore.LoadDataWithGuid<Class>(sql, userId);
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(LoadEnrolledClasses), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -94,10 +136,20 @@ namespace KMSCalendar.Services.Data
 		/// <returns>The number of rows deleted from the db.</returns>
 		public static int UnenrollUserFromClass(Class @class)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"DELETE FROM dbo.Class_Users 
                 WHERE ClassId = @Id AND UserId = @UserId AND Period = @Period";
 
-			return AzureDataStore.DeleteData(sql, @class);
+			int output = AzureDataStore.DeleteData(sql, @class);
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(UnenrollUserFromClass), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 	}
 }

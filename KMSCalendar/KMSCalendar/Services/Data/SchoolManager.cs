@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using KMSCalendar.Models.Data;
+
+using Microsoft.AppCenter.Analytics;
 
 namespace KMSCalendar.Services.Data
 {
@@ -11,10 +14,20 @@ namespace KMSCalendar.Services.Data
 		//* Public Methods
 		public static int AddSchool(School school)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"INSERT INTO dbo.Schools (Id, Name, ZipCode)
                 VALUES (@Id, @Name, @ZipCode)";
 
-			return AzureDataStore.SaveData(sql, school);
+			int output = AzureDataStore.SaveData(sql, school);
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(AddSchool), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		/// <summary>
@@ -24,18 +37,38 @@ namespace KMSCalendar.Services.Data
 		/// <returns>The name of the school. (string)</returns>
 		public static string GetSchoolName(Guid schoolId)
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT Name FROM dbo.Schools
                 WHERE Id = @Id";
 
-			return AzureDataStore.LoadDataWithGuid<string>(sql, schoolId)
+			string output = AzureDataStore.LoadDataWithGuid<string>(sql, schoolId)
 				.FirstOrDefault();
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(GetSchoolName), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 
 		public static List<School> LoadSchools()
 		{
+			Stopwatch watch = Stopwatch.StartNew();
+
 			string sql = @"SELECT * FROM dbo.Schools";
 
-			return AzureDataStore.LoadData<School>(sql);
+			List<School> output = AzureDataStore.LoadData<School>(sql);
+
+			watch.Stop();
+			Analytics.TrackEvent(nameof(LoadSchools), new Dictionary<string, string>
+			{
+				{ "ElapsedTime", $"{ watch.ElapsedMilliseconds } ms" }
+			});
+
+			return output;
 		}
 	}
 }
