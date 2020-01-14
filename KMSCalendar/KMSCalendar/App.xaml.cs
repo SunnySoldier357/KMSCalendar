@@ -36,11 +36,6 @@ namespace KMSCalendar
 		{
 			InitializeComponent();
 
-			AppCenter.Start("android=91fe2ab3-cf09-49c4-a160-01fd698ca5dc;" +
-				  "uwp={Your UWP App secret here};" +
-				  "ios={Your iOS App secret here}",
-				  typeof(Analytics), typeof(Crashes));
-
 			if (setup == null)
 				setup = new AppSetup();
 
@@ -51,6 +46,13 @@ namespace KMSCalendar
 				userSettings = scope.Resolve<UserSettings>();
 				appSettings = scope.Resolve<AppSettings>();
 
+				AppCenter.Start(
+					$"android={ appSettings.AppSecrets.Android };" +
+						"uwp={Your UWP App secret here};" +
+						"ios={Your iOS App secret here}",
+					typeof(Analytics), 
+					typeof(Crashes));
+
 				UpdateColorResources();
 				userSettings.PropertyChanged += ThemeChanged;
 
@@ -58,14 +60,8 @@ namespace KMSCalendar
 					MainPage = new LogInPage();
 				else
 				{
-					try
-					{
-						SignedInUser = dataOperation.ConnectToBackend(UserManager.LoadUserFromId, userSettings.SignedInUserId);
-					}
-					catch (Exception)
-					{
-						// TODO: Toast a message as to why it didn't work
-					}
+					SignedInUser = dataOperation.ConnectToBackend(UserManager.LoadUserFromId,
+						userSettings.SignedInUserId);
 
 					if (SignedInUser != null)
 						MainPage = new MainPage();

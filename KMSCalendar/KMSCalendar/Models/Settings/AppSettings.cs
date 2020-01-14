@@ -39,6 +39,8 @@ namespace KMSCalendar.Models.Settings
 
 		public List<ColorResource> ColorPalette { get; private set; }
 
+		public AppSecrets AppSecrets { get; private set; }
+
 		public ConnectionStringInfo ConnectionStringInfo { get; private set; }
 
 		public EmailInfo EmailInfo { get; private set; }
@@ -65,6 +67,7 @@ namespace KMSCalendar.Models.Settings
 
 				ColorPalette = new List<ColorResource>(settings.ColorPalette);
 
+				AppSecrets = settings.AppSecrets;
 				ConnectionStringInfo = settings.ConnectionStringInfo;
 				EmailInfo = settings.EmailInfo;
 			}
@@ -139,6 +142,7 @@ namespace KMSCalendar.Models.Settings
 				}
 			}
 
+			AppSecrets = AppSecrets.UpdateSettings(AppSecrets, settings.AppSecrets);
 			ConnectionStringInfo = ConnectionStringInfo.UpdateSettings(ConnectionStringInfo,
 				settings.ConnectionStringInfo);
 			EmailInfo = EmailInfo.UpdateSettings(EmailInfo, settings.EmailInfo);

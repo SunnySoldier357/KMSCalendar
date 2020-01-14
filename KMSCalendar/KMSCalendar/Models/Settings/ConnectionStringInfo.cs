@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+
+using Microsoft.AppCenter.Crashes;
 
 namespace KMSCalendar.Models.Settings
 {
@@ -58,13 +62,30 @@ namespace KMSCalendar.Models.Settings
 
 				return builder.ToString();
 			}
-			catch (InvalidOperationException)
+			catch (InvalidOperationException e)
 			{
-				throw new Exception("A property of ConnectionStringInfo is null. It " +
-					"requires a value in the appropriate appsettings.json file.");
+				// Check which property is null
+				string propertyName = GetType().GetProperties()
+					.Where(p => p.GetValue(this) == null)
+					.First()?
+					.ToString();
+
+				Crashes.TrackError(e, new Dictionary<string, string>
+				{
+					{ "PropertyName", propertyName },
+					{ "Source", nameof(ConnectionStringInfo) }
+				});
+
+				throw new Exception($"The property '{ propertyName }' of ConnectionStringInfo is " +
+					"null. It requires a value in the appropriate appsettings.json file.");
 			}
 			catch (Exception e)
 			{
+				Crashes.TrackError(e, new Dictionary<string, string>
+				{
+					{ "Source", nameof(ConnectionStringInfo) }
+				});
+
 				throw e;
 			}
 		}

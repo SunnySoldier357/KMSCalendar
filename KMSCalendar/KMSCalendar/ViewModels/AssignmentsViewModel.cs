@@ -10,7 +10,7 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
-
+using Microsoft.AppCenter.Crashes;
 using ModernXamarinCalendar;
 
 using PropertyChanged;
@@ -147,9 +147,14 @@ namespace KMSCalendar.ViewModels
 				}
 				assignments = userAssignments;
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				Debug.WriteLine(ex);
+				Crashes.TrackError(e, new Dictionary<string, string>
+				{
+					{ "Source", nameof(AssignmentsViewModel) }
+				});
+
+				Debug.WriteLine(e);
 			}
 			finally
 			{

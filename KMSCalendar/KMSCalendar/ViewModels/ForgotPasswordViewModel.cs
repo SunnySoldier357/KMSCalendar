@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -8,7 +9,7 @@ using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Services.Data;
 using KMSCalendar.Services.Email;
-
+using Microsoft.AppCenter.Crashes;
 using ModelValidation;
 
 using PropertyChanged;
@@ -126,8 +127,13 @@ namespace KMSCalendar.ViewModels
 							emailService.SendResetPasswordEmail(user, token);
 							currentUIState++;
 						}
-						catch
+						catch (Exception e)
 						{
+							Crashes.TrackError(e, new Dictionary<string, string>
+							{
+								{ "Source", nameof(ForgotPasswordViewModel) }
+							});
+
 							ValidationMessage = "Email failed to send";
 						}
 					}

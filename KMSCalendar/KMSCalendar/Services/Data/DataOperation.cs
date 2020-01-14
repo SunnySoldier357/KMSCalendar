@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
+
+using Microsoft.AppCenter.Crashes;
 
 namespace KMSCalendar.Services.Data
 {
@@ -60,7 +63,15 @@ namespace KMSCalendar.Services.Data
 					data = function(param);
 					return true;
 				}
-				catch { return false; }
+				catch (Exception e)
+				{
+					Crashes.TrackError(e, new Dictionary<string, string>
+					{
+						{ "Source", nameof(DataOperation) }
+					});
+
+					return false;
+				}
 			}
 			else
 			{
@@ -69,7 +80,15 @@ namespace KMSCalendar.Services.Data
 					data = function();
 					return true;
 				}
-				catch { return false; }
+				catch (Exception e)
+				{
+					Crashes.TrackError(e, new Dictionary<string, string>
+					{
+						{ "Source", nameof(DataOperation) }
+					});
+
+					return false;
+				}
 			}
 		}
 	}
