@@ -1,5 +1,7 @@
 # KMSCalendar by KMS (Kenneth, Matt, Sandeep)
 
+Xamarin.Android Build: [![Build Status](https://dev.azure.com/KenMattSan/KMSCalendar/_apis/build/status/Xamarin.Android%20Build?branchName=master)](https://dev.azure.com/KenMattSan/KMSCalendar/_build/latest?definitionId=5&branchName=master)
+
 A calendar application.
 
 <span>
