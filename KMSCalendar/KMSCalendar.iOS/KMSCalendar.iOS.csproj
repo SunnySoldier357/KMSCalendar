@@ -63,6 +63,9 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <OptimizePNGs>true</OptimizePNGs>
+    <MtouchI18n>west</MtouchI18n>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Controls\TransparentEntryRenderer.cs" />
