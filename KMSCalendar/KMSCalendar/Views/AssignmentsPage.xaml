@@ -6,6 +6,7 @@
              xmlns:control="clr-namespace:ModernXamarinCalendar;assembly=ModernXamarinCalendar"
              xmlns:ext="clr-namespace:KMSCalendar.Extensions"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             xmlns:views="clr-namespace:KMSCalendar.Views"
              x:Name="BrowseAssignmentsPage"
              Title="Assignments Calendar">
 
@@ -69,8 +70,11 @@
                             CommandParameter="{Binding Source={x:Reference CalendarWeekControl}}" />
                 </StackLayout>
 
-                <ScrollView>
-                    <ListView x:Name="AssignmentsListView"
+                <Grid>
+                    <views:UhOhView />
+
+                    <ScrollView>
+                        <ListView x:Name="AssignmentsListView"
                               VerticalOptions="FillAndExpand"
                               ItemsSource="{Binding FilteredAssignments}"
                               CachingStrategy="RecycleElement"
@@ -79,30 +83,30 @@
                               IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                               RefreshCommand="{Binding LoadAssignmentsCommand}">
 
-                        <ListView.Behaviors>
-                            <behavior:EventToCommandBehavior EventName="ItemSelected"
+                            <ListView.Behaviors>
+                                <behavior:EventToCommandBehavior EventName="ItemSelected"
                                                              Command="{Binding ItemSelectedCommand}"
                                                              CommandParameter="{Binding Source={x:Reference AssignmentsListView}, Path=SelectedItem}" />
-                        </ListView.Behaviors>
+                            </ListView.Behaviors>
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid Padding="10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="7*" />
-                                            <ColumnDefinition Width="3*" />
-                                        </Grid.ColumnDefinitions>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="7*" />
+                                                <ColumnDefinition Width="3*" />
+                                            </Grid.ColumnDefinitions>
 
-                                        <Label Text="{Binding Name}"
+                                            <Label Text="{Binding Name}"
                                                FontSize="16"
                                                LineBreakMode="TailTruncation" />
 
-                                        <Label Grid.RowSpan="2"
+                                            <Label Grid.RowSpan="2"
                                                Grid.Column="1"
                                                HorizontalOptions="End"
                                                VerticalOptions="Center"
@@ -110,17 +114,18 @@
                                                FontSize="13"
                                                LineBreakMode="TailTruncation" />
 
-                                        <Label Grid.Row="1"
+                                            <Label Grid.Row="1"
                                                Text="{Binding Description}"
                                                FontSize="13"
                                                LineBreakMode="TailTruncation" />
 
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </ScrollView>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollView>
+                </Grid>
             </StackLayout>
         </Frame>
     </StackLayout>

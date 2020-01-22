@@ -160,5 +160,8 @@
     <EmbeddedResource Update="Views\SignUpPage\SignUpView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\UhOhView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
