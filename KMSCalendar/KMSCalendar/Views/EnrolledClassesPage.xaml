@@ -5,6 +5,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:KMSCalendar.ViewModels"
+             xmlns:views="clr-namespace:KMSCalendar.Views"
              Title="My Enrolled Classes"
              mc:Ignorable="d">
 
@@ -15,6 +16,9 @@
     <ContentPage.Content>
         <Grid Padding="36"
               BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+
+            <views:UhOhView />
+
             <ListView x:Name="ClassListView"
                       ItemsSource="{Binding Classes}"
                       RowHeight="72">
@@ -73,24 +77,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <StackLayout Orientation="Vertical"
-                         VerticalOptions="Center"
-                         Margin="30,0,30,0"
-                         IsVisible="{Binding ImageVisibility}">
-
-                <Image HorizontalOptions="Center"
-                       Source="{Binding MissingImageSource.Source}"
-                       Margin="100,40,100,30" />
-
-                <Label HorizontalOptions="Center"
-                       Margin="0,0,0,16"
-                       Text="Uh-Oh. You aren't enrolled in any classes."
-                       TextColor="{DynamicResource Text}" />
-
-                <Label HorizontalOptions="Center"
-                       Text="Click &quot;Add New Class&quot; in the menu to enroll in a class."
-                       TextColor="{DynamicResource Text}" />
-            </StackLayout>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

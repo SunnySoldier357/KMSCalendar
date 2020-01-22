@@ -5,11 +5,12 @@ using System.Linq;
 using System.Windows.Input;
 
 using Autofac;
-
+using KMSCalendar.Extensions;
 using KMSCalendar.Models;
 using KMSCalendar.Models.Data;
 using KMSCalendar.Models.Settings;
 using KMSCalendar.Services.Data;
+using KMSCalendar.Views;
 using Microsoft.AppCenter.Crashes;
 using ModernXamarinCalendar;
 
@@ -28,9 +29,17 @@ namespace KMSCalendar.ViewModels
 
 		private readonly UserSettings userSettings;
 
+		private bool imageVisibility;
+
 		//* Public Properties
 		[DoNotNotify]
 		public bool ShowCalendarDays => userSettings.ShowCalendarDays;
+
+		public bool ImageVisibility
+		{
+			get => imageVisibility;
+			set => setProperty(ref imageVisibility, value);
+		}
 
 		public DateTime DateSelected { get; set; }
 
@@ -48,6 +57,8 @@ namespace KMSCalendar.ViewModels
 		public List<Assignment> FilteredAssignments { get; set; }
 
 		public string DateFormatted => DateSelected.ToString("dddd, MMM d");
+
+		public ThemeImageSource MissingImageSource { get; }
 
 		//* Constructors
 		public AssignmentsViewModel() :
@@ -78,6 +89,9 @@ namespace KMSCalendar.ViewModels
 
 				filterAssignments(DateSelected);
 			});
+
+			MissingImageSource = new ThemeImageSource("missing_bag_blue.png",
+				"missing_bag_white.png", nameof(EnrolledClassesPage));
 
 			// This is so that when the class search page closes,
 			// the assignment page will update it's assignment list
@@ -129,6 +143,8 @@ namespace KMSCalendar.ViewModels
 				return;
 
 			IsBusy = true;
+
+			ImageVisibility = App.SignedInUser.EnrolledClasses.Count == 0;		//this determines whether to display the "Uh-oh" message
 
 			try
 			{

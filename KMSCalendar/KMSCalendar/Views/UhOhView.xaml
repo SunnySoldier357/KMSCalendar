@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="KMSCalendar.Views.UhOhView">
+  <ContentView.Content>
+        <StackLayout Orientation="Vertical"
+                     VerticalOptions="Center"
+                     Margin="30,-100,30,0"
+                     IsVisible="{Binding ImageVisibility}">
+
+            <Image HorizontalOptions="Center"
+                   Source="{Binding MissingImageSource.Source}"
+                   Margin="100,40,100,30" />
+
+            <Label HorizontalOptions="Center"
+                   Margin="10,0,10,16"
+                   Text="Uh-Oh. You aren't enrolled in any classes."
+                   TextColor="{DynamicResource BlueText}" />
+
+            <Label HorizontalOptions="Center"
+                   Text="Click &quot;Add New Class&quot; in the menu to enroll in a class."
+                   Margin="10,0,10,16"
+                   TextColor="{DynamicResource BlueText}" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
