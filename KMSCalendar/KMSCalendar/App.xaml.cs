@@ -50,7 +50,7 @@ namespace KMSCalendar
 					$"android={ appSettings.AppSecrets.Android };" +
 						"uwp={Your UWP App secret here};" +
 						"ios={Your iOS App secret here}",
-					typeof(Analytics), 
+					typeof(Analytics),
 					typeof(Crashes));
 
 				UpdateColorResources();

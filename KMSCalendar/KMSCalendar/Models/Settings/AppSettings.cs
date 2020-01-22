@@ -76,20 +76,24 @@ namespace KMSCalendar.Models.Settings
 		//* Public Methods
 		public static AppSettings InitSingleton()
 		{
-			if (!IsInitialized)
+			if (!readFileAsJson(MAIN_FILE, out AppSettings mainSettings))
 			{
-				if (!readFileAsJson(MAIN_FILE, out AppSettings mainSettings))
+				throw new FileNotFoundException("The appsettings.json file must be " +
+					"created from the appsettings-TEMPLATE.json file!", MAIN_FILE);
+			}
+
+			if (readFileAsJson(SECONDARY_FILE, out AppSettings secSettings))
+			{
+				mainSettings.updateSettings(secSettings);
+				secSettings.ColorPalette = mainSettings.ColorPalette;	
+
+				if (!IsInitialized)		//if the app is already initialized, then no need to grab appSettings because sec settings already has the information!
 				{
-					throw new FileNotFoundException("The appsettings.json file must be " +
-						"created from the appsettings-TEMPLATE.json file!", MAIN_FILE);
+					IsInitialized = true;
+					return new AppSettings(mainSettings);
 				}
 
-				if (readFileAsJson(SECONDARY_FILE, out AppSettings secSettings))
-					mainSettings.updateSettings(secSettings);
-
-				IsInitialized = true;
-
-				return new AppSettings(mainSettings);
+				return new AppSettings(secSettings);
 			}
 
 			throw new Exception($"A Singleton Instance of {nameof(AppSettings)} has already " +
@@ -142,10 +146,14 @@ namespace KMSCalendar.Models.Settings
 				}
 			}
 
-			AppSecrets = AppSecrets.UpdateSettings(AppSecrets, settings.AppSecrets);
-			ConnectionStringInfo = ConnectionStringInfo.UpdateSettings(ConnectionStringInfo,
-				settings.ConnectionStringInfo);
-			EmailInfo = EmailInfo.UpdateSettings(EmailInfo, settings.EmailInfo);
+			if(!IsInitialized)
+			{
+				AppSecrets = AppSecrets.UpdateSettings(AppSecrets, settings.AppSecrets);
+
+				ConnectionStringInfo = ConnectionStringInfo.UpdateSettings(ConnectionStringInfo,
+					settings.ConnectionStringInfo);
+				EmailInfo = EmailInfo.UpdateSettings(EmailInfo, settings.EmailInfo);
+			}
 		}
 
 		//* Private Class

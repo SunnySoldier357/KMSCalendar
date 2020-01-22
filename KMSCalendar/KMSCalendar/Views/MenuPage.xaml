@@ -3,11 +3,11 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ext="clr-namespace:KMSCalendar.Extensions"
-             Title="Menu">
+             Title="Menu"
+             BackgroundColor="{DynamicResource NavigationBackgroundLight}">
 
     <!--  This view is the hamburger menu  -->
-    <StackLayout VerticalOptions="Start"
-                 BackgroundColor="{DynamicResource NavigationBackgroundLight}">
+    <StackLayout VerticalOptions="Start">
 
         <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}">
             <Image HeightRequest="30"
@@ -24,7 +24,8 @@
                    TextColor="White" />
         </StackLayout>
 
-        <ListView x:Name="MenuListView">
+        <ListView x:Name="MenuListView"
+                  RowHeight="54">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
