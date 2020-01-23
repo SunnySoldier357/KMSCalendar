@@ -51,13 +51,13 @@
                 <RowDefinition Height="40" />
 
                 <!--  Spacing 13  -->
-                <RowDefinition Height="7*" />
+                <RowDefinition Height="10*" />
 
                 <!--  Error Message 14  -->
-                <RowDefinition Height="14" />
+                <RowDefinition Height="40" />
 
                 <!--  Spacing 15  -->
-                <RowDefinition Height="50*" />
+                <RowDefinition Height="20*" />
 
             </Grid.RowDefinitions>
 
