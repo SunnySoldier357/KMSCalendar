@@ -14,10 +14,8 @@ The Homework Buddy app gives students an all in one place to organize homework a
   * Most Importantly: Dark Theme
 
 <span>
-  <img src="https://github.com/SunnySoldier357/KMSCalendar/blob/master/README/login_screenshot.jpg" alt="Login Screen" width="400" height="776" />
-  <img src="https://github.com/SunnySoldier357/KMSCalendar/blob/master/README/calendar_screenshot.jpg" alt="Home Screen" width="400" height="711" />
-  <img src="https://github.com/SunnySoldier357/KMSCalendar/blob/master/README/dark_theme_screenshot.jpg" alt="Home Screen Dark Theme" width="400" height="687" />
-  <img src="https://github.com/SunnySoldier357/KMSCalendar/blob/master/README/enrolled_classes_screenshot.jpg" alt="Enrolled Classes View" width="400" height="686" />
+  <img src="https://github.com/SunnySoldier357/KMSCalendar/blob/master/README_Images/login_screenshot.jpg" alt="Login Screen" width="400" height="866" />
+  <img src="https://github.com/SunnySoldier357/KMSCalendar/blob/master/README_Images/dark_theme_screenshot.jpg" alt="Home Screen Dark Theme" width="400" height="866" />
 </span>
 
 ### The Technologies Used:
