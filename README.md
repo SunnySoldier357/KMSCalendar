@@ -29,12 +29,7 @@ The app uses two custom nuget-packages that you can check out below.
 - <a href="https://www.nuget.org/packages/ModelValidation/">nuget.org/packages/ModelValidation/</a>
 
 ### Previous Version
-
 - https://github.com/SunnySoldier357/HWCalendar
-
-
-
-
 
 #### developed by KenMattSan (Kenneth, Matt, Sandeep)
 - https://github.com/mattmorgan6
