@@ -1,5 +1,7 @@
 # The Homework Buddy
 
+[![Build Status](https://dev.azure.com/KenMattSan/KMSCalendar/_apis/build/status/Xamarin%20Debug%20Build?branchName=master)](https://dev.azure.com/KenMattSan/KMSCalendar/_build/latest?definitionId=8&branchName=master)
+
 The Homework Buddy app gives students an all in one place to organize homework assignments. View homework instructions that your classmates post, or post your own homework instructions for your peers to see. This saves students time, because they do not have to check every teacher's website or remember what to do. 
 
 ### Where You Can Find the App
