@@ -1,0 +1,108 @@
+trigger:
+- master
+- azure-pipelines
+
+pool:
+  vmImage: 'macos-latest'
+
+variables:
+  buildConfiguration: 'Debug'
+  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+
+jobs:
+  # Xamarin.Android
+  - job: XamarinAndroid
+    displayName: Xamarin.Android Debug Build
+    steps:
+      - task: NuGetToolInstaller@1
+        displayName: Install Nuget Tool
+
+      - task: NuGetCommand@2
+        displayName: Restore NuGet Packages for Solution
+        inputs:
+          restoreSolution: '**/*.sln'
+
+      - task: DownloadSecureFile@1
+        displayName: Download Debug AppSettings File
+        name: secureDebugAppFile
+        inputs:
+          secureFile: 'appsettings.Development.json'
+
+      - task: DownloadSecureFile@1
+        displayName: Download Release AppSettings File
+        name: secureReleaseAppFile
+        inputs:
+          secureFile: 'appsettings.Production.json'
+
+      - task: Bash@3
+        displayName: Link the secure file to the correct directory
+        inputs:
+          targetType: 'inline'
+          script: |
+            cd KMSCalendar/KMSCalendar/
+            ln -s $(secureDebugAppFile.secureFilePath) appsettings.Development.json
+            ln -s $(secureReleaseAppFile.secureFilePath) appsettings.Production.json
+
+      - task: XamarinAndroid@1
+        displayName: Build Xamarin.Android Project
+        inputs:
+          projectFile: '**/*droid*.csproj'
+          outputDirectory: '$(outputDirectory)'
+          configuration: '$(buildConfiguration)'
+          msbuildVersionOption: 'latest'
+          msbuildArchitectureOption: 'x64'
+          jdkOption: 'JDKVersion'
+  
+  # Xamarin.iOS
+  - job: XamariniOS
+    displayName: Xamarin.iOS Debug Build
+    steps:
+      # To manually select a Xamarin SDK version on the Microsoft-hosted macOS agent,
+      # configure this task with the *Mono* version that is associated with the
+      # Xamarin SDK version that you need, and set the "enabled" property to true.
+      # See https://go.microsoft.com/fwlink/?linkid=871629
+      - script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_12_0
+        displayName: 'Select the Xamarin SDK version'
+        enabled: false
+
+      - task: NuGetToolInstaller@1
+        displayName: Install Nuget Tool
+
+      - task: NuGetCommand@2
+        displayName: Restore NuGet Packages for Solution
+        inputs:
+          restoreSolution: '**/*.sln'
+
+      - task: DownloadSecureFile@1
+        displayName: Download Debug AppSettings File
+        name: secureDebugAppFile
+        inputs:
+          secureFile: 'appsettings.Development.json'
+
+      - task: DownloadSecureFile@1
+        displayName: Download Release AppSettings File
+        name: secureReleaseAppFile
+        inputs:
+          secureFile: 'appsettings.Production.json'
+
+      - task: Bash@3
+        displayName: Link the secure file to the correct directory
+        inputs:
+          targetType: 'inline'
+          script: |
+            cd KMSCalendar/KMSCalendar/
+            ln -s $(secureDebugAppFile.secureFilePath) appsettings.Development.json
+            ln -s $(secureReleaseAppFile.secureFilePath) appsettings.Production.json
+
+      #- task: XamariniOS@2
+      #  inputs:
+      #    solutionFile: '**/*iOS.csproj'
+      #    configuration: '$(buildConfiguration)'
+      #    packageApp: false
+      #    buildForSimulator: true
+      #    runNugetRestore: true
+
+      - task: MSBuild@1
+        inputs:
+          solution: '**/*ios*.csproj'
+          configuration: '$(buildConfiguration)'
