@@ -1,0 +1,29 @@
+steps:
+  - task: NuGetToolInstaller@1
+    displayName: Install Nuget Tool
+
+  - task: NuGetCommand@2
+    displayName: Restore NuGet Packages for Solution
+    inputs:
+      restoreSolution: '**/*.sln'
+
+  - task: DownloadSecureFile@1
+    displayName: Download Debug AppSettings File
+    name: secureDebugAppFile
+    inputs:
+      secureFile: 'appsettings.Development.json'
+
+  - task: DownloadSecureFile@1
+    displayName: Download Release AppSettings File
+    name: secureReleaseAppFile
+    inputs:
+      secureFile: 'appsettings.Production.json'
+
+  - task: Bash@3
+    displayName: Link the secure file to the correct directory
+    inputs:
+      targetType: 'inline'
+      script: |
+        cd KMSCalendar/KMSCalendar/
+        ln -s $(secureDebugAppFile.secureFilePath) appsettings.Development.json
+        ln -s $(secureReleaseAppFile.secureFilePath) appsettings.Production.json
