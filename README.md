@@ -5,8 +5,8 @@
 The Homework Buddy app gives students an all in one place to organize homework assignments. View homework instructions that your classmates post, or post your own homework instructions for your peers to see. This saves students time, because they do not have to check every teacher's website or remember what to do. 
 
 ### Where You Can Find the App
-  * Pending Publication on the Google Play Store for Android.
-  * Currently beta testing on Azure App Service for Android.
+  * Published on the Google Play Store for Android: https://play.google.com/store/apps/details?id=com.KenMattSan.HomeworkBuddy
+  * Beta testing on Azure App Center for Android.
 
 ### App Features:
   * Custom Calendar View.
@@ -33,7 +33,7 @@ The app uses two custom nuget-packages that you can check out below.
 ### Previous Version
 - https://github.com/SunnySoldier357/HWCalendar
 
-#### developed by KenMattSan (Kenneth, Matt, Sandeep)
+#### Developed by KenMattSan (Kenneth, Matt, Sandeep)
 - https://github.com/mattmorgan6
 - https://github.com/SunnySoldier357
 - https://github.com/Xuzii
