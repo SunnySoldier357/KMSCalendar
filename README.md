@@ -5,7 +5,7 @@
 The Homework Buddy app gives students an all in one place to organize homework assignments. View homework instructions that your classmates post, or post your own homework instructions for your peers to see. This saves students time, because they do not have to check every teacher's website or remember what to do. 
 
 ### Where You Can Find the App
-  * Published on the Google Play Store for Android: https://play.google.com/store/apps/details?id=com.KenMattSan.HomeworkBuddy
+  * ~~Published on the Google Play Store for Android: https://play.google.com/store/apps/details?id=com.KenMattSan.HomeworkBuddy~~
   * Beta testing on Azure App Center for Android.
 
 ### App Features:
